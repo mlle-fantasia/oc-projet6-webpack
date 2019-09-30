@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+   <meta charset="UTF-8" />
+   <title>Projet 6</title>
+</head>
+
+<body>
+
+   <div id="app">
+      <div class="container">
+
+         <h1 class="text-center mt-5 titre">Bienvenue</h1>
+         <section>
+            <h2>Choisissez votre univers</h2>
+            <div class="d-flex flex-row container-choix-univers">
+               <div class="d-flex flex-column checkbox-univers">
+                  <input type="radio" id="univers1" name="univers" value="amazonie" hidden>
+                  <label for="univers1" class="label-univers univers-amazonie"></label>
+                  <p>Forêt amazonienne</p>
+               </div>
+               <div class="d-flex flex-column checkbox-univers">
+                  <input type="radio" id="univers2" name="univers" value="ocean" hidden>
+                  <label for="univers2" class="label-univers univers-ocean"></label>
+                  <p>Océan</p>
+               </div>
+               <div class="d-flex flex-column checkbox-univers">
+                  <input type="radio" id="univers3" name="univers" value="ice" hidden>
+                  <label for="univers3" class="label-univers univers-ocean"></label>
+                  <p>le pôle arctique</p>
+               </div>
+            </div>
+         </section>
+         <section>
+            <h2>Choisissez le nombre de joueur</h2>
+            <div class="d-flex flex-row align-center">
+               <select name="nbPlayer" id="nbPlayer" class="select-nb-player">
+                  <option value="0">Choisir</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+               </select>
+            </div>
+         </section>
+         <section class="section-choix-player">
+         </section>
+         <div class="d-flex flex-row align-center">
+            <button class="form-control btn-start-game" id="btn-start-game">Lancer le jeu !
+            </button>
+         </div>
+
+         <div class="world"></div>
+
+      </div>
+   </div>
+
+
+   <script src="../src/index.js"></script>
+</body>
+
+</html>
