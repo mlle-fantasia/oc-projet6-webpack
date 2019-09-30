@@ -6,12 +6,14 @@ const webpack = require("webpack");
 // Webpack Configuration
 const config = {
 	// Entry
-	entry: "./src/index.js",
-
+	entry: {
+		main: "./src/index.js",
+		game: "./src/game.js"
+	},
 	// Output
 	output: {
 		path: path.resolve(__dirname, "./dist"),
-		filename: "bundle.js"
+		filename: "[name].js"
 	},
 	// Loaders
 	module: {
@@ -33,6 +35,11 @@ const config = {
 					// Compiles Sass to CSS
 					"sass-loader"
 				]
+			},
+			// images
+			{
+				test: /\.(png|svg|jpg|gif)$/,
+				use: ["file-loader"]
 			}
 		]
 	},
@@ -41,6 +48,11 @@ const config = {
 		new htmlWebpackPlugin({
 			template: "./public/index.html",
 			filename: "index.html",
+			hash: true
+		}),
+		new htmlWebpackPlugin({
+			template: "./public/game.html",
+			filename: "game.html",
 			hash: true
 		}),
 		new webpack.ProvidePlugin({

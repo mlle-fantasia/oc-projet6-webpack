@@ -1,5 +1,203 @@
-$body-color: red;
+@import "bootstrap";
 
-body {
-	color: $body-color;
+$body-color: red;
+$path-image: "../../public/images/";
+
+///////général//////
+.titre {
+	padding: 40px;
+}
+
+h2 {
+	font-size: 18px;
+}
+
+/////////player ///////////////
+.container-choix-player {
+	justify-content: space-around;
+}
+.label-player {
+	margin-bottom: 0;
+	width: 100px;
+	height: 60px;
+	background-size: cover;
+}
+.checkbox {
+	align-items: center;
+}
+
+.player1 {
+	background-image: url($path-image+"player1.jpg");
+}
+.player2 {
+	background-image: url($path-image+"player2.jpg");
+}
+.player3 {
+	background-image: url($path-image+"player3.jpg");
+}
+.player4 {
+	background-image: url($path-image+"player4.jpg");
+}
+.player5 {
+	background-image: url($path-image+"player5.jpg");
+}
+.player6 {
+	background-image: url($path-image+"player6.jpg");
+}
+.img-object-grid {
+	background-size: contain;
+	background-repeat: no-repeat;
+	width: 100%;
+	height: 100%;
+	background-position: center;
+}
+.player1figure {
+	background-image: url($path-image+"player1figure.png");
+}
+.player2figure {
+	background-image: url($path-image+"player2figure.png");
+}
+.player3figure {
+	background-image: url($path-image+"player3figure.png");
+}
+.player4figure {
+	background-image: url($path-image+"player4figure.png");
+}
+.player5figure {
+	background-image: url($path-image+"player5figure.png");
+}
+.player6figure {
+	background-image: url($path-image+"player6figure.png");
+}
+:checked + label {
+	border: solid 2px #a01515;
+	box-shadow: -1px 0 5px 0px #654442;
+}
+.checkbox-player {
+	position: relative;
+	display: inline-block;
+}
+
+.checkbox-player .tooltiptext {
+	visibility: hidden;
+	width: 200px;
+	background-color: #555;
+	color: #fff;
+	text-align: center;
+	border-radius: 6px;
+	padding: 5px 0;
+	position: absolute;
+	z-index: 1;
+	bottom: 50%;
+	left: 110%;
+	margin-left: -60px;
+	opacity: 0;
+	transition: opacity 0.3s;
+}
+
+/* .checkbox-player .tooltiptext::after {
+	content: "";
+	position: absolute;
+	bottom: 100%;
+	left: 50%;
+	margin-left: -5px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: #555 transparent transparent transparent;
+} */
+
+.checkbox-player:hover .tooltiptext {
+	visibility: visible;
+	opacity: 1;
+}
+.btn-start-game {
+	width: 30%;
+	background-color: #a01515;
+	color: #fff;
+}
+///////// nombre de player //////
+.select-nb-player {
+	width: 30%;
+	align-items: center;
+}
+/////////////le jeu/////////////
+.grid {
+}
+.line {
+	display: flex;
+	flex-direction: row;
+}
+.case {
+	border-left: solid 0.5px #5f4a4a;
+	border-bottom: solid 0.5px #5f4a4a;
+}
+.grass {
+	background-color: rgb(7, 216, 7);
+}
+.salt-desert {
+	background-color: gray;
+}
+.ice {
+	background-color: blue;
+}
+.tree {
+	background-color: green;
+}
+//////// armes et accessoires /////////////
+
+.nenya-grid {
+	background-image: url($path-image+"nenya.jpg");
+}
+.dard-grid {
+	background-image: url($path-image+"dard.jpg");
+}
+.narsil-grid {
+	background-image: url($path-image+"narsil.png");
+}
+.hache-grid {
+	background-image: url($path-image+"hache.jpg");
+}
+.dague-etincelante-grid {
+	background-image: url($path-image+"dague.jpg");
+}
+
+//////univers///////////
+.container-choix-univers {
+	justify-content: space-around;
+	.checkbox-univers {
+		align-items: center;
+	}
+}
+.label-univers {
+	margin-bottom: 0;
+	width: 100px;
+	height: 60px;
+	background-size: cover;
+}
+.univers-amazonie {
+	background-image: url($path-image+"amazonieimg.png");
+}
+.amazonie {
+	background-image: url($path-image+"amazonieBack.jpg");
+	.case {
+		border-left: solid 0.5px #cdd4e6;
+		border-bottom: solid 0.5px #cdd4e6;
+	}
+}
+.amazonieGrid {
+	background-image: url($path-image+"amazonieObs.jpg");
+}
+
+.univers-ocean {
+	background-image: url($path-image+"oceanImg.jpg");
+}
+.ocean {
+	background-image: url($path-image+"oceanBack.jpg");
+	.case {
+		border-left: solid 0.5px #cdd4e6;
+		border-bottom: solid 0.5px #cdd4e6;
+	}
+}
+.oceanGrid {
+	background-image: url($path-image+"oceanObs.png");
 }
