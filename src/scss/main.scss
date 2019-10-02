@@ -2,18 +2,83 @@
 
 $body-color: red;
 $path-image: "../../public/images/";
+$background-hero1: #bda88d;
+$background-hero2: #8d9082;
+$background-hero3: #e39944;
+$background-hero4: #92a2b3;
+$background-hero5: #b6a294;
+$background-hero6: #434343;
 
 ///////général//////
 .titre {
 	padding: 40px;
 }
-
+.titre-shadow {
+	text-shadow: 3px 4px 5px black;
+}
+.text-blanc {
+	color: #fff;
+}
 h2 {
 	font-size: 18px;
 }
-
+.container-fluid {
+	padding: 0;
+}
+.selected-border {
+	border: solid 3px #a01515;
+}
+.selected-background {
+	background-color: #a01515;
+	color: #fff;
+}
+.btn-selected {
+	background-color: greenyellow;
+}
+.header {
+	background-image: url($path-image+"gondolin.jpg");
+	background-position: center;
+	background-size: contain;
+}
+.navbar .navbar-nav .nav-item .nav-link,
+.navbar .navbar-brand {
+	color: #fff;
+	cursor: pointer;
+}
 /////////player ///////////////
-.container-choix-player {
+.legend-hero {
+	color: #fff;
+}
+.btn-hero {
+	width: 50%;
+	margin-bottom: 80px;
+}
+.carousel-inner {
+	max-height: 448px;
+}
+.container-all-heroes {
+	background-color: black;
+	padding-top: 30px;
+}
+.label-nbPlayer {
+	margin-bottom: 0;
+	width: 100px;
+	height: 71px;
+	background-size: cover;
+}
+.nbPlayer2 {
+	background-image: url($path-image+"players/2joueurs.png");
+}
+.nbPlayer3 {
+	background-image: url($path-image+"players/3joueurs.png");
+}
+.nbPlayer4 {
+	background-image: url($path-image+"players/4joueurs.png");
+}
+.select-nb-player {
+	width: 30%;
+}
+.container-choix-nbPlayer {
 	justify-content: space-around;
 }
 .label-player {
@@ -27,22 +92,22 @@ h2 {
 }
 
 .player1 {
-	background-image: url($path-image+"player1.jpg");
+	background-image: url($path-image+"players/img/player1.jpg");
 }
 .player2 {
-	background-image: url($path-image+"player2.jpg");
+	background-image: url($path-image+"players/img/player2.jpg");
 }
 .player3 {
-	background-image: url($path-image+"player3.jpg");
+	background-image: url($path-image+"players/img/player3.jpg");
 }
 .player4 {
-	background-image: url($path-image+"player4.jpg");
+	background-image: url($path-image+"players/img/player4.jpg");
 }
 .player5 {
-	background-image: url($path-image+"player5.jpg");
+	background-image: url($path-image+"players/img/player5.jpg");
 }
 .player6 {
-	background-image: url($path-image+"player6.jpg");
+	background-image: url($path-image+"players/img/player6.jpg");
 }
 .img-object-grid {
 	background-size: contain;
@@ -51,23 +116,23 @@ h2 {
 	height: 100%;
 	background-position: center;
 }
-.player1figure {
-	background-image: url($path-image+"player1figure.png");
+.hero1-grid {
+	background-image: url($path-image+"players/grid/player1figure.png");
 }
-.player2figure {
-	background-image: url($path-image+"player2figure.png");
+.hero2-grid {
+	background-image: url($path-image+"players/grid/player2figure.png");
 }
-.player3figure {
-	background-image: url($path-image+"player3figure.png");
+.hero3-grid {
+	background-image: url($path-image+"players/grid/player3figure.png");
 }
-.player4figure {
-	background-image: url($path-image+"player4figure.png");
+.hero4-grid {
+	background-image: url($path-image+"players/grid/player4figure.png");
 }
-.player5figure {
-	background-image: url($path-image+"player5figure.png");
+.hero5-grid {
+	background-image: url($path-image+"players/grid/player5figure.png");
 }
-.player6figure {
-	background-image: url($path-image+"player6figure.png");
+.hero6-grid {
+	background-image: url($path-image+"players/grid/player6figure.png");
 }
 :checked + label {
 	border: solid 2px #a01515;
@@ -111,7 +176,6 @@ h2 {
 	opacity: 1;
 }
 .btn-start-game {
-	width: 30%;
 	background-color: #a01515;
 	color: #fff;
 }
@@ -146,58 +210,88 @@ h2 {
 //////// armes et accessoires /////////////
 
 .nenya-grid {
-	background-image: url($path-image+"nenya.jpg");
+	background-image: url($path-image+"accessories/nenya.jpg");
 }
 .dard-grid {
-	background-image: url($path-image+"dard.jpg");
+	background-image: url($path-image+"accessories/dard.jpg");
 }
 .narsil-grid {
-	background-image: url($path-image+"narsil.png");
+	background-image: url($path-image+"accessories/narsil.png");
 }
 .hache-grid {
-	background-image: url($path-image+"hache.jpg");
+	background-image: url($path-image+"accessories/hache.jpg");
 }
 .dague-etincelante-grid {
-	background-image: url($path-image+"dague.jpg");
+	background-image: url($path-image+"accessories/dague.jpg");
 }
 
 //////univers///////////
-.container-choix-univers {
+/* .container-choix-univers {
 	justify-content: space-around;
 	.checkbox-univers {
 		align-items: center;
 	}
-}
-.label-univers {
-	margin-bottom: 0;
-	width: 100px;
-	height: 60px;
+} */
+.world {
+	padding: 0;
+	margin: 0;
+	height: 700px;
+	background-position: center;
+	background-repeat: no-repeat;
 	background-size: cover;
 }
-.univers-amazonie {
-	background-image: url($path-image+"amazonieimg.png");
+.world1 {
+	background-image: url($path-image+"fangorn.jpg");
 }
-.amazonie {
-	background-image: url($path-image+"amazonieBack.jpg");
+.world2 {
+	background-image: url($path-image+"lorien.jpg");
+}
+.world3 {
+	background-image: url($path-image+"test.jpg");
+}
+.world-legend {
+	background-color: #00000085;
+	padding: 20px;
+	position: absolute;
+	right: 15%;
+	bottom: 20px;
+	left: 15%;
+	z-index: 10;
+	color: #fff;
+	text-align: center;
+}
+.world1-background {
+	background-image: url($path-image+"worlds/ocean_back.jpg");
 	.case {
 		border-left: solid 0.5px #cdd4e6;
 		border-bottom: solid 0.5px #cdd4e6;
 	}
 }
-.amazonieGrid {
-	background-image: url($path-image+"amazonieObs.jpg");
+.world1-grid {
+	background-image: url($path-image+"worlds/amazonie_obs.jpg");
+}
+
+.world2-background {
+	background-image: url($path-image+"worlds/amazonie_back.jpg");
+	.case {
+		border-left: solid 0.5px #cdd4e6;
+		border-bottom: solid 0.5px #cdd4e6;
+	}
+}
+.world2-grid {
+	background-image: url($path-image+"worlds/amazonie_obs.jpg");
 }
 
 .univers-ocean {
-	background-image: url($path-image+"oceanImg.jpg");
+	background-image: url($path-image+"worlds/ocean_img.jpg");
 }
-.ocean {
-	background-image: url($path-image+"oceanBack.jpg");
+.world3-background {
+	background-image: url($path-image+"worlds/ocean_back.jpg");
 	.case {
 		border-left: solid 0.5px #cdd4e6;
 		border-bottom: solid 0.5px #cdd4e6;
 	}
 }
-.oceanGrid {
-	background-image: url($path-image+"oceanObs.png");
+.world3-grid {
+	background-image: url($path-image+"worlds/ocean_obs.png");
 }

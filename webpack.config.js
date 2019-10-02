@@ -40,6 +40,17 @@ const config = {
 			{
 				test: /\.(png|svg|jpg|gif)$/,
 				use: ["file-loader"]
+			},
+			{
+				test: /\.html$/,
+				use: [
+					{
+						loader: "html-loader",
+						options: {
+							minimize: true
+						}
+					}
+				]
 			}
 		]
 	},
@@ -47,11 +58,13 @@ const config = {
 	plugins: [
 		new htmlWebpackPlugin({
 			template: "./public/index.html",
+			chunks: ["main"],
 			filename: "index.html",
 			hash: true
 		}),
 		new htmlWebpackPlugin({
 			template: "./public/game.html",
+			chunks: ["game"],
 			filename: "game.html",
 			hash: true
 		}),
