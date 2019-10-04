@@ -5,8 +5,8 @@ $path-image: "../../public/images/";
 $background-hero1: #bda88d;
 $background-hero2: #8d9082;
 $background-hero3: #e39944;
-$background-hero4: #92a2b3;
-$background-hero5: #b6a294;
+$background-hero4: #a69486;
+$background-hero5: #788898;
 $background-hero6: #434343;
 
 ///////général//////
@@ -50,7 +50,6 @@ h2 {
 	color: #fff;
 }
 .btn-hero {
-	width: 50%;
 	margin-bottom: 80px;
 }
 .carousel-inner {
@@ -90,24 +89,24 @@ h2 {
 .checkbox {
 	align-items: center;
 }
-
+//pas utilisé
 .player1 {
-	background-image: url($path-image+"players/img/player1.jpg");
+	background-image: url($path-image+"players/img/hero1.jpg");
 }
 .player2 {
-	background-image: url($path-image+"players/img/player2.jpg");
+	background-image: url($path-image+"players/img/hero2.jpg");
 }
 .player3 {
-	background-image: url($path-image+"players/img/player3.jpg");
+	background-image: url($path-image+"players/img/hero3.jpg");
 }
 .player4 {
-	background-image: url($path-image+"players/img/player4.jpg");
+	background-image: url($path-image+"players/img/hero4.jpg");
 }
 .player5 {
-	background-image: url($path-image+"players/img/player5.jpg");
+	background-image: url($path-image+"players/img/hero5.jpg");
 }
 .player6 {
-	background-image: url($path-image+"players/img/player6.jpg");
+	background-image: url($path-image+"players/img/hero6.jpg");
 }
 .img-object-grid {
 	background-size: contain;

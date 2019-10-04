@@ -7,16 +7,19 @@ const render = function render(numPlayer) {
             <li data-target=".carouselExampleCaptions" data-slide-to="0" class="active"></li>
             <li data-target=".carouselExampleCaptions" data-slide-to="1"></li>
             <li data-target=".carouselExampleCaptions" data-slide-to="2"></li>
+            <li data-target=".carouselExampleCaptions" data-slide-to="3"></li>
+            <li data-target=".carouselExampleCaptions" data-slide-to="4"></li>
+            <li data-target=".carouselExampleCaptions" data-slide-to="5"></li>
          </ol>
          <div class="carousel-inner">
-            <div class="carousel-item active" class="slide-hero1player` +
+            <div id="slide-hero1" class="carousel-item active " class="slide-hero1player` +
 		numPlayer +
 		`">
                <div class="row">
                   <div class="col-md-7">
-                     <img src="../images/players/img/player1.jpg" class="d-block w-100" alt="...">
+                     <img src="../images/players/img/hero1.jpg" class="d-block w-100" alt="...">
                   </div>
-                  <div class="col-md-5">
+                  <div class="col-md-4">
                      <div class=" d-none d-md-block h-100">
                         <div class="legend-hero d-flex flex-column h-100">
                         <div class='playerName'>
@@ -45,14 +48,14 @@ const render = function render(numPlayer) {
                   </div>
                </div>
             </div>
-            <div class="carousel-item" class="slide-hero2player` +
+            <div id="slide-hero2" class="carousel-item " class="slide-hero2player` +
 		numPlayer +
 		`">
                <div class="row">
                   <div class="col-md-7">
-                     <img src="../images/players/img/player2.jpg" class="d-block w-100" alt="...">
+                     <img src="../images/players/img/hero2.jpg" class="d-block w-100" alt="...">
                   </div>
-                  <div class="col-md-5">
+                  <div class="col-md-4">
                      <div class=" d-none d-md-block h-100">
                         <div class="legend-hero d-flex flex-column h-100">
                         <div class='playerName'>
@@ -82,14 +85,14 @@ const render = function render(numPlayer) {
 
                </div>
             </div>
-            <div class="carousel-item" class="slide-hero3player` +
+            <div id="slide-hero3" class="carousel-item " class="slide-hero3player` +
 		numPlayer +
 		`">
                <div class="row">
                   <div class="col-md-7">
-                     <img src="../images/players/img/player3.jpg" class="d-block w-100" alt="...">
+                     <img src="../images/players/img/hero3.jpg" class="d-block w-100" alt="...">
                   </div>
-                  <div class="col-md-5">
+                  <div class="col-md-4">
                      <div class=" d-none d-md-block h-100">
                         <div class="legend-hero d-flex flex-column h-100">
                         <div class='playerName'>
@@ -118,14 +121,14 @@ const render = function render(numPlayer) {
                   </div>
                </div>
             </div>
-            <div class="carousel-item" class="slide-hero4player` +
+            <div id="slide-hero4" class="carousel-item " class="slide-hero4player` +
 		numPlayer +
 		`">
                <div class="row">
                   <div class="col-md-7">
-                     <img src="../images/players/img/player4.jpg" class="d-block w-100" alt="...">
+                     <img src="../images/players/img/hero4.jpg" class="d-block w-100" alt="...">
                   </div>
-                  <div class="col-md-5">
+                  <div class="col-md-4">
                      <div class=" d-none d-md-block">
                         <div class="legend-hero d-flex flex-column h-100">
                         <div class='playerName'>
@@ -154,14 +157,14 @@ const render = function render(numPlayer) {
                   </div>
                </div>
             </div>
-            <div class="carousel-item" class="slide-hero5player` +
+            <div id="slide-hero5" class="carousel-item " class="slide-hero5player` +
 		numPlayer +
 		`">
                <div class="row">
                   <div class="col-md-7">
-                     <img src="../images/players/img/player5.jpg" class="d-block w-100" alt="...">
+                     <img src="../images/players/img/hero5.jpg" class="d-block w-100" alt="...">
                   </div>
-                  <div class="col-md-5">
+                  <div class="col-md-4">
                      <div class=" d-none d-md-block h-100">
                         <div class="legend-hero d-flex flex-column h-100">
                         <div class='playerName'>
@@ -190,14 +193,14 @@ const render = function render(numPlayer) {
                   </div>
                </div>
             </div>
-            <div class="carousel-item" class="slide-hero6player` +
+            <div id="slide-hero6" class="carousel-item " class="slide-hero6player` +
 		numPlayer +
 		`">
                <div class="row">
                   <div class="col-md-7">
-                     <img src="../images/players/img/player6.jpg" class="d-block w-100" alt="...">
+                     <img src="../images/players/img/hero6.jpg" class="d-block w-100" alt="...">
                   </div>
-                  <div class="col-md-5">
+                  <div class="col-md-4">
                      <div class=" d-none d-md-block h-100">
                         <div class="legend-hero d-flex flex-column h-100">
                         <div class='playerName'>
@@ -228,11 +231,11 @@ const render = function render(numPlayer) {
                </div>
             </div>
          </div>
-         <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+         <a class="carousel-control-prev" href=".carouselExampleCaptions" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="sr-only">Previous</span>
          </a>
-         <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+         <a class="carousel-control-next" href=".carouselExampleCaptions" role="button" data-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
          </a>
@@ -243,28 +246,43 @@ const render = function render(numPlayer) {
 };
 
 const render2 = function render(numPlayer) {
-	let carousel = `
-   <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img class="d-block w-100" src="../images/players/img/player4.jpg" alt="First slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="../images/players/img/player3.jpg" alt="Second slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="../images/players/img/player6.jpg" alt="Third slide">
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>`;
+	let carousel =
+		`
+   <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+   <ol class="carousel-indicators">
+     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+     <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+     <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+   </ol>
+   <div class="carousel-inner">
+     <div class="carousel-item active">
+       <img class="d-block w-100" src="../images/players/img/player6.jpg" alt="First slide">
+     </div>
+     <div class="carousel-item">
+       <img class="d-block w-100" src="../images/players/img/player3.jpg" alt="Second slide">
+     </div>
+     <div class="carousel-item">
+       <img class="d-block w-100" src="../images/players/img/player5.jpg" alt="Third slide">
+       <div class=" d-none d-md-block h-100">
+                        
+                           <button class="flex-grow-0 btn-hero form-control" id="hero6player` +
+		numPlayer +
+		`">Jouer avec ce
+                              Personnage</button>
+                      
+
+                     </div>
+     </div>
+   </div>
+   <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+     <span class="sr-only">Previous</span>
+   </a>
+   <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+     <span class="carousel-control-next-icon" aria-hidden="true"></span>
+     <span class="sr-only">Next</span>
+   </a>
+ </div>`;
 
 	return carousel;
 };
