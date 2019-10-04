@@ -1,14 +1,13 @@
-import Cell from "./Cell";
-import Obstacle from "./Obstacle";
-import $ from "jquery";
-import Player from "./Player";
-import Utils from "./Utils";
 import config from "../conf.json";
+import Utils from "./Utils";
+import Cell from "./Cell";
+import Player from "./Player";
+import Obstacle from "./Obstacle";
 import Weapon from "./Weapon";
+import Accessory from "./Accessory";
 
 export default class World {
 	constructor(players, univers) {
-		console.log("players", players);
 		this.players = players;
 		this.univers = univers;
 		this.nbWeapon = this.players.length;
@@ -21,15 +20,15 @@ export default class World {
 		for (let y = 0; y < this.worldSizeY; y++) {
 			let line = [];
 			for (let x = 0; x < this.worldSizeX; x++) {
-				line.push(new Cell(this.univers, []));
+				line.push(new Cell([]));
 			}
 			this.grid.push(line);
 		}
 		this.placePlayers();
 		this.placeObstacles();
-		this.placeWeapons();
-		this.placeAccessories();
-
+		//this.placeWeapons();
+		this.placeAccessories("weapon");
+		this.placeAccessories("accessory");
 		console.log("grid", this.grid);
 		return this.grid;
 	}
@@ -37,7 +36,6 @@ export default class World {
 	placePlayers() {
 		for (let i = 0; i < this.players.length; i++) {
 			const player = this.players[i];
-			console.log("player ici !!!!", player);
 			this.placeOnePlayer(player, i + 1);
 		}
 	}
@@ -45,29 +43,12 @@ export default class World {
 		let x = Math.floor(Math.random() * Math.floor(this.worldSizeX));
 		let y = Math.floor(Math.random() * Math.floor(this.worldSizeY));
 		if (Utils.isFreePlayerCell(x, y, this.grid)) {
-			let newPlayer = new Player(player.playerName, player.hero, numPlayer);
-			let newCell = new Cell(this.univers, [newPlayer]);
+			let newWeapon = new Weapon("initial");
+			let newPlayer = new Player(player.playerName, player.hero, numPlayer, [newWeapon]);
+			let newCell = new Cell([newPlayer]);
 			this.updateCell(x, y, newCell);
 		} else {
 			this.placeOnePlayer(player);
-		}
-	}
-
-	placeWeapons() {
-		for (let i = 0; i < this.players.length; i++) {
-			this.placeOneWeapon();
-		}
-	}
-	placeOneWeapon() {
-		let x = Math.floor(Math.random() * Math.floor(this.worldSizeX));
-		let y = Math.floor(Math.random() * Math.floor(this.worldSizeY));
-		if (Utils.isFreeCell(x, y, this.grid)) {
-			let newObstacle = new Weapon();
-			let newCell = new Cell(this.univers, [newObstacle]);
-			console.log("newCell", newCell);
-			this.updateCell(x, y, newCell);
-		} else {
-			this.placeOneWeapon();
 		}
 	}
 	placeObstacles() {
@@ -80,13 +61,53 @@ export default class World {
 		let y = Math.floor(Math.random() * Math.floor(this.worldSizeY));
 		if (Utils.isFreeCell(x, y, this.grid)) {
 			let newObstacle = new Obstacle(this.univers);
-			let newCell = new Cell(this.univers, [newObstacle]);
+			let newCell = new Cell([newObstacle]);
 			this.updateCell(x, y, newCell);
 		} else {
 			this.placeOneObstacle();
 		}
 	}
-	placeAccessories() {}
+	/* 	placeWeapons() {
+		for (let i = 0; i < this.players.length; i++) {
+			this.placeOneWeapon();
+		}
+	} */
+	/* 	placeOneWeapon() {
+		let x = Math.floor(Math.random() * Math.floor(this.worldSizeX));
+		let y = Math.floor(Math.random() * Math.floor(this.worldSizeY));
+		if (Utils.isFreeCell(x, y, this.grid)) {
+			let newWeapon = new Weapon();
+			let newCell = new Cell([newWeapon]);
+			console.log("newCell", newCell);
+			this.updateCell(x, y, newCell);
+		} else {
+			this.placeOneWeapon();
+		}
+	} */
+	placeAccessories(objectToPlace) {
+		console.log("objectToPlace", objectToPlace);
+		for (let i = 0; i < this.players.length; i++) {
+			this.placeOneAccessory(objectToPlace);
+		}
+	}
+	placeOneAccessory(objectToPlace) {
+		let x = Math.floor(Math.random() * Math.floor(this.worldSizeX));
+		let y = Math.floor(Math.random() * Math.floor(this.worldSizeY));
+		if (Utils.isFreeCell(x, y, this.grid)) {
+			let newAccessory;
+			if (objectToPlace === "accessory") {
+				newAccessory = newAccessory = new Accessory();
+			}
+			if (objectToPlace === "weapon") {
+				newAccessory = newAccessory = new Weapon();
+			}
+			console.log("newAccessory", newAccessory);
+			let newCell = new Cell([newAccessory]);
+			this.updateCell(x, y, newCell);
+		} else {
+			this.placeOneAccessory();
+		}
+	}
 	/* placeOneObject(objectType, player) {
 		let x = Math.floor(Math.random() * Math.floor(this.worldSizeX));
 		let y = Math.floor(Math.random() * Math.floor(this.worldSizeY));

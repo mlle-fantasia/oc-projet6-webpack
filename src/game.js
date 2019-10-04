@@ -4,10 +4,12 @@ import $ from "jquery";
 
 $(document).ready(function() {
 	let players = JSON.parse(localStorage.getItem("players"));
+	console.log("players juste get from localstorage", players);
 	let univers = localStorage.getItem("univers");
+	console.log("univers juste get from localstorage", univers);
 	let newGrid = $("<div class='grid world" + univers + "-background'></div>");
 	$(".world").append($(newGrid));
-	console.log("lplayers", players);
+
 	let app = new App(players, univers);
 	render(app.grid);
 });

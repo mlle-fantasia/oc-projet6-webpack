@@ -1,6 +1,5 @@
 export default class Cell {
-	constructor(univers, objects) {
-		this.background = this.defineBackground(univers);
+	constructor(objects) {
 		this.objects = [...objects];
 	}
 	defineBackground(univers) {
