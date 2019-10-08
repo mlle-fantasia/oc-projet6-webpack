@@ -15,14 +15,21 @@ export default class Weapon {
 	}
 
 	defineWeapon(initial) {
+		/* 		let weaweapon;
+		const intialWeapons = WEAPON.filter(w => w.initial);
+		console.log("intialWeapons", intialWeapons);
+
+		weaweapon = intialWeapons[Math.floor(intialWeapons.length * Math.random())];
+		console.log("weaweapon", weaweapon);
+		return weaweapon; */
 		let weaweapon;
 		if (initial === "initial") {
 			const intialWeapons = WEAPON.filter(w => w.initial);
-			weaweapon = intialWeapons[Math.floor(WEAPON.length * Math.random())];
+			weaweapon = intialWeapons[Math.floor(intialWeapons.length * Math.random())];
+			return weaweapon;
 		} else {
 			weaweapon = WEAPON[Math.floor(WEAPON.length * Math.random())];
+			return weaweapon;
 		}
-		console.log("wweaweaponw", weaweapon);
-		return weaweapon;
 	}
 }

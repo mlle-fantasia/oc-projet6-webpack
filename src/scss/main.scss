@@ -193,6 +193,7 @@ h2 {
 .case {
 	border-left: solid 0.5px #5f4a4a;
 	border-bottom: solid 0.5px #5f4a4a;
+	position: relative;
 }
 .grass {
 	background-color: rgb(7, 216, 7);
@@ -209,21 +210,42 @@ h2 {
 //////// armes et accessoires /////////////
 
 .nenya-grid {
-	background-image: url($path-image+"accessories/nenya.jpg");
+	background-image: url($path-image+"accessories/nenya.png");
 }
 .dard-grid {
-	background-image: url($path-image+"accessories/dard.jpg");
+	background-image: url($path-image+"accessories/dard.png");
 }
 .narsil-grid {
 	background-image: url($path-image+"accessories/narsil.png");
 }
 .hache-grid {
-	background-image: url($path-image+"accessories/hache.jpg");
+	background-image: url($path-image+"accessories/hache.png");
 }
 .dague-etincelante-grid {
-	background-image: url($path-image+"accessories/dague.jpg");
+	background-image: url($path-image+"accessories/dague.png");
 }
-
+.potion_strength-grid {
+	background-image: url($path-image+"accessories/potion_strength.png");
+}
+.potion_life-grid {
+	background-image: url($path-image+"accessories/potion_life.png");
+}
+.potion_healfy-grid {
+	background-image: url($path-image+"accessories/potion_healfy.png");
+}
+.img-accessory-grid {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	margin: 2px;
+	background-color: #fff;
+	width: 20px;
+	height: 20px;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+	border-radius: 2px;
+}
 //////univers///////////
 /* .container-choix-univers {
 	justify-content: space-around;
