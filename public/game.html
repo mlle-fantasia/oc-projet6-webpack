@@ -9,9 +9,26 @@
 <body>
 
    <div id="game">
-      <div class="container">
-         <h1>Le jeu</h1>
-         <div class="world"></div>
+      <div class="container-fluid px-3">
+         <h1 class="text-center">Le jeu</h1>
+         <div class="row">
+            <div class="col-12 col-sm-12 col-md-3">
+               <button id="btn-info-player1" class="form-control">Joueur 1</button>
+               <div id="info-player1" class="row"></div>
+               <button id="btn-info-player3" class="form-control">Joueur 3</button>
+               <div id="info-player3" class="row"></div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-6">
+               <div class=" world"></div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-3">
+               <button id="btn-info-player2" class="form-control">Joueur 2</button>
+               <div id="info-player2" class="row"></div>
+               <button id="btn-info-player4" class="form-control">Joueur 4</button>
+               <div id="info-player4" class="row"></div>
+            </div>
+         </div>
+
 
       </div>
    </div>

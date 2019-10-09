@@ -9,5 +9,6 @@ export default class App {
 	initWorld(players, univers) {
 		this.world = new World(players, univers);
 		this.grid = this.world.generateWorld();
+		this.players = this.world.players;
 	}
 }

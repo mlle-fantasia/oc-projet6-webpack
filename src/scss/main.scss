@@ -1,4 +1,6 @@
 @import "bootstrap";
+@import "univers.scss";
+@import "players.scss";
 
 $body-color: red;
 $path-image: "../../public/images/";
@@ -184,7 +186,8 @@ h2 {
 	align-items: center;
 }
 /////////////le jeu/////////////
-.grid {
+.cell-move-ok {
+	background-color: #f5f5dc6b;
 }
 .line {
 	display: flex;
@@ -222,7 +225,7 @@ h2 {
 	background-image: url($path-image+"accessories/hache.png");
 }
 .dague-etincelante-grid {
-	background-image: url($path-image+"accessories/dague.png");
+	background-image: url($path-image+"accessories/dague-etincelante.png");
 }
 .potion_strength-grid {
 	background-image: url($path-image+"accessories/potion_strength.png");
@@ -245,74 +248,4 @@ h2 {
 	background-repeat: no-repeat;
 	background-position: center;
 	border-radius: 2px;
-}
-//////univers///////////
-/* .container-choix-univers {
-	justify-content: space-around;
-	.checkbox-univers {
-		align-items: center;
-	}
-} */
-.world {
-	padding: 0;
-	margin: 0;
-	height: 700px;
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: cover;
-}
-.world1 {
-	background-image: url($path-image+"fangorn.jpg");
-}
-.world2 {
-	background-image: url($path-image+"lorien.jpg");
-}
-.world3 {
-	background-image: url($path-image+"test.jpg");
-}
-.world-legend {
-	background-color: #00000085;
-	padding: 20px;
-	position: absolute;
-	right: 15%;
-	bottom: 20px;
-	left: 15%;
-	z-index: 10;
-	color: #fff;
-	text-align: center;
-}
-.world1-background {
-	background-image: url($path-image+"worlds/ocean_back.jpg");
-	.case {
-		border-left: solid 0.5px #cdd4e6;
-		border-bottom: solid 0.5px #cdd4e6;
-	}
-}
-.world1-grid {
-	background-image: url($path-image+"worlds/amazonie_obs.jpg");
-}
-
-.world2-background {
-	background-image: url($path-image+"worlds/amazonie_back.jpg");
-	.case {
-		border-left: solid 0.5px #cdd4e6;
-		border-bottom: solid 0.5px #cdd4e6;
-	}
-}
-.world2-grid {
-	background-image: url($path-image+"worlds/amazonie_obs.jpg");
-}
-
-.univers-ocean {
-	background-image: url($path-image+"worlds/ocean_img.jpg");
-}
-.world3-background {
-	background-image: url($path-image+"worlds/ocean_back.jpg");
-	.case {
-		border-left: solid 0.5px #cdd4e6;
-		border-bottom: solid 0.5px #cdd4e6;
-	}
-}
-.world3-grid {
-	background-image: url($path-image+"worlds/ocean_obs.png");
 }

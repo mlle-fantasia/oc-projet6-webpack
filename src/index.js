@@ -4,7 +4,7 @@ import carouselHeroes from "../public/include/carousel-heroes.js";
 
 let world = 0;
 let nbPlayer = 0;
-const backgroundHero = ["black", "#bda88d", "#898c7e", "#822701", "#a69486", "#788898", "#434343"];
+const backgroundHero = ["black", "#bda88d", "#898c7e", "#822701", "#788898", "#a69486", "#434343"];
 let players = [];
 /* players = [
 	{

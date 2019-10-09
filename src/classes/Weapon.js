@@ -9,7 +9,7 @@ export default class Weapon {
 	constructor(initial) {
 		let weapon = this.defineWeapon(initial);
 		this.weapon = weapon.text;
-		this.imageGrid = weapon.value + "-grid";
+		this.imageGrid = weapon.value;
 		this.degat = weapon.degat;
 		this.initial = weapon.initial;
 	}

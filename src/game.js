@@ -4,15 +4,16 @@ import $ from "jquery";
 import Player from "./classes/Player";
 
 $(document).ready(function() {
+	$("#btn-info-player3").hide();
+	$("#btn-info-player4").hide();
 	let players = JSON.parse(localStorage.getItem("players"));
-	//console.log("players juste get from localstorage", players);
 	let univers = localStorage.getItem("univers");
-	//console.log("univers juste get from localstorage", univers);
 	let newGrid = $("<div class='grid world" + univers + "-background'></div>");
 	$(".world").append($(newGrid));
 
 	let app = new App(players, univers);
 	render(app.grid);
+	appendInfoPlayer(app.players);
 });
 
 function render(grid) {
@@ -31,30 +32,80 @@ function render(grid) {
 }
 
 function renderObjectCell(cell, newCase) {
-	//console.log("Cell", cell);
-	//let image = $("<img src='../images/player1.jpg' alt='player'>");
-	if (cell.objects.length) {
+	if (cell.objects && cell.objects.length) {
 		for (let i = 0; i < cell.objects.length; i++) {
 			const object = cell.objects[i];
-			console.log("object", object);
 			let image = $("<div class='img-object-grid " + object.imageGrid + " '></div>");
 			newCase.append(image);
 			if (object instanceof Player) {
-				console.log("coucou", object);
 				for (let i = 0; i < object.accessories.length; i++) {
 					const accessory = object.accessories[i];
-					let image = $("<div class='img-accessory-grid " + accessory.imageGrid + " '></div>");
+					let image = $("<div class='img-accessory-grid " + accessory.imageGrid + "-grid '></div>");
 					newCase.append(image);
 				}
 			}
 		}
 	}
+}
+function appendInfoPlayer(players) {
+	for (let p = 0; p < players.length; p++) {
+		const player = players[p];
+		const numPlayer = p + 1;
+		$("#btn-info-player" + numPlayer).show();
+		$("#btn-info-player" + numPlayer).click(() => {
+			if ($("#info-player" + numPlayer).text().length === 0) {
+				let info = renderInfoPlayer(player);
+				$("#info-player" + numPlayer).append(info);
+				$("#info-player" + numPlayer).slideDown();
+			} else {
+				$("#info-player" + numPlayer).empty();
+			}
+		});
+	}
+}
+function renderInfoPlayer(player) {
+	//console.log("player.accessories", player.accessories[0]);
+	return (
+		`<div class="info-player  col-12">
+	<div class='info-player-text info-player-titre pt-4'>Joueur ` +
+		player.playerNum +
+		`</div>
+	<div class=" info-player-text info-player-name"> Nom : ` +
+		player.playerName +
+		`</div>
+	<img src="../images/players/img/hero` +
+		player.heroNum +
+		`.jpg" class="d-block w-100" alt="...">
+		<input type="range" class="info-player-text info-player-pt-vie" name="ptVie"
+		min="0" max="` +
+		player.ptVieMax +
+		`" value="` +
+		player.ptVie +
+		`" disabled>
+		<div class="info-player-text">
+		<p> Type : ` +
+		player.type +
+		`</p>
+		<p>Point fort : ` +
+		player.pointFort.text +
+		`</p>
+		</div>
+		<div class="row">
+		<div class="col-6 info-player-accessory">
+		<img src="../images/accessories/` +
+		player.accessories[0].imageGrid +
+		`.png" class="d-block w-100" alt="...">
+		<p>` +
+		player.accessories[0].weapon +
+		`</p>
+		<p>Dégats : ` +
+		player.accessories[0].degat +
+		`</p>
 
-	/* if (cell.objects.length && cell.objects[0] instanceof Player) {
-		for (let i = 0; i < cell.objects[0].accessories.length; i++) {
-			const accessory = cell.objects[0].accessories[i];
-			let image = $("<div class='img-object-grid " + accessory.imageGrid + " '></div>");
-			newCase.append(image);
-		}
-	} */
+		</div>
+		<div class="col-6 info-player-accessory">
+		</div>
+		</div>
+	</div>`
+	);
 }
