@@ -13,7 +13,7 @@ export default class Accessory {
 	constructor() {
 		let accessory = ACCESSORY[Math.floor(ACCESSORY.length * Math.random())];
 		this.Accessory = accessory.text;
-		this.imageGrid = accessory.value + "-grid";
+		this.imageGrid = accessory.value;
 		this.avantage = accessory.avantage;
 		this.temporality = accessory.temporality;
 	}

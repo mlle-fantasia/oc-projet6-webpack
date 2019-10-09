@@ -12,8 +12,8 @@ export default class World {
 		this.univers = univers;
 		this.nbWeapon = this.players.length;
 		this.nbObject = this.players.length;
-		this.worldSizeY = 10;
-		this.worldSizeX = 10;
+		this.worldSizeY = config.nbCasesY;
+		this.worldSizeX = config.nbCasesX;
 		this.grid = [];
 	}
 	generatePlayers() {
@@ -23,17 +23,18 @@ export default class World {
 	}
 	generateWorld() {
 		this.generatePlayers();
-		for (let y = 0; y < this.worldSizeY; y++) {
+		for (let x = 0; x < this.worldSizeX; x++) {
 			let line = [];
-			for (let x = 0; x < this.worldSizeX; x++) {
-				line.push(new Cell([]));
+			for (let y = 0; y < this.worldSizeY; y++) {
+				line.push(new Cell(x, y, []));
 			}
 			this.grid.push(line);
 		}
-		this.placePlayers();
 		this.placeObstacles();
+		this.placePlayers();
 		this.placeAccessories("weapon");
 		this.placeAccessories("accessory");
+
 		console.log("grid", this.grid); //à laisser
 		return this.grid;
 	}
@@ -49,9 +50,11 @@ export default class World {
 		let y = Math.floor(Math.random() * Math.floor(this.worldSizeY));
 		if (Utils.isFreePlayerCell(x, y, this.grid)) {
 			let newWeapon = new Weapon("initial");
-			let newPlayer = this.players[Math.floor(this.players.length * Math.random())];
+			let newPlayer = this.players[numPlayer - 1];
 			newPlayer.accessories = [newWeapon];
-			let newCell = new Cell([newPlayer]);
+			newPlayer.placeX = x;
+			newPlayer.placeY = y;
+			let newCell = new Cell(x, y, [newPlayer]);
 			this.updateCell(x, y, newCell);
 		} else {
 			this.placeOnePlayer(player);
@@ -67,7 +70,7 @@ export default class World {
 		let y = Math.floor(Math.random() * Math.floor(this.worldSizeY));
 		if (Utils.isFreeCell(x, y, this.grid)) {
 			let newObstacle = new Obstacle(this.univers);
-			let newCell = new Cell([newObstacle]);
+			let newCell = new Cell(x, y, [newObstacle]);
 			this.updateCell(x, y, newCell);
 		} else {
 			this.placeOneObstacle();
@@ -84,16 +87,16 @@ export default class World {
 		if (Utils.isFreeCell(x, y, this.grid)) {
 			let newAccessory;
 			if (objectToPlace === "accessory") {
-				newAccessory = newAccessory = new Accessory();
+				newAccessory = new Accessory();
 			}
 			if (objectToPlace === "weapon") {
-				newAccessory = newAccessory = new Weapon();
+				newAccessory = new Weapon();
 			}
 
-			let newCell = new Cell([newAccessory]);
+			let newCell = new Cell(x, y, [newAccessory]);
 			this.updateCell(x, y, newCell);
 		} else {
-			this.placeOneAccessory();
+			this.placeOneAccessory(objectToPlace);
 		}
 	}
 	updateCell(x, y, cell) {

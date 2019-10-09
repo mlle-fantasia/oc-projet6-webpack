@@ -14,9 +14,12 @@ $(document).ready(function() {
 	let app = new App(players, univers);
 	render(app.grid);
 	appendInfoPlayer(app.players);
+	app.showMove(app.players[0]);
+	render(app.grid);
 });
 
 function render(grid) {
+	$(".grid").empty();
 	let cellSize = $(".world").width() / grid.length;
 	for (let y = 0; y < grid.length; y++) {
 		const line = grid[y];
@@ -24,7 +27,7 @@ function render(grid) {
 		$(".grid").append(newLine);
 		for (let x = 0; x < line.length; x++) {
 			const cell = line[x];
-			let newCase = $("<div class='case ' style='width:" + cellSize + "px;height:" + cellSize + "px'></div>");
+			let newCase = $("<div class='case movable-" + cell.movable + "' style='width:" + cellSize + "px;height:" + cellSize + "px'></div>");
 			renderObjectCell(cell, newCase);
 			newLine.append(newCase);
 		}
@@ -40,7 +43,7 @@ function renderObjectCell(cell, newCase) {
 			if (object instanceof Player) {
 				for (let i = 0; i < object.accessories.length; i++) {
 					const accessory = object.accessories[i];
-					let image = $("<div class='img-accessory-grid " + accessory.imageGrid + "-grid '></div>");
+					let image = $("<div class='img-accessory-grid " + accessory.imageGrid + " '></div>");
 					newCase.append(image);
 				}
 			}

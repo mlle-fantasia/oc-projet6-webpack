@@ -5,12 +5,12 @@ export default class Player {
 			force: [10, 12, 14, 10, 12, 13],
 			type: ["motorisé", "ailé", "énervé", "force-calme", "patriote", "hasardeux"],
 			pointFort: [
-				{ value: "fast", text: "peut se déplacer plus vite" },
-				{ value: "attack", text: "peut attaquer deux fois" },
-				{ value: "steal", text: "peut voler un objet" },
-				{ value: "move", text: "peut déplacer les obstacles" },
-				{ value: "long", text: "peut attaquer de plus loin" },
-				{ value: "critique", text: "à plus de chance de faire des coups critique" }
+				{ value: "fast", text: "peut se déplacer plus vite", chance: 20 },
+				{ value: "attack", text: "peut attaquer deux fois", chance: 20 },
+				{ value: "steal", text: "peut voler un objet", chance: 20 },
+				{ value: "move", text: "peut déplacer les obstacles", chance: 50 },
+				{ value: "long", text: "peut attaquer de plus loin", chance: 10 },
+				{ value: "critique", text: "à plus de chance de faire des coups critique", chance: 30 }
 			]
 		};
 		this.playerName = name;
@@ -23,6 +23,8 @@ export default class Player {
 		this.type = tabVariablePlayer.type[heroNum - 1];
 		this.pointFort = tabVariablePlayer.pointFort[heroNum - 1];
 		this.accessories = accessories;
+		this.placeX;
+		this.placeY;
 		//this.playerInfo = this.showPlayerInfo();
 	}
 

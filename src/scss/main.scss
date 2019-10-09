@@ -186,7 +186,7 @@ h2 {
 	align-items: center;
 }
 /////////////le jeu/////////////
-.cell-move-ok {
+.movable-true {
 	background-color: #f5f5dc6b;
 }
 .line {
@@ -212,28 +212,28 @@ h2 {
 }
 //////// armes et accessoires /////////////
 
-.nenya-grid {
+.nenya {
 	background-image: url($path-image+"accessories/nenya.png");
 }
-.dard-grid {
+.dard {
 	background-image: url($path-image+"accessories/dard.png");
 }
-.narsil-grid {
+.narsil {
 	background-image: url($path-image+"accessories/narsil.png");
 }
-.hache-grid {
+.hache {
 	background-image: url($path-image+"accessories/hache.png");
 }
-.dague-etincelante-grid {
+.dague-etincelante {
 	background-image: url($path-image+"accessories/dague-etincelante.png");
 }
-.potion_strength-grid {
+.potion_strength {
 	background-image: url($path-image+"accessories/potion_strength.png");
 }
-.potion_life-grid {
+.potion_life {
 	background-image: url($path-image+"accessories/potion_life.png");
 }
-.potion_healfy-grid {
+.potion_healfy {
 	background-image: url($path-image+"accessories/potion_healfy.png");
 }
 .img-accessory-grid {

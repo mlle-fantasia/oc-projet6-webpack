@@ -1,4 +1,5 @@
 {
-	"nbCases": 100,
+	"nbCasesY": 10,
+	"nbCasesX": 10,
 	"nbObstacles": 10
 }
