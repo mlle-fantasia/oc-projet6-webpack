@@ -2,7 +2,8 @@ import "./scss/main.scss";
 import App from "./classes/App";
 import $ from "jquery";
 import Player from "./classes/Player";
-
+import { TIMEOUT } from "dns";
+var indexCurrentPlayer = 0;
 $(document).ready(function() {
 	$("#btn-info-player3").hide();
 	$("#btn-info-player4").hide();
@@ -11,13 +12,48 @@ $(document).ready(function() {
 	let newGrid = $("<div class='grid world" + univers + "-background'></div>");
 	$(".world").append($(newGrid));
 
-	let app = new App(players, univers);
-	render(app.grid);
-	appendInfoPlayer(app.players);
-	app.showMove(app.players[0]);
-	render(app.grid);
-});
+	window.app = new App(players, univers);
+	console.log("app.players", window.app.players);
+	render(window.app.grid);
+	appendInfoPlayer(window.app.players);
 
+	//tour par tour
+	nextPlayer();
+});
+function nextPlayer() {
+	window.app.currentPlayer = app.players[indexCurrentPlayer];
+	let player = app.players[indexCurrentPlayer];
+	renderYourTurn(player);
+}
+function renderYourTurn(player) {
+	setTimeout(function() {
+		alert("coucou " + player.playerName + " c'est à toi de jouer !");
+		player.showMove(app.grid);
+		render(app.grid);
+		indexCurrentPlayer++;
+	}, 2000);
+	/* let modal =
+		`<div class="modal fade hide" tabindex="-1" role="dialog" id="modalYourTurn">
+	<div class="modal-dialog" role="document">
+	  <div class="modal-content">
+		 <div class="modal-header">
+			<h5 class="modal-title text-center">` +
+		player.name +
+		`</h5>
+		 </div>
+		 <div class="modal-body">
+			<p>A vous de jouer !!!</p>
+		 </div>
+		 <div class="modal-footer">
+			<button type="button" class="btn btn-primary">OK</button>
+		 </div>
+	  </div>
+	</div>
+ </div>`;
+	$("#game").prepend(modal);
+	$.noConflict();
+	$("#modalYourTurn").modal("show"); */
+}
 function render(grid) {
 	$(".grid").empty();
 	let cellSize = $(".world").width() / grid.length;

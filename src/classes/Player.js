@@ -1,3 +1,5 @@
+import Utils from "./Utils";
+
 export default class Player {
 	constructor(name, heroNum, playerNum, accessories) {
 		const tabVariablePlayer = {
@@ -26,6 +28,9 @@ export default class Player {
 		this.placeX;
 		this.placeY;
 		//this.playerInfo = this.showPlayerInfo();
+	}
+	showMove(grid) {
+		Utils.testMove(grid, this.placeX, this.placeY, this.pointFort);
 	}
 
 	/* 	showPlayerInfo() {
