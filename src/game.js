@@ -3,7 +3,8 @@ import App from "./classes/App";
 import $ from "jquery";
 import Player from "./classes/Player";
 import World from "./classes/World";
-var indexCurrentPlayer = 0;
+var indexCurrentPlayer = -1;
+
 $(document).ready(function() {
 	$("#btn-info-player3").hide();
 	$("#btn-info-player4").hide();
@@ -21,8 +22,9 @@ $(document).ready(function() {
 	nextPlayer();
 });
 function nextPlayer() {
-	window.app.currentPlayer = app.players[indexCurrentPlayer];
-	let player = app.players[indexCurrentPlayer];
+	indexCurrentPlayer++;
+	//window.app.currentPlayer = app.players[indexCurrentPlayer];
+	let player = app.players[indexCurrentPlayer % window.app.players.length];
 	renderYourTurn(player);
 }
 function renderYourTurn(player) {
@@ -30,7 +32,8 @@ function renderYourTurn(player) {
 		alert("coucou " + player.playerName + " c'est à toi de jouer !");
 		player.showMove(app.grid);
 		render(app.grid);
-		$(".case").click(event => {
+
+		let monCallback = event => {
 			let x, y;
 			let object = false;
 			if ($(event.target).hasClass("img-object-grid")) {
@@ -57,34 +60,15 @@ function renderYourTurn(player) {
 				setTimeout(function() {
 					player.hasObjectToTake(x, y, window.app.grid);
 					render(app.grid);
+					$(".case").unbind("click", monCallback);
+					nextPlayer();
 				}, 100);
 			} else {
 				alert("vous ne pouvez pas aller sur cette case");
 			}
-		});
-		indexCurrentPlayer++;
+		};
+		$(".case").bind("click", monCallback);
 	}, 2000);
-	/* let modal =
-		`<div class="modal fade hide" tabindex="-1" role="dialog" id="modalYourTurn">
-	<div class="modal-dialog" role="document">
-	  <div class="modal-content">
-		 <div class="modal-header">
-			<h5 class="modal-title text-center">` +
-		player.name +
-		`</h5>
-		 </div>
-		 <div class="modal-body">
-			<p>A vous de jouer !!!</p>
-		 </div>
-		 <div class="modal-footer">
-			<button type="button" class="btn btn-primary">OK</button>
-		 </div>
-	  </div>
-	</div>
- </div>`;
-	$("#game").prepend(modal);
-	$.noConflict();
-	$("#modalYourTurn").modal("show"); */
 }
 function render(grid) {
 	$(".grid").empty();
@@ -121,10 +105,12 @@ function renderObjectCell(cell, newCase) {
 			let image = $("<div class='img-object-grid " + object.imageGrid + " '></div>");
 			newCase.append(image);
 			if (object instanceof Player) {
+				let accessories = $("<div class='d-flex flex-row container-accessories'></div>");
+				newCase.append(accessories);
 				for (let i = 0; i < object.accessories.length; i++) {
 					const accessory = object.accessories[i];
 					let image = $("<div class='img-accessory-grid " + accessory.imageGrid + " '></div>");
-					newCase.append(image);
+					accessories.append(image);
 				}
 			}
 		}
@@ -147,6 +133,21 @@ function appendInfoPlayer(players) {
 	}
 }
 function renderInfoPlayer(player) {
+	let accessory = "";
+	if (player.accessories[1]) {
+		accessory =
+			`<img src="../images/accessories/` +
+			player.accessories[1].imageGrid +
+			`.png" class="d-block w-100" alt="...">
+		<div>` +
+			player.accessories[1].text +
+			`<br/>
+		avantage : ` +
+			player.accessories[1].avantageText +
+			`<br/>Cet avantage est ` +
+			player.accessories[1].temporality +
+			`<div>`;
+	}
 	//console.log("player.accessories", player.accessories[0]);
 	return (
 		`<div class="info-player  col-12">
@@ -186,7 +187,9 @@ function renderInfoPlayer(player) {
 		`</p>
 
 		</div>
-		<div class="col-6 info-player-accessory">
+		<div class="col-6 info-player-accessory">` +
+		accessory +
+		`
 		</div>
 		</div>
 	</div>`

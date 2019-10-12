@@ -91,7 +91,11 @@ export default class Utils {
 					grid[i][y].movable = true;
 					tabMovableCell.push({ x: i, y: y });
 				} else {
-					if (grid[i][y].objects[0] instanceof Player || grid[i][y].objects[0] instanceof Obstacle) {
+					if (
+						grid[i][y].objects[0] instanceof Player ||
+						grid[i][y].objects[0] instanceof Obstacle ||
+						(grid[i][y].objects[1] && grid[i][y].objects[1] instanceof Player)
+					) {
 						grid[i][y].movable = false;
 						return;
 					} else {

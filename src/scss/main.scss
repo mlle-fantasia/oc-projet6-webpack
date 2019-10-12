@@ -237,10 +237,12 @@ h2 {
 .potion_healfy {
 	background-image: url($path-image+"accessories/potion_healfy.png");
 }
-.img-accessory-grid {
+.container-accessories {
 	position: absolute;
 	bottom: 0;
 	right: 0;
+}
+.img-accessory-grid {
 	margin: 2px;
 	background-color: #fff;
 	width: 20px;

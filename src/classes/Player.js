@@ -71,12 +71,15 @@ export default class Player {
 			return;
 		}
 		let object = grid[x][y].objects[0];
+		let avntagetempoel = object.temporality ? "Cet avantage est " + object.temporality : ".";
 		if (
 			confirm(
-				"Vous avez trouvé un objet ! c'est " +
+				"Vous avez trouvé un objet ! c'est : " +
 					object.text +
-					" sont avantage est : " +
+					", sont avantage est : " +
 					object.avantageText +
+					". " +
+					avntagetempoel +
 					" Souhaitez vous le prendre et laisser l'objet de même type sur place ? "
 			)
 		) {
@@ -85,8 +88,25 @@ export default class Player {
 	}
 
 	takeObject(x, y, grid) {
-		let object = grid[x][y].objects[0];
-		for (let a = 0; a < this.accessories.length; a++) {
+		let objectGrid = grid[x][y].objects[0];
+		let weaponPlayer = this.accessories[0];
+		let accessoryPlayer;
+		if (this.accessories[1]) {
+			accessoryPlayer = this.accessories[1];
+		}
+		if (objectGrid instanceof Weapon) {
+			this.accessories[0] = objectGrid;
+			grid[x][y].objects[0] = weaponPlayer;
+		}
+		if (objectGrid instanceof Accessory) {
+			this.accessories[1] = objectGrid;
+			if (accessoryPlayer) {
+				grid[x][y].objects[0] = accessoryPlayer;
+			} else {
+				grid[x][y].objects.shift();
+			}
+		}
+		/* for (let a = 0; a < this.accessories.length; a++) {
 			let objectPlayer = this.accessories[a];
 			const accessory = this.accessories[a];
 			if (accessory instanceof Weapon && object instanceof Weapon) {
@@ -95,9 +115,12 @@ export default class Player {
 			}
 			if (accessory instanceof Accessory && object instanceof Accessory) {
 				this.accessories[a] = object;
-				grid[x][y].objects[0] = objectPlayer;
+				grid[x][y].objects[1] = objectPlayer;
+			}else{
+				this.accessories[a] = object;
+				grid[x][y].objects[1] = objectPlayer;
 			}
-		}
+		} */
 	}
 	/* 	showPlayerInfo() {
 		return (
