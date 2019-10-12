@@ -1,14 +1,15 @@
 const WEAPON = [
-	{ value: "dague-etincelante", text: "jolie dague étincelante", degat: 9, initial: true },
-	{ value: "nenya", text: "Nenya l'annaeu magique", degat: 20, initial: false },
-	{ value: "dard", text: "Dard, la dague elfique", degat: 10, initial: true },
-	{ value: "narsil", text: "Narsil, la flemme de l'ouest", degat: 15, initial: false },
-	{ value: "hache", text: "hache", degat: 12, initial: true }
+	{ value: "dague-etincelante", text: "jolie dague étincelante", avantagetext: "possède 9 de dégat", degat: 9, initial: true },
+	{ value: "nenya", text: "Nenya l'annaeu magique", avantagetext: "possède 20 de dégat", degat: 20, initial: false },
+	{ value: "dard", text: "Dard, la dague elfique", avantagetext: "possède 10 de dégat", degat: 10, initial: true },
+	{ value: "narsil", text: "Narsil, la flemme de l'ouest", avantagetext: "possède 15 de dégat", degat: 15, initial: false },
+	{ value: "hache", text: "hache", avantagetext: "possède 12 de dégat", degat: 12, initial: true }
 ];
 export default class Weapon {
 	constructor(initial) {
 		let weapon = this.defineWeapon(initial);
-		this.weapon = weapon.text;
+		this.text = weapon.text;
+		this.avantageText = weapon.avantageText;
 		this.imageGrid = weapon.value;
 		this.degat = weapon.degat;
 		this.initial = weapon.initial;

@@ -1,4 +1,7 @@
+import Cell from "./Cell";
 import Utils from "./Utils";
+import Accessory from "./Accessory";
+import Weapon from "./Weapon";
 
 export default class Player {
 	constructor(name, heroNum, playerNum, accessories) {
@@ -27,12 +30,75 @@ export default class Player {
 		this.accessories = accessories;
 		this.placeX;
 		this.placeY;
+		this.movableCell;
 		//this.playerInfo = this.showPlayerInfo();
 	}
 	showMove(grid) {
-		Utils.testMove(grid, this.placeX, this.placeY, this.pointFort);
+		this.movableCell = Utils.showMove(grid, this.placeX, this.placeY, this.pointFort);
 	}
 
+	// test si une case est movable , return true ou false
+	isMovableCell(x, y, grid) {
+		if (grid[x][y].movable === true) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	move(x, y, grid) {
+		let oldPlayerCell = new Cell(this.placeX, this.placeY, []);
+		Utils.updateCell(this.placeX, this.placeY, oldPlayerCell, grid);
+		this.placeX = x;
+		this.placeY = y;
+		let newPlayerCell;
+		if (grid[x][y].objects && grid[x][y].objects.length) {
+			grid[x][y].objects.push(this);
+			newPlayerCell = grid[x][y];
+		} else {
+			newPlayerCell = new Cell(x, y, [this]);
+		}
+		Utils.updateCell(x, y, newPlayerCell, grid);
+		for (let c = 0; c < this.movableCell.length; c++) {
+			const coordinate = this.movableCell[c];
+			grid[coordinate.x][coordinate.y].movable = false;
+		}
+		console.log("grid", grid);
+	}
+
+	hasObjectToTake(x, y, grid) {
+		console.log("grid[x][y].objects", grid[x][y].objects);
+		if (grid[x][y].objects.length < 2) {
+			return;
+		}
+		let object = grid[x][y].objects[0];
+		if (
+			confirm(
+				"Vous avez trouvé un objet ! c'est " +
+					object.text +
+					" sont avantage est : " +
+					object.avantageText +
+					" Souhaitez vous le prendre et laisser l'objet de même type sur place ? "
+			)
+		) {
+			this.takeObject(x, y, grid);
+		}
+	}
+
+	takeObject(x, y, grid) {
+		let object = grid[x][y].objects[0];
+		for (let a = 0; a < this.accessories.length; a++) {
+			let objectPlayer = this.accessories[a];
+			const accessory = this.accessories[a];
+			if (accessory instanceof Weapon && object instanceof Weapon) {
+				this.accessories[a] = object;
+				grid[x][y].objects[0] = objectPlayer;
+			}
+			if (accessory instanceof Accessory && object instanceof Accessory) {
+				this.accessories[a] = object;
+				grid[x][y].objects[0] = objectPlayer;
+			}
+		}
+	}
 	/* 	showPlayerInfo() {
 		return (
 			`<div class="info-player">

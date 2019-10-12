@@ -111,6 +111,7 @@ h2 {
 	background-image: url($path-image+"players/img/hero6.jpg");
 }
 .img-object-grid {
+	position: absolute;
 	background-size: contain;
 	background-repeat: no-repeat;
 	width: 100%;

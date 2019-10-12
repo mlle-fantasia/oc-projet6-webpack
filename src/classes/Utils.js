@@ -42,18 +42,21 @@ export default class Utils {
 		}
 	}
 	// renvoie les déplacements possibles du joueur
-	static testMove(grid, x, y, ptfort) {
+	static showMove(grid, x, y, ptfort) {
+		let tabMovableCell = [];
 		let avantage = false;
 		if (ptfort.value === "fast") {
 			avantage = this.calculChanceAvantage(ptfort);
 		}
-		this.testMoveLeft(x, y, grid, avantage);
-		this.testMoveTop(x, y, grid, avantage);
+		this.testMoveLeft(x, y, grid, avantage, tabMovableCell);
+		this.testMoveTop(x, y, grid, avantage, tabMovableCell);
 
-		this.testMoveBottom(x, y, grid, avantage);
-		this.testMoveRight(x, y, grid, avantage);
+		this.testMoveBottom(x, y, grid, avantage, tabMovableCell);
+		this.testMoveRight(x, y, grid, avantage, tabMovableCell);
+		console.log(", tabMovableCell", tabMovableCell);
+		return tabMovableCell;
 	}
-	static testMoveLeft(x, y, grid, avantage) {
+	static testMoveLeft(x, y, grid, avantage, tabMovableCell) {
 		let nbCaseMaxToMove = 3;
 		if (avantage) {
 			nbCaseMaxToMove = 4;
@@ -63,20 +66,20 @@ export default class Utils {
 				let cellEmpty = this.isFreeCell(x, i, grid);
 				if (cellEmpty) {
 					grid[x][i].movable = true;
+					tabMovableCell.push({ x: x, y: i });
 				} else {
 					if (grid[x][i].objects[0] instanceof Player || grid[x][i].objects[0] instanceof Obstacle) {
-						console.log("grid[x][i]", grid[x][i]);
 						grid[x][i].movable = false;
 						return;
 					} else {
-						console.log("grid[x][i] movable ok arme", grid[x][i].objects[0]);
 						grid[x][i].movable = true;
+						tabMovableCell.push({ x: x, y: i });
 					}
 				}
 			}
 		}
 	}
-	static testMoveTop(x, y, grid, avantage) {
+	static testMoveTop(x, y, grid, avantage, tabMovableCell) {
 		let nbCaseMaxToMove = 3;
 		if (avantage) {
 			nbCaseMaxToMove = 4;
@@ -86,18 +89,20 @@ export default class Utils {
 				let cellEmpty = this.isFreeCell(i, y, grid);
 				if (cellEmpty) {
 					grid[i][y].movable = true;
+					tabMovableCell.push({ x: i, y: y });
 				} else {
 					if (grid[i][y].objects[0] instanceof Player || grid[i][y].objects[0] instanceof Obstacle) {
 						grid[i][y].movable = false;
 						return;
 					} else {
 						grid[i][y].movable = true;
+						tabMovableCell.push({ x: i, y: y });
 					}
 				}
 			}
 		}
 	}
-	static testMoveBottom(x, y, grid, avantage) {
+	static testMoveBottom(x, y, grid, avantage, tabMovableCell) {
 		let nbCaseMaxToMove = 3;
 		if (avantage) {
 			nbCaseMaxToMove = 4;
@@ -107,19 +112,21 @@ export default class Utils {
 				let cellEmpty = this.isFreeCell(i, y, grid);
 				if (cellEmpty) {
 					grid[i][y].movable = true;
+					tabMovableCell.push({ x: i, y: y });
 				} else {
 					if (grid[i][y].objects[0] instanceof Player || grid[i][y].objects[0] instanceof Obstacle) {
 						grid[i][y].movable = false;
 						return;
 					} else {
 						grid[i][y].movable = true;
+						tabMovableCell.push({ x: i, y: y });
 					}
 				}
 			}
 		}
 	}
 
-	static testMoveRight(x, y, grid, avantage) {
+	static testMoveRight(x, y, grid, avantage, tabMovableCell) {
 		let nbCaseMaxToMove = 3;
 		if (avantage) {
 			nbCaseMaxToMove = 4;
@@ -129,12 +136,14 @@ export default class Utils {
 				let cellEmpty = this.isFreeCell(x, i, grid);
 				if (cellEmpty) {
 					grid[x][i].movable = true;
+					tabMovableCell.push({ x: x, y: i });
 				} else {
 					if (grid[x][i].objects[0] instanceof Player || grid[x][i].objects[0] instanceof Obstacle) {
 						grid[x][i].movable = false;
 						return;
 					} else {
 						grid[x][i].movable = true;
+						tabMovableCell.push({ x: x, y: i });
 					}
 				}
 			}
@@ -152,5 +161,9 @@ export default class Utils {
 		} else {
 			return false;
 		}
+	}
+	static updateCell(x, y, cell, grid) {
+		// todo gérer les erreurs
+		grid[x][y] = cell;
 	}
 }

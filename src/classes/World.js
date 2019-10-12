@@ -26,8 +26,6 @@ export default class World {
 		}
 		this.placeObstacles();
 		this.placePlayers(players);
-		console.log("weapon", weapons);
-		console.log("accessories", accessories);
 		this.placeAccessories("weapon", weapons);
 		this.placeAccessories("accessory", accessories);
 
@@ -45,7 +43,7 @@ export default class World {
 		if (Utils.isFreeCell(x, y, this.grid)) {
 			let newObstacle = new Obstacle(this.univers);
 			let newCell = new Cell(x, y, [newObstacle]);
-			this.updateCell(x, y, newCell);
+			Utils.updateCell(x, y, newCell, this.grid);
 		} else {
 			this.placeOneObstacle();
 		}
@@ -63,7 +61,7 @@ export default class World {
 			player.placeX = x;
 			player.placeY = y;
 			let newCell = new Cell(x, y, [player]);
-			this.updateCell(x, y, newCell);
+			Utils.updateCell(x, y, newCell, this.grid);
 		} else {
 			this.placeOnePlayer(player);
 		}
@@ -80,13 +78,9 @@ export default class World {
 		let y = Math.floor(Math.random() * Math.floor(this.worldSizeY));
 		if (Utils.isFreeCell(x, y, this.grid)) {
 			let newCell = new Cell(x, y, [object]);
-			this.updateCell(x, y, newCell);
+			Utils.updateCell(x, y, newCell, this.grid);
 		} else {
 			this.placeOneAccessory(objectToPlace, object);
 		}
-	}
-	updateCell(x, y, cell) {
-		// todo gérer les erreurs
-		this.grid[x][y] = cell;
 	}
 }

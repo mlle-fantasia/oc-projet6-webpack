@@ -2,7 +2,7 @@ import "./scss/main.scss";
 import App from "./classes/App";
 import $ from "jquery";
 import Player from "./classes/Player";
-import { TIMEOUT } from "dns";
+import World from "./classes/World";
 var indexCurrentPlayer = 0;
 $(document).ready(function() {
 	$("#btn-info-player3").hide();
@@ -30,6 +30,38 @@ function renderYourTurn(player) {
 		alert("coucou " + player.playerName + " c'est à toi de jouer !");
 		player.showMove(app.grid);
 		render(app.grid);
+		$(".case").click(event => {
+			let x, y;
+			let object = false;
+			if ($(event.target).hasClass("img-object-grid")) {
+				x = parseInt(
+					$(event.target)
+						.parent()
+						.attr("data-x")
+				);
+				y = parseInt(
+					$(event.target)
+						.parent()
+						.attr("data-y")
+				);
+				object = true;
+			} else {
+				x = parseInt($(event.target).attr("data-x"));
+				y = parseInt($(event.target).attr("data-y"));
+			}
+
+			if (player.isMovableCell(x, y, window.app.grid)) {
+				console.log("mouvement accepté");
+				player.move(x, y, window.app.grid);
+				render(app.grid);
+				setTimeout(function() {
+					player.hasObjectToTake(x, y, window.app.grid);
+					render(app.grid);
+				}, 100);
+			} else {
+				alert("vous ne pouvez pas aller sur cette case");
+			}
+		});
 		indexCurrentPlayer++;
 	}, 2000);
 	/* let modal =
@@ -57,13 +89,25 @@ function renderYourTurn(player) {
 function render(grid) {
 	$(".grid").empty();
 	let cellSize = $(".world").width() / grid.length;
-	for (let y = 0; y < grid.length; y++) {
-		const line = grid[y];
+	for (let x = 0; x < grid.length; x++) {
+		const line = grid[x];
 		let newLine = $("<div class='line'></div>");
 		$(".grid").append(newLine);
-		for (let x = 0; x < line.length; x++) {
-			const cell = line[x];
-			let newCase = $("<div class='case movable-" + cell.movable + "' style='width:" + cellSize + "px;height:" + cellSize + "px'></div>");
+		for (let y = 0; y < line.length; y++) {
+			const cell = line[y];
+			let newCase = $(
+				"<div class='case movable-" +
+					cell.movable +
+					"' data-x='" +
+					x +
+					"' data-y='" +
+					y +
+					"' style='width:" +
+					cellSize +
+					"px;height:" +
+					cellSize +
+					"px'></div>"
+			);
 			renderObjectCell(cell, newCase);
 			newLine.append(newCase);
 		}
@@ -135,7 +179,7 @@ function renderInfoPlayer(player) {
 		player.accessories[0].imageGrid +
 		`.png" class="d-block w-100" alt="...">
 		<p>` +
-		player.accessories[0].weapon +
+		player.accessories[0].text +
 		`</p>
 		<p>Dégats : ` +
 		player.accessories[0].degat +
