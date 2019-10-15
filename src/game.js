@@ -17,7 +17,17 @@ $(document).ready(function() {
 	console.log("app.players", window.app.players);
 	render(window.app.grid);
 	appendInfoPlayer(window.app.players);
-
+	//à appeler à chaque tour
+	let infoPlayerTop = renderInfoPlayerTop(window.app.players);
+	$(".container-info-player-top").append(infoPlayerTop);
+	if (window.app.players.length > 2) {
+		let infoPlayer3 = renderInfoPlayer3(window.app.players);
+		$(".container-info-player3").append(infoPlayer3);
+	}
+	if (window.app.players.length > 3) {
+		let infoPlayer4 = renderInfoPlayer4(window.app.players);
+		$(".container-info-player4").append(infoPlayer4);
+	}
 	//tour par tour
 	nextPlayer();
 });
@@ -30,6 +40,8 @@ function nextPlayer() {
 function renderYourTurn(player) {
 	setTimeout(function() {
 		alert("coucou " + player.playerName + " c'est à toi de jouer !");
+		$(".player-" + player.playerNum).addClass("zoom");
+		appendInfoPlayer2(player);
 		player.showMove(app.grid);
 		render(app.grid);
 
@@ -102,7 +114,7 @@ function renderObjectCell(cell, newCase) {
 	if (cell.objects && cell.objects.length) {
 		for (let i = 0; i < cell.objects.length; i++) {
 			const object = cell.objects[i];
-			let image = $("<div class='img-object-grid " + object.imageGrid + " '></div>");
+			let image = $("<div class='img-object-grid " + object.imageGrid + " player-" + object.playerNum + "'></div>");
 			newCase.append(image);
 			if (object instanceof Player) {
 				let accessories = $("<div class='d-flex flex-row container-accessories'></div>");
@@ -116,6 +128,11 @@ function renderObjectCell(cell, newCase) {
 		}
 	}
 }
+function appendInfoPlayer2(player) {
+	let info = renderInfoPlayer2(player);
+	$("#info-player").append(info);
+}
+function renderInfoPlayer2(player) {}
 function appendInfoPlayer(players) {
 	for (let p = 0; p < players.length; p++) {
 		const player = players[p];
@@ -193,5 +210,169 @@ function renderInfoPlayer(player) {
 		</div>
 		</div>
 	</div>`
+	);
+}
+
+function renderInfoPlayerTop(players) {
+	let player1 = players[0];
+	let player2 = players[1];
+	let accessoryPlayer1 = player1.accessories[1] ? ' src="images/accessories/' + player1.accessories[1].imageGrid + '.png" alt="image hero 1"' : "";
+	let accessoryPlayer2 = player2.accessories[1] ? ' src="images/accessories/' + player2.accessories[1].imageGrid + '.png" alt="image hero 2"' : "";
+	return (
+		`
+		<div class="info-player2 d-flex flex-row justify-content-between">
+			<div class="col-md-5">
+				<div class="row d-flex flex-row align-items-start">
+					<div class="col-md-6 d-flex flex-column px-0">
+						<div class="info-player2-name">` +
+		player1.playerName +
+		`</div>
+						<div class="bacground-info-player2 overlay">
+							<div class="container-info-playe2-vie-top-left">
+								<div id="triangle-1"></div>
+								<div id="triangle-2"></div>
+							</div>
+							<div class="info-playe2-vie-top">` +
+		player1.ptVie +
+		`</div>
+							<img class="info-player2-img info-player2-img-hero " src="images/players/img/hero` +
+		player1.heroNum +
+		`.jpg"
+								alt="image hero">
+						</div>
+
+					</div>
+					<div class="col-md-4 px-0">
+						<div class="bacground-info-player2 overlay">
+							<img class="info-player2-img info-player2-img-armor" src="images/accessories/` +
+		player1.accessories[0].imageGrid +
+		`.png"
+								alt="image hero">
+						</div>
+					</div>
+					<div class="col-md-2 px-0">
+						<div class="bacground-info-player2 overlay">
+						<img class="info-player2-img info-player2-img-accessory" ` +
+		accessoryPlayer1 +
+		`
+		>		
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-5">
+				<div class="row d-flex flex-row align-items-start">
+					<div class="col-md-2 px-0">
+						<div class="bacground-info-player2 overlay">
+							<img class="info-player2-img info-player2-img-accessory"` +
+		accessoryPlayer2 +
+		`
+								>
+						</div>
+					</div>
+					<div class="col-md-4 px-0">
+						<div class="bacground-info-player2 overlay">
+							<img class="info-player2-img info-player2-img-armor" src="images/accessories/` +
+		player2.accessories[0].imageGrid +
+		`.png"
+								alt="image hero">
+						</div>
+					</div>
+					<div class="col-md-6 d-flex flex-column px-0">
+						<div class="info-player2-name">` +
+		player2.playerName +
+		`</div>
+						<div class="bacground-info-player2 overlay">
+							<div class="container-info-playe2-vie-top-right">
+								<div id="triangle-1"></div>
+								<div id="triangle-2"></div>
+							</div>
+							<div class="info-playe2-vie-top">` +
+		player2.ptVie +
+		`</div>
+							<img class="info-player2-img info-player2-img-hero " src="images/players/img/hero` +
+		player2.heroNum +
+		`.jpg"
+								alt="image hero">
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	`
+	);
+}
+function renderInfoPlayer3(players) {
+	let player = players[2];
+	return (
+		`<div class="row d-flex flex-row align-items-end">
+<div class="col-md-6 d-flex flex-column px-0">
+	<div class="bacground-info-player2 overlay">
+		<div class="container-info-playe2-vie-bot-left">
+			<div id="triangle-1"></div>
+			<div id="triangle-2"></div>
+		</div>
+		<div class="info-playe2-vie-bot">` +
+		player.ptVie +
+		`</div>
+		<img class="info-player2-img info-player2-img-hero " src="images/players/img/hero2.jpg"
+			alt="image hero">
+	</div>
+	<div class="info-player2-name">` +
+		player.playerName +
+		`</div>
+</div>
+<div class="col-md-4 px-0">
+	<div class="bacground-info-player2 overlay">
+		<img class="info-player2-img info-player2-img-armor" src="images/accessories/dard.png"
+			alt="image hero">
+	</div>
+</div>
+<div class="col-md-2 px-0">
+	<div class="bacground-info-player2 overlay">
+		<img class="info-player2-img info-player2-img-accessory" src="images/accessories/armor.png"
+			alt="image hero">
+	</div>
+</div>
+</div>
+`
+	);
+}
+function renderInfoPlayer4(players) {
+	let player = players[3];
+	return (
+		`<div class="row d-flex flex-row align-items-end">
+		<div class="col-md-2 px-0">
+			<div class="bacground-info-player2 overlay">
+				<img class="info-player2-img info-player2-img-accessory" src="images/accessories/armor.png"
+					alt="image hero">
+			</div>
+		</div>
+		<div class="col-md-4 px-0">
+			<div class="bacground-info-player2 overlay">
+				<img class="info-player2-img info-player2-img-armor" src="images/accessories/dard.png"
+					alt="image hero">
+			</div>
+		</div>
+		<div class="col-md-6 d-flex flex-column px-0">
+			<div class="bacground-info-player2 overlay">
+				<div class="container-info-playe2-vie-bot-right">
+					<div id="triangle-1"></div>
+					<div id="triangle-2"></div>
+				</div>
+				<div class="info-playe2-vie-bot">` +
+		player.ptVie +
+		`</div>
+				<img class="info-player2-img info-player2-img-hero " src="images/players/img/hero2.jpg"
+					alt="image hero">
+			</div>
+			<div class="info-player2-name">` +
+		player.playerName +
+		`</div>
+		</div>
+	</div>
+`
 	);
 }

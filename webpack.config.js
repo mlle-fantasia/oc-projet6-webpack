@@ -51,6 +51,17 @@ const config = {
 						}
 					}
 				]
+			},
+			{
+				test: /\.ttf$/,
+				use: [
+					{
+						loader: "ttf-loader",
+						options: {
+							name: "./public/[hash].[ext]"
+						}
+					}
+				]
 			}
 		]
 	},

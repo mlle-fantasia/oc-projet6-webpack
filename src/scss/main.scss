@@ -11,9 +11,18 @@ $background-hero4: #a69486;
 $background-hero5: #788898;
 $background-hero6: #434343;
 
+/* @font-face {
+	font-family: "tolkien";
+	src: url("../../public/Courier Prime.ttf");
+} */
 ///////général//////
+
+.container-game {
+	margin-top: 249px;
+}
 .titre {
 	padding: 40px;
+	//font-family: "tolkien";
 }
 .titre-shadow {
 	text-shadow: 3px 4px 5px black;
@@ -117,6 +126,7 @@ h2 {
 	width: 100%;
 	height: 100%;
 	background-position: center;
+	z-index: 1;
 }
 .hero1-grid {
 	background-image: url($path-image+"players/grid/player1figure.png");
@@ -237,10 +247,20 @@ h2 {
 .potion_healfy {
 	background-image: url($path-image+"accessories/potion_healfy.png");
 }
+.mitril {
+	background-image: url($path-image+"accessories/mitril.png");
+}
+.hat {
+	background-image: url($path-image+"accessories/hat.png");
+}
+.armor {
+	background-image: url($path-image+"accessories/armor.png");
+}
 .container-accessories {
 	position: absolute;
 	bottom: 0;
 	right: 0;
+	z-index: 2;
 }
 .img-accessory-grid {
 	margin: 2px;
