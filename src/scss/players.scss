@@ -22,50 +22,7 @@ $path-image: "../../public/images/";
 	position: absolute;
 	top: 0;
 }
-.info-player2-name {
-	text-align: center;
-	text-transform: uppercase;
-	border: double 3px #733c06;
-	border-radius: 15px;
-}
-.bacground-info-player2 {
-	background-image: url($path-image+"fond.png");
-	background-size: cover;
-	border-radius: 50%;
-}
-.info-player2-img {
-	width: 100%;
-	border-radius: 50%;
-}
-.info-player2-img-hero {
-	height: 340px;
-	padding: 25px;
-	object-fit: cover;
-}
-.info-player2-img-armor {
-	height: 227px;
-	padding: 20px;
-	object-fit: contain;
-}
-.info-player2-img-accessory {
-	height: 114px;
-	padding: 20px;
-	object-fit: contain;
-}
-#triangle-1 {
-	width: 0;
-	height: 0;
-	border-left: 36px solid transparent;
-	border-right: 36px solid transparent;
-	border-bottom: 60px solid #723c10;
-}
-#triangle-2 {
-	width: 0;
-	height: 0;
-	border-left: 36px solid transparent;
-	border-right: 36px solid transparent;
-	border-top: 60px solid #723c10;
-}
+
 .info-playe2-vie-bot {
 	color: #fff;
 	position: absolute;
@@ -107,4 +64,102 @@ $path-image: "../../public/images/";
 .overlay {
 	background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
 	z-index: 4; /* Specify a stack order in case you're using a different order for other elements */
+}
+/////////////////////// infos players //////////////////////////
+/////////////// général //////////////
+.info-all-players {
+	align-items: center;
+	.info-player2-img-hero {
+		padding: 12px;
+	}
+}
+.info-player-name {
+	text-align: center;
+	text-transform: uppercase;
+	border: double 3px #733c06;
+	border-radius: 15px;
+	width: 100%;
+	margin-bottom: 5px;
+}
+.info-player2-img {
+	width: 100%;
+	border-radius: 50%;
+}
+.info-player2-img-hero {
+	padding: 25px;
+	object-fit: cover;
+}
+.info-player2-img-armor {
+	padding: 20px;
+	object-fit: contain;
+}
+.info-player2-img-accessory {
+	padding: 20px;
+	object-fit: contain;
+}
+#triangle-1 {
+	width: 0;
+	height: 0;
+	border-left: 36px solid transparent;
+	border-right: 36px solid transparent;
+	border-bottom: 60px solid #723c10;
+}
+#triangle-2 {
+	width: 0;
+	height: 0;
+	border-left: 36px solid transparent;
+	border-right: 36px solid transparent;
+	border-top: 60px solid #723c10;
+}
+.cercle-hero {
+	width: 100%;
+}
+.cercle-armor {
+	width: 50%;
+}
+.cercle-accessory {
+	width: 33%;
+}
+.player {
+	width: 50%;
+	margin-bottom: 5px;
+	margin-top: 35px;
+}
+
+.background-cercle-anneau {
+	background-image: url($path-image+"fond.png");
+	background-size: cover;
+	border-radius: 50%;
+	height: 100%;
+	img {
+		height: 100%;
+	}
+}
+.background-cercle-player-hero {
+	position: relative;
+	background-image: url($path-image+"bordure.png");
+	background-size: cover;
+	border-radius: 50%;
+	height: 100%;
+	img {
+		height: 100%;
+	}
+	.info-player2-img-armor {
+		padding: 5px;
+	}
+}
+////////// all players ////////////
+.all-player-weapon {
+	position: absolute;
+	width: 30%;
+	height: 30%;
+	bottom: 0;
+	right: 0;
+}
+.all-player-accessory {
+	position: absolute;
+	width: 30%;
+	height: 30%;
+	bottom: 0;
+	left: 0;
 }

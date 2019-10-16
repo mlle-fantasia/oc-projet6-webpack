@@ -38,7 +38,7 @@ const config = {
 			},
 			// images
 			{
-				test: /\.(png|svg|jpg|gif)$/,
+				test: /\.(png|svg|jpg|gif|ttf|TTF)$/,
 				use: ["file-loader"]
 			},
 			{
@@ -48,17 +48,6 @@ const config = {
 						loader: "html-loader",
 						options: {
 							minimize: true
-						}
-					}
-				]
-			},
-			{
-				test: /\.ttf$/,
-				use: [
-					{
-						loader: "ttf-loader",
-						options: {
-							name: "./public/[hash].[ext]"
 						}
 					}
 				]

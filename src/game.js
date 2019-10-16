@@ -16,18 +16,8 @@ $(document).ready(function() {
 	window.app = new App(players, univers);
 	console.log("app.players", window.app.players);
 	render(window.app.grid);
-	appendInfoPlayer(window.app.players);
-	//à appeler à chaque tour
-	let infoPlayerTop = renderInfoPlayerTop(window.app.players);
-	$(".container-info-player-top").append(infoPlayerTop);
-	if (window.app.players.length > 2) {
-		let infoPlayer3 = renderInfoPlayer3(window.app.players);
-		$(".container-info-player3").append(infoPlayer3);
-	}
-	if (window.app.players.length > 3) {
-		let infoPlayer4 = renderInfoPlayer4(window.app.players);
-		$(".container-info-player4").append(infoPlayer4);
-	}
+	let infoPlayers = renderInfoAllPlayer(window.app.players);
+	$(".info-all-player").append(infoPlayers);
 	//tour par tour
 	nextPlayer();
 });
@@ -38,49 +28,47 @@ function nextPlayer() {
 	renderYourTurn(player);
 }
 function renderYourTurn(player) {
-	setTimeout(function() {
-		alert("coucou " + player.playerName + " c'est à toi de jouer !");
-		$(".player-" + player.playerNum).addClass("zoom");
-		appendInfoPlayer2(player);
-		player.showMove(app.grid);
-		render(app.grid);
+	$(".info-current-player").empty();
+	let info = renderInfoCurrentPlayer(player);
+	$(".info-current-player").append(info);
+	player.showMove(app.grid);
+	render(app.grid);
+	$(".player-" + player.playerNum).addClass("zoom");
 
-		let monCallback = event => {
-			let x, y;
-			let object = false;
-			if ($(event.target).hasClass("img-object-grid")) {
-				x = parseInt(
-					$(event.target)
-						.parent()
-						.attr("data-x")
-				);
-				y = parseInt(
-					$(event.target)
-						.parent()
-						.attr("data-y")
-				);
-				object = true;
-			} else {
-				x = parseInt($(event.target).attr("data-x"));
-				y = parseInt($(event.target).attr("data-y"));
-			}
+	let monCallback = event => {
+		let x, y;
+		let object = false;
+		if ($(event.target).hasClass("img-object-grid")) {
+			x = parseInt(
+				$(event.target)
+					.parent()
+					.attr("data-x")
+			);
+			y = parseInt(
+				$(event.target)
+					.parent()
+					.attr("data-y")
+			);
+			object = true;
+		} else {
+			x = parseInt($(event.target).attr("data-x"));
+			y = parseInt($(event.target).attr("data-y"));
+		}
 
-			if (player.isMovableCell(x, y, window.app.grid)) {
-				console.log("mouvement accepté");
-				player.move(x, y, window.app.grid);
+		if (player.isMovableCell(x, y, window.app.grid)) {
+			player.move(x, y, window.app.grid);
+			render(app.grid);
+			setTimeout(function() {
+				player.hasObjectToTake(x, y, window.app.grid);
 				render(app.grid);
-				setTimeout(function() {
-					player.hasObjectToTake(x, y, window.app.grid);
-					render(app.grid);
-					$(".case").unbind("click", monCallback);
-					nextPlayer();
-				}, 100);
-			} else {
-				alert("vous ne pouvez pas aller sur cette case");
-			}
-		};
-		$(".case").bind("click", monCallback);
-	}, 2000);
+				$(".case").unbind("click", monCallback);
+				nextPlayer();
+			}, 100);
+		} else {
+			alert("vous ne pouvez pas aller sur cette case");
+		}
+	};
+	$(".case").bind("click", monCallback);
 }
 function render(grid) {
 	$(".grid").empty();
@@ -128,11 +116,7 @@ function renderObjectCell(cell, newCase) {
 		}
 	}
 }
-function appendInfoPlayer2(player) {
-	let info = renderInfoPlayer2(player);
-	$("#info-player").append(info);
-}
-function renderInfoPlayer2(player) {}
+
 function appendInfoPlayer(players) {
 	for (let p = 0; p < players.length; p++) {
 		const player = players[p];
@@ -213,166 +197,88 @@ function renderInfoPlayer(player) {
 	);
 }
 
-function renderInfoPlayerTop(players) {
-	let player1 = players[0];
-	let player2 = players[1];
-	let accessoryPlayer1 = player1.accessories[1] ? ' src="images/accessories/' + player1.accessories[1].imageGrid + '.png" alt="image hero 1"' : "";
-	let accessoryPlayer2 = player2.accessories[1] ? ' src="images/accessories/' + player2.accessories[1].imageGrid + '.png" alt="image hero 2"' : "";
+function renderInfoCurrentPlayer(player) {
+	let accessory = "";
+	if (player.accessories[1]) {
+		accessory = 'src="images/accessories/' + player.accessories[1].imageGrid + '.png" alt="image accessoire"';
+	}
+	let heroSize = $(".info-current-player").width();
+	let ArmorSize = $(".info-current-player").width() / 2;
+	let AccessorySize = $(".info-current-player").width() / 3;
 	return (
-		`
-		<div class="info-player2 d-flex flex-row justify-content-between">
-			<div class="col-md-5">
-				<div class="row d-flex flex-row align-items-start">
-					<div class="col-md-6 d-flex flex-column px-0">
-						<div class="info-player2-name">` +
-		player1.playerName +
+		`<div class="d-flex flex-column cercle-hero">
+	<div class="info-player-name tolkien">` +
+		player.playerName +
 		`</div>
-						<div class="bacground-info-player2 overlay">
-							<div class="container-info-playe2-vie-top-left">
-								<div id="triangle-1"></div>
-								<div id="triangle-2"></div>
-							</div>
-							<div class="info-playe2-vie-top">` +
-		player1.ptVie +
-		`</div>
-							<img class="info-player2-img info-player2-img-hero " src="images/players/img/hero` +
-		player1.heroNum +
-		`.jpg"
-								alt="image hero">
-						</div>
-
-					</div>
-					<div class="col-md-4 px-0">
-						<div class="bacground-info-player2 overlay">
-							<img class="info-player2-img info-player2-img-armor" src="images/accessories/` +
-		player1.accessories[0].imageGrid +
-		`.png"
-								alt="image hero">
-						</div>
-					</div>
-					<div class="col-md-2 px-0">
-						<div class="bacground-info-player2 overlay">
-						<img class="info-player2-img info-player2-img-accessory" ` +
-		accessoryPlayer1 +
-		`
-		>		
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-md-5">
-				<div class="row d-flex flex-row align-items-start">
-					<div class="col-md-2 px-0">
-						<div class="bacground-info-player2 overlay">
-							<img class="info-player2-img info-player2-img-accessory"` +
-		accessoryPlayer2 +
-		`
-								>
-						</div>
-					</div>
-					<div class="col-md-4 px-0">
-						<div class="bacground-info-player2 overlay">
-							<img class="info-player2-img info-player2-img-armor" src="images/accessories/` +
-		player2.accessories[0].imageGrid +
-		`.png"
-								alt="image hero">
-						</div>
-					</div>
-					<div class="col-md-6 d-flex flex-column px-0">
-						<div class="info-player2-name">` +
-		player2.playerName +
-		`</div>
-						<div class="bacground-info-player2 overlay">
-							<div class="container-info-playe2-vie-top-right">
-								<div id="triangle-1"></div>
-								<div id="triangle-2"></div>
-							</div>
-							<div class="info-playe2-vie-top">` +
-		player2.ptVie +
-		`</div>
-							<img class="info-player2-img info-player2-img-hero " src="images/players/img/hero` +
-		player2.heroNum +
-		`.jpg"
-								alt="image hero">
-						</div>
-
-					</div>
-				</div>
-			</div>
-		</div>
-	`
-	);
-}
-function renderInfoPlayer3(players) {
-	let player = players[2];
-	return (
-		`<div class="row d-flex flex-row align-items-end">
-<div class="col-md-6 d-flex flex-column px-0">
-	<div class="bacground-info-player2 overlay">
-		<div class="container-info-playe2-vie-bot-left">
+	<div class="background-cercle-player-hero" style="height:` +
+		heroSize +
+		`px">
+		<div class="container-info-playe2-vie-top-right">
 			<div id="triangle-1"></div>
 			<div id="triangle-2"></div>
 		</div>
-		<div class="info-playe2-vie-bot">` +
+		<div class="info-playe2-vie-top">` +
 		player.ptVie +
 		`</div>
-		<img class="info-player2-img info-player2-img-hero " src="images/players/img/hero2.jpg"
-			alt="image hero">
-	</div>
-	<div class="info-player2-name">` +
-		player.playerName +
-		`</div>
-</div>
-<div class="col-md-4 px-0">
-	<div class="bacground-info-player2 overlay">
-		<img class="info-player2-img info-player2-img-armor" src="images/accessories/dard.png"
+		<img class="info-player2-img info-player2-img-hero " src="images/players/img/hero` +
+		player.heroNum +
+		`.jpg"
 			alt="image hero">
 	</div>
 </div>
-<div class="col-md-2 px-0">
-	<div class="bacground-info-player2 overlay">
-		<img class="info-player2-img info-player2-img-accessory" src="images/accessories/armor.png"
-			alt="image hero">
+<div class=" cercle-armor" style="height:` +
+		ArmorSize +
+		`px">
+	<div class="background-cercle-anneau" >
+		<img class="info-player2-img info-player2-img-armor" src="images/accessories/` +
+		player.accessories[0].imageGrid +
+		`.png"
+			alt="image arme">
 	</div>
 </div>
-</div>
-`
+<div class="cercle-accessory ">
+	<div class="background-cercle-anneau" style="height:` +
+		AccessorySize +
+		`px">
+		<img class="info-player2-img info-player2-img-accessory"` +
+		accessory +
+		` >
+	</div>
+
+</div>`
 	);
 }
-function renderInfoPlayer4(players) {
-	let player = players[3];
-	return (
-		`<div class="row d-flex flex-row align-items-end">
-		<div class="col-md-2 px-0">
-			<div class="bacground-info-player2 overlay">
-				<img class="info-player2-img info-player2-img-accessory" src="images/accessories/armor.png"
-					alt="image hero">
-			</div>
-		</div>
-		<div class="col-md-4 px-0">
-			<div class="bacground-info-player2 overlay">
-				<img class="info-player2-img info-player2-img-armor" src="images/accessories/dard.png"
-					alt="image hero">
-			</div>
-		</div>
-		<div class="col-md-6 d-flex flex-column px-0">
-			<div class="bacground-info-player2 overlay">
-				<div class="container-info-playe2-vie-bot-right">
-					<div id="triangle-1"></div>
-					<div id="triangle-2"></div>
-				</div>
-				<div class="info-playe2-vie-bot">` +
-		player.ptVie +
-		`</div>
-				<img class="info-player2-img info-player2-img-hero " src="images/players/img/hero2.jpg"
-					alt="image hero">
-			</div>
-			<div class="info-player2-name">` +
-		player.playerName +
-		`</div>
-		</div>
+function renderInfoAllPlayer(players) {
+	let widthPlayer = $(".info-all-players").width() / 2;
+	for (let p = 0; p < players.length; p++) {
+		const player = players[p];
+		let accessory = "";
+		if (player.accessories[1]) {
+			accessory = 'src="images/accessories/' + player.accessories[1].imageGrid + '.png" alt="image accessoire"';
+		}
+		let onePlayer =
+			`<div class="player" style="height:` +
+			widthPlayer +
+			`px">
+	<div class="background-cercle-player-hero">
+		<img class="info-player2-img info-player2-img-hero " src="images/players/img/hero` +
+			player.heroNum +
+			`.jpg"
+			alt="image hero">
+			<div class="background-cercle-anneau all-player-weapon">
+			<img class="info-player2-img info-player2-img-armor" src="images/accessories/` +
+			player.accessories[0].imageGrid +
+			`.png"
+			alt="image arme"></div>
+			<div class="background-cercle-anneau all-player-accessory">
+			<img class="info-player2-img info-player2-img-armor" ` +
+			accessory +
+			`></div>
 	</div>
-`
-	);
+	<div class="info-player-name tolkien">` +
+			player.playerName +
+			`</div>
+</div>`;
+		$(".info-all-players").append(onePlayer);
+	}
 }

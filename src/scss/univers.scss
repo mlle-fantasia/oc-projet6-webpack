@@ -1,4 +1,4 @@
-$path-image: "../../public/images/";
+$path-image: "../../public/images/worlds/";
 
 .world {
 	padding: 0;
@@ -12,10 +12,10 @@ $path-image: "../../public/images/";
 	background-image: url($path-image+"fangorn.jpg");
 }
 .world2 {
-	background-image: url($path-image+"lorien.jpg");
+	background-image: url($path-image+"moria.jpg");
 }
 .world3 {
-	background-image: url($path-image+"test.jpg");
+	background-image: url($path-image+"destin.jpg");
 }
 .world-legend {
 	background-color: #00000085;
@@ -29,37 +29,55 @@ $path-image: "../../public/images/";
 	text-align: center;
 }
 .world1-background {
-	background-image: url($path-image+"worlds/ocean_back.jpg");
+	background-image: url($path-image+"fangorn.jpg");
+	background-size: cover;
+	background-position: center;
 	.case {
 		border-left: solid 0.5px #cdd4e6;
 		border-bottom: solid 0.5px #cdd4e6;
+	}
+	.line {
+		background-color: #4f5c5354;
 	}
 }
 .world1-grid {
-	background-image: url($path-image+"worlds/amazonie_obs.jpg");
+	//background-image: url($path-image+"worlds/amazonie_obs.jpg");
+	background-color: #4f5d53;
 }
 
 .world2-background {
-	background-image: url($path-image+"worlds/amazonie_back.jpg");
+	background-image: url($path-image+"moria.jpg");
+	background-size: cover;
+	background-position: center;
 	.case {
 		border-left: solid 0.5px #cdd4e6;
 		border-bottom: solid 0.5px #cdd4e6;
+	}
+	.line {
+		background-color: #00000070;
 	}
 }
 .world2-grid {
-	background-image: url($path-image+"worlds/amazonie_obs.jpg");
+	//background-image: url($path-image+"amazonie_obs.jpg");
+	background-color: #15100d;
 }
 
 .univers-ocean {
-	background-image: url($path-image+"worlds/ocean_img.jpg");
+	background-image: url($path-image+"ocean_img.jpg");
 }
 .world3-background {
-	background-image: url($path-image+"worlds/ocean_back.jpg");
+	background-image: url($path-image+"destin.jpg");
+	background-size: cover;
+	background-position: center;
 	.case {
 		border-left: solid 0.5px #cdd4e6;
 		border-bottom: solid 0.5px #cdd4e6;
 	}
+	.line {
+		background-color: #8a5c408a;
+	}
 }
 .world3-grid {
-	background-image: url($path-image+"worlds/ocean_obs.png");
+	//background-image: url($path-image+"ocean_obs.png");
+	background-color: #332318;
 }

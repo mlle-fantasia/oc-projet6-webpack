@@ -11,18 +11,17 @@ $background-hero4: #a69486;
 $background-hero5: #788898;
 $background-hero6: #434343;
 
-/* @font-face {
+@font-face {
 	font-family: "tolkien";
-	src: url("../../public/Courier Prime.ttf");
-} */
+	src: url("../../public/tolkien.TTF");
+}
 ///////général//////
-
-.container-game {
-	margin-top: 249px;
+.tolkien {
+	font-family: "tolkien";
 }
 .titre {
 	padding: 40px;
-	//font-family: "tolkien";
+	font-family: "tolkien";
 }
 .titre-shadow {
 	text-shadow: 3px 4px 5px black;
@@ -123,8 +122,8 @@ h2 {
 	position: absolute;
 	background-size: contain;
 	background-repeat: no-repeat;
-	width: 100%;
-	height: 100%;
+	width: 99%;
+	height: 99%;
 	background-position: center;
 	z-index: 1;
 }
