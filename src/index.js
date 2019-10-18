@@ -6,20 +6,6 @@ let world = 0;
 let nbPlayer = 0;
 const backgroundHero = ["black", "#bda88d", "#898c7e", "#822701", "#788898", "#a69486", "#434343"];
 let players = [];
-/* players = [
-	{
-		hero: 1,
-		playerName: "Marina"
-	},
-	{
-		hero: 4,
-		playerName: "Romain"
-	},
-	{
-		hero: 2,
-		playerName: "Alexandre"
-	}
-]; */
 
 $(document).ready(function() {
 	localStorage.clear();

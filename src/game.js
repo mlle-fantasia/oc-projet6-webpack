@@ -6,10 +6,9 @@ import World from "./classes/World";
 var indexCurrentPlayer = -1;
 
 $(document).ready(function() {
-	$("#btn-info-player3").hide();
-	$("#btn-info-player4").hide();
 	let players = JSON.parse(localStorage.getItem("players"));
 	let univers = localStorage.getItem("univers");
+	$("#game").addClass("game-" + univers);
 	let newGrid = $("<div class='grid world" + univers + "-background'></div>");
 	$(".world").append($(newGrid));
 
@@ -138,7 +137,8 @@ function renderInfoCurrentPlayer(player) {
 	let ArmorSize = $(".info-current-player").width() / 2;
 	let AccessorySize = $(".info-current-player").width() / 3;
 	return (
-		`<div class="d-flex flex-column cercle-hero">
+		`
+		<div class="d-flex flex-column cercle-hero">
 	<div class="info-name tolkien">` +
 		player.playerName +
 		`</div>
@@ -200,6 +200,7 @@ function renderInfoCurrentPlayer(player) {
 }
 function renderInfoAllPlayer(players) {
 	$(".info-all-players").empty();
+	$(".info-all-players").append(`<div class="info-name tolkien">Les joueurs</div>`);
 	let widthPlayer = $(".info-all-players").width() / 2;
 	for (let p = 0; p < players.length; p++) {
 		const player = players[p];

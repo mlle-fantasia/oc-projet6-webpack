@@ -1,5 +1,20 @@
 $path-image: "../../public/images/worlds/";
 
+#game {
+	background-position: bottom;
+	background-repeat: no-repeat;
+	background-size: cover;
+	&.game-2 {
+		background-image: url($path-image+"morian.jpg");
+	}
+	&.game-1 {
+		background-image: url($path-image+"fangornn.jpg");
+	}
+	&.game-3 {
+		background-image: url($path-image+"destin.jpg");
+	}
+}
+
 .world {
 	padding: 0;
 	margin: 0;
@@ -62,9 +77,6 @@ $path-image: "../../public/images/worlds/";
 	background-color: #15100d;
 }
 
-.univers-ocean {
-	background-image: url($path-image+"ocean_img.jpg");
-}
 .world3-background {
 	background-image: url($path-image+"destin.jpg");
 	background-size: cover;
