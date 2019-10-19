@@ -63,6 +63,16 @@ const config = {
 			hash: true
 		}),
 		new htmlWebpackPlugin({
+			template: "./public/regles.html",
+			chunks: ["main"],
+			filename: "regles.html"
+		}),
+		new htmlWebpackPlugin({
+			template: "./public/dev.html",
+			chunks: ["main"],
+			filename: "dev.html"
+		}),
+		new htmlWebpackPlugin({
 			template: "./public/game.html",
 			chunks: ["game"],
 			filename: "game.html",

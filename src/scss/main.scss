@@ -16,34 +16,14 @@ $background-hero6: #434343;
 	src: url("../../public/tolkien.TTF");
 }
 ///////général//////
-.tolkien {
-	font-family: "tolkien";
-}
-.titre {
-	padding: 40px;
-	font-family: "tolkien";
-}
-.titre-shadow {
-	text-shadow: 3px 4px 5px black;
-}
-.text-blanc {
-	color: #fff;
-}
-h2 {
-	font-size: 18px;
-}
-.container-fluid {
-	padding: 0;
-}
-.selected-border {
-	border: solid 3px #a01515;
-}
-.selected-background {
-	background-color: #a01515;
-	color: #fff;
-}
-.btn-selected {
-	background-color: greenyellow;
+.navbar-light {
+	border-bottom: solid 1px #9c9999;
+	&.navbar .navbar-nav .nav-item .nav-link:hover {
+		color: #9c9999;
+	}
+	.navbar-brand:hover {
+		color: #9c9999;
+	}
 }
 .header {
 	background-image: url($path-image+"gondolin.jpg");
@@ -55,7 +35,42 @@ h2 {
 	color: #fff;
 	cursor: pointer;
 }
-/////////player ///////////////
+.tolkien {
+	font-family: "tolkien";
+}
+.titre {
+	padding: 40px;
+	font-family: "tolkien";
+}
+.text-blanc {
+	color: #fff;
+}
+h2 {
+	font-size: 18px;
+}
+.container-fluid {
+	padding: 0;
+}
+///////// autres pages ///////////
+.regles-img-hero {
+	width: 20%;
+}
+//////// index.html ///////////
+.titre-shadow {
+	text-shadow: 3px 4px 5px black;
+}
+.selected-border {
+	border: solid 3px #a01515;
+}
+.selected-background {
+	background-color: #a01515;
+	color: #fff;
+}
+.btn-selected {
+	background-color: greenyellow;
+}
+
+///////// player ///////////////
 .legend-hero {
 	color: #fff;
 }
@@ -148,43 +163,6 @@ h2 {
 :checked + label {
 	border: solid 2px #a01515;
 	box-shadow: -1px 0 5px 0px #654442;
-}
-.checkbox-player {
-	position: relative;
-	display: inline-block;
-}
-
-.checkbox-player .tooltiptext {
-	visibility: hidden;
-	width: 200px;
-	background-color: #555;
-	color: #fff;
-	text-align: center;
-	border-radius: 6px;
-	padding: 5px 0;
-	position: absolute;
-	z-index: 1;
-	bottom: 50%;
-	left: 110%;
-	margin-left: -60px;
-	opacity: 0;
-	transition: opacity 0.3s;
-}
-
-/* .checkbox-player .tooltiptext::after {
-	content: "";
-	position: absolute;
-	bottom: 100%;
-	left: 50%;
-	margin-left: -5px;
-	border-width: 5px;
-	border-style: solid;
-	border-color: #555 transparent transparent transparent;
-} */
-
-.checkbox-player:hover .tooltiptext {
-	visibility: visible;
-	opacity: 1;
 }
 .btn-start-game {
 	background-color: #a01515;

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   <title>Projet 6</title>
+</head>
+
+<body>
+
+   <div id="app">
+      <header class="header container-fluid">
+         <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light">
+               <a href="./index.html" class="navbar-brand">Arda</a>
+               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                  aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+               </button>
+               <div class="collapse navbar-collapse" id="navbarNav">
+                  <ul class="navbar-nav">
+
+                     <li class="nav-item">
+                        <a class="nav-link" href="./regles.html">Règles du jeu</a>
+                     </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="./dev.html">Dévelopement du jeu</a>
+                     </li>
+                  </ul>
+               </div>
+            </nav>
+         </div>
+         <div class="container">
+            <h1 class="text-center text-blanc mt-5 titre">Les règles du jeu</h1>
+            <p class="text-center text-blanc sous-titre mb-5 pb-5">Il y eu Eru, le premier qu'en Arda on appelle
+               Iluvatar; de
+               son esprit,il créa les Ainurs et devant lui il firent une grande musique. Le Monde est issu, de cette
+               musique, car Iluvatar rendi visible le chant des Ainurs et ils purent le voir comme une lumière dans les
+               ténèbres</p>
+         </div>
+      </header>
+
+      <section>
+
+         <div class="container">
+            <h3>But du jeu </h3>
+            <p>
+               Le but du jeu est d'être le dernier joueur vivant sur la grille de jeu !
+            </p>
+            <h3>Avant de jouer</h3>
+            <p>
+               Vous devez tout d'abord choisir un univers puis le nombre de joueur puis chaque joueur doit choisir son
+               hero et lui donner un nom.
+               chaque hero possède : <br>
+               - un nombre de point de vie défini <br>
+               - un avantage différent<br>
+               - et un pourcentage de chance d'obtenir cet avantage à chaque tour ou en fonction de la position des
+               joueurs selon l'avantage.
+            </p>
+            <h3>Les avantages des heros</h3>
+            <div class="regles-hero d-flex flex-row mt-4">
+               <img class="regles-img-hero " src="./images/players/img/hero1.jpg" alt="image du hero numéro 1">
+               <p class="ml-4">L'elfe inventeur fou à 20% de chance de pouvoir avancer de 4 cases au lieu de 3 si la
+                  carte le permet.<br>
+                  Son type est : motorisé°<br>
+                  Ses points de vie de départ s'élèvent à 10.
+               </p>
+            </div>
+            <div class="regles-hero d-flex flex-row mt-4">
+               <img class="regles-img-hero " src="./images/players/img/hero2.jpg" alt="image du hero numéro 1">
+               <p class="ml-4">L'elfe et le dragon à 20% de chance de pouvoir attaquer deux fois de suite son
+                  adversaire.<br>
+                  Son type est : aillé<br>
+                  Ses points de vie de départ s'élèvent à 12.
+               </p>
+            </div>
+            <div class="regles-hero d-flex flex-row mt-4">
+               <img class="regles-img-hero " src="./images/players/img/hero3.jpg" alt="image du hero numéro 1">
+               <p class="ml-4">Le mercenaire venu du sud à 20% de chance de pouvoir voler un objet à un autre joueur sur
+                  la carte .<br>
+                  Son type est : énervé°<br>
+                  Ses points de vie de départ s'élèvent à 10.
+               </p>
+            </div>
+            <div class="regles-hero d-flex flex-row mt-4">
+               <img class="regles-img-hero " src="./images/players/img/hero4.jpg" alt="image du hero numéro 1">
+               <p class="ml-4">l'homme des caverne aveugle à 20% de chance de pouvoir déplacer un obstacle lorsqu'il se
+                  trouve à côté. Il peut déplacer l'obstacle d'une case vers l'avant par rapport à lui. <br>
+                  Son type est : force-calme°<br>
+                  Ses points de vie de départ s'élèvent à 10.
+               </p>
+            </div>
+            <div class="regles-hero d-flex flex-row mt-4">
+               <img class="regles-img-hero " src="./images/players/img/hero5.jpg" alt="image du hero numéro 1">
+               <p class="ml-4">L'elfe inventeur fou à 20% de chance de pouvoir attaquer un joueur de deux cases à
+                  côté.<br>
+                  Son type est : patriote°<br>
+                  Ses points de vie de départ s'élèvent à 10.
+               </p>
+            </div>
+            <div class="regles-hero d-flex flex-row mt-4">
+               <img class="regles-img-hero " src="./images/players/img/hero6.jpg" alt="image du hero numéro 1">
+               <p class="ml-4">Le maître du destin à 20% de chance de pouvoir rejouer une fois lors de la phase de
+                  déplacement.<br>
+                  Son type est : hasardeux°<br>
+                  Ses points de vie de départ s'élèvent à 10.
+               </p>
+            </div>
+            <p>° le type ne n'a aucune influce sur le jeu</p>
+            <p>
+            </p>
+            <h3>Le jeu</h3>
+            <p>
+               Une fois que tous les joueurs ont choisi leur héro, vous pouvez cliquer sur "Lancer le jeu".
+               Au commencement, chaque joueur s'est vu attribué une arme de base aléatoirement.
+               Les joueurs sont placer aléatoirement sur une grille de 10 cases par 10 cases.
+               Sur cette grille sont placé aussi aléatoirement des objets : des armes (autant que de hero), des
+               accessoires (autant que de hero également) et des obstacles (10).
+               Tour par tour les joueurs pourront se déplacer sur la grille (pas sur les obstacles) de 1, 2 ou 3 case
+               vers la droite, la guanche, le haut ou le bas
+               SI le joureur arrive sur une case ou se trouve un objet, il pourra le ramasser ou l'échanger contre
+               l'objet qu'il possède, de même type (arme ou accessoire).
+            </p>
+            <h3>les combats</h3>
+            <p>
+            </p>
+
+         </div>
+      </section>
+
+
+   </div>
+   <script src="//code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+   <script src="../dist/main.js"></script>
+</body>
+
+</html>

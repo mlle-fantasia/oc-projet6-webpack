@@ -75,7 +75,6 @@ function functiontruc(p) {
 					alert("vous devez renseigner un nom pour votre personnage");
 				} else {
 					let name = $(".inputplayerName" + h).val();
-					console.log("name, hero", name, h);
 					players.push({
 						hero: h,
 						playerName: name
