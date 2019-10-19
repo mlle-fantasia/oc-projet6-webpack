@@ -21,6 +21,7 @@ export default class Utils {
 			return true;
 		}
 	}
+	// test si un joueur se trouve à côté de la case fournie en paramètre
 	static isFreePlayerCell(x, y, grid) {
 		// pour un grille carrée
 		let cellEmpty = this.isFreeCell(x, y, grid);
@@ -38,7 +39,47 @@ export default class Utils {
 		) {
 			return false;
 		} else {
-			return true;
+			let nbObsNear = this.isObstacleNear(x, y, grid, true);
+			if (nbObsNear > 1) {
+				console.log("nbObsNear trop grand : ", nbObsNear);
+				return false;
+			} else {
+				return true;
+			}
+		}
+	}
+	// test si un obstacle se trouve à côté de la case fournie en paramètre
+	// si en paramètre est donné "nombre" renvoie le nombre d'obstacle à proximité
+	// si non, renvoie les coordonnées de la case où se situ l'obstacle
+	static isObstacleNear(x, y, grid, nombre) {
+		// pour un grille carrée
+		let nbObstacle = [];
+		let cellLeft, cellRight, cellTop, cellBottom;
+		x > 0 ? (cellLeft = grid[x - 1][y]) : (cellLeft = grid[x][y]);
+		x < grid.length - 1 ? (cellRight = grid[x + 1][y]) : (cellRight = grid[x][y]);
+		y > 0 ? (cellTop = grid[x][y - 1]) : (cellTop = grid[x][y]);
+		y < grid.length - 1 ? (cellBottom = grid[x][y + 1]) : (cellBottom = grid[x][y]);
+		if (cellLeft.objects.length && cellLeft.objects[0] instanceof Obstacle) {
+			nbObstacle.push({ cellLeft });
+		}
+		if (cellRight.objects.length && cellRight.objects[0] instanceof Obstacle) {
+			nbObstacle.push({ cellRight });
+		}
+		if (cellTop.objects.length && cellTop.objects[0] instanceof Obstacle) {
+			nbObstacle.push({ cellTop });
+		}
+		if (cellBottom.objects.length && cellBottom.objects[0] instanceof Obstacle) {
+			nbObstacle.push({ cellBottom });
+		}
+		if (nombre) {
+			return nbObstacle.length;
+		} else {
+			if (nbObstacle.length) {
+				let obsToMove = nbObstacle[Math.floor(nbObstacle.length * Math.random())];
+				console.log("obsToMove", obsToMove);
+			} else {
+				return false;
+			}
 		}
 	}
 	// renvoie les déplacements possibles du joueur

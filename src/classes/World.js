@@ -1,10 +1,7 @@
 import config from "../conf.json";
 import Utils from "./Utils";
 import Cell from "./Cell";
-
 import Obstacle from "./Obstacle";
-import Weapon from "./Weapon";
-import Accessory from "./Accessory";
 
 export default class World {
 	constructor(univers) {

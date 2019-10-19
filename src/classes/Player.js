@@ -66,13 +66,12 @@ export default class Player {
 	}
 
 	hasObjectToTake(x, y, grid) {
-		console.log("grid[x][y].objects", grid[x][y].objects);
 		if (grid[x][y].objects.length < 2) {
-			return;
+			return false;
 		}
 		let object = grid[x][y].objects[0];
-		let avntagetempoel = object.temporality ? "Cet avantage est " + object.temporality : ".";
-		if (
+		return object;
+		/* if (
 			confirm(
 				"Vous avez trouvé un objet ! c'est : " +
 					object.text +
@@ -84,10 +83,11 @@ export default class Player {
 			)
 		) {
 			this.takeObject(x, y, grid);
-		}
+		} */
 	}
 
 	takeObject(x, y, grid) {
+		console.log("coucou");
 		let objectGrid = grid[x][y].objects[0];
 		let weaponPlayer = this.accessories[0];
 		let accessoryPlayer;
@@ -105,6 +105,7 @@ export default class Player {
 			} else {
 				grid[x][y].objects.shift();
 			}
+			console.log("grid[x][y].objects", grid[x][y].objects);
 		}
 		/* for (let a = 0; a < this.accessories.length; a++) {
 			let objectPlayer = this.accessories[a];

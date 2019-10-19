@@ -1,6 +1,7 @@
 @import "bootstrap";
-@import "univers.scss";
-@import "players.scss";
+@import "_univers.scss";
+@import "_players.scss";
+@import "_modal.scss";
 
 $body-color: red;
 $path-image: "../../public/images/";
@@ -41,6 +42,9 @@ $background-hero6: #434343;
 .titre {
 	padding: 40px;
 	font-family: "tolkien";
+}
+.bold {
+	font-weight: 700;
 }
 .text-blanc {
 	color: #fff;

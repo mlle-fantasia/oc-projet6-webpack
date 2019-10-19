@@ -16,13 +16,6 @@ export default class Weapon {
 	}
 
 	defineWeapon(initial) {
-		/* 		let weaweapon;
-		const intialWeapons = WEAPON.filter(w => w.initial);
-		console.log("intialWeapons", intialWeapons);
-
-		weaweapon = intialWeapons[Math.floor(intialWeapons.length * Math.random())];
-		console.log("weaweapon", weaweapon);
-		return weaweapon; */
 		let weaweapon;
 		if (initial === "initial") {
 			const intialWeapons = WEAPON.filter(w => w.initial);

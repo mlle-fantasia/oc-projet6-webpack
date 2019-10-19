@@ -1,0 +1,57 @@
+$path-image: "../../public/images/";
+.container-modal-component {
+	position: absolute;
+	width: 100vw;
+	height: 100vh;
+	background-color: #000000a6;
+	z-index: 100;
+	justify-content: center;
+	align-items: center;
+}
+.modal-component {
+	width: 40%;
+	//	margin-top: 10%;
+	background-color: #ece6e0;
+	text-align: center;
+	border-radius: 5px;
+	padding: 10px;
+}
+.modal-title {
+	font-size: 25px;
+	padding-bottom: 10px;
+}
+/////// content ///////
+.modal-content {
+	padding: 20px;
+}
+.modal-container-info-object {
+	height: 250px;
+}
+.modal-background-anneau {
+	background-image: url($path-image+"fond.png");
+	background-size: cover;
+	border-radius: 50%;
+	height: 100%;
+	margin: 0 20px;
+	img {
+		object-fit: contain;
+
+		width: 250px;
+		padding: 40px;
+	}
+}
+.modal-info-text {
+	text-align: left;
+	padding-top: 30px;
+}
+///////footer ////////
+.btn-modal-no {
+	background-color: #d6c1ba;
+	width: 20%;
+	color: #fff;
+}
+.btn-modal-yes {
+	background-color: #23a51a;
+	width: 20%;
+	color: #fff;
+}

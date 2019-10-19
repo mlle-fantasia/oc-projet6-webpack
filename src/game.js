@@ -2,7 +2,9 @@ import "./scss/main.scss";
 import App from "./classes/App";
 import $ from "jquery";
 import Player from "./classes/Player";
-import World from "./classes/World";
+//import modalComponent from "../public/include/modal";
+import Weapon from "./classes/Weapon";
+import Modal from "./classes/modal";
 var indexCurrentPlayer = -1;
 
 $(document).ready(function() {
@@ -57,17 +59,44 @@ function renderYourTurn(player) {
 		if (player.isMovableCell(x, y, window.app.grid)) {
 			player.move(x, y, window.app.grid);
 			render(app.grid);
-			setTimeout(function() {
-				player.hasObjectToTake(x, y, window.app.grid);
-				render(app.grid);
-				$(".case").unbind("click", monCallback);
-				nextPlayer();
-			}, 100);
+			let isObject = player.hasObjectToTake(x, y, window.app.grid);
+			if (isObject) {
+				let modal = new Modal(isObject.constructor.name, isObject);
+				$("#game").prepend(modal.render());
+				$(".modal-response").click(e => {
+					if (e.target.dataset.response) {
+						player.takeObject(x, y, app.grid);
+					}
+					$(".container-modal-component").remove();
+					render(app.grid);
+					$(".case").unbind("click", monCallback);
+					nextPlayer();
+				});
+				return;
+			}
+			render(app.grid);
+			$(".case").unbind("click", monCallback);
+			nextPlayer();
 		} else {
-			alert("vous ne pouvez pas aller sur cette case");
+			let modal = new Modal("errorMove", null);
+			$("#game").prepend(modal.render());
+			$(".modal-response").click(e => {
+				$(".container-modal-component").remove();
+			});
 		}
 	};
 	$(".case").bind("click", monCallback);
+}
+async function doRequests(uris) {
+	for (const uri of uris) {
+		await fetch(uri);
+		await wait(1000);
+	}
+}
+async function wait(ms) {
+	return new Promise(resolve => {
+		setTimeout(resolve, ms);
+	});
 }
 function render(grid) {
 	$(".grid").empty();
