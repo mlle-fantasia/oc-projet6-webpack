@@ -10,6 +10,12 @@ const TYPE = {
 		btnYes: "OUI",
 		btnNo: "Non"
 	},
+	Cell: {
+		title: "Déplacer un obstacle",
+		text: "Vous ne pouvez déplacer un obstacle, voulez vous le faire",
+		btnYes: "OUI",
+		btnNo: "Non"
+	},
 	Accessory: {
 		title: "Accessoire trouvé",
 		text: "Vous venez de trouver un accessoire, voulez-vous le rammaser ? ",
@@ -36,12 +42,17 @@ export default class Modal {
 		if (this.type !== "errorMove") {
 			btnNo = `<button class="form-control modal-response btn-modal-no" data-response="false">` + TYPE[this.type].btnNo + `</button> `;
 		}
-		let temporalite = "";
-		if (this.object.temporality) {
-			temporalite = `<div class=""><span class="bold"> temporalité :</span> ` + this.object.temporality + `</div>`;
+		console.log("this.object", this.object);
+		if (this.type === "Cell") {
+			this.object = null;
 		}
+
 		let object = "";
 		if (this.object) {
+			let temporalite = "";
+			if (this.object.temporality) {
+				temporalite = `<div class=""><span class="bold"> temporalité :</span> ` + this.object.temporality + `</div>`;
+			}
 			object =
 				`<div class="d-flex flex-row modal-container-info-object">
 					<div class="modal-background-anneau d-flex" >

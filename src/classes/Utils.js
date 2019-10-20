@@ -60,23 +60,51 @@ export default class Utils {
 		y > 0 ? (cellTop = grid[x][y - 1]) : (cellTop = grid[x][y]);
 		y < grid.length - 1 ? (cellBottom = grid[x][y + 1]) : (cellBottom = grid[x][y]);
 		if (cellLeft.objects.length && cellLeft.objects[0] instanceof Obstacle) {
-			nbObstacle.push({ cellLeft });
+			nbObstacle.push(cellLeft);
 		}
 		if (cellRight.objects.length && cellRight.objects[0] instanceof Obstacle) {
-			nbObstacle.push({ cellRight });
+			nbObstacle.push(cellRight);
 		}
 		if (cellTop.objects.length && cellTop.objects[0] instanceof Obstacle) {
-			nbObstacle.push({ cellTop });
+			nbObstacle.push(cellTop);
 		}
 		if (cellBottom.objects.length && cellBottom.objects[0] instanceof Obstacle) {
-			nbObstacle.push({ cellBottom });
+			nbObstacle.push(cellBottom);
 		}
 		if (nombre) {
 			return nbObstacle.length;
 		} else {
 			if (nbObstacle.length) {
-				let obsToMove = nbObstacle[Math.floor(nbObstacle.length * Math.random())];
-				console.log("obsToMove", obsToMove);
+				let cellObsFrom = nbObstacle[Math.floor(nbObstacle.length * Math.random())];
+				console.log("cell obs", cellObsFrom);
+				console.log("cell player", x, y);
+				let cellObsTo = { x: 0, y: 0 };
+				if (x === cellObsFrom.x) {
+					console.log("x === cellObsFrom.x", x, cellObsFrom.x);
+					if (cellObsFrom.y > 0 && cellObsFrom.y < 9) {
+						y < cellObsFrom.y ? (cellObsTo.y = cellObsFrom.y + 1) : (cellObsTo.y = cellObsFrom.y - 1);
+						cellObsTo.x = cellObsFrom.x;
+					} else {
+						console.log("bord");
+						return false;
+					}
+				}
+				if (y === cellObsFrom.y) {
+					console.log("y === cellObsFrom.y", y, cellObsFrom.y);
+					if (cellObsFrom.x > 0 && cellObsFrom.x < 9) {
+						x < cellObsFrom.x ? (cellObsTo.x = cellObsFrom.x + 1) : (cellObsTo.x = cellObsFrom.x - 1);
+						cellObsTo.y = cellObsFrom.y;
+					} else {
+						console.log("bord");
+						return false;
+					}
+				}
+				if (this.isFreeCell) {
+					console.log("cellObsFrom, cellObsTo", cellObsFrom, cellObsTo);
+					return { cellObsFrom, cellObsTo };
+				} else {
+					return false;
+				}
 			} else {
 				return false;
 			}

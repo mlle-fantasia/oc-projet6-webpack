@@ -2,6 +2,7 @@ import Cell from "./Cell";
 import Utils from "./Utils";
 import Accessory from "./Accessory";
 import Weapon from "./Weapon";
+import Obstacle from "./Obstacle";
 
 export default class Player {
 	constructor(name, heroNum, playerNum, accessories) {
@@ -13,7 +14,7 @@ export default class Player {
 				{ value: "fast", text: "peut se déplacer plus vite", chance: 20 },
 				{ value: "attack", text: "peut attaquer deux fois", chance: 20 },
 				{ value: "steal", text: "peut voler un objet", chance: 20 },
-				{ value: "move", text: "peut déplacer les obstacles", chance: 50 },
+				{ value: "move", text: "peut déplacer les obstacles", chance: 100 },
 				{ value: "long", text: "peut attaquer de plus loin", chance: 10 },
 				{ value: "critique", text: "à plus de chance de faire des coups critique", chance: 30 }
 			]
@@ -62,7 +63,19 @@ export default class Player {
 			const coordinate = this.movableCell[c];
 			grid[coordinate.x][coordinate.y].movable = false;
 		}
-		console.log("grid", grid);
+		//console.log("grid", grid);
+	}
+	moveObstacle(isObsToMove, grid, univers) {
+		console.log("coucou");
+		let emptyCell = new Cell(this.placeX, this.placeY, []);
+		Utils.updateCell(this.placeX, this.placeY, emptyCell, grid);
+		this.placeX = isObsToMove.cellObsFrom.x;
+		this.placeY = isObsToMove.cellObsFrom.y;
+		let newPlayerCell = new Cell(this.placeX, this.placeY, [this]);
+		Utils.updateCell(this.placeX, this.placeY, newPlayerCell, grid);
+		let obs = new Obstacle(univers);
+		let newObstacleCell = new Cell(this.placeX, this.placeY, [obs]);
+		Utils.updateCell(isObsToMove.cellObsTo.x, isObsToMove.cellObsTo.y, newObstacleCell, grid);
 	}
 
 	hasObjectToTake(x, y, grid) {
@@ -71,23 +84,9 @@ export default class Player {
 		}
 		let object = grid[x][y].objects[0];
 		return object;
-		/* if (
-			confirm(
-				"Vous avez trouvé un objet ! c'est : " +
-					object.text +
-					", sont avantage est : " +
-					object.avantageText +
-					". " +
-					avntagetempoel +
-					" Souhaitez vous le prendre et laisser l'objet de même type sur place ? "
-			)
-		) {
-			this.takeObject(x, y, grid);
-		} */
 	}
 
 	takeObject(x, y, grid) {
-		console.log("coucou");
 		let objectGrid = grid[x][y].objects[0];
 		let weaponPlayer = this.accessories[0];
 		let accessoryPlayer;

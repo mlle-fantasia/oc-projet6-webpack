@@ -5,11 +5,11 @@ import Player from "./classes/Player";
 //import modalComponent from "../public/include/modal";
 import Weapon from "./classes/Weapon";
 import Modal from "./classes/modal";
+import Utils from "./classes/Utils";
 var indexCurrentPlayer = -1;
-
+let players = JSON.parse(localStorage.getItem("players"));
+let univers = localStorage.getItem("univers");
 $(document).ready(function() {
-	let players = JSON.parse(localStorage.getItem("players"));
-	let univers = localStorage.getItem("univers");
 	$("#game").addClass("game-" + univers);
 	let newGrid = $("<div class='grid world" + univers + "-background'></div>");
 	$(".world").append($(newGrid));
@@ -70,8 +70,38 @@ function renderYourTurn(player) {
 					$(".container-modal-component").remove();
 					render(app.grid);
 					$(".case").unbind("click", monCallback);
+					let isObsToMove = avantageHero4(player, x, y);
+					if (isObsToMove) {
+						let modal = new Modal(isObject.constructor.name, isObject);
+						$("#game").prepend(modal.render());
+						$(".modal-response").click(e => {
+							if (e.target.dataset.response) {
+								player.moveObstacle(isObsToMove, app.grid, univers);
+							}
+							$(".container-modal-component").remove();
+							render(app.grid);
+							nextPlayer();
+							return;
+						});
+					}
 					nextPlayer();
 				});
+				return;
+			}
+			let isObsToMove = avantageHero4(player, x, y);
+			if (isObsToMove) {
+				console.log("isObject.cellObsFromconstructor.name", isObsToMove.cellObsFrom.constructor.name);
+				let modal = new Modal(isObsToMove.cellObsFrom.constructor.name, null);
+				$("#game").prepend(modal.render());
+				$(".modal-response").click(e => {
+					if (e.target.dataset.response) {
+						player.moveObstacle(isObsToMove, app.grid, univers);
+					}
+					$(".container-modal-component").remove();
+					render(app.grid);
+					nextPlayer();
+				});
+
 				return;
 			}
 			render(app.grid);
@@ -87,16 +117,14 @@ function renderYourTurn(player) {
 	};
 	$(".case").bind("click", monCallback);
 }
-async function doRequests(uris) {
-	for (const uri of uris) {
-		await fetch(uri);
-		await wait(1000);
+function avantageHero4(player, x, y) {
+	if (player.heroNum !== 4) {
+		return false;
 	}
-}
-async function wait(ms) {
-	return new Promise(resolve => {
-		setTimeout(resolve, ms);
-	});
+	if (Utils.calculChanceAvantage(player.pointFort)) {
+		let isObsToMove = Utils.isObstacleNear(x, y, app.grid, false);
+		return isObsToMove;
+	}
 }
 function render(grid) {
 	$(".grid").empty();
