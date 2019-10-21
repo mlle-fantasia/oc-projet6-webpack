@@ -27,6 +27,12 @@ const TYPE = {
 		text: "Vous venez de trouver une arme, voulez-vous la rammaser et remplacer votre arme actuelle ? ",
 		btnYes: "Je la prend !",
 		btnNo: "Je la laisse"
+	},
+	steal: {
+		title: "Object à voler !",
+		text: "L'occasion se présente à vous de voler un accessoire à un autre joueur, voulez-vous agir ? ",
+		btnYes: "Je vole !",
+		btnNo: "Je ne vole pas"
 	}
 };
 export default class Modal {

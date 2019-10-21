@@ -11,12 +11,12 @@ export default class Player {
 			force: [10, 12, 14, 10, 12, 13],
 			type: ["motorisé", "ailé", "énervé", "force-calme", "patriote", "hasardeux"],
 			pointFort: [
-				{ value: "fast", text: "peut se déplacer plus vite", chance: 20 },
-				{ value: "attack", text: "peut attaquer deux fois", chance: 20 },
-				{ value: "steal", text: "peut voler un objet", chance: 20 },
+				{ value: "fast", text: "peut se déplacer plus vite", chance: 100 },
+				{ value: "attack", text: "peut attaquer deux fois", chance: 100 },
+				{ value: "steal", text: "peut voler un objet", chance: 100 },
 				{ value: "move", text: "peut déplacer les obstacles", chance: 100 },
-				{ value: "long", text: "peut attaquer de plus loin", chance: 10 },
-				{ value: "critique", text: "à plus de chance de faire des coups critique", chance: 30 }
+				{ value: "long", text: "peut attaquer de plus loin", chance: 100 },
+				{ value: "critique", text: "à plus de chance de faire des coups critique", chance: 100 }
 			]
 		};
 		this.playerName = name;
@@ -47,7 +47,16 @@ export default class Player {
 		}
 	}
 	move(x, y, grid) {
-		let oldPlayerCell = new Cell(this.placeX, this.placeY, []);
+		console.log("grid[this.placeX][this.placeX].objects", this.placeX, this.placeY, grid[this.placeX][this.placeY].objects);
+		if (grid[this.placeX][this.placeY].objects.length > 1) {
+			grid[this.placeX][this.placeY].objects.splice(1, 1);
+		} else {
+			grid[this.placeX][this.placeY].objects = [];
+		}
+		let reste = grid[this.placeX][this.placeY].objects;
+		console.log("reste", reste);
+		let oldPlayerCell = new Cell(x, y, reste);
+		//let oldPlayerCell = new Cell(this.placeX, this.placeY, []);
 		Utils.updateCell(this.placeX, this.placeY, oldPlayerCell, grid);
 		this.placeX = x;
 		this.placeY = y;
@@ -63,10 +72,8 @@ export default class Player {
 			const coordinate = this.movableCell[c];
 			grid[coordinate.x][coordinate.y].movable = false;
 		}
-		//console.log("grid", grid);
 	}
 	moveObstacle(isObsToMove, grid, univers) {
-		console.log("coucou");
 		let emptyCell = new Cell(this.placeX, this.placeY, []);
 		Utils.updateCell(this.placeX, this.placeY, emptyCell, grid);
 		this.placeX = isObsToMove.cellObsFrom.x;
@@ -77,7 +84,11 @@ export default class Player {
 		let newObstacleCell = new Cell(this.placeX, this.placeY, [obs]);
 		Utils.updateCell(isObsToMove.cellObsTo.x, isObsToMove.cellObsTo.y, newObstacleCell, grid);
 	}
-
+	stealObject(isPlayerToSteal) {
+		let objectSteal = isPlayerToSteal.accessories[1];
+		this.accessories[1] = objectSteal;
+		isPlayerToSteal.accessories.splice(1, 1);
+	}
 	hasObjectToTake(x, y, grid) {
 		if (grid[x][y].objects.length < 2) {
 			return false;
@@ -104,7 +115,7 @@ export default class Player {
 			} else {
 				grid[x][y].objects.shift();
 			}
-			console.log("grid[x][y].objects", grid[x][y].objects);
+			//console.log("grid[x][y].objects", grid[x][y].objects);
 		}
 		/* for (let a = 0; a < this.accessories.length; a++) {
 			let objectPlayer = this.accessories[a];

@@ -22,10 +22,12 @@ export default class Utils {
 		}
 	}
 	// test si un joueur se trouve à côté de la case fournie en paramètre
-	static isFreePlayerCell(x, y, grid) {
+	static isFreePlayerCell(x, y, grid, fight) {
 		// pour un grille carrée
-		let cellEmpty = this.isFreeCell(x, y, grid);
-		if (!cellEmpty) return false;
+		if (!fight) {
+			let cellEmpty = this.isFreeCell(x, y, grid);
+			if (!cellEmpty) return false;
+		}
 		let cellLeft, cellRight, cellTop, cellBottom;
 		x > 0 ? (cellLeft = grid[x - 1][y]) : (cellLeft = grid[x][y]);
 		x < grid.length - 1 ? (cellRight = grid[x + 1][y]) : (cellRight = grid[x][y]);
@@ -41,7 +43,6 @@ export default class Utils {
 		} else {
 			let nbObsNear = this.isObstacleNear(x, y, grid, true);
 			if (nbObsNear > 1) {
-				console.log("nbObsNear trop grand : ", nbObsNear);
 				return false;
 			} else {
 				return true;
@@ -76,31 +77,24 @@ export default class Utils {
 		} else {
 			if (nbObstacle.length) {
 				let cellObsFrom = nbObstacle[Math.floor(nbObstacle.length * Math.random())];
-				console.log("cell obs", cellObsFrom);
-				console.log("cell player", x, y);
 				let cellObsTo = { x: 0, y: 0 };
 				if (x === cellObsFrom.x) {
-					console.log("x === cellObsFrom.x", x, cellObsFrom.x);
 					if (cellObsFrom.y > 0 && cellObsFrom.y < 9) {
 						y < cellObsFrom.y ? (cellObsTo.y = cellObsFrom.y + 1) : (cellObsTo.y = cellObsFrom.y - 1);
 						cellObsTo.x = cellObsFrom.x;
 					} else {
-						console.log("bord");
 						return false;
 					}
 				}
 				if (y === cellObsFrom.y) {
-					console.log("y === cellObsFrom.y", y, cellObsFrom.y);
 					if (cellObsFrom.x > 0 && cellObsFrom.x < 9) {
 						x < cellObsFrom.x ? (cellObsTo.x = cellObsFrom.x + 1) : (cellObsTo.x = cellObsFrom.x - 1);
 						cellObsTo.y = cellObsFrom.y;
 					} else {
-						console.log("bord");
 						return false;
 					}
 				}
 				if (this.isFreeCell) {
-					console.log("cellObsFrom, cellObsTo", cellObsFrom, cellObsTo);
 					return { cellObsFrom, cellObsTo };
 				} else {
 					return false;
@@ -119,10 +113,8 @@ export default class Utils {
 		}
 		this.testMoveLeft(x, y, grid, avantage, tabMovableCell);
 		this.testMoveTop(x, y, grid, avantage, tabMovableCell);
-
 		this.testMoveBottom(x, y, grid, avantage, tabMovableCell);
 		this.testMoveRight(x, y, grid, avantage, tabMovableCell);
-		console.log(", tabMovableCell", tabMovableCell);
 		return tabMovableCell;
 	}
 	static testMoveLeft(x, y, grid, avantage, tabMovableCell) {
@@ -240,7 +232,7 @@ export default class Utils {
 
 	static calculChanceAvantage(ptfort) {
 		let chance = Math.floor(Math.random() * Math.floor(100));
-		console.log("chance", chance);
+		//console.log("chance", chance);
 		if (chance <= ptfort.chance) {
 			return true;
 		} else {
