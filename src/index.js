@@ -1,5 +1,6 @@
 import "./scss/main.scss";
 import "bootstrap";
+import "babel-polyfill";
 import carouselHeroes from "../public/include/carousel-heroes.js";
 
 let world = 0;

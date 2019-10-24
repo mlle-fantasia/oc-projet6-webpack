@@ -41,9 +41,13 @@ export default class Utils {
 		) {
 			return false;
 		} else {
-			let nbObsNear = this.isObstacleNear(x, y, grid, true);
-			if (nbObsNear > 1) {
-				return false;
+			if (!fight) {
+				let nbObsNear = this.isObstacleNear(x, y, grid, true);
+				if (nbObsNear > 1) {
+					return false;
+				} else {
+					return true;
+				}
 			} else {
 				return true;
 			}

@@ -1,6 +1,7 @@
 import "./scss/main.scss";
 import App from "./classes/App";
 import $ from "jquery";
+import "babel-polyfill";
 import Player from "./classes/Player";
 //import modalComponent from "../public/include/modal";
 import Weapon from "./classes/Weapon";
@@ -21,23 +22,77 @@ $(document).ready(function() {
 	//tour par tour
 	nextPlayer();
 });
-function nextPlayer() {
+async function nextPlayer() {
 	indexCurrentPlayer++;
 	//window.app.currentPlayer = app.players[indexCurrentPlayer];
 	let player = app.players[indexCurrentPlayer % app.players.length];
-	renderYourTurn(player);
+	await renderYourTurn(player);
 }
-function renderYourTurn(player) {
+async function renderYourTurn(player) {
 	$(".info-current-player").empty();
 	let info = renderInfoCurrentPlayer(player);
 	$(".info-current-player").append(info);
+
 	player.showMove(app.grid);
 	render(app.grid);
 	console.log("app.players", app.players);
 	renderInfoAllPlayer(app.players);
 	$(".player-" + player.playerNum).addClass("zoom");
 
-	let monCallback = event => {
+	$(".case").click(async () => {
+		// get x et y de la case cliquée
+		let x, y;
+		if ($(event.target).hasClass("img-object-grid")) {
+			x = parseInt(
+				$(event.target)
+					.parent()
+					.attr("data-x")
+			);
+			y = parseInt(
+				$(event.target)
+					.parent()
+					.attr("data-y")
+			);
+		} else {
+			x = parseInt($(event.target).attr("data-x"));
+			y = parseInt($(event.target).attr("data-y"));
+		}
+		//
+		if (player.isMovableCell(x, y, app.grid)) {
+			player.move(x, y, app.grid);
+			render(app.grid);
+			let isObject = player.hasObjectToTake(x, y, app.grid);
+			if (isObject && player.accessories.length < 2) {
+				let responseModal = await showModal(player, "takeObject", isObject, x, y);
+				if (responseModal) {
+					player.takeObject(x, y, app.grid);
+				}
+			}
+			let isObsToMove = avantageHero4(player, x, y);
+			if (isObsToMove) {
+				let responseModal = await showModal(player, "moveObstacle", isObsToMove, x, y);
+				if (responseModal) {
+					player.moveObstacle(isObsToMove, app.grid, univers);
+				}
+			}
+			let isPlayerToSteal = avantageHero3(player, x, y);
+			if (isPlayerToSteal) {
+				let responseModal = await showModal(player, "stealObject", isPlayerToSteal.accessories[1], x, y, isPlayerToSteal);
+				if (responseModal) {
+					player.stealObject(isPlayerToSteal);
+				}
+			}
+			nextPlayer();
+		} else {
+			let modal = new Modal("errorMove", null);
+			$("#game").prepend(modal.render());
+			$(".modal-response").click(e => {
+				$(".container-modal-component").remove();
+			});
+		}
+	});
+
+	/* let monCallback = event => {
 		let x, y;
 
 		if ($(event.target).hasClass("img-object-grid")) {
@@ -73,6 +128,11 @@ function renderYourTurn(player) {
 			if (isPlayerToSteal) {
 				showModal(player, "stealObject", isPlayerToSteal.accessories[1], x, y, isPlayerToSteal);
 			}
+			let isPlayerToFight = testAttaque(player.placeX, player.placeY);
+			if (isPlayerToFight) {
+				showModal(player, "fight", isPlayerToFight, x, y);
+				return;
+			}
 			render(app.grid);
 			$(".case").unbind("click", monCallback);
 			nextPlayer();
@@ -84,9 +144,39 @@ function renderYourTurn(player) {
 			});
 		}
 	};
-	$(".case").bind("click", monCallback);
+	$(".case").bind("click", monCallback);*/
 }
 function showModal(player, functionToCall, object, x, y, isPlayerToSteal) {
+	let modalType = object.constructor.name;
+	if (functionToCall === "moveObstacle") {
+		modalType = "Cell";
+	}
+	let modal = new Modal(modalType, object);
+	$("#game").prepend(modal.render());
+	let resonseModal = "pas encore de réponse";
+	return new Promise(resolve => {
+		$(".modal-response").click(e => {
+			$(".container-modal-component").remove();
+			resolve(e.target.dataset.response === "true");
+			/* if (e.target.dataset.response === "true") {
+				switch (functionToCall) {
+					case "takeObject":
+						player.takeObject(x, y, app.grid);
+						break;
+					case "moveObstacle":
+						player.moveObstacle(object, app.grid, univers);
+						break;
+					case "stealObject":
+						player.stealObject(isPlayerToSteal);
+						break;
+				}
+				render(app.grid);
+			} */
+		});
+	});
+}
+
+/* function showModal(player, functionToCall, object, x, y, isPlayerToSteal) {
 	let modalType = object.constructor.name;
 	if (functionToCall === "moveObstacle") {
 	}
@@ -107,6 +197,9 @@ function showModal(player, functionToCall, object, x, y, isPlayerToSteal) {
 				case "stealObject":
 					player.stealObject(isPlayerToSteal);
 					break;
+				// case "fight":
+				//	player.stealObject(isPlayerToSteal);
+				//	break; 
 			}
 			$(".container-modal-component").remove();
 			render(app.grid);
@@ -125,19 +218,22 @@ function showModal(player, functionToCall, object, x, y, isPlayerToSteal) {
 				}
 			}
 			if (functionToCall === "takeObject" || functionToCall === "moveObstacle" || functionToCall === "stealObject") {
-				let isPlayerToFight = testAttaque(player);
+				let isPlayerToFight = testAttaque(player.placeX, player.placeY);
 				if (isPlayerToFight) {
 					showModal(player, "fight", isPlayerToFight, x, y);
 				}
 			}
 		}
 		render(app.grid);
-		console.log("fin", app.grid);
 		nextPlayer();
 	});
-}
-function testAttaque(player) {
-	console.log("attaque ? ");
+} */
+function testAttaque(x, y) {
+	let noFight = Utils.isFreePlayerCell(x, y, app.grid, "fight");
+	console.log("noFight", noFight);
+	if (!noFight) {
+		console.log("combat !!!!");
+	}
 }
 
 function avantageHero4(player, x, y) {
@@ -154,16 +250,17 @@ function avantageHero3(player) {
 		return false;
 	}
 	if (Utils.calculChanceAvantage(player.pointFort)) {
-		let playerToSteal = window.app.players[Math.floor(window.app.players.length * Math.random())];
+		let otherPlayer = window.app.players.filter(p => {
+			return p.playerNum != player.playerNum;
+		});
+		console.log("otherPlayer", otherPlayer);
+		let playerToSteal = otherPlayer[Math.floor(otherPlayer.length * Math.random())];
 		if (playerToSteal.playerNum === player.playerNum) {
-			console.log("moi");
 			avantageHero3(player);
 		} else {
 			if (playerToSteal.accessories.length < 2) {
-				console.log("pas d'objet à voler");
 				playerToSteal = null;
 			}
-			console.log("playerToSteal", playerToSteal);
 			return playerToSteal;
 		}
 	}

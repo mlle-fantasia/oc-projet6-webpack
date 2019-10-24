@@ -47,14 +47,12 @@ export default class Player {
 		}
 	}
 	move(x, y, grid) {
-		console.log("grid[this.placeX][this.placeX].objects", this.placeX, this.placeY, grid[this.placeX][this.placeY].objects);
 		if (grid[this.placeX][this.placeY].objects.length > 1) {
 			grid[this.placeX][this.placeY].objects.splice(1, 1);
 		} else {
 			grid[this.placeX][this.placeY].objects = [];
 		}
 		let reste = grid[this.placeX][this.placeY].objects;
-		console.log("reste", reste);
 		let oldPlayerCell = new Cell(x, y, reste);
 		//let oldPlayerCell = new Cell(this.placeX, this.placeY, []);
 		Utils.updateCell(this.placeX, this.placeY, oldPlayerCell, grid);

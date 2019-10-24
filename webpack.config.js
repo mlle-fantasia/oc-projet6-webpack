@@ -7,8 +7,8 @@ const webpack = require("webpack");
 const config = {
 	// Entry
 	entry: {
-		main: "./src/index.js",
-		game: "./src/game.js"
+		main: ["babel-polyfill", "./src/index.js"],
+		game: ["babel-polyfill", "./src/game.js"]
 	},
 	// Output
 	output: {
