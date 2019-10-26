@@ -69,7 +69,7 @@ const render = function render(numPlayer) {
 		numPlayer +
 		`'></input>
                         </div>
-                           <h5 class="flex-grow-0 mt-4 titre-shadow">L'elfe et le dragon</h5>
+                           <h5 class="flex-grow-0 mt-4 titre-shadow">L'elfe dresseur le dragon</h5>
                            <p class="flex-grow-1">
                               Type : ailé<br>
                               Point de vie : 12 <br>
@@ -218,7 +218,7 @@ const render = function render(numPlayer) {
                            <p class="flex-grow-1">
                               type : enervé<br>
                               Point de vie : 12 <br>
-                              Point fort : plus de chance d'infliger un coup critique
+                              Point fort : peut imiter le point fort d'un autre joueur
                            </p>
                            <button class="flex-grow-0 btn-hero form-control" id="hero6player` +
 		numPlayer +

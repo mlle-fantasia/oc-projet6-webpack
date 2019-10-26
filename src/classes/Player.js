@@ -9,20 +9,29 @@ export default class Player {
 		const tabVariablePlayer = {
 			ptVie: [10, 12, 14, 10, 12, 13],
 			force: [10, 12, 14, 10, 12, 13],
-			type: ["motorisé", "ailé", "énervé", "force-calme", "patriote", "hasardeux"],
+			type: ["motorisé", "ailé", "énervé", "force-calme", "patriote", "joueur"],
 			pointFort: [
 				{ value: "fast", text: "peut se déplacer plus vite", chance: 100 },
 				{ value: "attack", text: "peut attaquer deux fois", chance: 100 },
 				{ value: "steal", text: "peut voler un objet", chance: 100 },
 				{ value: "move", text: "peut déplacer les obstacles", chance: 100 },
 				{ value: "long", text: "peut attaquer de plus loin", chance: 100 },
-				{ value: "critique", text: "à plus de chance de faire des coups critique", chance: 100 }
+				{ value: "copy", text: "peut imiter le point fort d'un autre joueur", chance: 100 }
+			],
+			hero: [
+				"L'elfe inventeur fou",
+				"L'elfe dresseur le dragon",
+				"Le mercenaire venu du sud",
+				"L'homme des cavernes aveugle",
+				"Le gardien de la citadelle",
+				"Le maître du destin"
 			]
 		};
 		this.playerName = name;
 		this.playerNum = playerNum;
 		this.heroNum = heroNum;
-		this.image = "hero" + heroNum + "-img";
+		this.hero = tabVariablePlayer.hero[heroNum - 1];
+		this.image = "hero" + heroNum;
 		this.imageGrid = "hero" + heroNum + "-grid";
 		this.ptVieMax = tabVariablePlayer.ptVie[heroNum - 1];
 		this.ptVie = tabVariablePlayer.ptVie[heroNum - 1];
@@ -115,55 +124,8 @@ export default class Player {
 			}
 			//console.log("grid[x][y].objects", grid[x][y].objects);
 		}
-		/* for (let a = 0; a < this.accessories.length; a++) {
-			let objectPlayer = this.accessories[a];
-			const accessory = this.accessories[a];
-			if (accessory instanceof Weapon && object instanceof Weapon) {
-				this.accessories[a] = object;
-				grid[x][y].objects[0] = objectPlayer;
-			}
-			if (accessory instanceof Accessory && object instanceof Accessory) {
-				this.accessories[a] = object;
-				grid[x][y].objects[1] = objectPlayer;
-			}else{
-				this.accessories[a] = object;
-				grid[x][y].objects[1] = objectPlayer;
-			}
-		} */
 	}
-	/* 	showPlayerInfo() {
-		return (
-			`<div class="info-player">
-		<div class='info-player-text info-player-titre pt-4'>Joueur ` +
-			this.playerNum +
-			`</div>
-		<div class=" info-player-text info-player-name"> Nom : ` +
-			this.playerName +
-			`</div>
-		<img src="../images/players/img/hero` +
-			this.heroNum +
-			`.jpg" class="d-block w-100" alt="...">
-			<input type="range" class="info-player-text info-player-pt-vie" name="ptVie"
-         min="0" max="` +
-			this.ptVieMax +
-			`" value="` +
-			this.ptVie +
-			`" disabled>
-			<div class="info-player-text">
-			<p> Type : ` +
-			this.type +
-			`</p>
-			<p>Point fort : ` +
-			this.pointFort.text +
-			`</p>
-			</div>
-			<div class="row">
-			<div class="col-6 info-player-weapon">
-			</div>
-			<div class="col-6 info-player-accessory">
-			</div>
-			</div>
-		</div>`
-		);
-	}*/
+	attack(isPlayerToFight) {
+		console.log("ataque...", isPlayerToFight);
+	}
 }
