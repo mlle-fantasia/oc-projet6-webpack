@@ -93,7 +93,11 @@ async function renderYourTurn(player) {
 			if (isPlayerToFight) {
 				let responseModal = await showModal(player, "fight", isPlayerToFight, x, y);
 				if (responseModal) {
-					player.attack(isPlayerToFight);
+					//player.attack(isPlayerToFight);
+					localStorage.setItem("player", JSON.stringify(player));
+					localStorage.setItem("playerToFight", JSON.stringify(isPlayerToFight));
+					localStorage.setItem("univers", univers);
+					window.location.href = "fight.html";
 				}
 			}
 			nextPlayer();
@@ -108,14 +112,11 @@ async function renderYourTurn(player) {
 }
 
 function showModal(player, functionToCall, object, x, y, isPlayerToSteal) {
-	let modalType = object.constructor.name;
-	if (functionToCall === "moveObstacle") {
-		modalType = "Cell";
+	if (functionToCall === "takeObject") {
+		functionToCall = object.constructor.name;
 	}
-	if (functionToCall === "powerCopy") {
-		modalType = "powerCopy";
-	}
-	let modal = new Modal(player, modalType, object);
+
+	let modal = new Modal(player, functionToCall, object);
 	$("#game").prepend(modal.render());
 	let resonseModal = "pas encore de réponse";
 	return new Promise(resolve => {
@@ -127,10 +128,12 @@ function showModal(player, functionToCall, object, x, y, isPlayerToSteal) {
 }
 
 function testAttaque(x, y) {
-	let noFight = Utils.isFreePlayerCell(x, y, app.grid, "fight");
-	console.log("noFight", noFight);
-	if (!noFight) {
-		console.log("combat !!!!");
+	let isPlayerToFight = Utils.isPlayerToFight(x, y, app.grid, 1);
+	if (isPlayerToFight) {
+		console.log("combat !!!!", isPlayerToFight);
+		return isPlayerToFight;
+	} else {
+		return false;
 	}
 }
 

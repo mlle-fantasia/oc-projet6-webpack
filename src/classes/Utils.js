@@ -21,13 +21,51 @@ export default class Utils {
 			return true;
 		}
 	}
-	// test si un joueur se trouve à côté de la case fournie en paramètre
-	static isFreePlayerCell(x, y, grid, fight) {
-		// pour un grille carrée
-		if (!fight) {
-			let cellEmpty = this.isFreeCell(x, y, grid);
-			if (!cellEmpty) return false;
+
+	static isPlayerToFight(x, y, grid, distance) {
+		let playersToFight = [];
+		for (let i = y - 1; i >= y - distance; i--) {
+			if (this.isExistCell(x, i)) {
+				if (!this.isFreeCell(x, i, grid) && grid[x][i].objects[0] instanceof Player) {
+					playersToFight.push(grid[x][i].objects[0]);
+				}
+			}
 		}
+		for (let i = x - 1; i >= x - distance; i--) {
+			if (this.isExistCell(i, y)) {
+				if (!this.isFreeCell(i, y, grid) && grid[i][y].objects[0] instanceof Player) {
+					playersToFight.push(grid[i][y].objects[0]);
+				}
+			}
+		}
+		for (let i = x + 1; i <= x + distance; i++) {
+			if (this.isExistCell(i, y)) {
+				if (!this.isFreeCell(i, y, grid) && grid[i][y].objects[0] instanceof Player) {
+					playersToFight.push(grid[i][y].objects[0]);
+				}
+			}
+		}
+		for (let i = y + 1; i <= y + distance; i++) {
+			if (this.isExistCell(x, i)) {
+				if (!this.isFreeCell(x, i, grid) && grid[x][i].objects[0] instanceof Player) {
+					playersToFight.push(grid[x][i].objects[0]);
+				}
+			}
+		}
+		if (playersToFight.length) {
+			return playersToFight[Math.floor(playersToFight.length * Math.random())];
+		} else {
+			return false;
+		}
+	}
+
+	// test si un joueur se trouve à côté de la case fournie en paramètre
+	static isFreePlayerCell(x, y, grid) {
+		// pour un grille carrée
+
+		let cellEmpty = this.isFreeCell(x, y, grid);
+		if (!cellEmpty) return false;
+
 		let cellLeft, cellRight, cellTop, cellBottom;
 		x > 0 ? (cellLeft = grid[x - 1][y]) : (cellLeft = grid[x][y]);
 		x < grid.length - 1 ? (cellRight = grid[x + 1][y]) : (cellRight = grid[x][y]);
@@ -41,18 +79,31 @@ export default class Utils {
 		) {
 			return false;
 		} else {
-			if (!fight) {
-				let nbObsNear = this.isObstacleNear(x, y, grid, true);
-				if (nbObsNear > 1) {
-					return false;
-				} else {
-					return true;
-				}
+			let nbObsNear = this.isObstacleNear(x, y, grid, true);
+			if (nbObsNear > 1) {
+				return false;
 			} else {
 				return true;
 			}
 		}
 	}
+	/* 	witchPlayerToFight(x, y, grid) {
+		console.log("x,y", x, y);
+		let cellLeft, cellRight, cellTop, cellBottom;
+		x > 0 ? (cellLeft = grid[x - 1][y]) : (cellLeft = grid[x][y]);
+		x < grid.length - 1 ? (cellRight = grid[x + 1][y]) : (cellRight = grid[x][y]);
+		y > 0 ? (cellTop = grid[x][y - 1]) : (cellTop = grid[x][y]);
+		y < grid.length - 1 ? (cellBottom = grid[x][y + 1]) : (cellBottom = grid[x][y]);
+		let tabCellAround = [cellLeft, cellRight, cellTop, cellBottom];
+		let playersToFight = [];
+		for (let index = 0; index < tabCellAround.length; index++) {
+			const cell = tabCellAround[index];
+			if (cell.objects.length && cell.objects[0] instanceof Player) {
+				playersToFight.push(cell.objects[0]);
+			}
+		}
+		return playersToFight[Math.floor(playersToFight.length * Math.random())];
+	} */
 	// test si un obstacle se trouve à côté de la case fournie en paramètre
 	// si en paramètre est donné "nombre" renvoie le nombre d'obstacle à proximité
 	// si non, renvoie les coordonnées de la case où se situ l'obstacle

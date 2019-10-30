@@ -45,7 +45,6 @@ $(document).ready(function() {
 		if (!world || !players) {
 			alert("vous devez choisir un univers ET des joueurs");
 		} else {
-			console.log("univers", world);
 			localStorage.setItem("players", JSON.stringify(players));
 			localStorage.setItem("univers", world);
 			window.location.href = "game.html";

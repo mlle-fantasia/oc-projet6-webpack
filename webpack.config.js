@@ -8,7 +8,8 @@ const config = {
 	// Entry
 	entry: {
 		main: ["babel-polyfill", "./src/index.js"],
-		game: ["babel-polyfill", "./src/game.js"]
+		game: ["babel-polyfill", "./src/game.js"],
+		fight: ["babel-polyfill", "./src/fight.js"]
 	},
 	// Output
 	output: {
@@ -76,6 +77,12 @@ const config = {
 			template: "./public/game.html",
 			chunks: ["game"],
 			filename: "game.html",
+			hash: true
+		}),
+		new htmlWebpackPlugin({
+			template: "./public/fight.html",
+			chunks: ["fight"],
+			filename: "fight.html",
 			hash: true
 		}),
 		new webpack.ProvidePlugin({

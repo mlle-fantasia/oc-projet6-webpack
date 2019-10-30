@@ -9,20 +9,68 @@
 
 <body>
 
-   <div id="game">
+   <div id="fight">
       <div class="container-fluid px-3">
          <!-- <h1 class="text-center">Le jeu</h1> -->
 
          <div class="row container-game justify-content-center">
-            <div class="col-12 col-sm-12 col-md-3 info-current-player">
-               <!-- infos current player -->
+            <div class="col-12 col-sm-12 col-md-2 info-attack-player">
+               <!-- infos player -->
             </div>
-            <div class="col-12 col-sm-12 col-md-offset-3 col-md-6">
-               <div class=" world"></div>
+            <div class="col-12 col-sm-12 col-md-offset-2 col-md-8">
+               <div class="row fight-background">
+                  <div class="col-6 d-flex flex-column fight-player ">
+                     <div class='fight-container-img-player attack-player'>
+
+                     </div>
+
+                  </div>
+                  <div class="col-6 d-flex flex-column fight-player ">
+                     <div class='fight-container-img-player defence-player '>
+
+                     </div>
+
+                  </div>
+               </div>
+               <div class="row ">
+                  <div class="col-6 d-flex flex-row  ">
+                     <div class="fight-container-vie row">
+                        <div class="col-5 container-btn-help">
+                           <button class="form-control" id="btn-use-potion-playerAttack">Utiliser ma potion</button>
+                        </div>
+                        <div class="col-2 container-point-vie">
+                           <div class="container-info-player-vie fight-container-info-player-vie">
+                              <div id="triangle-1"></div>
+                              <div id="triangle-2"></div>
+                           </div>
+                        </div>
+                        <div class="col-5 container-btn-attack">
+                           <button class="form-control" id="btn-attack-playerAttack">Attaquer !</button>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-6 d-flex flex-row  ">
+                     <div class="fight-container-vie row">
+                        <div class="col-5 container-btn-help"><button class="form-control"
+                              id="btn-use-potion-playerDefence">Utiliser ma
+                              potion</button></div>
+                        <div class="col-2 container-point-vie">
+                           <div class="container-info-player-vie fight-container-info-player-vie">
+                              <div id="triangle-1"></div>
+                              <div id="triangle-2"></div>
+                           </div>
+                        </div>
+                        <div class="col-5 container-btn-defence"><button class="form-control"
+                              id="btn-attack-playerDefence">Attaquer
+                              !</button></div>
+                     </div>
+                  </div>
+               </div>
+
             </div>
-            <div class="col-12 col-sm-12 col-md-3 d-flex flex-column info-all-players">
-               <div class="info-name tolkien">Les joueurs</div>
-               <!-- infos all players -->
+            <div class="col-12 col-sm-12 col-md-2 d-flex flex-column info-defence-player">
+
+               <!-- infos player -->
             </div>
          </div>
 

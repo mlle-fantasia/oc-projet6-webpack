@@ -1,0 +1,58 @@
+#fight {
+	height: 100vh;
+}
+.fight-player {
+	align-items: flex-end;
+}
+.fight-container-img-player {
+	justify-content: center;
+	display: flex;
+}
+.fight-container-img-player img {
+	width: 85%;
+	transition: transform 1s linear;
+}
+
+.fight-ground {
+	height: 3px;
+	background-color: black;
+	box-shadow: 5px 5px 5px;
+}
+.fight-background {
+	box-shadow: 0px 0px 20px 3px;
+	border-bottom: solid 3px #352609b8;
+	align-items: flex-end;
+}
+.fight-container-vie {
+	width: 100%;
+}
+.fight-container-info-player-vie {
+	position: absolute;
+	top: -61px;
+	left: 28px;
+}
+.translate-attack {
+	transform: translateX(200px);
+}
+.translate-defence {
+	transform: translateX(-200px);
+}
+.rotate3d {
+	transform: rotate3d(1, 1, 1, 180deg);
+}
+.rotate {
+	transform: rotate(360deg);
+}
+.rotateY {
+	transform: rotateY(360deg);
+}
+.scale {
+	transform: scale(0.2);
+}
+.rotateX {
+	transform: rotateX(360deg);
+}
+
+.shew {
+	transform: skew(40deg, 40deg);
+}

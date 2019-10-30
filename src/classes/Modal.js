@@ -19,7 +19,7 @@ const TYPE = {
 		text: "Ce tour ci, avez copié les pouvoirs du joueur suivant : ",
 		btnYes: "OK ;)"
 	},
-	Cell: {
+	moveObstacle: {
 		title: "Déplacer un obstacle",
 		text: "Vous ne pouvez déplacer un obstacle, voulez vous le faire",
 		btnYes: "OUI",
