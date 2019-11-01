@@ -20,6 +20,7 @@ $(document).ready(function() {
 	render(app.grid);
 	renderInfoAllPlayer(app.players);
 	//tour par tour
+	showModal(app.players[0], "quete3Modal1", null);
 	nextPlayer();
 });
 async function nextPlayer() {
@@ -32,6 +33,8 @@ async function renderYourTurn(player) {
 	$(".info-current-player").empty();
 	let info = renderInfoCurrentPlayer(player);
 	$(".info-current-player").append(info);
+	//modal quête pour mode solo
+
 	if (player.heroNum === 6) {
 		let otherPlayer = app.players.filter(p => {
 			return p.playerNum != player.playerNum;
@@ -73,6 +76,16 @@ async function renderYourTurn(player) {
 				let responseModal = await showModal(player, "takeObject", isObject, x, y);
 				if (responseModal) {
 					player.takeObject(x, y, app.grid);
+				}
+			}
+			let isGate = player.hasGate(x, y, app.grid);
+			if (isGate) {
+				let responseModal = await showModal(player, "quete3Modal2", null);
+				if (responseModal) {
+					localStorage.setItem("player", JSON.stringify(player));
+					localStorage.setItem("playerToFight", JSON.stringify(new Player("Golum", 7, 2, [{ text: "", avantageText: "", imageGrid: "" }])));
+					localStorage.setItem("univers", univers);
+					window.location.href = "fight.html";
 				}
 			}
 			let isObsToMove = avantageHero4(player, x, y);

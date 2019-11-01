@@ -7,27 +7,53 @@ let world = 0;
 let nbPlayer = 0;
 const backgroundHero = ["black", "#bda88d", "#898c7e", "#822701", "#788898", "#a69486", "#434343"];
 let players = [];
+let typeJeu;
 
 $(document).ready(function() {
 	localStorage.clear();
+	$(".jeu-solo").hide();
+	$(".jeu-multijoueur").hide();
 	$("#sectionChoicePlayers").hide();
+	$("#sectionChoicePlayer").hide();
 	$("#sectionChoiceWorld").hide();
+	$("#sectionChoiceQuete").hide();
 	$("#container-choice-heroes").hide();
 	$(".container-choice-heroes").css("background-color", backgroundHero[1]);
 	$(".btn-start-game").attr("disabled", true);
 	for (let i = 1; i <= 3; i++) {
-		$("#world" + i).click(() => {
+		$(".btn-worldQuete" + i).click(() => {
 			world = i;
-			$(".world" + i).addClass("selected-border");
-			$("#world" + i).addClass("selected-background");
+			$(".worldQuete" + i).addClass("selected-border");
+			$(".btn-worldQuete" + i).addClass("selected-background");
 			for (let j = 1; j <= 3; j++) {
 				if (j !== i) {
-					$(".world" + j).removeClass("selected-border");
-					$("#world" + j).removeClass("selected-background");
+					$(".worldQuete" + j).removeClass("selected-border");
+					$(".btn-worldQuete" + j).removeClass("selected-background");
 				}
 			}
 		});
 	}
+
+	$("#solo").click(() => {
+		typeJeu = "solo";
+		nbPlayer = 1;
+		$("#choiceMultijoueur").slideUp();
+		$(".jeu-solo").slideDown();
+	});
+	$("#multiplayer").click(() => {
+		typeJeu = "multijoueur";
+		$("#choiceMultijoueur").slideUp();
+		$(".jeu-multijoueur").slideDown();
+	});
+	/// solo
+	$("#showChoiceQuete").click(() => {
+		$("#sectionChoiceQuete").slideDown();
+	});
+	$("#showChoicePlayer").click(() => {
+		$("#sectionChoicePlayer").slideDown();
+		functiontruc(1, typeJeu);
+	});
+	/// multi joueur
 	$("#showChoiceWorld").click(() => {
 		$("#sectionChoiceWorld").slideDown();
 	});
@@ -38,7 +64,7 @@ $(document).ready(function() {
 		$(".container-all-heroes").fadeOut();
 		nbPlayer = $("input[type=radio][name=nbPlayer]:checked").val();
 		nbPlayer = parseInt(nbPlayer);
-		functiontruc(1);
+		functiontruc(1, typeJeu);
 	});
 
 	$("#btn-start-game").click(() => {
@@ -46,22 +72,38 @@ $(document).ready(function() {
 			alert("vous devez choisir un univers ET des joueurs");
 		} else {
 			localStorage.setItem("players", JSON.stringify(players));
-			localStorage.setItem("univers", world);
+			if (typeJeu === "solo") {
+				localStorage.setItem("univers", world + 3);
+			}
+			if (typeJeu === "multijoueur") {
+				localStorage.setItem("univers", world);
+			}
 			window.location.href = "game.html";
 		}
 	});
 });
 
-function appendCarouselHero(i) {
-	$(".container-choice-heroes").empty();
-	let carousel = carouselHeroes.render(i);
-	$(".container-choice-heroes").append(carousel);
-	$(".container-choice-heroes").css("background-color", backgroundHero[1]);
-	$(".container-choice-heroes").fadeIn();
+function appendCarouselHero(i, typeJeu) {
+	console.log("typeJeu", typeJeu);
+	if (typeJeu === "multijoueur") {
+		$(".container-choice-heroes").empty();
+		let carousel = carouselHeroes.render(i);
+		$(".container-choice-heroes").append(carousel);
+		$(".container-choice-heroes").css("background-color", backgroundHero[1]);
+		$(".container-choice-heroes").fadeIn();
+	}
+	if (typeJeu === "solo") {
+		console.log("typeJeu , i", typeJeu, i);
+		$(".container-choice-heroe").empty();
+		let carousel = carouselHeroes.render(i);
+		$(".container-choice-heroe").append(carousel);
+		$(".container-choice-heroe").css("background-color", backgroundHero[1]);
+		$(".container-choice-heroe").fadeIn();
+	}
 }
-function functiontruc(p) {
+function functiontruc(p, typeJeu) {
 	if (players.length < p && nbPlayer >= p) {
-		appendCarouselHero(p);
+		appendCarouselHero(p, typeJeu);
 		$(".carouselExampleCaptions").on("slid.bs.carousel", function(e) {
 			for (let i = 1; i <= 6; i++) {
 				if (e.relatedTarget.id === "slide-hero" + i) {
@@ -81,7 +123,7 @@ function functiontruc(p) {
 					});
 					$(".container-choice-heroes").slideUp();
 					if (nbPlayer > p) {
-						functiontruc(p + 1);
+						functiontruc(p + 1, typeJeu);
 					}
 					if (players.length === nbPlayer) {
 						$(".btn-start-game").attr("disabled", false);

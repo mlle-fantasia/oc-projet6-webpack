@@ -39,74 +39,155 @@
                musique, car Iluvatar rendi visible le chant des Ainurs et ils purent le voir comme une lumière dans les
                ténèbres</p>
          </div>
-
       </header>
-      <div class="container my-4">
-         <button id="showChoiceWorld" class="form-control showChoiceWorld">
-            <h2 class="text-center">Etape 1 : Choisissez votre univers</h2>
-         </button>
-      </div>
-
-      <section id='sectionChoiceWorld' class="container-fluid">
+      <!-- choix solo ou multi-joueur -->
+      <div class="container my-4" id="choiceMultijoueur">
          <div class="row">
-            <div class="col-md-4 world world1">
-               <div class="world-legend d-none d-md-block">
-                  <h5>La Foret de Fangorn</h5>
-                  <p>Quelle folie va vous conduire dans cet endroit ? </p>
-                  <button id="world1" class="form-control">Jouer dans ce lieu effrayant</button>
-               </div>
-            </div>
-            <div class="col-md-4 world world2">
-               <div class="world-legend d-none d-md-block">
-                  <h5>Les mines de la Moria</h5>
-                  <p>Les nains ont creusé trop profondément et avec trop d'avidité, savez-vous ce qu'ils ont découvert
-                     dans les profondeurs de la Moria ? </p>
-                  <button id="world2" class="form-control">Jouer dans ce tombeau</button>
-               </div>
-            </div>
-            <div class="col-md-4 world world3">
-               <div class="world-legend d-none d-md-block">
-                  <h5>Les versants de la montagne du Destin</h5>
-                  <p>Quelle folie va vous conduire dans cet endroit ? </p>
-                  <button id="world3" class="form-control">Jouer dans ce lieu maudit</button>
-               </div>
-            </div>
+            <div class="col-6"><button id="solo" class="form-control showChoiceWorld">
+                  <h2 class="text-center">Jouer en solo</h2>
+               </button></div>
+            <div class="col-6"><button id="multiplayer" class="form-control showChoiceWorld">
+                  <h2 class="text-center">Jeu multijoueur</h2>
+               </button></div>
          </div>
-      </section>
+      </div>
+      <!-- jeu solo -->
+      <div class="jeu-solo">
+         <div class="container my-4">
+            <button id="showChoiceQuete" class="form-control showChoiceWorld">
+               <h2 class="text-center">Etape 1 : Choisissez votre quête</h2>
+            </button>
+         </div>
+         <section id='sectionChoiceQuete' class="container-fluid">
+            <div class="row">
+               <div class="col-md-4 world quete1 worldQuete1">
+                  <div class="world-legend d-none d-md-block">
+                     <h5>Sauver Gondolin</h5>
+                     <p>Cette quête vous est assignée par Ulmo le seigneur des eaux en personne, vous devez chercher le
 
-      <div class="container my-4 ">
-         <button id="showChoicePlayers" class="form-control showChoicePlayers">
-            <h2 class="text-center">Etape 2 : Choisissez les joueurs</h2>
-         </button>
+                        royaume cacher de Gondolin et transmettre un message au roi Turgon et le prévenir de la chute
+
+                        imminente de Gondolin</p>
+                     <button id="world1" class="form-control btn-worldQuete1">Accomplir cette quête</button>
+                  </div>
+               </div>
+               <div class="col-md-4 world quete2 worldQuete2">
+                  <div class="world-legend d-none d-md-block">
+                     <h5>Récupérer les Silmarils</h5>
+                     <p>Que ne feriez-vous pas pour la main de Luthien Tinuviel ? Le roi des Elfes Thingol, n'est pas
+
+                        vraiment près à vous laisser sa fille, la plus belle de toutes les Elfes. Lors de votre demande,
+
+                        il vous répond : "Bien ! épouser ma Tinuviel, la plus belle des demoiselles du monde, et devenir
+
+                        un prince des elfes des bois - ce n'est pas là une petite faveur à réclamer pour un étranger.
+
+                        D'aventure, puis-je de bon droit demander quelque chose en retour. Ce ne sera rien d'important,
+
+                        un gage seulement de ton estime. Apporte-moi un silmaril de la couronne de Melko, et ce jour-là
+
+                        Tinuviel t'épousera, si elle le désire." </p>
+                     <button id="world2" class="form-control btn-worldQuete2">Accomplir cette quête</button>
+                  </div>
+               </div>
+               <div class="col-md-4 world quete3 worldQuete3">
+                  <div class="world-legend d-none d-md-block">
+                     <h5>Détruire l'anneau unique</h5>
+                     <p>mais l'anneau ne peut être détruit par aucun moyen en notre possession. Notre seul espoir, si
+                        tant est que c'en soit un est de nous engager sur une route ardu et périlleuse : aller vers le
+                        Mordor et jeter l'anneau dans le feu d'où il a été créé. Cette tâche vous est dévolue.</p>
+                     <button id="world3" class="form-control btn-worldQuete3">Accomplir cette quête</button>
+                  </div>
+               </div>
+            </div>
+         </section>
+         <div class="container my-4 ">
+            <button id="showChoicePlayer" class="form-control showChoicePlayers">
+               <h2 class="text-center">Etape 2 : Choisissez votre hero</h2>
+            </button>
+         </div>
+
+         <section id="sectionChoicePlayer" class=" ">
+            <div class="d-flex flex-column align-center ">
+               <div class="container-fluid container-choice-heroe">
+               </div>
+            </div>
+         </section>
       </div>
 
-      <section id="sectionChoicePlayers" class=" ">
-         <div class="d-flex flex-column align-center ">
-            <div class="container d-flex flex-row container-choix-nbPlayer mb-4">
-               <div class="d-flex flex-column checkbox-nbPlayer">
-                  <input type="radio" id="nbPlayer2" name="nbPlayer" value="2" hidden>
-                  <label for="nbPlayer2" class="label-nbPlayer nbPlayer2"></label>
-               </div>
-               <div class="d-flex flex-column checkbox-nbPlayer">
-                  <input type="radio" id="nbPlayer3" name="nbPlayer" value="3" hidden>
-                  <label for="nbPlayer3" class="label-nbPlayer nbPlayer3"></label>
-               </div>
-               <div class="d-flex flex-column checkbox-nbPlayer">
-                  <input type="radio" id="nbPlayer4" name="nbPlayer" value="4" hidden>
-                  <label for="nbPlayer4" class="label-nbPlayer nbPlayer4"></label>
-               </div>
-            </div>
-            <div class="container-fluid container-all-heroes">
-               <div class="container">
-                  <img src="images/players/heroes.png" class="d-block w-100" alt="...">
-               </div>
-            </div>
-            <div class="container-fluid container-choice-heroes">
-            </div>
+      <!-- jeu multi-joueur -->
+      <div class="jeu-multijoueur">
+         <div class="container my-4">
+            <button id="showChoiceWorld" class="form-control showChoiceWorld">
+               <h2 class="text-center">Etape 1 : Choisissez votre univers</h2>
+            </button>
          </div>
 
-      </section>
+         <section id='sectionChoiceWorld' class="container-fluid">
+            <div class="row">
+               <div class="col-md-4 world world1 worldQuete1">
+                  <div class="world-legend d-none d-md-block">
+                     <h5>La Foret de Fangorn</h5>
+                     <p>Quelle folie va vous conduire dans cet endroit ? </p>
+                     <button id="world1" class="form-control btn-worldQuete1">Jouer dans ce lieu effrayant</button>
+                  </div>
+               </div>
+               <div class="col-md-4 world world2 worldQuete2">
+                  <div class="world-legend d-none d-md-block">
+                     <h5>Les mines de la Moria</h5>
+                     <p>Les nains ont creusé trop profondément et avec trop d'avidité, savez-vous ce qu'ils ont
+                        découvert
+                        dans les profondeurs de la Moria ? </p>
+                     <button id="world2" class="form-control btn-worldQuete2">Jouer dans ce tombeau</button>
+                  </div>
+               </div>
+               <div class="col-md-4 world world3 worldQuete3">
+                  <div class="world-legend d-none d-md-block">
+                     <h5>Les versants de la montagne du Destin</h5>
+                     <p>Quelle folie va vous conduire dans cet endroit ? </p>
+                     <button id="world3" class="form-control btn-worldQuete3">Jouer dans ce lieu maudit</button>
+                  </div>
+               </div>
+            </div>
+         </section>
+         <div class="container my-4 ">
+            <button id="showChoicePlayers" class="form-control showChoicePlayers">
+               <h2 class="text-center">Etape 2 : Choisissez les joueurs</h2>
+            </button>
+         </div>
 
+         <section id="sectionChoicePlayers" class=" ">
+            <div class="d-flex flex-column align-center ">
+               <div class="container d-flex flex-row container-choix-nbPlayer mb-4">
+                  <div class="d-flex flex-column checkbox-nbPlayer">
+                     <input type="radio" id="nbPlayer2" name="nbPlayer" value="2" hidden>
+                     <label for="nbPlayer2" class="label-nbPlayer nbPlayer2"></label>
+                  </div>
+                  <div class="d-flex flex-column checkbox-nbPlayer">
+                     <input type="radio" id="nbPlayer3" name="nbPlayer" value="3" hidden>
+                     <label for="nbPlayer3" class="label-nbPlayer nbPlayer3"></label>
+                  </div>
+                  <div class="d-flex flex-column checkbox-nbPlayer">
+                     <input type="radio" id="nbPlayer4" name="nbPlayer" value="4" hidden>
+                     <label for="nbPlayer4" class="label-nbPlayer nbPlayer4"></label>
+                  </div>
+               </div>
+               <div class="container-fluid container-all-heroes">
+                  <div class="container">
+                     <img src="images/players/heroes.png" class="d-block w-100" alt="...">
+                  </div>
+               </div>
+               <div class="container-fluid container-choice-heroes">
+               </div>
+            </div>
+
+         </section>
+      </div>
+
+
+
+
+      <!-- lancement du jeu -->
       <div class="container my-4 ">
          <button class="form-control btn-start-game" id="btn-start-game">Lancer le jeu !
          </button>

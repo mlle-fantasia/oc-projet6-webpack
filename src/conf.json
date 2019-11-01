@@ -1,5 +1,6 @@
 {
 	"nbCasesY": 10,
 	"nbCasesX": 10,
-	"nbObstacles": 10
+	"nbObstacles": 10,
+	"nbObstaclesQuete6": 20
 }

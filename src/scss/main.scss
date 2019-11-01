@@ -138,6 +138,9 @@ h2 {
 .player6 {
 	background-image: url($path-image+"players/img/hero6.jpg");
 }
+.player7 {
+	background-image: url($path-image+"players/img/hero7.jpg");
+}
 .img-object-grid {
 	position: absolute;
 	background-size: contain;
@@ -164,6 +167,9 @@ h2 {
 }
 .hero6-grid {
 	background-image: url($path-image+"players/grid/player6figure.png");
+}
+.hero7-grid {
+	background-image: url($path-image+"players/grid/player7figure.png"); // golum
 }
 :checked + label {
 	border: solid 2px #a01515;

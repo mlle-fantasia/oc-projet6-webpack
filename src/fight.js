@@ -22,6 +22,7 @@ $(document).ready(function() {
 	$(".defence-player").append($(elementPlayerDefence));
 	let infoplayerDefence = renderInfoPlayerAttack(playerDefence);
 	let infoplayerAttack = renderInfoPlayerAttack(playerAttack);
+	console.log("infoplainfoplayerAttackyerDefence", infoplayerAttack);
 	$(".info-attack-player").append(infoplayerAttack);
 	$(".info-defence-player").append(infoplayerDefence);
 
@@ -54,9 +55,21 @@ $(document).ready(function() {
 });
 
 function renderInfoPlayerAttack(player) {
+	console.log("player", player);
+	let weapon = "";
+	let infoWeapon = "";
+	if (player.accessories[0]) {
+		weapon = 'src="images/accessories/' + player.accessories[0].imageGrid + '.png" alt="image arme"';
+		infoWeapon =
+			'<div class="info-name info-weapon weapon-text tolkien">' +
+			player.accessories[0].text +
+			'</div><div class="info-name info-weapon weapon-avantage">' +
+			player.accessories[0].avantageText +
+			"</div>";
+	}
 	let accessory = "";
 	let infoAccessory = "";
-	if (player.accessories[1]) {
+	if (player.accessories && player.accessories[1]) {
 		accessory = 'src="images/accessories/' + player.accessories[1].imageGrid + '.png" alt="image accessoire"';
 		let temp = player.accessories[1].temporality === "perpetual" ? "avantage permanent" : "avantage ponctuel";
 		infoAccessory =
@@ -73,6 +86,7 @@ function renderInfoPlayerAttack(player) {
 	let heroSize = $(".info-attack-player").width();
 	let ArmorSize = $(".info-attack-player").width() / 2;
 	let AccessorySize = $(".info-attack-player").width() / 3;
+	console.log("player.accessories ", player.accessories);
 	return (
 		`
 		<div class="d-flex flex-column cercle-hero">
@@ -100,18 +114,15 @@ function renderInfoPlayerAttack(player) {
 		ArmorSize +
 		`px">
 		<div class="background-cercle-anneau" >
-			<img class="info-player2-img info-player2-img-armor" src="images/accessories/` +
-		player.accessories[0].imageGrid +
-		`.png"
-				alt="image arme">
+			<img class="info-player2-img info-player2-img-armor" ` +
+		weapon +
+		`>
+		` +
+		infoWeapon +
+		`
 		</div>
 	</div>
-	<div class="info-name info-weapon weapon-text tolkien">` +
-		player.accessories[0].text +
-		`</div>
-	<div class="info-name info-weapon weapon-avantage">` +
-		player.accessories[0].avantageText +
-		`</div>
+	
 </div>
 <div class=" container-info-accessory">
 	<div class="cercle-accessory ">

@@ -2,6 +2,7 @@ import config from "../conf.json";
 import Utils from "./Utils";
 import Cell from "./Cell";
 import Obstacle from "./Obstacle";
+import Gate from "./Gate.js";
 
 export default class World {
 	constructor(univers) {
@@ -21,6 +22,9 @@ export default class World {
 			}
 			this.grid.push(line);
 		}
+		if (this.univers === "4" || this.univers === "5" || this.univers === "6") {
+			this.placePorte();
+		}
 		this.placeObstacles();
 		this.placePlayers(players);
 		this.placeAccessories("weapon", weapons);
@@ -29,8 +33,21 @@ export default class World {
 		console.log("grid", this.grid); //à laisser
 		return this.grid;
 	}
+	placePorte() {
+		let x = Math.floor(Math.random() * Math.floor(this.worldSizeX));
+		let y = Math.floor(Math.random() * Math.floor(this.worldSizeY));
+		if (Utils.isFreeCell(x, y, this.grid)) {
+			let newGate = new Gate(this.univers);
+			let newCell = new Cell(x, y, [newGate]);
+			Utils.updateCell(x, y, newCell, this.grid);
+		} else {
+			this.placePorte();
+		}
+	}
 	placeObstacles() {
-		for (let i = 0; i < config.nbObstacles; i++) {
+		let nbObstacle = config.nbObstacles;
+		if (this.univers === "6") nbObstacle = config.nbObstaclesQuete6;
+		for (let i = 0; i < nbObstacle; i++) {
 			this.placeOneObstacle();
 		}
 	}

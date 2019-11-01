@@ -14,6 +14,16 @@ $path-image: "../../public/images/worlds/";
 	&.game-3 {
 		background-image: url($path-image+"destin.jpg");
 	}
+	/// jeu solo ///
+	&.game-4 {
+		background-image: url($path-image+"gondolin.jpg");
+	}
+	&.game-5 {
+		background-image: url($path-image+"silmaril.jpg");
+	}
+	&.game-6 {
+		background-image: url($path-image+"destin.jpg");
+	}
 }
 
 .world {
@@ -31,6 +41,15 @@ $path-image: "../../public/images/worlds/";
 	background-image: url($path-image+"moria.jpg");
 }
 .world3 {
+	background-image: url($path-image+"destin.jpg");
+}
+.quete1 {
+	background-image: url($path-image+"gondolin.jpg");
+}
+.quete2 {
+	background-image: url($path-image+"silmaril.jpg");
+}
+.quete3 {
 	background-image: url($path-image+"destin.jpg");
 }
 .world-legend {
@@ -93,4 +112,56 @@ $path-image: "../../public/images/worlds/";
 .world3-grid {
 	//background-image: url($path-image+"ocean_obs.png");
 	background-color: #332318;
+}
+
+////// background pour jeu solo
+.world4-background {
+	background-image: url($path-image+"gondolin.jpg");
+	background-size: cover;
+	background-position: center;
+	.case {
+		border-left: solid 0.5px #cdd4e6;
+		border-bottom: solid 0.5px #cdd4e6;
+	}
+	.line {
+		background-color: #8478718a;
+	}
+}
+.world4-grid {
+	background-color: #414956;
+}
+
+.world5-background {
+	background-image: url($path-image+"silmaril.jpg");
+	background-size: cover;
+	background-position: center;
+	.case {
+		border-left: solid 0.5px #cdd4e6;
+		border-bottom: solid 0.5px #cdd4e6;
+	}
+	.line {
+		background-color: #00000070;
+	}
+}
+.world5-grid {
+	background-color: #979db1;
+}
+
+.world6-background {
+	background-image: url($path-image+"destin.jpg");
+	background-size: cover;
+	background-position: center;
+	.case {
+		border-left: solid 0.5px #cdd4e6;
+		border-bottom: solid 0.5px #cdd4e6;
+	}
+	.line {
+		background-color: #8a5c408a;
+	}
+}
+.world6-grid {
+	background-color: #332318;
+}
+.Gate6-grid {
+	background-image: url($path-image+"porte-destin.png");
 }
