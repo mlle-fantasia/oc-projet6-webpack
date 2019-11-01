@@ -56,3 +56,18 @@
 .shew {
 	transform: skew(40deg, 40deg);
 }
+.btn-fight {
+	background-color: #e6c4a8;
+	border: double 4px #ffffff;
+	border-radius: 18px;
+	padding: 3px;
+	text-transform: uppercase;
+	font-weight: 600;
+	font-size: 15px;
+	color: black;
+	box-shadow: 2px 2px 2px 1px;
+}
+.form-control:disabled {
+	background-color: #e6c4a8;
+	opacity: 0.5;
+}

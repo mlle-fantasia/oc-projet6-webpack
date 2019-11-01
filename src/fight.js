@@ -8,6 +8,8 @@ let playerAttack = JSON.parse(localStorage.getItem("player"));
 let indexCurrentPlayer = playerAttack;
 let univers = localStorage.getItem("univers");
 $(document).ready(function() {
+	$(".btn-playerDefence").prop("disabled", true);
+	$(".btn-playerAttack").prop("disabled", false);
 	$("#fight").addClass("game-" + univers);
 	$(".fight-background").addClass("world" + univers + "-background");
 	let elementPlayerAttack = $(
@@ -24,6 +26,8 @@ $(document).ready(function() {
 	$(".info-defence-player").append(infoplayerDefence);
 
 	$("#btn-attack-playerDefence").click(() => {
+		$(".btn-playerDefence").prop("disabled", true);
+		$(".btn-playerAttack").prop("disabled", false);
 		let animate = ANIMATE[Math.floor(ANIMATE.length * Math.random())];
 		$(".img-defence-player").addClass("translate-defence");
 		setTimeout(() => {
@@ -35,6 +39,8 @@ $(document).ready(function() {
 		}, 1000);
 	});
 	$("#btn-attack-playerAttack").click(() => {
+		$(".btn-playerDefence").prop("disabled", false);
+		$(".btn-playerAttack").prop("disabled", true);
 		let animate = ANIMATE[Math.floor(ANIMATE.length * Math.random())];
 		$(".img-attack-player").addClass("translate-attack");
 		setTimeout(() => {
