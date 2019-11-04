@@ -3,24 +3,34 @@ import App from "./classes/App";
 import $ from "jquery";
 import "babel-polyfill";
 import Player from "./classes/Player";
-//import modalComponent from "../public/include/modal";
-import Weapon from "./classes/Weapon";
-import Modal from "./classes/modal";
+import Modal from "./classes/Modal";
 import Utils from "./classes/Utils";
+
 var indexCurrentPlayer = -1;
 let players = JSON.parse(localStorage.getItem("players"));
 let univers = localStorage.getItem("univers");
+
 $(document).ready(function() {
 	$("#game").addClass("game-" + univers);
 	let newGrid = $("<div class='grid world" + univers + "-background'></div>");
 	$(".world").append($(newGrid));
 
-	window.app = new App(players, univers);
-	console.log("app.players", app.players);
+	if (localStorage.getItem("grid")) {
+		console.log("grid localstorage");
+		let grid = JSON.parse(localStorage.getItem("grid"));
+		console.log("grid récupéré du localStorage", grid);
+		window.app = new App(univers, grid);
+	} else {
+		window.app = new App(players, univers);
+	}
+	console.log("grid", app.grid); //à laisser
 	render(app.grid);
+
 	renderInfoAllPlayer(app.players);
 	//tour par tour
-	showModal(app.players[0], "quete3Modal1", null);
+	if (univers === "4" || univers === "5" || univers === "6") {
+		Utils.showModal(app.players[0], "quete" + univers + "Modal1", null);
+	}
 	nextPlayer();
 });
 async function nextPlayer() {
@@ -41,7 +51,7 @@ async function renderYourTurn(player) {
 		});
 		let playerToCopy = otherPlayer[Math.floor(otherPlayer.length * Math.random())];
 		player.pointFort = playerToCopy.pointFort;
-		let responseModal = await showModal(player, "powerCopy", playerToCopy);
+		let responseModal = await Utils.showModal(player, "powerCopy", playerToCopy);
 	}
 	player.showMove(app.grid);
 	render(app.grid);
@@ -73,42 +83,44 @@ async function renderYourTurn(player) {
 			render(app.grid);
 			let isObject = player.hasObjectToTake(x, y, app.grid);
 			if (isObject && player.accessories.length < 2) {
-				let responseModal = await showModal(player, "takeObject", isObject, x, y);
+				let responseModal = await Utils.showModal(player, "takeObject", isObject, x, y);
 				if (responseModal) {
 					player.takeObject(x, y, app.grid);
 				}
 			}
 			let isGate = player.hasGate(x, y, app.grid);
 			if (isGate) {
-				let responseModal = await showModal(player, "quete3Modal2", null);
+				let responseModal = await Utils.showModal(player, "quete" + univers + "Modal2", null);
 				if (responseModal) {
 					localStorage.setItem("player", JSON.stringify(player));
 					localStorage.setItem("playerToFight", JSON.stringify(new Player("Golum", 7, 2, [{ text: "", avantageText: "", imageGrid: "" }])));
 					localStorage.setItem("univers", univers);
+					localStorage.setItem("grid", JSON.stringify(app.grid));
 					window.location.href = "fight.html";
 				}
 			}
 			let isObsToMove = avantageHero4(player, x, y);
 			if (isObsToMove) {
-				let responseModal = await showModal(player, "moveObstacle", isObsToMove, x, y);
+				let responseModal = await Utils.showModal(player, "moveObstacle", isObsToMove, x, y);
 				if (responseModal) {
 					player.moveObstacle(isObsToMove, app.grid, univers);
 				}
 			}
 			let isPlayerToSteal = avantageHero3(player, x, y);
 			if (isPlayerToSteal) {
-				let responseModal = await showModal(player, "stealObject", isPlayerToSteal.accessories[1], x, y, isPlayerToSteal);
+				let responseModal = await Utils.showModal(player, "stealObject", isPlayerToSteal.accessories[1], x, y, isPlayerToSteal);
 				if (responseModal) {
 					player.stealObject(isPlayerToSteal);
 				}
 			}
 			let isPlayerToFight = testAttaque(player.placeX, player.placeY);
 			if (isPlayerToFight) {
-				let responseModal = await showModal(player, "fight", isPlayerToFight, x, y);
+				let responseModal = await Utils.showModal(player, "fight", isPlayerToFight, x, y);
 				if (responseModal) {
 					//player.attack(isPlayerToFight);
 					localStorage.setItem("player", JSON.stringify(player));
 					localStorage.setItem("playerToFight", JSON.stringify(isPlayerToFight));
+					localStorage.setItem("grid", JSON.stringify(app.grid));
 					localStorage.setItem("univers", univers);
 					window.location.href = "fight.html";
 				}
@@ -121,22 +133,6 @@ async function renderYourTurn(player) {
 				$(".container-modal-component").remove();
 			});
 		}
-	});
-}
-
-function showModal(player, functionToCall, object, x, y, isPlayerToSteal) {
-	if (functionToCall === "takeObject") {
-		functionToCall = object.constructor.name;
-	}
-
-	let modal = new Modal(player, functionToCall, object);
-	$("#game").prepend(modal.render());
-	let resonseModal = "pas encore de réponse";
-	return new Promise(resolve => {
-		$(".modal-response").click(e => {
-			$(".container-modal-component").remove();
-			resolve(e.target.dataset.response === "true");
-		});
 	});
 }
 

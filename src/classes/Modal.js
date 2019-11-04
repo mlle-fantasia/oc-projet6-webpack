@@ -147,37 +147,37 @@ const TYPE = {
 		btnYes: "Je vole !",
 		btnNo: "Je ne vole pas"
 	},
-	quete3Modal1: {
+	quete6Modal1: {
 		title: "Détruire l'anneau unique",
 		text:
 			"Après avoir traverser la terre du milieu, non sans embuches et mauvaises rencontres, vous avez enfin réussi à attendre le seul endroit de de la terre du milieu que l'on ne peut atendre : Le Mordor et la montagne du destin ! la dernière ligne droite est devant vous, atteignez la porte et jetez l'anneau !",
 		btnYes: "Je vois la porte"
 	},
-	quete3Modal2: {
+	quete6Modal2: {
 		title: "Détruire l'anneau unique",
 		text:
 			"Vous voila au coeur de la montagne du destin, là au Sauron le seigneur des ténèbres forgea en secret le maître anneau il y a 3000 ans. Mais un être ne veut pas que vous détruisiez l'anneau, Golum vous attaque, défendez vous !",
 		btnYes: "ahh !!!"
 	},
-	quete3Modal3: {
+	quete6Modal3: {
 		title: "Détruire l'anneau unique",
 		text: "Bien joué ! Golum est tombé dans la lave. il vous reste à jeter l'anneau dans le feu ! Allez-vous jeter votre précieux ? ",
 		btnYes: "Je le jete",
 		btnNo: "Je le garde"
 	},
-	quete3Modal3fail: {
+	quete6Modal3fail: {
 		title: "Détruire l'anneau unique",
 		text:
 			"Le coeur des homme est aisement coruptible et l'anneau à sa volonté propre, vous avez cédez à son pouvoir et échoué dans votre mission. L'anneau vous trahira en vous menant à la mort et toutes les contrées de la terre du milieu tomberont sous l'emprise de Sauron...",
 		btnYes: "..."
 	},
-	quete3Modal3sucess: {
+	quete6Modal3sucess: {
 		title: "Détruire l'anneau unique",
 		text:
 			"Vous avez pris la bonne décision. jeter l'anneau dans le feu était le seul moyen de le détruire et de libérer la terre du milieu de l'emprise de Sauron. Mais le volcan commence à se reveiller, il vous faut sortir maintenant et éviter de mourir des rochers en fusion",
 		btnYes: "Je fuis !"
 	},
-	quete3ModalSucess: {
+	quete6ModalSucess: {
 		title: "Détruire l'anneau unique",
 		text: "Bravo vous avez accompli la tâche qui vous a été confiée !  les aigles vont vous enmener en lieu sûr",
 		btnYes: "houra !"

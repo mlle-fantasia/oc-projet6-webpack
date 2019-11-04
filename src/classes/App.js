@@ -6,10 +6,19 @@ import Weapon from "./Weapon";
 import Accessory from "./Accessory";
 
 export default class App {
-	constructor(initPlayers, univers) {
-		this.initWorld(initPlayers, univers);
+	constructor(initPlayers, univers, existingGrid) {
+		if (existingGrid) {
+			console.log("reInitWOrld");
+			this.reInitWorld(univers, existingGrid);
+		} else {
+			this.initWorld(initPlayers, univers);
+		}
 	}
-
+	reInitWorld(univers, existingGrid) {
+		this.world = new World(univers);
+		console.log("new world", this.world);
+		this.grid = this.world.reGenerateWorld(existingGrid);
+	}
 	initWorld(initPlayers, univers) {
 		this.players = this.generatePlayers(initPlayers);
 		this.weapons = this.generateWeapon();

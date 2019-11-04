@@ -13,6 +13,7 @@ export default class Weapon {
 		this.imageGrid = weapon.value;
 		this.degat = weapon.degat;
 		this.initial = weapon.initial;
+		this.type = "Weapon";
 	}
 
 	defineWeapon(initial) {

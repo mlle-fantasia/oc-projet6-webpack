@@ -44,6 +44,7 @@ export default class Player {
 		this.placeX;
 		this.placeY;
 		this.movableCell;
+		this.type = "Player";
 		//this.playerInfo = this.showPlayerInfo();
 	}
 	showMove(grid) {

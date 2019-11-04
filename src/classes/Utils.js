@@ -1,11 +1,28 @@
 import config from "../conf.json";
 import Player from "./Player";
 import Obstacle from "./Obstacle";
-import Accessory from "./Accessory.js";
+import Modal from "./Modal.js";
 import Weapon from "./Weapon.js";
 
 export default class Utils {
 	constructor() {}
+
+	static showModal(player, functionToCall, object, x, y, isPlayerToSteal) {
+		if (functionToCall === "takeObject") {
+			functionToCall = object.constructor.name;
+		}
+
+		let modal = new Modal(player, functionToCall, object);
+		$("#game").prepend(modal.render());
+		let resonseModal = "pas encore de réponse";
+		return new Promise(resolve => {
+			$(".modal-response").click(e => {
+				$(".container-modal-component").remove();
+				resolve(e.target.dataset.response === "true");
+			});
+		});
+	}
+
 	static isExistCell(x, y) {
 		if (x >= config.nbCasesX || y >= config.nbCasesY || x < 0 || y < 0) {
 			return false;

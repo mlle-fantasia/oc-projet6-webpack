@@ -1,7 +1,8 @@
 import "./scss/main.scss";
-import App from "./classes/App";
 import $ from "jquery";
 import "babel-polyfill";
+import Utils from "./classes/Utils";
+
 const ANIMATE = ["shew", "rotate", "rotateX", "rotateY", "rotate3d", "scale"];
 let playerDefence = JSON.parse(localStorage.getItem("playerToFight"));
 let playerAttack = JSON.parse(localStorage.getItem("player"));
@@ -51,6 +52,22 @@ $(document).ready(function() {
 				$(".img-defence-player").removeClass(animate);
 			}, 1000);
 		}, 1000);
+	});
+
+	$("#retour-test").click(() => {
+		console.log("quete" + univers + "Modal3");
+		let responseModal = Utils.showModal(playerAttack, "quete" + univers + "Modal3", null);
+		if (responseModal) {
+			if (univers === "6") {
+				Utils.showModal(playerAttack, "quete6Modal3sucess", null);
+			}
+			localStorage.setItem("player", JSON.stringify(playerAttack));
+			localStorage.setItem("univers", univers);
+			localStorage.setItem("grid", localStorage.getItem("grid"));
+			window.location.href = "game.html";
+		} else {
+			Utils.showModal(playerAttack, "quete" + univers + "Modal3fail", null);
+		}
 	});
 });
 

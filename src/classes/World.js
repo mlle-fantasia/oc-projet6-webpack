@@ -3,6 +3,8 @@ import Utils from "./Utils";
 import Cell from "./Cell";
 import Obstacle from "./Obstacle";
 import Gate from "./Gate.js";
+import Accessory from "./Accessory.js";
+import Player from "./Player.js";
 
 export default class World {
 	constructor(univers) {
@@ -13,7 +15,42 @@ export default class World {
 		this.worldSizeX = config.nbCasesX;
 		this.grid = [];
 	}
+	reGenerateWorld(existingGrid) {
+		console.log("reGenerateWorld");
+		for (let x = 0; x < existingGrid.length; x++) {
+			let line = [];
+			for (let y = 0; y < existingGrid[x]; y++) {
+				const existingCell = existingGrid[x][y];
+				let objects = [];
+				for (let index = 0; index < existingCell.objects.length; index++) {
+					const existingObject = existingCell.objects[index];
 
+					switch (existingObject.type) {
+						case "Accessory":
+							objects.push(new Accessory());
+							break;
+						case "Weapon":
+							new Weapon();
+							break;
+						case "Player":
+							console.log("object", object);
+							new Player(object.playerName, object.heroNum, object.playerNum, object.accessories);
+							break;
+						case "Obstacle":
+							new Obstacle(this.univers);
+							break;
+						case "Gate":
+							new Gate();
+							break;
+					}
+				}
+
+				console.log("existingCell", existingCell);
+				line.push(new Cell(x, y, objects));
+			}
+			this.grid.push(line);
+		}
+	}
 	generateWorld(players, weapons, accessories) {
 		for (let x = 0; x < this.worldSizeX; x++) {
 			let line = [];
@@ -30,7 +67,6 @@ export default class World {
 		this.placeAccessories("weapon", weapons);
 		this.placeAccessories("accessory", accessories);
 
-		console.log("grid", this.grid); //à laisser
 		return this.grid;
 	}
 	placePorte() {

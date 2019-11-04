@@ -29,5 +29,6 @@ export default class Accessory {
 		this.avantage = accessory.avantage;
 		this.avantageText = accessory.avantageText;
 		this.temporality = accessory.temporality;
+		this.type = "Accessory";
 	}
 }
