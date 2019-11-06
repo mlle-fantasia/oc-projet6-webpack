@@ -23,7 +23,6 @@ $(document).ready(function() {
 	$(".defence-player").append($(elementPlayerDefence));
 	let infoplayerDefence = renderInfoPlayerAttack(playerDefence);
 	let infoplayerAttack = renderInfoPlayerAttack(playerAttack);
-	console.log("infoplainfoplayerAttackyerDefence", infoplayerAttack);
 	$(".info-attack-player").append(infoplayerAttack);
 	$(".info-defence-player").append(infoplayerDefence);
 
@@ -54,17 +53,21 @@ $(document).ready(function() {
 		}, 1000);
 	});
 
-	$("#retour-test").click(() => {
+	$("#retour-test").click(async () => {
 		console.log("quete" + univers + "Modal3");
-		let responseModal = Utils.showModal(playerAttack, "quete" + univers + "Modal3", null);
+		let responseModal = await Utils.showModal(playerAttack, "quete" + univers + "Modal3", null);
 		if (responseModal) {
+			console.log("univers", univers);
 			if (univers === "6") {
-				Utils.showModal(playerAttack, "quete6Modal3sucess", null);
+				let responseModal = await Utils.showModal(playerAttack, "quete6Modal3success", null);
+				if (responseModal) {
+					localStorage.setItem("player", JSON.stringify(playerAttack));
+					localStorage.setItem("univers", univers);
+					localStorage.setItem("retour", true);
+					localStorage.setItem("grid", localStorage.getItem("grid"));
+					window.location.href = "game.html";
+				}
 			}
-			localStorage.setItem("player", JSON.stringify(playerAttack));
-			localStorage.setItem("univers", univers);
-			localStorage.setItem("grid", localStorage.getItem("grid"));
-			window.location.href = "game.html";
 		} else {
 			Utils.showModal(playerAttack, "quete" + univers + "Modal3fail", null);
 		}

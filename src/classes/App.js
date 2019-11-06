@@ -9,15 +9,18 @@ export default class App {
 	constructor(initPlayers, univers, existingGrid) {
 		if (existingGrid) {
 			console.log("reInitWOrld");
-			this.reInitWorld(univers, existingGrid);
+			this.reInitWorld(univers, existingGrid, initPlayers);
 		} else {
 			this.initWorld(initPlayers, univers);
 		}
 	}
-	reInitWorld(univers, existingGrid) {
+	reInitWorld(univers, existingGrid, initPlayers) {
+		//this.players = this.reGeneratePlayers(initPlayers);
 		this.world = new World(univers);
 		console.log("new world", this.world);
-		this.grid = this.world.reGenerateWorld(existingGrid);
+		let elements = this.world.reGenerateWorld(existingGrid);
+		this.grid = elements.grid;
+		this.players = elements.players;
 	}
 	initWorld(initPlayers, univers) {
 		this.players = this.generatePlayers(initPlayers);
@@ -27,6 +30,19 @@ export default class App {
 		this.grid = this.world.generateWorld(this.players, this.weapons, this.accessories);
 		this.currentPlayer = this.players[0];
 	}
+	/* 	reGeneratePlayers(initPlayers) {
+		let players = [];
+		for (let p = 0; p < initPlayers.length; p++) {
+			const player = initPlayers[p];
+			for (let a = 0; a < initPlayers.accessories.length; a++) {
+				const accessory = initPlayers.accessories[a];
+				
+			}
+			let newplayer = new Player(player.playerName, player.hero, p + 1, player.accessories);
+			players.push(newplayer);
+		}
+		return players;
+	} */
 	generatePlayers(initPlayers) {
 		let players = [];
 		for (let p = 0; p < initPlayers.length; p++) {

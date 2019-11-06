@@ -4,6 +4,7 @@ import Cell from "./Cell";
 import Obstacle from "./Obstacle";
 import Gate from "./Gate.js";
 import Accessory from "./Accessory.js";
+import Weapon from "./Weapon.js";
 import Player from "./Player.js";
 
 export default class World {
@@ -16,40 +17,56 @@ export default class World {
 		this.grid = [];
 	}
 	reGenerateWorld(existingGrid) {
-		console.log("reGenerateWorld");
+		let reinitPlayer = [];
 		for (let x = 0; x < existingGrid.length; x++) {
 			let line = [];
-			for (let y = 0; y < existingGrid[x]; y++) {
+			for (let y = 0; y < existingGrid[x].length; y++) {
 				const existingCell = existingGrid[x][y];
 				let objects = [];
 				for (let index = 0; index < existingCell.objects.length; index++) {
 					const existingObject = existingCell.objects[index];
-
 					switch (existingObject.type) {
 						case "Accessory":
 							objects.push(new Accessory());
 							break;
 						case "Weapon":
-							new Weapon();
+							objects.push(new Weapon());
 							break;
 						case "Player":
-							console.log("object", object);
-							new Player(object.playerName, object.heroNum, object.playerNum, object.accessories);
+							let accessories = [];
+							for (let a = 0; a < existingObject.accessories.length; a++) {
+								const accessory = existingObject.accessories[a];
+
+								if (accessory.type === "Accessory") {
+									accessories.push(new Accessory());
+								}
+								if (accessory.type === "Weapon") {
+									accessories.push(new Weapon());
+								}
+							}
+							let newPlayer = new Player(existingObject.playerName, existingObject.heroNum, existingObject.playerNum, accessories);
+							newPlayer.placeX = x;
+							newPlayer.placeY = y;
+							objects.push(newPlayer);
+							reinitPlayer.push(newPlayer);
 							break;
 						case "Obstacle":
-							new Obstacle(this.univers);
+							objects.push(new Obstacle(this.univers));
 							break;
 						case "Gate":
-							new Gate();
+							objects.push(new Gate(this.univers));
 							break;
 					}
 				}
 
-				console.log("existingCell", existingCell);
 				line.push(new Cell(x, y, objects));
 			}
 			this.grid.push(line);
 		}
+		if (this.univers === "6") {
+			this.placePorte("aigle");
+		}
+		return { grid: this.grid, players: reinitPlayer };
 	}
 	generateWorld(players, weapons, accessories) {
 		for (let x = 0; x < this.worldSizeX; x++) {
@@ -69,11 +86,16 @@ export default class World {
 
 		return this.grid;
 	}
-	placePorte() {
+	placePorte(aigle) {
 		let x = Math.floor(Math.random() * Math.floor(this.worldSizeX));
 		let y = Math.floor(Math.random() * Math.floor(this.worldSizeY));
 		if (Utils.isFreeCell(x, y, this.grid)) {
-			let newGate = new Gate(this.univers);
+			let newGate;
+			if (aigle) {
+				newGate = new Gate(this.univers, aigle);
+			} else {
+				newGate = new Gate(this.univers);
+			}
 			let newCell = new Cell(x, y, [newGate]);
 			Utils.updateCell(x, y, newCell, this.grid);
 		} else {

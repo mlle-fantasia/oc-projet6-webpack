@@ -8,10 +8,10 @@ export default class Utils {
 	constructor() {}
 
 	static showModal(player, functionToCall, object, x, y, isPlayerToSteal) {
+		console.log("functionToCall", functionToCall);
 		if (functionToCall === "takeObject") {
 			functionToCall = object.constructor.name;
 		}
-
 		let modal = new Modal(player, functionToCall, object);
 		$("#game").prepend(modal.render());
 		let resonseModal = "pas encore de réponse";
@@ -104,23 +104,7 @@ export default class Utils {
 			}
 		}
 	}
-	/* 	witchPlayerToFight(x, y, grid) {
-		console.log("x,y", x, y);
-		let cellLeft, cellRight, cellTop, cellBottom;
-		x > 0 ? (cellLeft = grid[x - 1][y]) : (cellLeft = grid[x][y]);
-		x < grid.length - 1 ? (cellRight = grid[x + 1][y]) : (cellRight = grid[x][y]);
-		y > 0 ? (cellTop = grid[x][y - 1]) : (cellTop = grid[x][y]);
-		y < grid.length - 1 ? (cellBottom = grid[x][y + 1]) : (cellBottom = grid[x][y]);
-		let tabCellAround = [cellLeft, cellRight, cellTop, cellBottom];
-		let playersToFight = [];
-		for (let index = 0; index < tabCellAround.length; index++) {
-			const cell = tabCellAround[index];
-			if (cell.objects.length && cell.objects[0] instanceof Player) {
-				playersToFight.push(cell.objects[0]);
-			}
-		}
-		return playersToFight[Math.floor(playersToFight.length * Math.random())];
-	} */
+
 	// test si un obstacle se trouve à côté de la case fournie en paramètre
 	// si en paramètre est donné "nombre" renvoie le nombre d'obstacle à proximité
 	// si non, renvoie les coordonnées de la case où se situ l'obstacle
@@ -178,6 +162,7 @@ export default class Utils {
 	}
 	// renvoie les déplacements possibles du joueur
 	static showMove(grid, x, y, ptfort) {
+		console.log("x, y", x, y);
 		let tabMovableCell = [];
 		let avantage = false;
 		if (ptfort.value === "fast") {

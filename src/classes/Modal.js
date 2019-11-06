@@ -101,7 +101,7 @@ export default class Modal {
 				</div>
 			</div>
 	`;
-
+		console.log("modal", modal);
 		return modal;
 	}
 }
@@ -171,13 +171,13 @@ const TYPE = {
 			"Le coeur des homme est aisement coruptible et l'anneau à sa volonté propre, vous avez cédez à son pouvoir et échoué dans votre mission. L'anneau vous trahira en vous menant à la mort et toutes les contrées de la terre du milieu tomberont sous l'emprise de Sauron...",
 		btnYes: "..."
 	},
-	quete6Modal3sucess: {
+	quete6Modal3success: {
 		title: "Détruire l'anneau unique",
 		text:
 			"Vous avez pris la bonne décision. jeter l'anneau dans le feu était le seul moyen de le détruire et de libérer la terre du milieu de l'emprise de Sauron. Mais le volcan commence à se reveiller, il vous faut sortir maintenant et éviter de mourir des rochers en fusion",
 		btnYes: "Je fuis !"
 	},
-	quete6ModalSucess: {
+	quete6ModalSuccess: {
 		title: "Détruire l'anneau unique",
 		text: "Bravo vous avez accompli la tâche qui vous a été confiée !  les aigles vont vous enmener en lieu sûr",
 		btnYes: "houra !"

@@ -9,6 +9,7 @@ import Utils from "./classes/Utils";
 var indexCurrentPlayer = -1;
 let players = JSON.parse(localStorage.getItem("players"));
 let univers = localStorage.getItem("univers");
+let retour = localStorage.getItem("retour");
 
 $(document).ready(function() {
 	$("#game").addClass("game-" + univers);
@@ -16,10 +17,8 @@ $(document).ready(function() {
 	$(".world").append($(newGrid));
 
 	if (localStorage.getItem("grid")) {
-		console.log("grid localstorage");
 		let grid = JSON.parse(localStorage.getItem("grid"));
-		console.log("grid récupéré du localStorage", grid);
-		window.app = new App(univers, grid);
+		window.app = new App(players, univers, grid);
 	} else {
 		window.app = new App(players, univers);
 	}
@@ -28,12 +27,13 @@ $(document).ready(function() {
 
 	renderInfoAllPlayer(app.players);
 	//tour par tour
-	if (univers === "4" || univers === "5" || univers === "6") {
+	if ((univers === "4" || univers === "5" || univers === "6") && !retour) {
 		Utils.showModal(app.players[0], "quete" + univers + "Modal1", null);
 	}
 	nextPlayer();
 });
 async function nextPlayer() {
+	console.log("indexCurrentPlayer", indexCurrentPlayer);
 	indexCurrentPlayer++;
 	//window.app.currentPlayer = app.players[indexCurrentPlayer];
 	let player = app.players[indexCurrentPlayer % app.players.length];
@@ -43,7 +43,6 @@ async function renderYourTurn(player) {
 	$(".info-current-player").empty();
 	let info = renderInfoCurrentPlayer(player);
 	$(".info-current-player").append(info);
-	//modal quête pour mode solo
 
 	if (player.heroNum === 6) {
 		let otherPlayer = app.players.filter(p => {
@@ -90,13 +89,23 @@ async function renderYourTurn(player) {
 			}
 			let isGate = player.hasGate(x, y, app.grid);
 			if (isGate) {
-				let responseModal = await Utils.showModal(player, "quete" + univers + "Modal2", null);
-				if (responseModal) {
-					localStorage.setItem("player", JSON.stringify(player));
-					localStorage.setItem("playerToFight", JSON.stringify(new Player("Golum", 7, 2, [{ text: "", avantageText: "", imageGrid: "" }])));
-					localStorage.setItem("univers", univers);
-					localStorage.setItem("grid", JSON.stringify(app.grid));
-					window.location.href = "fight.html";
+				if (!retour) {
+					let responseModal = await Utils.showModal(player, "quete" + univers + "Modal2", null);
+					if (responseModal) {
+						localStorage.setItem("player", JSON.stringify(player));
+						localStorage.setItem(
+							"playerToFight",
+							JSON.stringify(new Player("Golum", 7, 2, [{ text: "", avantageText: "", imageGrid: "" }]))
+						);
+						localStorage.setItem("univers", univers);
+						localStorage.setItem("grid", JSON.stringify(app.grid));
+						window.location.href = "fight.html";
+					}
+				} else {
+					let responseModal = await Utils.showModal(player, "quete" + univers + "ModalSuccess", null);
+					if (responseModal) {
+						window.location.href = "index.html";
+					}
 				}
 			}
 			let isObsToMove = avantageHero4(player, x, y);
