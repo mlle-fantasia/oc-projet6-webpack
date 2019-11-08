@@ -112,7 +112,6 @@ export default class Modal {
 				</div>
 			</div>
 	`;
-		console.log("modal", modal);
 		return modal;
 	}
 }
@@ -203,5 +202,19 @@ const TYPE = {
 		text:
 			"Vous êtes mort par la montagne du destin en furie ! Vous avez quand meme sauvé la terre du milieu, votre honneur est sauf, vous allez rejoindre vos ailleux et vous n'aurez pas honte.",
 		btnYes: ":'("
+	},
+	quete4Modal1: {
+		title: "Sauver Gondolin",
+		text:
+			"C'est lors de votre passage à Vinyamar, au bord de Belegaer, la grande mer qu'Ulmo le seigneur des eaux vous est apparut, il est sortit d'une tempête venu de l'ouest. il vous dit d'endosser le heaume, la cotte, l'épée et le bouclier laissés par Turgon dans la grande salle du trône, de quiter cet endroit et de trouver Gondolin afin de délivrer son message. ",
+		image: "quete4Modal1",
+		btnYes: "Je part"
+	},
+	quete4Modal2: {
+		title: "Sauver Gondolin",
+		text: "Bravo vous avez enfin trouvé l'entrée sous les montagnes qui mène à la cité cachée de gondolin !",
+		image: "quete4Modal2",
+		btnYes: "Je rentre",
+		btnNo: "Je rentre pas"
 	}
 };

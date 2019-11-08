@@ -43,6 +43,7 @@ export default class App {
 		return end;
 	}
 	initWorld(initPlayers, univers) {
+		this.univers = univers;
 		this.players = this.generatePlayers(initPlayers);
 		this.weapons = this.generateWeapon();
 		this.accessories = this.generateAccessories();
@@ -50,19 +51,6 @@ export default class App {
 		this.grid = this.world.generateWorld(this.players, this.weapons, this.accessories);
 		this.currentPlayer = this.players[0];
 	}
-	/* 	reGeneratePlayers(initPlayers) {
-		let players = [];
-		for (let p = 0; p < initPlayers.length; p++) {
-			const player = initPlayers[p];
-			for (let a = 0; a < initPlayers.accessories.length; a++) {
-				const accessory = initPlayers.accessories[a];
-				
-			}
-			let newplayer = new Player(player.playerName, player.hero, p + 1, player.accessories);
-			players.push(newplayer);
-		}
-		return players;
-	} */
 	generatePlayers(initPlayers) {
 		let players = [];
 		for (let p = 0; p < initPlayers.length; p++) {
@@ -75,15 +63,26 @@ export default class App {
 	}
 	generateWeapon() {
 		let weapons = [];
-		for (let i = 0; i < this.players.length; i++) {
-			weapons.push(new Weapon());
+		console.log("this.univers", this.univers);
+		if (this.univers !== "4") {
+			for (let i = 0; i < this.players.length; i++) {
+				weapons.push(new Weapon());
+			}
+		} else {
+			weapons.push(new Weapon(null, "epee"));
 		}
 		return weapons;
 	}
 	generateAccessories() {
 		let accessories = [];
-		for (let i = 0; i < this.players.length; i++) {
-			accessories.push(new Accessory());
+		if (this.univers !== "4") {
+			for (let i = 0; i < this.players.length; i++) {
+				accessories.push(new Accessory());
+			}
+		} else {
+			accessories.push(new Accessory("cotte"));
+			accessories.push(new Accessory("heaume"));
+			accessories.push(new Accessory("bouclier"));
 		}
 		return accessories;
 	}
