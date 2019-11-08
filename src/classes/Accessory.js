@@ -22,13 +22,21 @@ const ACCESSORY = [
 ];
 
 export default class Accessory {
-	constructor() {
-		let accessory = ACCESSORY[Math.floor(ACCESSORY.length * Math.random())];
+	constructor(value = null) {
+		let accessory;
+		if (value) {
+			accessory = ACCESSORY.find(a => {
+				return a.value === value;
+			});
+		} else {
+			accessory = ACCESSORY[Math.floor(ACCESSORY.length * Math.random())];
+		}
 		this.text = accessory.text;
 		this.imageGrid = accessory.value;
 		this.avantage = accessory.avantage;
 		this.avantageText = accessory.avantageText;
 		this.temporality = accessory.temporality;
 		this.type = "Accessory";
+		this.value = accessory.value;
 	}
 }

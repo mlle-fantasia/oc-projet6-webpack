@@ -100,11 +100,17 @@ export default class Player {
 		this.accessories[1] = objectSteal;
 		isPlayerToSteal.accessories.splice(1, 1);
 	}
-	hasGate(x, y, grid) {
+	hasGate(x, y, grid, exit = false) {
 		if (grid[x][y].objects.length < 2) {
 			return false;
 		}
-		if (grid[x][y].objects[0] instanceof Gate) return true;
+		if (grid[x][y].objects[0] instanceof Gate) {
+			if (exit && grid[x][y].objects[0].imageGrid !== "Gate6-grid-aigle") {
+				return false;
+			} else {
+				return true;
+			}
+		}
 	}
 	hasObjectToTake(x, y, grid) {
 		if (grid[x][y].objects.length < 2) {

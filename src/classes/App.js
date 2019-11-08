@@ -2,13 +2,14 @@ import World from "./World";
 import config from "../conf.json";
 import Utils from "./Utils";
 import Player from "./Player";
+import Cell from "./Cell";
 import Weapon from "./Weapon";
 import Accessory from "./Accessory";
+import Obstacle from "./Obstacle";
 
 export default class App {
 	constructor(initPlayers, univers, existingGrid) {
 		if (existingGrid) {
-			console.log("reInitWOrld");
 			this.reInitWorld(univers, existingGrid, initPlayers);
 		} else {
 			this.initWorld(initPlayers, univers);
@@ -21,6 +22,25 @@ export default class App {
 		let elements = this.world.reGenerateWorld(existingGrid);
 		this.grid = elements.grid;
 		this.players = elements.players;
+		this.univers = univers;
+	}
+	destroyCell(grid, univers) {
+		let end = false;
+		for (let i = 0; i < 3; i++) {
+			let x = Math.floor(Math.random() * Math.floor(config.nbCasesX));
+			let y = Math.floor(Math.random() * Math.floor(config.nbCasesY));
+			if ((grid[x][y].objects.length > 1 && grid[x][y].objects[1] instanceof Player) || grid[x][y].objects[0] instanceof Player) {
+				end = true;
+			}
+			/* if (grid[x][y].objects[0] instanceof Obstacle && grid[x][y].objects[0].type === "lave") {
+				this.destroyCell(grid, univers);
+			} */
+			let destroyedCell = new Obstacle(univers, true);
+			let newCell = new Cell(x, y, [destroyedCell]);
+			Utils.updateCell(x, y, newCell, grid);
+			this.grid = grid;
+		}
+		return end;
 	}
 	initWorld(initPlayers, univers) {
 		this.players = this.generatePlayers(initPlayers);

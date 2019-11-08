@@ -55,17 +55,20 @@ $(document).ready(function() {
 
 	$("#retour-test").click(async () => {
 		console.log("quete" + univers + "Modal3");
+		if (univers === "1" || univers === "2" || univers === "3") {
+			//localStorage.setItem("player", JSON.stringify(playerAttack));
+			//localStorage.setItem("playerToFight", JSON.stringify(playerDefence));
+			retourGame();
+			return;
+		}
 		let responseModal = await Utils.showModal(playerAttack, "quete" + univers + "Modal3", null);
 		if (responseModal) {
 			console.log("univers", univers);
 			if (univers === "6") {
 				let responseModal = await Utils.showModal(playerAttack, "quete6Modal3success", null);
 				if (responseModal) {
-					localStorage.setItem("player", JSON.stringify(playerAttack));
-					localStorage.setItem("univers", univers);
-					localStorage.setItem("retour", true);
-					localStorage.setItem("grid", localStorage.getItem("grid"));
-					window.location.href = "game.html";
+					//localStorage.setItem("player", JSON.stringify(playerAttack));
+					retourGame();
 				}
 			}
 		} else {
@@ -73,6 +76,12 @@ $(document).ready(function() {
 		}
 	});
 });
+function retourGame() {
+	localStorage.setItem("univers", univers);
+	localStorage.setItem("retour", true);
+	localStorage.setItem("grid", localStorage.getItem("grid"));
+	window.location.href = "game.html";
+}
 
 function renderInfoPlayerAttack(player) {
 	console.log("player", player);

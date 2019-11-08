@@ -10,6 +10,7 @@ var indexCurrentPlayer = -1;
 let players = JSON.parse(localStorage.getItem("players"));
 let univers = localStorage.getItem("univers");
 let retour = localStorage.getItem("retour");
+let isEnd = false;
 
 $(document).ready(function() {
 	$("#game").addClass("game-" + univers);
@@ -41,20 +42,21 @@ async function nextPlayer() {
 }
 async function renderYourTurn(player) {
 	$(".info-current-player").empty();
-	let info = renderInfoCurrentPlayer(player);
-	$(".info-current-player").append(info);
-
 	if (player.heroNum === 6) {
 		let otherPlayer = app.players.filter(p => {
 			return p.playerNum != player.playerNum;
 		});
 		let playerToCopy = otherPlayer[Math.floor(otherPlayer.length * Math.random())];
-		player.pointFort = playerToCopy.pointFort;
-		let responseModal = await Utils.showModal(player, "powerCopy", playerToCopy);
+		if (playerToCopy) {
+			player.pointFort = playerToCopy.pointFort;
+			console.log("player", player);
+			//let responseModal = await Utils.showModal(player, "powerCopy", playerToCopy);
+		}
 	}
+	let info = renderInfoCurrentPlayer(player);
+	$(".info-current-player").append(info);
 	player.showMove(app.grid);
 	render(app.grid);
-	console.log("app.players", app.players);
 	renderInfoAllPlayer(app.players);
 	$(".player-" + player.playerNum).addClass("zoom");
 
@@ -76,10 +78,19 @@ async function renderYourTurn(player) {
 			x = parseInt($(event.target).attr("data-x"));
 			y = parseInt($(event.target).attr("data-y"));
 		}
-		//
+
 		if (player.isMovableCell(x, y, app.grid)) {
 			player.move(x, y, app.grid);
+			if (univers === "6" && retour) {
+				isEnd = app.destroyCell(app.grid, univers);
+			}
 			render(app.grid);
+			if (isEnd) {
+				let responseModal = await Utils.showModal(player, "quete" + univers + "ModalDead", null);
+				if (responseModal) {
+					window.location.href = "index.html";
+				}
+			}
 			let isObject = player.hasObjectToTake(x, y, app.grid);
 			if (isObject && player.accessories.length < 2) {
 				let responseModal = await Utils.showModal(player, "takeObject", isObject, x, y);
@@ -87,7 +98,7 @@ async function renderYourTurn(player) {
 					player.takeObject(x, y, app.grid);
 				}
 			}
-			let isGate = player.hasGate(x, y, app.grid);
+			let isGate = player.hasGate(x, y, app.grid, retour);
 			if (isGate) {
 				if (!retour) {
 					let responseModal = await Utils.showModal(player, "quete" + univers + "Modal2", null);

@@ -6,14 +6,23 @@ const WEAPON = [
 	{ value: "hache", text: "hache", avantageText: "possède 12 de dégat", degat: 12, initial: true }
 ];
 export default class Weapon {
-	constructor(initial) {
-		let weapon = this.defineWeapon(initial);
+	constructor(initial, value = null) {
+		let weapon;
+		if (value) {
+			weapon = WEAPON.find(w => {
+				return w.value === value;
+			});
+		} else {
+			weapon = this.defineWeapon(initial);
+		}
+
 		this.text = weapon.text;
 		this.avantageText = weapon.avantageText;
 		this.imageGrid = weapon.value;
 		this.degat = weapon.degat;
 		this.initial = weapon.initial;
 		this.type = "Weapon";
+		this.value = weapon.value;
 	}
 
 	defineWeapon(initial) {

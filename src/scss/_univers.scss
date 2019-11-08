@@ -162,6 +162,9 @@ $path-image: "../../public/images/worlds/";
 .world6-grid {
 	background-color: #332318;
 }
+.world6-nocell {
+	background-image: url($path-image+"lave.gif");
+}
 .Gate6-grid {
 	background-image: url($path-image+"porte-destin.png");
 }

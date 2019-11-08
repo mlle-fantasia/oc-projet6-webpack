@@ -27,10 +27,10 @@ export default class World {
 					const existingObject = existingCell.objects[index];
 					switch (existingObject.type) {
 						case "Accessory":
-							objects.push(new Accessory());
+							objects.push(new Accessory(existingObject.value));
 							break;
 						case "Weapon":
-							objects.push(new Weapon());
+							objects.push(new Weapon(null, existingObject.value));
 							break;
 						case "Player":
 							let accessories = [];
@@ -38,10 +38,11 @@ export default class World {
 								const accessory = existingObject.accessories[a];
 
 								if (accessory.type === "Accessory") {
-									accessories.push(new Accessory());
+									accessories.push(new Accessory(accessory.value));
 								}
 								if (accessory.type === "Weapon") {
-									accessories.push(new Weapon());
+									console.log("accessory", accessory);
+									accessories.push(new Weapon(null, accessory.value));
 								}
 							}
 							let newPlayer = new Player(existingObject.playerName, existingObject.heroNum, existingObject.playerNum, accessories);

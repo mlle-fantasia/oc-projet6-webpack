@@ -20,7 +20,17 @@ export default class Modal {
 		if (this.type === "Cell") {
 			this.object = null;
 		}
-
+		let image = "";
+		if (TYPE[this.type].image) {
+			image =
+				`
+<div class="quete-image-modal" >
+	<img class="" src="images/modal/` +
+				TYPE[this.type].image +
+				`.png" alt="illustration de la quete">
+</div>
+`;
+		}
 		let object = "";
 		if (this.object && (this.object instanceof Weapon || this.object instanceof Accessory)) {
 			let temporalite = "";
@@ -88,6 +98,7 @@ export default class Modal {
 					</p>
 					` +
 			object +
+			image +
 			`
 					</div>
 					<div class="modal-footer">
@@ -151,17 +162,20 @@ const TYPE = {
 		title: "Détruire l'anneau unique",
 		text:
 			"Après avoir traverser la terre du milieu, non sans embuches et mauvaises rencontres, vous avez enfin réussi à attendre le seul endroit de de la terre du milieu que l'on ne peut atendre : Le Mordor et la montagne du destin ! la dernière ligne droite est devant vous, atteignez la porte et jetez l'anneau !",
+		image: "quete6Modal1",
 		btnYes: "Je vois la porte"
 	},
 	quete6Modal2: {
 		title: "Détruire l'anneau unique",
 		text:
 			"Vous voila au coeur de la montagne du destin, là au Sauron le seigneur des ténèbres forgea en secret le maître anneau il y a 3000 ans. Mais un être ne veut pas que vous détruisiez l'anneau, Golum vous attaque, défendez vous !",
+		image: "quete6Modal2",
 		btnYes: "ahh !!!"
 	},
 	quete6Modal3: {
 		title: "Détruire l'anneau unique",
 		text: "Bien joué ! Golum est tombé dans la lave. il vous reste à jeter l'anneau dans le feu ! Allez-vous jeter votre précieux ? ",
+		image: "quete6Modal3",
 		btnYes: "Je le jete",
 		btnNo: "Je le garde"
 	},
@@ -169,17 +183,25 @@ const TYPE = {
 		title: "Détruire l'anneau unique",
 		text:
 			"Le coeur des homme est aisement coruptible et l'anneau à sa volonté propre, vous avez cédez à son pouvoir et échoué dans votre mission. L'anneau vous trahira en vous menant à la mort et toutes les contrées de la terre du milieu tomberont sous l'emprise de Sauron...",
+		image: "quete6Modal3fail",
 		btnYes: "..."
 	},
 	quete6Modal3success: {
 		title: "Détruire l'anneau unique",
 		text:
-			"Vous avez pris la bonne décision. jeter l'anneau dans le feu était le seul moyen de le détruire et de libérer la terre du milieu de l'emprise de Sauron. Mais le volcan commence à se reveiller, il vous faut sortir maintenant et éviter de mourir des rochers en fusion",
+			"Vous avez pris la bonne décision, vous avez accompli la tâche qui vous a été confiée ! Jeter l'anneau dans le feu était le seul moyen de le détruire et de libérer la terre du milieu de l'emprise de Sauron. Mais le volcan commence à se reveiller, il vous faut sortir maintenant et éviter de mourir des rochers en fusion",
+		image: "quete6Modal3success",
 		btnYes: "Je fuis !"
 	},
 	quete6ModalSuccess: {
 		title: "Détruire l'anneau unique",
-		text: "Bravo vous avez accompli la tâche qui vous a été confiée !  les aigles vont vous enmener en lieu sûr",
+		text: "La montagne peut exploser, vous avez atteint des aigles, ils vont vous enmener en lieu sûr",
 		btnYes: "houra !"
+	},
+	quete6ModalDead: {
+		title: "Détruire l'anneau unique",
+		text:
+			"Vous êtes mort par la montagne du destin en furie ! Vous avez quand meme sauvé la terre du milieu, votre honneur est sauf, vous allez rejoindre vos ailleux et vous n'aurez pas honte.",
+		btnYes: ":'("
 	}
 };
