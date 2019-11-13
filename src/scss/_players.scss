@@ -78,55 +78,49 @@ $path-image: "../../public/images/";
 }
 .cercle-armor {
 	width: 50%;
+	position: relative;
+	flex-shrink: 0;
 }
 .container-info-weapon {
 	margin-top: 15px;
 	position: relative;
-	.info-weapon {
-		position: absolute;
-		width: 75%;
-	}
+	display: flex;
+
 	.weapon-text {
-		top: 0;
-		left: 25%;
-		z-index: -1;
 		padding: 2px 0 0 25px;
 	}
 	.weapon-avantage {
-		top: 35px;
-		left: 25%;
-		z-index: -1;
 		padding: 2px 0 0 65px;
 	}
 }
 .container-info-accessory {
 	margin-top: 15px;
 	position: relative;
-	.info-accessory {
-		position: absolute;
-		width: 85%;
-	}
+	display: flex;
+	align-items: center;
+
 	.accessory-text {
-		top: 0;
-		left: 15%;
-		z-index: -1;
 		padding: 2px 0 0 25px;
 	}
 	.accessory-avantage {
-		top: 35px;
-		left: 15%;
-		z-index: -1;
 		padding: 2px 0 0 65px;
 	}
 	.accessory-temp {
-		top: 70px;
-		left: 15%;
-		z-index: -1;
 		padding: 2px 0 0 65px;
 	}
 }
 .cercle-accessory {
 	width: 33%;
+	position: relative;
+	flex-shrink: 0;
+}
+.container-info-name-accessory {
+	margin-left: -43px;
+	width: calc(100% + 43px);
+}
+.container-info-name-weapon {
+	margin-left: -92px;
+	width: calc(100% + 92px);
 }
 
 .background-cercle-anneau {

@@ -8,10 +8,10 @@ export default class Utils {
 	constructor() {}
 
 	static showModal(player, functionToCall, object, x, y, isPlayerToSteal) {
-		console.log("functionToCall", functionToCall);
 		if (functionToCall === "takeObject") {
 			functionToCall = object.constructor.name;
 		}
+		console.log("functionToCall", functionToCall);
 		let modal = new Modal(player, functionToCall, object);
 		$("#game").prepend(modal.render());
 		let resonseModal = "pas encore de réponse";

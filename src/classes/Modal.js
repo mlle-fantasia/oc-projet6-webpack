@@ -157,6 +157,11 @@ const TYPE = {
 		btnYes: "Je vole !",
 		btnNo: "Je ne vole pas"
 	},
+	winFight: {
+		title: "Vous avez gagné",
+		text: "Vous avez terrassé votre ennemie, félicitation",
+		btnYes: "retour grille"
+	},
 	quete6Modal1: {
 		title: "Détruire l'anneau unique",
 		text:
@@ -212,8 +217,29 @@ const TYPE = {
 	},
 	quete4Modal2: {
 		title: "Sauver Gondolin",
-		text: "Bravo vous avez enfin trouvé l'entrée sous les montagnes qui mène à la cité cachée de gondolin !",
+		text:
+			"Bravo vous avez enfin trouvé le passage sous les montagnes qui mène à la cité cachée de gondolin ! c'est un tunnel creusé dans la pierre dure par les eaux qui s'écoulaient du flanc de la montagne. Passé le seuil tout est sombre noir. vous cheminé à l'aveuglette et avec précaussion lorsque vous êtes arreté par la garde de la cité. Vous connaissez maintenant le chemin secret, vous allez entrer dans la cité mais jamais plus vous n'en resortirez or par la porte de la mort.",
 		image: "quete4Modal2",
+		btnYes: "Je rentre"
+	},
+	quete4Modal2: {
+		title: "Sauver Gondolin",
+		text:
+			"Vous êtes passé par des tunnels sous la montagne, des ponts, des des chemins escarpés, de longs escaliers, des pentes sinueuses et avez   passé les septs portes qui mènes à Gondolin : la porte de bois, la porte de pierre, la porte de bronze, la porte de fer forgé, la porte de marble blanc, la porte d'argent, et enfin, la porte d'or.",
+		image: "quete4Modal2",
+		btnYes: "Je rentre"
+	},
+	quete5Modal1: {
+		title: "Récupérer les Silmaril",
+		text:
+			"Vous voila embarqué dans une perieuse aventure : récupérer les Silmaril de la couronne de l'ainu melko en personne, l'ennemie  le plus plussant ",
+		image: "quete5Modal1",
+		btnYes: "Je part"
+	},
+	quete5Modal2: {
+		title: "Récupérer les Silmaril",
+		text: "",
+		image: "quete5Modal2",
 		btnYes: "Je rentre",
 		btnNo: "Je rentre pas"
 	}

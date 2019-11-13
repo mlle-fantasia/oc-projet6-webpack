@@ -1,4 +1,4 @@
-#fight {
+#game {
 	height: 100vh;
 }
 .fight-player {
@@ -12,7 +12,9 @@
 	width: 85%;
 	transition: transform 1s linear;
 }
-
+.container-fight {
+	align-self: center;
+}
 .fight-ground {
 	height: 3px;
 	background-color: black;
@@ -22,6 +24,7 @@
 	box-shadow: 0px 0px 20px 3px;
 	border-bottom: solid 3px #352609b8;
 	align-items: flex-end;
+	padding: 55px;
 }
 .fight-container-vie {
 	width: 100%;
@@ -29,7 +32,14 @@
 .fight-container-info-player-vie {
 	position: absolute;
 	top: -61px;
-	left: 28px;
+	left: 10px;
+}
+.player-vie {
+	position: absolute;
+	top: -27px;
+	left: 27px;
+	color: #fff;
+	font-size: 35px;
 }
 .translate-attack {
 	transform: translateX(200px);

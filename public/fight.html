@@ -10,14 +10,14 @@
 <body>
 
    <div id="game">
-      <div class="container-fluid px-3">
+      <div class="container-fluid px-3 height-100">
          <!-- <h1 class="text-center">Le jeu</h1> -->
 
-         <div class="row container-game justify-content-center">
+         <div class="row container-game justify-content-center height-100">
             <div class="col-12 col-sm-12 col-md-2 info-attack-player">
                <!-- infos player -->
             </div>
-            <div class="col-12 col-sm-12 col-md-offset-2 col-md-8">
+            <div class="col-12 col-sm-12 col-md-offset-2 col-md-8 container-fight">
                <div class="row fight-background">
                   <div class="col-6 d-flex flex-column fight-player ">
                      <div class='fight-container-img-player attack-player'>
@@ -36,8 +36,8 @@
                   <div class="col-6 d-flex flex-row  ">
                      <div class="fight-container-vie row">
                         <div class="col-5 container-btn-help">
-                           <button class="form-control btn-fight btn-playerAttack"
-                              id="btn-use-potion-playerAttack">Utiliser ma
+                           <button class="form-control btn-fight btn-playerAttack btn-use-potion"
+                              id="btn-use-potion-playerAttack" data-type="attack">Utiliser ma
                               potion</button>
                         </div>
                         <div class="col-2 container-point-vie">
@@ -45,26 +45,31 @@
                               <div id="triangle-1"></div>
                               <div id="triangle-2"></div>
                            </div>
+                           <div class="player-vie player-attack-vie"></div>
                         </div>
                         <div class="col-5 container-btn-attack">
-                           <button class="form-control btn-fight btn-playerAttack" id="btn-attack-playerAttack">Attaquer
+                           <button class="form-control btn-fight btn-playerAttack" id="btn-attack-playerAttack"
+                              data-type="attack">Attaquer
                               !</button>
                         </div>
                      </div>
                   </div>
                   <div class="col-6 d-flex flex-row  ">
                      <div class="fight-container-vie row">
-                        <div class="col-5 container-btn-help"><button class="form-control btn-fight btn-playerDefence"
-                              id="btn-use-potion-playerDefence">Utiliser ma
+                        <div class="col-5 container-btn-help"><button
+                              class="form-control btn-fight btn-playerDefence btn-use-potion"
+                              id="btn-use-potion-playerDefence" data-type="defence">Utiliser ma
                               potion</button></div>
                         <div class="col-2 container-point-vie">
                            <div class="container-info-player-vie fight-container-info-player-vie">
                               <div id="triangle-1"></div>
                               <div id="triangle-2"></div>
                            </div>
+                           <div class="player-vie player-defence-vie"> 10</div>
                         </div>
                         <div class="col-5 container-btn-defence"><button
-                              class="form-control btn-fight btn-playerDefence" id="btn-attack-playerDefence">Attaquer
+                              class="form-control btn-fight btn-playerDefence" id="btn-attack-playerDefence"
+                              data-type="defence">Attaquer
                               !</button></div>
                      </div>
                   </div>

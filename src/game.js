@@ -34,7 +34,6 @@ $(document).ready(function() {
 	nextPlayer();
 });
 async function nextPlayer() {
-	console.log("indexCurrentPlayer", indexCurrentPlayer);
 	indexCurrentPlayer++;
 	//window.app.currentPlayer = app.players[indexCurrentPlayer];
 	let player = app.players[indexCurrentPlayer % app.players.length];
@@ -248,7 +247,7 @@ function renderInfoCurrentPlayer(player) {
 		accessory = 'src="images/accessories/' + player.accessories[1].imageGrid + '.png" alt="image accessoire"';
 		let temp = player.accessories[1].temporality === "perpetual" ? "avantage permanent" : "avantage ponctuel";
 		infoAccessory =
-			`<div class="info-name info-accessory accessory-text tolkien">` +
+			`<div class="container-info-name-accessory"><div class="info-name info-accessory accessory-text tolkien">` +
 			player.accessories[1].text +
 			`</div>
 		<div class="info-name info-accessory accessory-avantage">` +
@@ -256,7 +255,7 @@ function renderInfoCurrentPlayer(player) {
 			`</div>
 			<div class="info-name info-accessory accessory-temp">` +
 			temp +
-			`</div>`;
+			`</div></div>`;
 	}
 	let heroSize = $(".info-current-player").width();
 	let ArmorSize = $(".info-current-player").width() / 2;
@@ -282,6 +281,7 @@ function renderInfoCurrentPlayer(player) {
 		`.jpg"
 			alt="image hero">
 	</div>
+
 	<div class="info-name "> type : ` +
 		player.type +
 		`</div>
@@ -300,12 +300,13 @@ function renderInfoCurrentPlayer(player) {
 				alt="image arme">
 		</div>
 	</div>
+	<div class="container-info-name-weapon">
 	<div class="info-name info-weapon weapon-text tolkien">` +
 		player.accessories[0].text +
 		`</div>
 	<div class="info-name info-weapon weapon-avantage">` +
 		player.accessories[0].avantageText +
-		`</div>
+		`</div></div>
 </div>
 <div class=" container-info-accessory">
 	<div class="cercle-accessory ">
