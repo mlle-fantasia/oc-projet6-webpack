@@ -9,6 +9,7 @@ let playerAttack = JSON.parse(localStorage.getItem("player"));
 let combatants = [{ type: "defence", player: playerDefence }, { type: "attack", player: playerAttack }];
 let indexCurrentPlayer = playerAttack;
 let univers = localStorage.getItem("univers");
+let remainingPlayers = localStorage.getItem("remainingPlayers");
 $(document).ready(function() {
 	$(".btn-playerDefence").prop("disabled", true);
 	$(".btn-playerAttack").prop("disabled", false);
@@ -135,10 +136,14 @@ function renderptViePlayer(playerToMaj, type, player) {
 		setTimeout(async () => {
 			$("." + type + "-player").fadeOut("slow");
 			setTimeout(async () => {
-				let responseModal = await Utils.showModal(player, "winFight", null);
+				let responseModal = await Utils.showModal(player, "winFight", null, remainingPlayers);
 				if (responseModal) {
-					deletePlayer(playerToMaj);
-					//retourGame();
+					let newGrid = deletePlayer(playerToMaj);
+					if (remainingPlayers > 0) {
+						retourGame(newGrid);
+					} else {
+						window.location.href = "index.html";
+					}
 				}
 			}, 1000);
 		}, 1000);
@@ -147,11 +152,13 @@ function renderptViePlayer(playerToMaj, type, player) {
 function deletePlayer(player) {
 	let grid = JSON.parse(localStorage.getItem("grid"));
 	grid[player.placeX][player.placeY].objects = [];
+	localStorage.setItem("playerDead", JSON.stringify(player));
+	return grid;
 }
-function retourGame() {
+function retourGame(newGrid) {
 	localStorage.setItem("univers", univers);
 	localStorage.setItem("retour", true);
-	localStorage.setItem("grid", localStorage.getItem("grid"));
+	localStorage.setItem("grid", JSON.stringify(newGrid));
 	window.location.href = "game.html";
 }
 

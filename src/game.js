@@ -19,6 +19,11 @@ $(document).ready(function() {
 
 	if (localStorage.getItem("grid")) {
 		let grid = JSON.parse(localStorage.getItem("grid"));
+		if (localStorage.getItem("playerDead")) {
+			let playerDead = JSON.parse(localStorage.getItem("playerDead"));
+			let indexPlayerDead = players.findIndex(element => element.name === playerDead.name);
+			players.splice(indexPlayerDead, 1);
+		}
 		window.app = new App(players, univers, grid);
 	} else {
 		window.app = new App(players, univers);
@@ -141,6 +146,12 @@ async function renderYourTurn(player) {
 					localStorage.setItem("playerToFight", JSON.stringify(isPlayerToFight));
 					localStorage.setItem("grid", JSON.stringify(app.grid));
 					localStorage.setItem("univers", univers);
+					let remainingPlayers = 0;
+					if (players.length > 2) {
+						remainingPlayers = players.length - 2;
+					}
+					localStorage.setItem("remainingPlayers", remainingPlayers);
+
 					window.location.href = "fight.html";
 				}
 			}

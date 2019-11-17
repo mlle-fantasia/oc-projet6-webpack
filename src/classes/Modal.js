@@ -3,12 +3,13 @@ import Weapon from "./Weapon";
 import Player from "./Player";
 
 export default class Modal {
-	constructor(player, type, object) {
+	constructor(player, type, object, remainingPlayer = false) {
 		this.type = type;
 		this.title = TYPE[type].title;
 		this.text = TYPE[type].text;
 		this.object = object;
 		this.player = player;
+		remainingPlayer ? (this.retour = true) : (this.retour = false);
 	}
 
 	render() {
@@ -16,7 +17,12 @@ export default class Modal {
 		if (TYPE[this.type].btnNo) {
 			btnNo = `<button class="form-control modal-response btn-modal-no" data-response="false">` + TYPE[this.type].btnNo + `</button> `;
 		}
-		console.log("this.object", this.object);
+		let btnYes = "";
+		if (this.type === "winFight") {
+			this.retour ? (btnYes = "Retour grille") : (btnYes = "Retour accueil");
+		} else {
+			btnYes = TYPE[this.type].btnYes;
+		}
 		if (this.type === "Cell") {
 			this.object = null;
 		}
@@ -106,7 +112,7 @@ export default class Modal {
 			btnNo +
 			`
 						<button class="form-control modal-response btn-modal-yes" data-response="true">` +
-			TYPE[this.type].btnYes +
+			btnYes +
 			`</button>
 					</div>
 				</div>
@@ -151,7 +157,7 @@ const TYPE = {
 		btnYes: "Je la prend !",
 		btnNo: "Je la laisse"
 	},
-	steal: {
+	stealObject: {
 		title: "Object à voler !",
 		text: "L'occasion se présente à vous de voler un accessoire à un autre joueur, voulez-vous agir ? ",
 		btnYes: "Je vole !",
@@ -160,7 +166,7 @@ const TYPE = {
 	winFight: {
 		title: "Vous avez gagné",
 		text: "Vous avez terrassé votre ennemie, félicitation",
-		btnYes: "retour grille"
+		btnYes: ""
 	},
 	quete6Modal1: {
 		title: "Détruire l'anneau unique",
