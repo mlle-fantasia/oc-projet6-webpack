@@ -90,7 +90,6 @@ h2 {
 }
 .container-all-heroes {
 	background-color: black;
-	padding-top: 30px;
 }
 .label-nbPlayer {
 	margin-bottom: 0;
@@ -213,7 +212,9 @@ h2 {
 	background-color: green;
 }
 //////// armes et accessoires /////////////
-
+.cailloux {
+	background-image: url($path-image+"accessories/nenya.png");
+}
 .nenya {
 	background-image: url($path-image+"accessories/nenya.png");
 }

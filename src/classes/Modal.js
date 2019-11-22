@@ -9,7 +9,9 @@ export default class Modal {
 		this.text = TYPE[type].text;
 		this.object = object;
 		this.player = player;
-		remainingPlayer ? (this.retour = true) : (this.retour = false);
+		console.log("remainingPlayer", remainingPlayer);
+		this.retour = parseInt(remainingPlayer) > 0 ? true : false;
+		//remainingPlayer ? (this.retour = true) : (this.retour = false);
 	}
 
 	render() {
@@ -19,7 +21,8 @@ export default class Modal {
 		}
 		let btnYes = "";
 		if (this.type === "winFight") {
-			this.retour ? (btnYes = "Retour grille") : (btnYes = "Retour accueil");
+			console.log("this.type, this.retour", this.type, this.retour);
+			btnYes = this.retour ? "Retour grille" : "Retour accueil";
 		} else {
 			btnYes = TYPE[this.type].btnYes;
 		}

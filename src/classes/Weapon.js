@@ -5,7 +5,8 @@ const WEAPON = [
 	{ value: "narsil", text: "Narsil, la flemme de l'ouest", avantageText: "possède 15 de dégat", degat: 15, initial: false, univers: "all" },
 	{ value: "hache", text: "hache", avantageText: "possède 12 de dégat", degat: 12, initial: true, univers: "all" },
 
-	{ value: "epee", text: "l'epee", avantageText: "possède 20 de dégat", degat: 20, univers: "4" }
+	{ value: "epee", text: "l'epee", avantageText: "possède 20 de dégat", degat: 20, univers: "4" },
+	{ value: "cailloux", text: "un cailloux", avantageText: "fabrication local et naturelle", degat: 8, univers: "6" }
 ];
 
 export default class Weapon {
@@ -38,7 +39,7 @@ export default class Weapon {
 		} else {
 			console.log("all");
 			const Weapons = WEAPON.filter(w => w.univers === "all");
-			weaweapon = Weapons[Math.floor(WEAPON.length * Math.random())];
+			weaweapon = Weapons[Math.floor(Weapons.length * Math.random())];
 			return weaweapon;
 		}
 	}

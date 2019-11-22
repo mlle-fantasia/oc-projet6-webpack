@@ -11,8 +11,8 @@ let indexCurrentPlayer = playerAttack;
 let univers = localStorage.getItem("univers");
 let remainingPlayers = localStorage.getItem("remainingPlayers");
 $(document).ready(function() {
-	$(".btn-playerDefence").prop("disabled", true);
-	$(".btn-playerAttack").prop("disabled", false);
+	$(".btn-player-defence").prop("disabled", true);
+	$(".btn-player-attack").prop("disabled", false);
 	$("#game").addClass("game-" + univers);
 	$(".fight-background").addClass("world" + univers + "-background");
 	let elementPlayerAttack = $(
@@ -25,52 +25,42 @@ $(document).ready(function() {
 	$(".defence-player").append($(elementPlayerDefence));
 	let infoplayerDefence = renderInfoPlayer(playerDefence);
 	let infoplayerAttack = renderInfoPlayer(playerAttack);
-
 	$(".info-attack-player").append(infoplayerAttack);
 	$(".info-defence-player").append(infoplayerDefence);
+
 	renderptViePlayer(playerDefence, "defence");
 	renderptViePlayer(playerAttack, "attack");
 	calculFight(playerDefence);
 	calculFight(playerAttack);
 
-	$("#btn-attack-playerDefence").click(() => {
-		$(".btn-playerDefence").prop("disabled", true);
-		$("#btn-attack-playerAttack").prop("disabled", false);
-		if (playerAttack.potion) {
-			$("#btn-use-potion-playerAttack").prop("disabled", false);
+	$(".btn-attack").click(element => {
+		let typePlayer = element.target.dataset.type;
+		let tabPlayer = combatants.filter(p => {
+			return p.type === typePlayer;
+		});
+		let player = tabPlayer[0];
+		let tabOtherPlayer = combatants.filter(p => {
+			return p.type !== typePlayer;
+		});
+		let otherPlayer = tabOtherPlayer[0];
+		$("#btn-attack-player-" + otherPlayer.type).prop("disabled", false);
+		$(".btn-player-" + player.type).prop("disabled", true);
+		if (otherPlayer.player.potion) {
+			$("#btn-use-potion-player-" + otherPlayer.type).prop("disabled", false);
 		}
-		playerAttack.ptVie = playerAttack.ptVie - (playerDefence.force - playerAttack.resistance);
-		renderptViePlayer(playerAttack, "attack", playerDefence);
-
+		otherPlayer.player.ptVie = otherPlayer.player.ptVie - (player.player.force - otherPlayer.player.resistance);
+		renderptViePlayer(otherPlayer.player, otherPlayer.type, player.player);
 		let animate = ANIMATE[Math.floor(ANIMATE.length * Math.random())];
-		$(".img-defence-player").addClass("translate-defence");
+		$(".img-" + player.type + "-player").addClass("translate-" + player.type);
 		setTimeout(() => {
-			$(".img-defence-player").removeClass("translate-defence");
-			$(".img-attack-player").addClass(animate);
+			$(".img-" + player.type + "-player").removeClass("translate-" + player.type);
+			$(".img-" + otherPlayer.type + "-player").addClass(animate);
 			setTimeout(() => {
-				$(".img-attack-player").removeClass(animate);
+				$(".img-" + otherPlayer.type + "-player").removeClass(animate);
 			}, 1000);
 		}, 1000);
 	});
-	$("#btn-attack-playerAttack").click(() => {
-		$("#btn-attack-playerDefence").prop("disabled", false);
-		$(".btn-playerAttack").prop("disabled", true);
-		if (playerDefence.potion) {
-			$("#btn-use-potion-playerDefence").prop("disabled", false);
-		}
-		playerDefence.ptVie = playerDefence.ptVie - (playerAttack.force - playerDefence.resistance);
-		renderptViePlayer(playerDefence, "defence", playerAttack);
 
-		let animate = ANIMATE[Math.floor(ANIMATE.length * Math.random())];
-		$(".img-attack-player").addClass("translate-attack");
-		setTimeout(() => {
-			$(".img-attack-player").removeClass("translate-attack");
-			$(".img-defence-player").addClass(animate);
-			setTimeout(() => {
-				$(".img-defence-player").removeClass(animate);
-			}, 1000);
-		}, 1000);
-	});
 	$(".btn-use-potion").click(element => {
 		let typePlayer = element.target.dataset.type;
 		let playerPotion = combatants.filter(p => {
@@ -131,18 +121,36 @@ function calculFight(player) {
 	player.resistance = resistance;
 }
 function renderptViePlayer(playerToMaj, type, player) {
-	$(".player-" + type + "-vie").text(playerToMaj.ptVie);
+	console.log("playerToMaj", playerToMaj);
+	$(".player-" + type + "-vie").text(playerToMaj.ptVie < 0 ? 0 : playerToMaj.ptVie);
 	if (playerToMaj.ptVie <= 0) {
 		setTimeout(async () => {
 			$("." + type + "-player").fadeOut("slow");
 			setTimeout(async () => {
-				let responseModal = await Utils.showModal(player, "winFight", null, remainingPlayers);
-				if (responseModal) {
-					let newGrid = deletePlayer(playerToMaj);
-					if (remainingPlayers > 0) {
-						retourGame(newGrid);
+				if (univers === "6") {
+					let responseModal = await Utils.showModal(playerAttack, "quete" + univers + "Modal3", null);
+					if (responseModal) {
+						if (univers === "6") {
+							let responseModal = await Utils.showModal(playerAttack, "quete6Modal3success", null);
+							if (responseModal) {
+								let newGrid = deletePlayer();
+								console.log("newGrid", newGrid);
+								retourGame(newGrid);
+							}
+						}
 					} else {
-						window.location.href = "index.html";
+						Utils.showModal(playerAttack, "quete" + univers + "Modal3fail", null);
+					}
+				} else {
+					console.log("remainingPlayers", remainingPlayers);
+					let responseModal = await Utils.showModal(player, "winFight", null, null, null, null, remainingPlayers);
+					if (responseModal) {
+						if (remainingPlayers > 0) {
+							let newGrid = deletePlayer(playerToMaj);
+							retourGame(newGrid);
+						} else {
+							window.location.href = "index.html";
+						}
 					}
 				}
 			}, 1000);
@@ -151,8 +159,10 @@ function renderptViePlayer(playerToMaj, type, player) {
 }
 function deletePlayer(player) {
 	let grid = JSON.parse(localStorage.getItem("grid"));
-	grid[player.placeX][player.placeY].objects = [];
-	localStorage.setItem("playerDead", JSON.stringify(player));
+	if (player) {
+		grid[player.placeX][player.placeY].objects = [];
+		localStorage.setItem("playerDead", JSON.stringify(player));
+	}
 	return grid;
 }
 function retourGame(newGrid) {

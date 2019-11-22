@@ -8,8 +8,8 @@ import Gate from "./Gate";
 export default class Player {
 	constructor(name, heroNum, playerNum, accessories) {
 		const tabVariablePlayer = {
-			ptVie: [33, 30, 43, 52, 48, 40],
-			force: [10, 12, 14, 10, 12, 13],
+			ptVie: [33, 30, 43, 52, 48, 40, 20],
+			force: [10, 12, 14, 10, 12, 13, 8],
 			type: ["motorisé", "ailé", "énervé", "force-calme", "patriote", "joueur", "dépendant"],
 			pointFort: [
 				{ value: "fast", text: "peut se déplacer plus vite", chance: 100 },

@@ -122,6 +122,7 @@ function functiontruc(p, typeJeu) {
 						playerName: name
 					});
 					$(".container-choice-heroes").slideUp();
+					$(".container-choice-heroe").slideUp();
 					if (nbPlayer > p) {
 						functiontruc(p + 1, typeJeu);
 					}

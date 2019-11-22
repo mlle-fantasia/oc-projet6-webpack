@@ -5,6 +5,7 @@ import "babel-polyfill";
 import Player from "./classes/Player";
 import Modal from "./classes/Modal";
 import Utils from "./classes/Utils";
+import Weapon from "./classes/Weapon";
 
 var indexCurrentPlayer = -1;
 let players = JSON.parse(localStorage.getItem("players"));
@@ -108,10 +109,8 @@ async function renderYourTurn(player) {
 					let responseModal = await Utils.showModal(player, "quete" + univers + "Modal2", null);
 					if (responseModal) {
 						localStorage.setItem("player", JSON.stringify(player));
-						localStorage.setItem(
-							"playerToFight",
-							JSON.stringify(new Player("Golum", 7, 2, [{ text: "", avantageText: "", imageGrid: "" }]))
-						);
+						let golumArme = new Weapon(null, "cailloux");
+						localStorage.setItem("playerToFight", JSON.stringify(new Player("Golum", 7, 2, [golumArme])));
 						localStorage.setItem("univers", univers);
 						localStorage.setItem("grid", JSON.stringify(app.grid));
 						window.location.href = "fight.html";

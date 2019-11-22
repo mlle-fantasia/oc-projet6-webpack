@@ -7,12 +7,12 @@ import Weapon from "./Weapon.js";
 export default class Utils {
 	constructor() {}
 
-	static showModal(player, functionToCall, object, x, y, isPlayerToSteal) {
+	static showModal(player, functionToCall, object, x, y, isPlayerToSteal, remainingPlayers) {
 		if (functionToCall === "takeObject") {
 			functionToCall = object.constructor.name;
 		}
-		console.log("functionToCall", functionToCall);
-		let modal = new Modal(player, functionToCall, object);
+		console.log("remainingPlayers-utils", remainingPlayers);
+		let modal = new Modal(player, functionToCall, object, remainingPlayers);
 		$("#game").prepend(modal.render());
 		let resonseModal = "pas encore de réponse";
 		return new Promise(resolve => {
