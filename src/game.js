@@ -6,6 +6,7 @@ import Player from "./classes/Player";
 import Modal from "./classes/Modal";
 import Utils from "./classes/Utils";
 import Weapon from "./classes/Weapon";
+import Accessory from "./classes/Accessory";
 
 var indexCurrentPlayer = -1;
 let players = JSON.parse(localStorage.getItem("players"));
@@ -97,10 +98,12 @@ async function renderYourTurn(player) {
 				}
 			}
 			let isObject = player.hasObjectToTake(x, y, app.grid);
-			if (isObject && player.accessories.length < 2) {
-				let responseModal = await Utils.showModal(player, "takeObject", isObject, x, y);
-				if (responseModal) {
-					player.takeObject(x, y, app.grid);
+			if (isObject) {
+				if (player.accessories.length < 2 || (player.accessories.length === 2 && !(isObject instanceof Accessory))) {
+					let responseModal = await Utils.showModal(player, "takeObject", isObject, x, y);
+					if (responseModal) {
+						player.takeObject(x, y, app.grid);
+					}
 				}
 			}
 			let isGate = player.hasGate(x, y, app.grid, retour);
@@ -237,15 +240,6 @@ function renderObjectCell(cell, newCase) {
 			const object = cell.objects[i];
 			let image = $("<div class='img-object-grid " + object.imageGrid + " player-" + object.playerNum + "'></div>");
 			newCase.append(image);
-			if (object instanceof Player) {
-				let accessories = $("<div class='d-flex flex-row container-accessories'></div>");
-				newCase.append(accessories);
-				for (let i = 0; i < object.accessories.length; i++) {
-					const accessory = object.accessories[i];
-					let image = $("<div class='img-accessory-grid " + accessory.imageGrid + " '></div>");
-					accessories.append(image);
-				}
-			}
 		}
 	}
 }

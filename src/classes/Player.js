@@ -113,9 +113,7 @@ export default class Player {
 		}
 	}
 	hasObjectToTake(x, y, grid) {
-		if (grid[x][y].objects.length < 2) {
-			return false;
-		}
+		if (grid[x][y].objects.length < 2) return false;
 		if (grid[x][y].objects[0] instanceof Gate) return false;
 		let object = grid[x][y].objects[0];
 		return object;

@@ -182,7 +182,6 @@ export default class Utils {
 	}
 	// renvoie les déplacements possibles du joueur
 	static showMove(grid, x, y, ptfort) {
-		console.log("x, y", x, y);
 		let tabMovableCell = [];
 		let avantage = false;
 		if (ptfort.value === "fast") {
@@ -303,9 +302,6 @@ export default class Utils {
 			}
 		}
 	}
-
-	// test s'il y a un joueur à côté
-	static testAttack(x, y, grid, player) {}
 
 	static calculChanceAvantage(ptfort) {
 		let chance = Math.floor(Math.random() * Math.floor(100));
