@@ -43,29 +43,49 @@ export default class Utils {
 		let playersToFight = [];
 		for (let i = y - 1; i >= y - distance; i--) {
 			if (this.isExistCell(x, i)) {
-				if (!this.isFreeCell(x, i, grid) && grid[x][i].objects[0] instanceof Player) {
-					playersToFight.push(grid[x][i].objects[0]);
+				if (!this.isFreeCell(x, i, grid)) {
+					if (grid[x][i].objects[0] instanceof Player) {
+						playersToFight.push(grid[x][i].objects[0]);
+					}
+					if (grid[x][i].objects.length > 1 && grid[x][i].objects[1] instanceof Player) {
+						playersToFight.push(grid[x][i].objects[1]);
+					}
 				}
 			}
 		}
 		for (let i = x - 1; i >= x - distance; i--) {
 			if (this.isExistCell(i, y)) {
-				if (!this.isFreeCell(i, y, grid) && grid[i][y].objects[0] instanceof Player) {
-					playersToFight.push(grid[i][y].objects[0]);
+				if (!this.isFreeCell(i, y, grid)) {
+					if (grid[i][y].objects[0] instanceof Player) {
+						playersToFight.push(grid[i][y].objects[0]);
+					}
+					if (grid[i][y].objects.length > 1 && grid[i][y].objects[1] instanceof Player) {
+						playersToFight.push(grid[i][y].objects[1]);
+					}
 				}
 			}
 		}
 		for (let i = x + 1; i <= x + distance; i++) {
 			if (this.isExistCell(i, y)) {
-				if (!this.isFreeCell(i, y, grid) && grid[i][y].objects[0] instanceof Player) {
-					playersToFight.push(grid[i][y].objects[0]);
+				if (!this.isFreeCell(i, y, grid)) {
+					if (grid[i][y].objects[0] instanceof Player) {
+						playersToFight.push(grid[i][y].objects[0]);
+					}
+					if (grid[i][y].objects.length > 1 && grid[i][y].objects[1] instanceof Player) {
+						playersToFight.push(grid[i][y].objects[1]);
+					}
 				}
 			}
 		}
 		for (let i = y + 1; i <= y + distance; i++) {
 			if (this.isExistCell(x, i)) {
-				if (!this.isFreeCell(x, i, grid) && grid[x][i].objects[0] instanceof Player) {
-					playersToFight.push(grid[x][i].objects[0]);
+				if (!this.isFreeCell(x, i, grid)) {
+					if (grid[x][i].objects[0] instanceof Player) {
+						playersToFight.push(grid[x][i].objects[0]);
+					}
+					if (grid[x][i].objects.length > 1 && grid[x][i].objects[1] instanceof Player) {
+						playersToFight.push(grid[x][i].objects[1]);
+					}
 				}
 			}
 		}
