@@ -11,8 +11,13 @@ let indexCurrentPlayer = playerAttack;
 let univers = localStorage.getItem("univers");
 let remainingPlayers = localStorage.getItem("remainingPlayers");
 $(document).ready(function() {
+	calculFight(playerDefence);
+	calculFight(playerAttack);
 	$(".btn-player-defence").prop("disabled", true);
 	$(".btn-player-attack").prop("disabled", false);
+	if (!playerAttack.potion) {
+		$("#btn-use-potion-player-attack").prop("disabled", true);
+	}
 	$("#game").addClass("game-" + univers);
 	$(".fight-background").addClass("world" + univers + "-background");
 	let elementPlayerAttack = $(
@@ -30,8 +35,6 @@ $(document).ready(function() {
 
 	renderptViePlayer(playerDefence, "defence");
 	renderptViePlayer(playerAttack, "attack");
-	calculFight(playerDefence);
-	calculFight(playerAttack);
 
 	$(".btn-attack").click(element => {
 		let typePlayer = element.target.dataset.type;
@@ -121,40 +124,40 @@ function calculFight(player) {
 	player.resistance = resistance;
 }
 function renderptViePlayer(playerToMaj, type, player) {
-	console.log("playerToMaj", playerToMaj);
 	$(".player-" + type + "-vie").text(playerToMaj.ptVie < 0 ? 0 : playerToMaj.ptVie);
 	if (playerToMaj.ptVie <= 0) {
 		setTimeout(async () => {
 			$("." + type + "-player").fadeOut("slow");
 			setTimeout(async () => {
-				if (univers === "6") {
-					let responseModal = await Utils.showModal(playerAttack, "quete" + univers + "Modal3", null);
-					if (responseModal) {
-						if (univers === "6") {
-							let responseModal = await Utils.showModal(playerAttack, "quete6Modal3success", null);
-							if (responseModal) {
-								let newGrid = deletePlayer();
-								console.log("newGrid", newGrid);
-								retourGame(newGrid);
-							}
-						}
-					} else {
-						Utils.showModal(playerAttack, "quete" + univers + "Modal3fail", null);
-					}
-				} else {
-					console.log("remainingPlayers", remainingPlayers);
-					let responseModal = await Utils.showModal(player, "winFight", null, null, null, null, remainingPlayers);
-					if (responseModal) {
-						if (remainingPlayers > 0) {
-							let newGrid = deletePlayer(playerToMaj);
-							retourGame(newGrid);
-						} else {
-							window.location.href = "index.html";
-						}
-					}
-				}
+				await endGame(playerToMaj, player);
 			}, 1000);
 		}, 1000);
+	}
+}
+async function endGame(playerToMaj, player) {
+	if (univers === "6") {
+		let responseModal = await Utils.showModal(playerAttack, "quete" + univers + "Modal3", null);
+		if (responseModal) {
+			if (univers === "6") {
+				let responseModal = await Utils.showModal(playerAttack, "quete6Modal3success", null);
+				if (responseModal) {
+					let newGrid = deletePlayer();
+					retourGame(newGrid);
+				}
+			}
+		} else {
+			Utils.showModal(playerAttack, "quete" + univers + "Modal3fail", null);
+		}
+	} else {
+		let responseModal = await Utils.showModal(player, "winFight", null, null, null, null, remainingPlayers);
+		if (responseModal) {
+			if (remainingPlayers > 0) {
+				let newGrid = deletePlayer(playerToMaj);
+				retourGame(newGrid);
+			} else {
+				window.location.href = "index.html";
+			}
+		}
 	}
 }
 function deletePlayer(player) {

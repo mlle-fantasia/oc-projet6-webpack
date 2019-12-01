@@ -18,7 +18,6 @@ export default class App {
 	reInitWorld(univers, existingGrid, initPlayers) {
 		//this.players = this.reGeneratePlayers(initPlayers);
 		this.world = new World(univers);
-		console.log("new world", this.world);
 		let elements = this.world.reGenerateWorld(existingGrid);
 		this.grid = elements.grid;
 		this.players = elements.players;
