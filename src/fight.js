@@ -7,9 +7,9 @@ const ANIMATE = ["shew", "rotate", "rotateX", "rotateY", "rotate3d", "scale"];
 let playerDefence = JSON.parse(localStorage.getItem("playerToFight"));
 let playerAttack = JSON.parse(localStorage.getItem("player"));
 let combatants = [{ type: "defence", player: playerDefence }, { type: "attack", player: playerAttack }];
-let indexCurrentPlayer = playerAttack;
 let univers = localStorage.getItem("univers");
 let remainingPlayers = localStorage.getItem("remainingPlayers");
+let attackAgain = { attack: false, number: 0 };
 $(document).ready(function() {
 	calculFight(playerDefence);
 	calculFight(playerAttack);
@@ -46,11 +46,9 @@ $(document).ready(function() {
 			return p.type !== typePlayer;
 		});
 		let otherPlayer = tabOtherPlayer[0];
-		$("#btn-attack-player-" + otherPlayer.type).prop("disabled", false);
+
 		$(".btn-player-" + player.type).prop("disabled", true);
-		if (otherPlayer.player.potion) {
-			$("#btn-use-potion-player-" + otherPlayer.type).prop("disabled", false);
-		}
+
 		otherPlayer.player.ptVie = otherPlayer.player.ptVie - (player.player.force - otherPlayer.player.resistance);
 		renderptViePlayer(otherPlayer.player, otherPlayer.type, player.player);
 		let animate = ANIMATE[Math.floor(ANIMATE.length * Math.random())];
@@ -60,6 +58,27 @@ $(document).ready(function() {
 			$(".img-" + otherPlayer.type + "-player").addClass(animate);
 			setTimeout(() => {
 				$(".img-" + otherPlayer.type + "-player").removeClass(animate);
+				console.log("player", player);
+				if (player.player.pointFort.value === "attack") {
+					if (Utils.calculChanceAvantage(player.player.pointFort)) {
+						if (attackAgain.number === 0) {
+							attackAgain = { attack: true, number: 1 };
+						} else {
+							attackAgain = { attack: false, number: 0 };
+						}
+					}
+				}
+				if (attackAgain.attack) {
+					$(".btn-player-" + player.type).prop("disabled", false);
+					if (!player.player.potion) {
+						$("#btn-use-potion-player-" + player.type).prop("disabled", true);
+					}
+				} else {
+					$("#btn-attack-player-" + otherPlayer.type).prop("disabled", false);
+					if (otherPlayer.player.potion) {
+						$("#btn-use-potion-player-" + otherPlayer.type).prop("disabled", false);
+					}
+				}
 			}, 1000);
 		}, 1000);
 	});
