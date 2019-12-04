@@ -11,13 +11,13 @@ export default class Utils {
 		if (functionToCall === "takeObject") {
 			functionToCall = object.constructor.name;
 		}
-		console.log("remainingPlayers-utils", remainingPlayers);
 		let modal = new Modal(player, functionToCall, object, remainingPlayers);
 		$("#game").prepend(modal.render());
 		let resonseModal = "pas encore de réponse";
 		return new Promise(resolve => {
 			$(".modal-response").click(e => {
 				$(".container-modal-component").remove();
+				console.log("e.target.dataset.response", e.target.dataset.response);
 				resolve(e.target.dataset.response === "true");
 			});
 		});

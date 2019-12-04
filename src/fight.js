@@ -36,6 +36,10 @@ $(document).ready(function() {
 	renderptViePlayer(playerDefence, "defence");
 	renderptViePlayer(playerAttack, "attack");
 
+	if (univers === "6") {
+		ennemieAttack();
+	}
+
 	$(".btn-attack").click(element => {
 		let typePlayer = element.target.dataset.type;
 		let tabPlayer = combatants.filter(p => {
@@ -58,7 +62,6 @@ $(document).ready(function() {
 			$(".img-" + otherPlayer.type + "-player").addClass(animate);
 			setTimeout(() => {
 				$(".img-" + otherPlayer.type + "-player").removeClass(animate);
-				console.log("player", player);
 				if (player.player.pointFort.value === "attack") {
 					if (Utils.calculChanceAvantage(player.player.pointFort)) {
 						if (attackAgain.number === 0) {
@@ -79,6 +82,9 @@ $(document).ready(function() {
 						$("#btn-use-potion-player-" + otherPlayer.type).prop("disabled", false);
 					}
 				}
+				if (univers === "6" && otherPlayer.player.ptVie > 0) {
+					ennemieAttack();
+				}
 			}, 1000);
 		}, 1000);
 	});
@@ -94,7 +100,7 @@ $(document).ready(function() {
 		usePotion(playerPotion[0].player, typePlayer, otherPlayer[0].player);
 	});
 
-	$("#retour-test").click(async () => {
+	/* 	$("#retour-test").click(async () => {
 		if (univers === "1" || univers === "2" || univers === "3") {
 			//localStorage.setItem("player", JSON.stringify(playerAttack));
 			//localStorage.setItem("playerToFight", JSON.stringify(playerDefence));
@@ -113,8 +119,26 @@ $(document).ready(function() {
 		} else {
 			Utils.showModal(playerAttack, "quete" + univers + "Modal3fail", null);
 		}
-	});
+	}); */
 });
+function ennemieAttack() {
+	$(".btn-player-attack").hide();
+	playerDefence.ptVie = playerDefence.ptVie - (playerAttack.force - playerDefence.resistance);
+	renderptViePlayer(playerDefence, "defence", playerAttack);
+	let animate = ANIMATE[Math.floor(ANIMATE.length * Math.random())];
+	$(".img-attack-player").addClass("translate-attack");
+	setTimeout(() => {
+		$(".img-attack-player").removeClass("translate-attack");
+		$(".img-defence-player").addClass(animate);
+		setTimeout(() => {
+			$(".img-defence-player").removeClass(animate);
+			$("#btn-attack-player-defence").prop("disabled", false);
+			if (playerDefence.potion) {
+				$("#btn-use-potion-player-defence").prop("disabled", false);
+			}
+		}, 1000);
+	}, 1000);
+}
 function usePotion(player, type, otherPlayer) {
 	if (player.accessories[1].sousType === "potion") {
 		player.ptVie += player.accessories[1].avantage;
@@ -165,7 +189,12 @@ async function endGame(playerToMaj, player) {
 				}
 			}
 		} else {
-			Utils.showModal(playerAttack, "quete" + univers + "Modal3fail", null);
+			// ???
+			let responseModal2 = Utils.showModal(playerAttack, "quete" + univers + "Modal3fail", null);
+			console.log("responseModal2", responseModal2);
+			if (responseModal2) {
+				//window.location.href = "index.html";
+			}
 		}
 	} else {
 		let responseModal = await Utils.showModal(player, "winFight", null, null, null, null, remainingPlayers);
