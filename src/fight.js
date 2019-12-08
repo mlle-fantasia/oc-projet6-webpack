@@ -2,6 +2,7 @@ import "./scss/main.scss";
 import $ from "jquery";
 import "babel-polyfill";
 import Utils from "./classes/Utils";
+import Modal from "./classes/Modal";
 
 const ANIMATE = ["shew", "rotate", "rotateX", "rotateY", "rotate3d", "scale"];
 let playerDefence = JSON.parse(localStorage.getItem("playerToFight"));
@@ -35,8 +36,9 @@ $(document).ready(function() {
 
 	renderptViePlayer(playerDefence, "defence");
 	renderptViePlayer(playerAttack, "attack");
+	console.log("playerAttack.heroNum", playerAttack.heroNum);
 
-	if (univers === "6") {
+	if (univers === "6" || (univers === "5" && (playerAttack.heroNum === 9 || playerAttack.heroNum === 8))) {
 		ennemieAttack();
 	}
 
@@ -82,7 +84,7 @@ $(document).ready(function() {
 						$("#btn-use-potion-player-" + otherPlayer.type).prop("disabled", false);
 					}
 				}
-				if (univers === "6" && otherPlayer.player.ptVie > 0) {
+				if ((univers === "6" || univers === "5") && otherPlayer.player.ptVie > 0) {
 					ennemieAttack();
 				}
 			}, 1000);
@@ -189,11 +191,10 @@ async function endGame(playerToMaj, player) {
 				}
 			}
 		} else {
-			// ???
-			let responseModal2 = Utils.showModal(playerAttack, "quete" + univers + "Modal3fail", null);
+			let responseModal2 = await Utils.showModal(playerAttack, "quete" + univers + "Modal3fail", null, univers);
 			console.log("responseModal2", responseModal2);
 			if (responseModal2) {
-				//window.location.href = "index.html";
+				window.location.href = "index.html";
 			}
 		}
 	} else {

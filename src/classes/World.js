@@ -45,11 +45,19 @@ export default class World {
 									accessories.push(new Weapon(null, accessory.value));
 								}
 							}
-							let newPlayer = new Player(existingObject.playerName, existingObject.heroNum, existingObject.playerNum, accessories);
+
+							let newPlayer = new Player(
+								existingObject.playerName,
+								existingObject.heroNum,
+								existingObject.playerNum,
+								accessories,
+								existingObject.canMove
+							);
 							newPlayer.placeX = x;
 							newPlayer.placeY = y;
 							objects.push(newPlayer);
 							reinitPlayer.push(newPlayer);
+
 							break;
 						case "Obstacle":
 							objects.push(new Obstacle(this.univers));

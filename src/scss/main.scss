@@ -173,6 +173,12 @@ h2 {
 .hero7-grid {
 	background-image: url($path-image+"players/grid/player7figure.png"); // golum
 }
+.hero8-grid {
+	background-image: url($path-image+"players/grid/player8figure.png"); // orcs
+}
+.hero9-grid {
+	background-image: url($path-image+"players/grid/player9figure.png"); // Melko
+}
 :checked + label {
 	border: solid 2px #a01515;
 	box-shadow: -1px 0 5px 0px #654442;

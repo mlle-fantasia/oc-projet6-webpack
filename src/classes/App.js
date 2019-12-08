@@ -55,8 +55,15 @@ export default class App {
 		for (let p = 0; p < initPlayers.length; p++) {
 			const player = initPlayers[p];
 			let weapon = new Weapon("initial");
-			let newplayer = new Player(player.playerName, player.hero, p + 1, [weapon]);
+			let newplayer = new Player(player.playerName, player.hero, p + 1, [weapon], true);
 			players.push(newplayer);
+		}
+		if (this.univers === "5") {
+			for (let i = 1; i < 6; i++) {
+				let arme = new Weapon("initial");
+				let orc = new Player("Orc", 8, i + 1, [arme]);
+				players.push(orc);
+			}
 		}
 		return players;
 	}

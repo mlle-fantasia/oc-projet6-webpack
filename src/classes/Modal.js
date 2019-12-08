@@ -3,21 +3,22 @@ import Weapon from "./Weapon";
 import Player from "./Player";
 
 export default class Modal {
-	constructor(player, type, object, remainingPlayer = false) {
+	constructor(player, type, object, remainingPlayer = false, univers = null) {
 		this.type = type;
 		this.title = TYPE[type].title;
 		this.text = TYPE[type].text;
 		this.object = object;
 		this.player = player;
-		console.log("remainingPlayer", remainingPlayer);
 		this.retour = parseInt(remainingPlayer) > 0 ? true : false;
 		//remainingPlayer ? (this.retour = true) : (this.retour = false);
+		this.univers = univers;
 	}
-
 	render() {
 		let btnNo = "";
 		if (TYPE[this.type].btnNo) {
-			btnNo = `<button class="form-control modal-response btn-modal-no" data-response="false">` + TYPE[this.type].btnNo + `</button> `;
+			let data_response = "false";
+			if (this.univers === "5") data_response = "univers";
+			btnNo = `<button class="form-control modal-response btn-modal-no" data-response="${data_response}'"> ${TYPE[this.type].btnNo} </button> `;
 		}
 		let btnYes = "";
 		if (this.type === "winFight") {

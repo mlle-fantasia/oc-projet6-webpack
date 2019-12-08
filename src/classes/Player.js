@@ -6,11 +6,11 @@ import Obstacle from "./Obstacle";
 import Gate from "./Gate";
 
 export default class Player {
-	constructor(name, heroNum, playerNum, accessories) {
+	constructor(name, heroNum, playerNum, accessories, canMove = false) {
 		const tabVariablePlayer = {
-			ptVie: [33, 30, 43, 52, 48, 40, 20],
-			force: [10, 12, 14, 10, 12, 13, 8],
-			type: ["motorisé", "ailé", "énervé", "force-calme", "patriote", "joueur", "dépendant"],
+			ptVie: [33, 30, 43, 52, 48, 40, 20, 15, 50],
+			force: [10, 12, 14, 10, 12, 13, 8, 8, 50],
+			type: ["motorisé", "ailé", "énervé", "force-calme", "patriote", "joueur", "dépendant", "", ""],
 			pointFort: [
 				{ value: "fast", text: "peut se déplacer plus vite", chance: 100 },
 				{ value: "attack", text: "peut attaquer deux fois", chance: 100 },
@@ -18,7 +18,9 @@ export default class Player {
 				{ value: "move", text: "peut déplacer les obstacles", chance: 100 },
 				{ value: "long", text: "peut attaquer de plus loin", chance: 100 },
 				{ value: "copy", text: "peut imiter le point fort d'un autre joueur", chance: 100 },
-				{ value: "teath", text: "a des dents asserées", chance: 100 }
+				{ value: "teath", text: "a des dents asserées", chance: 100 },
+				{ value: "orc", text: "", chance: 100 },
+				{ value: "melko", text: "", chance: 100 }
 			],
 			hero: [
 				"L'elfe inventeur fou",
@@ -27,9 +29,12 @@ export default class Player {
 				"L'homme des cavernes aveugle",
 				"Le gardien de la citadelle",
 				"Le maître du destin",
-				"Le puant"
+				"Le puant",
+				"elfe déchu",
+				"Ainur déchu"
 			]
 		};
+		this.canMove = canMove;
 		this.playerName = name;
 		this.playerNum = playerNum;
 		this.heroNum = heroNum;
@@ -100,13 +105,17 @@ export default class Player {
 		this.accessories[1] = objectSteal;
 		isPlayerToSteal.accessories.splice(1, 1);
 	}
-	hasGate(x, y, grid, exit = false) {
+	hasGate(x, y, grid, retour = false) {
 		if (grid[x][y].objects.length < 2) {
 			return false;
 		}
 		if (grid[x][y].objects[0] instanceof Gate) {
-			if (exit && grid[x][y].objects[0].imageGrid !== "Gate6-grid-aigle") {
-				return false;
+			if (retour) {
+				if (grid[x][y].objects[0].imageGrid === "Gate6-grid-aigle" || grid[x][y].objects[0].imageGrid === "Gate5-grid") {
+					return true;
+				} else {
+					return false;
+				}
 			} else {
 				return true;
 			}

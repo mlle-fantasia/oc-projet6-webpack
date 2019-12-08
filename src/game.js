@@ -13,6 +13,7 @@ let players = JSON.parse(localStorage.getItem("players"));
 let univers = localStorage.getItem("univers");
 let retour = localStorage.getItem("retour");
 let isEnd = false;
+let remainingOrcs = 6;
 
 $(document).ready(function() {
 	$("#game").addClass("game-" + univers);
@@ -42,8 +43,8 @@ $(document).ready(function() {
 });
 async function nextPlayer() {
 	indexCurrentPlayer++;
-	//window.app.currentPlayer = app.players[indexCurrentPlayer];
-	let player = app.players[indexCurrentPlayer % app.players.length];
+	const players = app.players.filter(player => player.canMove);
+	let player = players[indexCurrentPlayer % players.length];
 	await renderYourTurn(player);
 }
 async function renderYourTurn(player) {
@@ -90,6 +91,9 @@ async function renderYourTurn(player) {
 			if (univers === "6" && retour) {
 				isEnd = app.destroyCell(app.grid, univers);
 			}
+			if (univers === "5") {
+				// TODO déplacer les orcs
+			}
 			render(app.grid);
 			if (isEnd) {
 				let responseModal = await Utils.showModal(player, "quete" + univers + "ModalDead", null);
@@ -107,21 +111,37 @@ async function renderYourTurn(player) {
 				}
 			}
 			let isGate = player.hasGate(x, y, app.grid, retour);
+
+			console.log("je passe ", isGate);
 			if (isGate) {
+				if (univers === "5") {
+					console.log("je passe ", univers);
+					let melkoArme = new Weapon(null, "melko");
+					let melko = new Player("Melko", 9, 2, [melkoArme]);
+					goPageFight(player, melko, true);
+				}
 				if (!retour) {
 					let responseModal = await Utils.showModal(player, "quete" + univers + "Modal2", null);
 					if (responseModal) {
-						localStorage.setItem("playerToFight", JSON.stringify(player));
+						if (univers === "6") {
+							let golumArme = new Weapon(null, "cailloux");
+							let golum = new Player("Golum", 7, 2, [golumArme]);
+							goPageFight(player, golum, true);
+						}
+
+						/* localStorage.setItem("playerToFight", JSON.stringify(player));
 						let golumArme = new Weapon(null, "cailloux");
 						localStorage.setItem("player", JSON.stringify(new Player("Golum", 7, 2, [golumArme])));
 						localStorage.setItem("univers", univers);
 						localStorage.setItem("grid", JSON.stringify(app.grid));
-						window.location.href = "fight.html";
+						window.location.href = "fight.html"; */
 					}
 				} else {
-					let responseModal = await Utils.showModal(player, "quete" + univers + "ModalSuccess", null);
-					if (responseModal) {
-						window.location.href = "index.html";
+					if (univers === "6") {
+						let responseModal = await Utils.showModal(player, "quete" + univers + "ModalSuccess", null);
+						if (responseModal) {
+							window.location.href = "index.html";
+						}
 					}
 				}
 			}
@@ -141,20 +161,14 @@ async function renderYourTurn(player) {
 			}
 			let isPlayerToFight = testAttaque(player.placeX, player.placeY);
 			if (isPlayerToFight) {
-				let responseModal = await Utils.showModal(player, "fight", isPlayerToFight, x, y);
-				if (responseModal) {
-					//player.attack(isPlayerToFight);
-					localStorage.setItem("player", JSON.stringify(player));
-					localStorage.setItem("playerToFight", JSON.stringify(isPlayerToFight));
-					localStorage.setItem("grid", JSON.stringify(app.grid));
-					localStorage.setItem("univers", univers);
-					let remainingPlayers = 0;
-					if (players.length > 2) {
-						remainingPlayers = players.length - 2;
+				if (isPlayerToFight.heroNum === 8) {
+					goPageFight(player, isPlayerToFight, true);
+				} else {
+					let responseModal = await Utils.showModal(player, "fight", isPlayerToFight, x, y);
+					if (responseModal) {
+						//player.attack(isPlayerToFight);
+						goPageFight(player, isPlayerToFight);
 					}
-					localStorage.setItem("remainingPlayers", remainingPlayers);
-
-					window.location.href = "fight.html";
 				}
 			}
 			nextPlayer();
@@ -167,7 +181,27 @@ async function renderYourTurn(player) {
 		}
 	});
 }
-
+function goPageFight(player, isPlayerToFight, attackMe = false) {
+	if (attackMe) {
+		localStorage.setItem("player", JSON.stringify(isPlayerToFight));
+		localStorage.setItem("playerToFight", JSON.stringify(player));
+	} else {
+		localStorage.setItem("player", JSON.stringify(player));
+		localStorage.setItem("playerToFight", JSON.stringify(isPlayerToFight));
+	}
+	localStorage.setItem("grid", JSON.stringify(app.grid));
+	localStorage.setItem("univers", univers);
+	let remainingPlayers = 0;
+	if (players.length > 2) {
+		remainingPlayers = players.length - 2;
+	}
+	if (univers === "5") {
+		remainingPlayers = remainingOrcs;
+		remainingOrcs--;
+	}
+	localStorage.setItem("remainingPlayers", remainingPlayers);
+	window.location.href = "fight.html";
+}
 function testAttaque(x, y) {
 	let isPlayerToFight = Utils.isPlayerToFight(x, y, app.grid, 1);
 	if (isPlayerToFight) {
@@ -329,11 +363,12 @@ function renderInfoCurrentPlayer(player) {
 	);
 }
 function renderInfoAllPlayer(players) {
+	const players2 = app.players.filter(player => player.canMove);
 	$(".info-all-players").empty();
 	$(".info-all-players").append(`<div class="info-name tolkien">Les joueurs</div>`);
 	let widthPlayer = $(".info-all-players").width() / 2.5;
-	for (let p = 0; p < players.length; p++) {
-		const player = players[p];
+	for (let p = 0; p < players2.length; p++) {
+		const player = players2[p];
 		let accessory = "";
 		if (player.accessories[1]) {
 			accessory = 'src="images/accessories/' + player.accessories[1].imageGrid + '.png" alt="image accessoire"';

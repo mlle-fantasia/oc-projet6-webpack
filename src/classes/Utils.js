@@ -7,18 +7,17 @@ import Weapon from "./Weapon.js";
 export default class Utils {
 	constructor() {}
 
-	static showModal(player, functionToCall, object, x, y, isPlayerToSteal, remainingPlayers) {
+	static showModal(player, functionToCall, object, x, y, isPlayerToSteal, remainingPlayers, univers) {
 		if (functionToCall === "takeObject") {
 			functionToCall = object.constructor.name;
 		}
-		let modal = new Modal(player, functionToCall, object, remainingPlayers);
+		let modal = new Modal(player, functionToCall, object, remainingPlayers, univers);
 		$("#game").prepend(modal.render());
 		let resonseModal = "pas encore de réponse";
 		return new Promise(resolve => {
 			$(".modal-response").click(e => {
 				$(".container-modal-component").remove();
-				console.log("e.target.dataset.response", e.target.dataset.response);
-				resolve(e.target.dataset.response === "true");
+				resolve(e.target.dataset.response === "true" || e.target.dataset.response === "univers");
 			});
 		});
 	}

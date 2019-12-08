@@ -6,7 +6,8 @@ const WEAPON = [
 	{ value: "hache", text: "hache", avantageText: "possède 12 de dégat", degat: 12, initial: true, univers: "all" },
 
 	{ value: "epee", text: "l'epee", avantageText: "possède 20 de dégat", degat: 20, univers: "4" },
-	{ value: "cailloux", text: "un cailloux", avantageText: "fabrication local et naturelle", degat: 8, univers: "6" }
+	{ value: "cailloux", text: "un cailloux", avantageText: "fabrication local et naturelle", degat: 8, univers: "6" },
+	{ value: "melko", text: "un marteau", avantageText: "", degat: 20, univers: "5" }
 ];
 
 export default class Weapon {
