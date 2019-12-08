@@ -242,15 +242,30 @@ const TYPE = {
 	quete5Modal1: {
 		title: "Récupérer les Silmaril",
 		text:
-			"Vous voila embarqué dans une perieuse aventure : récupérer les Silmaril de la couronne de l'ainu melko en personne, l'ennemie  le plus plussant ",
+			"Vous voila embarqué dans une perieuse aventure : récupérer les Silmaril de la couronne de l'ainu melko en personne, l'ennemie  le plus pluissant. ramassez le plus d'objet possible pour vous aider a vaincre melko mais en évitant de vous faire remarquer, par les orcs de garde.",
 		image: "quete5Modal1",
 		btnYes: "Je part"
 	},
 	quete5Modal2: {
 		title: "Récupérer les Silmaril",
-		text: "",
+		text: "Vous voila équipé et prêt à passer à l'ataque, entrer dans la deumeure de Melko sous la montagne et ramenez les silmarils",
 		image: "quete5Modal2",
-		btnYes: "Je rentre",
+		btnYes: "Je suis prêt",
+		btnNo: "Je rentre pas"
+	},
+	quete5Modal3fail: {
+		title: "Récupérer les Silmaril",
+		text:
+			"Vous avez échoué face à Melko. Mais votre exploi traversera les âges dans les chants elfiques. Très peu ont eu le courage d'affronter Melko en personne",
+		image: "quete5Modal2",
+		btnYes: "Je suis prêt",
+		btnNo: "Je rentre pas"
+	},
+	quete5Modal3success: {
+		title: "Récupérer les Silmaril",
+		text: "Félicitation vous avec vaincu Melko et récupérer les silmarils, Luthien vous attend !",
+		image: "quete5Modal2",
+		btnYes: "Je suis prêt",
 		btnNo: "Je rentre pas"
 	}
 };
