@@ -129,7 +129,7 @@ export default class Player {
 		return object;
 	}
 
-	takeObject(x, y, grid) {
+	takeObject(x, y, grid, univers) {
 		let objectGrid = grid[x][y].objects[0];
 		let weaponPlayer = this.accessories[0];
 		let accessoryPlayer;
@@ -141,11 +141,16 @@ export default class Player {
 			grid[x][y].objects[0] = weaponPlayer;
 		}
 		if (objectGrid instanceof Accessory) {
-			this.accessories[1] = objectGrid;
-			if (accessoryPlayer) {
-				grid[x][y].objects[0] = accessoryPlayer;
-			} else {
+			if (univers === "5") {
+				this.accessories.push(objectGrid);
 				grid[x][y].objects.shift();
+			} else {
+				this.accessories[1] = objectGrid;
+				if (accessoryPlayer) {
+					grid[x][y].objects[0] = accessoryPlayer;
+				} else {
+					grid[x][y].objects.shift();
+				}
 			}
 			//console.log("grid[x][y].objects", grid[x][y].objects);
 		}

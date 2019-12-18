@@ -122,12 +122,25 @@ function ennemieAttack() {
 }
 function usePotion(player, type, otherPlayer) {
 	let pointVieInitiale = player.ptVie;
-	if (player.accessories[1].sousType === "potion") {
-		player.ptVie += player.accessories[1].avantage;
-		player.potion = false;
+	let indexPotion;
+	for (let p = 0; p < player.accessories.length; p++) {
+		const accessory = player.accessories[p];
+		if (accessory.sousType === "potion") {
+			player.ptVie += accessory.avantage;
+			player.potion = false;
+			indexPotion = p;
+		}
 	}
+	player.accessories.splice(indexPotion, 1);
+	for (let p = 0; p < player.accessories.length; p++) {
+		const accessory = player.accessories[p];
+		if (accessory.sousType === "potion") {
+			player.ptVie += accessory.avantage;
+			player.potion = true;
+		}
+	}
+	console.log("player", player);
 	renderptViePlayer(pointVieInitiale, player, type, otherPlayer);
-	player.accessories.splice(1);
 	$(".info-" + type + "-player").empty();
 	let infoplayer = renderInfoPlayer(player);
 	$(".info-" + type + "-player").append(infoplayer);
@@ -138,19 +151,24 @@ function calculFight(player) {
 	let resistance = 0;
 	force = player.accessories[0].degat;
 	if (player.accessories.length > 1) {
-		if (player.accessories[1].sousType === "protection") {
-			resistance = player.accessories[1].avantage;
-		}
-		if (player.accessories[1].sousType === "potion") {
-			player.potion = true;
+		if (univers === "5") {
+			for (let index = 1; index < player.accessories.length; index++) {
+				const accessory = player.accessories[index];
+				if (accessory.sousType === "protection") {
+					resistance += accessory.avantage;
+				}
+				if (accessory.sousType === "potion") {
+					player.potion = true;
+				}
+			}
 		}
 	}
 	player.force = force;
 	player.resistance = resistance;
+	console.log("force, resistance", player.heroNum, force, resistance);
 }
 function renderptViePlayer(pointVieInitial, playerToMaj, type, player) {
 	let plus = pointVieInitial < playerToMaj.ptVie ? true : false;
-	console.log("pointVie", pointVieInitial, playerToMaj.ptVie);
 	var n = playerToMaj.ptVie < 0 ? 0 : playerToMaj.ptVie; // Nombre final du compteur
 	var cpt = pointVieInitial; // Initialisation du compteur
 	function countdown() {
@@ -190,7 +208,6 @@ async function endGame(playerToMaj, player) {
 			}
 		} else {
 			let responseModal2 = await Utils.showModal(playerAttack, "quete" + univers + "Modal3fail", null, univers);
-			console.log("responseModal2", responseModal2);
 			if (responseModal2) {
 				window.location.href = "index.html";
 			}

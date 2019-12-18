@@ -60,8 +60,13 @@ async function renderYourTurn(player) {
 			//let responseModal = await Utils.showModal(player, "powerCopy", playerToCopy);
 		}
 	}
-	let info = renderInfoCurrentPlayer(player);
-	$(".info-current-player").append(info);
+	let infoHtml = renderInfoCurrentPlayer(player);
+	let tabAccessoryHtml = renderAccessoriesCurentPlayer(player);
+	$(".info-current-player").append(infoHtml);
+	for (let i = 0; i < tabAccessoryHtml.length; i++) {
+		const html = tabAccessoryHtml[i];
+		$(".info-current-player").append(html);
+	}
 	player.showMove(app.grid);
 	render(app.grid);
 	renderInfoAllPlayer(app.players);
@@ -106,10 +111,10 @@ async function renderYourTurn(player) {
 			}
 			let isObject = player.hasObjectToTake(x, y, app.grid);
 			if (isObject) {
-				if (player.accessories.length < 2 || (player.accessories.length === 2 && !(isObject instanceof Accessory))) {
+				if (univers === "5" || player.accessories.length < 2 || (player.accessories.length === 2 && !(isObject instanceof Accessory))) {
 					let responseModal = await Utils.showModal(player, "takeObject", isObject, x, y);
 					if (responseModal) {
-						player.takeObject(x, y, app.grid);
+						player.takeObject(x, y, app.grid, univers);
 					}
 				}
 			}
@@ -281,28 +286,10 @@ function renderObjectCell(cell, newCase) {
 }
 
 function renderInfoCurrentPlayer(player) {
-	let accessory = "";
-	let infoAccessory = "";
-	if (player.accessories[1]) {
-		accessory = 'src="images/accessories/' + player.accessories[1].imageGrid + '.png" alt="image accessoire"';
-		let temp = player.accessories[1].temporality === "perpetual" ? "avantage permanent" : "avantage ponctuel";
-		infoAccessory =
-			`<div class="container-info-name-accessory"><div class="info-name info-accessory accessory-text tolkien">` +
-			player.accessories[1].text +
-			`</div>
-		<div class="info-name info-accessory accessory-avantage">` +
-			player.accessories[1].avantageText +
-			`</div>
-			<div class="info-name info-accessory accessory-temp">` +
-			temp +
-			`</div></div>`;
-	}
 	let heroSize = $(".info-current-player").width();
 	let ArmorSize = $(".info-current-player").width() / 2;
-	let AccessorySize = $(".info-current-player").width() / 3;
 	return (
-		`
-		<div class="d-flex flex-column cercle-hero">
+		`<div class="d-flex flex-column cercle-hero">
 	<div class="info-name tolkien">` +
 		player.playerName +
 		`</div>
@@ -348,22 +335,50 @@ function renderInfoCurrentPlayer(player) {
 		player.accessories[0].avantageText +
 		`</div></div>
 </div>
-<div class=" container-info-accessory">
-	<div class="cercle-accessory ">
-		<div class="background-cercle-anneau" style="height:` +
-		AccessorySize +
-		`px">
-			<img class="info-player2-img info-player2-img-accessory"` +
-		accessory +
-		` >
-		</div>
-	</div>` +
-		infoAccessory +
-		`
-	
-</div>`
+`
 	);
 }
+function renderAccessoriesCurentPlayer(player) {
+	let accessories = [];
+	for (let i = 1; i < player.accessories.length; i++) {
+		const accessory = player.accessories[i];
+		let AccessorySize = $(".info-current-player").width() / 3;
+		let accessorySRC = "";
+		let infoAccessory = "";
+
+		accessorySRC = 'src="images/accessories/' + accessory.imageGrid + '.png" alt="image accessoire"';
+		let temp = accessory.temporality === "perpetual" ? "avantage permanent" : "avantage ponctuel";
+		infoAccessory =
+			`<div class="container-info-name-accessory"><div class="info-name info-accessory accessory-text tolkien">` +
+			accessory.text +
+			`</div>
+		<div class="info-name info-accessory accessory-avantage">` +
+			accessory.avantageText +
+			`</div>
+			<div class="info-name info-accessory accessory-temp">` +
+			temp +
+			`</div></div>`;
+
+		let oneAccessory =
+			`<div class=" container-info-accessory">
+		<div class="cercle-accessory ">
+			<div class="background-cercle-anneau" style="height:` +
+			AccessorySize +
+			`px">
+				<img class="info-player2-img info-player2-img-accessory"` +
+			accessorySRC +
+			` >
+			</div>
+		</div>` +
+			infoAccessory +
+			`
+		
+	</div>`;
+		accessories.push(oneAccessory);
+	}
+	return accessories;
+}
+
 function renderInfoAllPlayer(players) {
 	const players2 = app.players.filter(player => player.canMove);
 	$(".info-all-players").empty();
