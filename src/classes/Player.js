@@ -84,6 +84,7 @@ export default class Player {
 			newPlayerCell = new Cell(x, y, [this]);
 		}
 		Utils.updateCell(x, y, newPlayerCell, grid);
+		//console.log("newPlayerCell", newPlayerCell);
 		for (let c = 0; c < this.movableCell.length; c++) {
 			const coordinate = this.movableCell[c];
 			grid[coordinate.x][coordinate.y].movable = false;

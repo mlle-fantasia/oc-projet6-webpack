@@ -146,7 +146,7 @@ function usePotion(player, type, otherPlayer) {
 		player.ptVie += player.accessories[1].avantage;
 		player.potion = false;
 	}
-	renderptViePlayer(player, "defence", otherPlayer);
+	renderptViePlayer(player, type, otherPlayer);
 	player.accessories.splice(1);
 	$(".info-" + type + "-player").empty();
 	let infoplayer = renderInfoPlayer(player);
@@ -198,6 +198,12 @@ async function endGame(playerToMaj, player) {
 			}
 		}
 	} else {
+		if (univers === 5 && player.heroNum === 9) {
+			let responseModal = await Utils.showModal(player, "loseFight", null, null, null, null, remainingPlayers);
+			if (responseModal) {
+				window.location.href = "index.html";
+			}
+		}
 		let responseModal = await Utils.showModal(player, "winFight", null, null, null, null, remainingPlayers);
 		if (responseModal) {
 			if (remainingPlayers > 0) {

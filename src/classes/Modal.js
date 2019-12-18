@@ -172,6 +172,11 @@ const TYPE = {
 		text: "Vous avez terrassé votre ennemie, félicitation",
 		btnYes: ""
 	},
+	loseFight: {
+		title: "Vous avez perdu",
+		text: "Votre ennemie à été plus fort que vous ",
+		btnYes: "Terminer"
+	},
 	quete6Modal1: {
 		title: "Détruire l'anneau unique",
 		text:

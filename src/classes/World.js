@@ -89,6 +89,7 @@ export default class World {
 			this.placePorte();
 		}
 		this.placeObstacles();
+		console.log("players", players);
 		this.placePlayers(players);
 		this.placeAccessories("weapon", weapons);
 		this.placeAccessories("accessory", accessories);

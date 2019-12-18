@@ -37,7 +37,11 @@ export default class Utils {
 			return true;
 		}
 	}
-
+	static defineXandY() {
+		let x = Math.floor(Math.random() * Math.floor(config.nbCasesX));
+		let y = Math.floor(Math.random() * Math.floor(config.nbCasesY));
+		return { x, y };
+	}
 	static isPlayerToFight(x, y, grid, distance) {
 		let playersToFight = [];
 		for (let i = y - 1; i >= y - distance; i--) {

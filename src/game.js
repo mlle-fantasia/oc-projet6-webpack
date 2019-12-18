@@ -88,10 +88,13 @@ async function renderYourTurn(player) {
 
 		if (player.isMovableCell(x, y, app.grid)) {
 			player.move(x, y, app.grid);
+
 			if (univers === "6" && retour) {
 				isEnd = app.destroyCell(app.grid, univers);
 			}
 			if (univers === "5") {
+				const orcs = app.players.filter(player => !player.canMove);
+				app.moveOrcs(orcs, app.grid);
 				// TODO déplacer les orcs
 			}
 			render(app.grid);

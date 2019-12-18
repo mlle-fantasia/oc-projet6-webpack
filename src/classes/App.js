@@ -23,6 +23,26 @@ export default class App {
 		this.players = elements.players;
 		this.univers = univers;
 	}
+	moveOrcs(orcs, grid) {
+		//console.log("grid", grid);
+		for (let i = 0; i < orcs.length; i++) {
+			const orc = orcs[i];
+			let position = this.defineNewPlaceOrcs(grid);
+			grid[orc.placeX][orc.placeY].objects = [];
+			orc.placeX = position.x;
+			orc.placeY = position.y;
+			let newOrcCell = new Cell(position.x, position.y, [orc]);
+			Utils.updateCell(position.x, position.y, newOrcCell, grid);
+		}
+	}
+	defineNewPlaceOrcs(grid) {
+		let position = Utils.defineXandY();
+		if (!Utils.isFreeCell(position.x, position.y, grid)) {
+			console.log("position", Utils.isFreeCell(position.x, position.y, grid), position.x, position.y);
+			this.defineNewPlaceOrcs(grid);
+		}
+		return position;
+	}
 	destroyCell(grid, univers) {
 		let end = false;
 		for (let i = 0; i < 3; i++) {
