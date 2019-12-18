@@ -34,9 +34,8 @@ $(document).ready(function() {
 	$(".info-attack-player").append(infoplayerAttack);
 	$(".info-defence-player").append(infoplayerDefence);
 
-	renderptViePlayer(playerDefence, "defence");
-	renderptViePlayer(playerAttack, "attack");
-	console.log("playerAttack.heroNum", playerAttack.heroNum);
+	renderptViePlayer(0, playerDefence, "defence");
+	renderptViePlayer(0, playerAttack, "attack");
 
 	if (univers === "6" || (univers === "5" && (playerAttack.heroNum === 9 || playerAttack.heroNum === 8))) {
 		ennemieAttack();
@@ -54,9 +53,9 @@ $(document).ready(function() {
 		let otherPlayer = tabOtherPlayer[0];
 
 		$(".btn-player-" + player.type).prop("disabled", true);
-
+		let PointVieInitiale = otherPlayer.player.ptVie;
 		otherPlayer.player.ptVie = otherPlayer.player.ptVie - (player.player.force - otherPlayer.player.resistance);
-		renderptViePlayer(otherPlayer.player, otherPlayer.type, player.player);
+		renderptViePlayer(PointVieInitiale, otherPlayer.player, otherPlayer.type, player.player);
 		let animate = ANIMATE[Math.floor(ANIMATE.length * Math.random())];
 		$(".img-" + player.type + "-player").addClass("translate-" + player.type);
 		setTimeout(() => {
@@ -125,8 +124,9 @@ $(document).ready(function() {
 });
 function ennemieAttack() {
 	$(".btn-player-attack").hide();
+	let pointVieInitiale = playerDefence.ptVie;
 	playerDefence.ptVie = playerDefence.ptVie - (playerAttack.force - playerDefence.resistance);
-	renderptViePlayer(playerDefence, "defence", playerAttack);
+	renderptViePlayer(pointVieInitiale, playerDefence, "defence", playerAttack);
 	let animate = ANIMATE[Math.floor(ANIMATE.length * Math.random())];
 	$(".img-attack-player").addClass("translate-attack");
 	setTimeout(() => {
@@ -142,11 +142,12 @@ function ennemieAttack() {
 	}, 1000);
 }
 function usePotion(player, type, otherPlayer) {
+	let pointVieInitiale = player.ptVie;
 	if (player.accessories[1].sousType === "potion") {
 		player.ptVie += player.accessories[1].avantage;
 		player.potion = false;
 	}
-	renderptViePlayer(player, type, otherPlayer);
+	renderptViePlayer(pointVieInitiale, player, type, otherPlayer);
 	player.accessories.splice(1);
 	$(".info-" + type + "-player").empty();
 	let infoplayer = renderInfoPlayer(player);
@@ -168,8 +169,29 @@ function calculFight(player) {
 	player.force = force;
 	player.resistance = resistance;
 }
-function renderptViePlayer(playerToMaj, type, player) {
-	$(".player-" + type + "-vie").text(playerToMaj.ptVie < 0 ? 0 : playerToMaj.ptVie);
+function renderptViePlayer(pointVieInitial, playerToMaj, type, player) {
+	let plus = pointVieInitial === 0 ? true : false;
+	console.log("pointVie", pointVieInitial, playerToMaj.ptVie);
+	var n = playerToMaj.ptVie < 0 ? 0 : playerToMaj.ptVie; // Nombre final du compteur
+	var cpt = pointVieInitial; // Initialisation du compteur
+	var duree = 2; // Durée en seconde pendant laquel le compteur ira de 0 à 15
+	var delta = Math.ceil((duree * 1000) / n); // On calcule l'intervalle de temps entre chaque rafraîchissement du compteur (durée mise en milliseconde)
+	function countdown() {
+		if (plus) {
+			$(".player-" + type + "-vie").text(cpt++);
+			if (cpt <= n) {
+				setTimeout(countdown, delta);
+			}
+		} else {
+			console.log("coucou", cpt);
+			$(".player-" + type + "-vie").text(cpt--);
+			if (cpt >= n) {
+				setTimeout(countdown, delta);
+			}
+		}
+	}
+	setTimeout(countdown, delta);
+
 	if (playerToMaj.ptVie <= 0) {
 		setTimeout(async () => {
 			$("." + type + "-player").fadeOut("slow");
