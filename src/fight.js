@@ -100,27 +100,6 @@ $(document).ready(function() {
 		});
 		usePotion(playerPotion[0].player, typePlayer, otherPlayer[0].player);
 	});
-
-	/* 	$("#retour-test").click(async () => {
-		if (univers === "1" || univers === "2" || univers === "3") {
-			//localStorage.setItem("player", JSON.stringify(playerAttack));
-			//localStorage.setItem("playerToFight", JSON.stringify(playerDefence));
-			retourGame();
-			return;
-		}
-		let responseModal = await Utils.showModal(playerAttack, "quete" + univers + "Modal3", null);
-		if (responseModal) {
-			if (univers === "6") {
-				let responseModal = await Utils.showModal(playerAttack, "quete6Modal3success", null);
-				if (responseModal) {
-					//localStorage.setItem("player", JSON.stringify(playerAttack));
-					retourGame();
-				}
-			}
-		} else {
-			Utils.showModal(playerAttack, "quete" + univers + "Modal3fail", null);
-		}
-	}); */
 });
 function ennemieAttack() {
 	$(".btn-player-attack").hide();

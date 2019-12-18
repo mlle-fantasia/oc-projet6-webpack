@@ -88,6 +88,7 @@ async function renderYourTurn(player) {
 
 		if (player.isMovableCell(x, y, app.grid)) {
 			player.move(x, y, app.grid);
+			console.log("player", player);
 
 			if (univers === "6" && retour) {
 				isEnd = app.destroyCell(app.grid, univers);
@@ -95,7 +96,6 @@ async function renderYourTurn(player) {
 			if (univers === "5") {
 				const orcs = app.players.filter(player => !player.canMove);
 				app.moveOrcs(orcs, app.grid);
-				// TODO déplacer les orcs
 			}
 			render(app.grid);
 			if (isEnd) {
@@ -115,7 +115,6 @@ async function renderYourTurn(player) {
 			}
 			let isGate = player.hasGate(x, y, app.grid, retour);
 
-			console.log("je passe ", isGate);
 			if (isGate) {
 				if (univers === "5") {
 					console.log("je passe ", univers);

@@ -23,25 +23,29 @@ export default class App {
 		this.players = elements.players;
 		this.univers = univers;
 	}
-	moveOrcs(orcs, grid) {
+	moveOrcs(orcs) {
 		//console.log("grid", grid);
 		for (let i = 0; i < orcs.length; i++) {
 			const orc = orcs[i];
-			let position = this.defineNewPlaceOrcs(grid);
-			grid[orc.placeX][orc.placeY].objects = [];
-			orc.placeX = position.x;
-			orc.placeY = position.y;
-			let newOrcCell = new Cell(position.x, position.y, [orc]);
-			Utils.updateCell(position.x, position.y, newOrcCell, grid);
+			// l'orc à une chance sur deux de se déplacer
+			let d = Math.floor(Math.random() * Math.floor(10));
+			if (d > 5) continue;
+			this.moveOneOrc(orc);
 		}
 	}
-	defineNewPlaceOrcs(grid) {
-		let position = Utils.defineXandY();
-		if (!Utils.isFreeCell(position.x, position.y, grid)) {
-			console.log("position", Utils.isFreeCell(position.x, position.y, grid), position.x, position.y);
-			this.defineNewPlaceOrcs(grid);
+	moveOneOrc(orc) {
+		let x = Math.floor(Math.random() * Math.floor(config.nbCasesX));
+		let y = Math.floor(Math.random() * Math.floor(config.nbCasesY));
+		console.log("grid[x][y]", x, y, this.grid[x][y].objects);
+		if (Utils.isFreeCell(x, y, this.grid)) {
+			this.grid[orc.placeX][orc.placeY].objects = [];
+			orc.placeX = x;
+			orc.placeY = y;
+			let newOrcCell = new Cell(x, y, [orc]);
+			Utils.updateCell(x, y, newOrcCell, this.grid);
+		} else {
+			this.moveOneOrc(orc);
 		}
-		return position;
 	}
 	destroyCell(grid, univers) {
 		let end = false;
