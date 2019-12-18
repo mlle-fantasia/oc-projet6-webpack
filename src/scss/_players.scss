@@ -87,10 +87,14 @@ $path-image: "../../public/images/";
 	display: flex;
 
 	.weapon-text {
-		padding: 2px 0 0 25px;
+		text-align: end;
+		font-size: 14px;
+		padding: 2px 5px 0 50px;
 	}
 	.weapon-avantage {
-		padding: 2px 0 0 65px;
+		text-align: end;
+		font-size: 12px;
+		padding: 2px 5px 0 90px;
 	}
 }
 .container-info-accessory {
@@ -100,13 +104,19 @@ $path-image: "../../public/images/";
 	align-items: center;
 
 	.accessory-text {
-		padding: 2px 0 0 25px;
+		text-align: end;
+		font-size: 14px;
+		padding: 2px 5px 0 40px;
 	}
 	.accessory-avantage {
-		padding: 2px 0 0 65px;
+		text-align: end;
+		font-size: 12px;
+		padding: 2px 5px 0 40px;
 	}
 	.accessory-temp {
-		padding: 2px 0 0 65px;
+		text-align: end;
+		font-size: 12px;
+		padding: 2px 5px 0 40px;
 	}
 }
 .cercle-accessory {

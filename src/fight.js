@@ -170,27 +170,24 @@ function calculFight(player) {
 	player.resistance = resistance;
 }
 function renderptViePlayer(pointVieInitial, playerToMaj, type, player) {
-	let plus = pointVieInitial === 0 ? true : false;
+	let plus = pointVieInitial < playerToMaj.ptVie ? true : false;
 	console.log("pointVie", pointVieInitial, playerToMaj.ptVie);
 	var n = playerToMaj.ptVie < 0 ? 0 : playerToMaj.ptVie; // Nombre final du compteur
 	var cpt = pointVieInitial; // Initialisation du compteur
-	var duree = 2; // Durée en seconde pendant laquel le compteur ira de 0 à 15
-	var delta = Math.ceil((duree * 1000) / n); // On calcule l'intervalle de temps entre chaque rafraîchissement du compteur (durée mise en milliseconde)
 	function countdown() {
 		if (plus) {
 			$(".player-" + type + "-vie").text(cpt++);
 			if (cpt <= n) {
-				setTimeout(countdown, delta);
+				setTimeout(countdown, 50);
 			}
 		} else {
-			console.log("coucou", cpt);
 			$(".player-" + type + "-vie").text(cpt--);
 			if (cpt >= n) {
-				setTimeout(countdown, delta);
+				setTimeout(countdown, 100);
 			}
 		}
 	}
-	setTimeout(countdown, delta);
+	setTimeout(countdown, 100);
 
 	if (playerToMaj.ptVie <= 0) {
 		setTimeout(async () => {
@@ -258,7 +255,7 @@ function renderInfoPlayer(player) {
 	if (player.accessories[0]) {
 		weapon = 'src="images/accessories/' + player.accessories[0].imageGrid + '.png" alt="image arme"';
 		infoWeapon =
-			'<div class="container-info-name-weapon"><div class="info-name info-weapon weapon-text tolkien">' +
+			'<div class="container-info-name-weapon"><div class="info-name info-weapon weapon-text">' +
 			player.accessories[0].text +
 			'</div><div class="info-name info-weapon weapon-avantage">' +
 			player.accessories[0].avantageText +
@@ -270,7 +267,7 @@ function renderInfoPlayer(player) {
 		accessory = 'src="images/accessories/' + player.accessories[1].imageGrid + '.png" alt="image accessoire"';
 		let temp = player.accessories[1].temporality === "perpetual" ? "avantage permanent" : "avantage ponctuel";
 		infoAccessory =
-			`<div class="container-info-name-accessory"><div class="info-name info-accessory accessory-text tolkien">` +
+			`<div class="container-info-name-accessory"><div class="info-name info-accessory accessory-text">` +
 			player.accessories[1].text +
 			`</div>
 		<div class="info-name info-accessory accessory-avantage">` +
