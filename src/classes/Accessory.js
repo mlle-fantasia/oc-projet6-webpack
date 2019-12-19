@@ -74,7 +74,7 @@ const ACCESSORY = [
 	{
 		value: "bouclier",
 		text: "le bouclier",
-		avantageText: "possède 10 de dégat",
+		avantageText: "ajoute 2 de résistance",
 		avantage: 10,
 		univers: "4",
 		temporality: "perpetual",
@@ -83,7 +83,7 @@ const ACCESSORY = [
 	{
 		value: "cotte",
 		text: "la cotte",
-		avantageText: "possède 15 de dégat",
+		avantageText: "ajoute 3 de résistance",
 		avantage: 15,
 		univers: "4",
 		temporality: "perpetual",
@@ -92,7 +92,7 @@ const ACCESSORY = [
 	{
 		value: "heaume",
 		text: "le heaume",
-		avantageText: "possède 9 de dégat",
+		avantageText: "ajoute 4 de résistance",
 		avantage: 9,
 		univers: "4",
 		temporality: "perpetual",

@@ -218,6 +218,21 @@ h2 {
 	background-color: green;
 }
 //////// armes et accessoires /////////////
+.epee {
+	background-image: url($path-image+"accessories/epee.png");
+}
+.cotte {
+	background-image: url($path-image+"accessories/cotte.png");
+}
+.bouclier {
+	background-image: url($path-image+"accessories/bouclier.png");
+}
+.heaume {
+	background-image: url($path-image+"accessories/heaume.png");
+}
+.epee {
+	background-image: url($path-image+"accessories/epee.png");
+}
 .cailloux {
 	background-image: url($path-image+"accessories/nenya.png");
 }
@@ -253,6 +268,9 @@ h2 {
 }
 .armor {
 	background-image: url($path-image+"accessories/armor.png");
+}
+.cotte_maille {
+	background-image: url($path-image+"accessories/cotte2.png");
 }
 .container-accessories {
 	position: absolute;

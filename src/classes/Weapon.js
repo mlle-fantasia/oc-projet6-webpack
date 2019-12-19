@@ -5,7 +5,7 @@ const WEAPON = [
 	{ value: "narsil", text: "Narsil, la flemme de l'ouest", avantageText: "possède 15 de dégat", degat: 15, initial: false, univers: "all" },
 	{ value: "hache", text: "hache", avantageText: "possède 12 de dégat", degat: 12, initial: true, univers: "all" },
 
-	{ value: "epee", text: "l'epee", avantageText: "possède 20 de dégat", degat: 20, univers: "4" },
+	{ value: "epee", text: "l'epee", avantageText: "possède 15 de dégat", degat: 15, univers: "4" },
 	{ value: "cailloux", text: "un cailloux", avantageText: "fabrication local et naturelle", degat: 8, univers: "6" },
 	{ value: "melko", text: "un marteau", avantageText: "", degat: 20, univers: "5" }
 ];
@@ -29,6 +29,7 @@ export default class Weapon {
 		this.initial = weapon.initial;
 		this.type = "Weapon";
 		this.value = weapon.value;
+		console.log("weapon", weapon);
 	}
 
 	defineWeapon(initial) {

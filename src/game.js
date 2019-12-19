@@ -111,7 +111,12 @@ async function renderYourTurn(player) {
 			}
 			let isObject = player.hasObjectToTake(x, y, app.grid);
 			if (isObject) {
-				if (univers === "5" || player.accessories.length < 2 || (player.accessories.length === 2 && !(isObject instanceof Accessory))) {
+				if (
+					univers === "5" ||
+					univers === "4" ||
+					player.accessories.length < 2 ||
+					(player.accessories.length === 2 && !(isObject instanceof Accessory))
+				) {
 					let responseModal = await Utils.showModal(player, "takeObject", isObject, x, y);
 					if (responseModal) {
 						player.takeObject(x, y, app.grid, univers);

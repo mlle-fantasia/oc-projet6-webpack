@@ -94,12 +94,12 @@ export default class App {
 	generateWeapon() {
 		let weapons = [];
 		console.log("this.univers", this.univers);
-		if (this.univers !== "4") {
+		if (this.univers === "4") {
+			weapons.push(new Weapon(null, "epee"));
+		} else {
 			for (let i = 0; i < this.players.length; i++) {
 				weapons.push(new Weapon(null));
 			}
-		} else {
-			weapons.push(new Weapon(null, "epee"));
 		}
 		return weapons;
 	}

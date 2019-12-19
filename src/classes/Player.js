@@ -141,7 +141,7 @@ export default class Player {
 			grid[x][y].objects[0] = weaponPlayer;
 		}
 		if (objectGrid instanceof Accessory) {
-			if (univers === "5") {
+			if (univers === "5" || univers === "4") {
 				this.accessories.push(objectGrid);
 				grid[x][y].objects.shift();
 			} else {
