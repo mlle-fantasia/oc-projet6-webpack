@@ -235,14 +235,21 @@ const TYPE = {
 		text:
 			"Bravo vous avez enfin trouvé le passage sous les montagnes qui mène à la cité cachée de gondolin ! c'est un tunnel creusé dans la pierre dure par les eaux qui s'écoulaient du flanc de la montagne. Passé le seuil tout est sombre noir. vous cheminé à l'aveuglette et avec précaussion lorsque vous êtes arreté par la garde de la cité. Vous connaissez maintenant le chemin secret, vous allez entrer dans la cité mais jamais plus vous n'en resortirez or par la porte de la mort.",
 		image: "quete4Modal2",
-		btnYes: "Je rentre"
+		btnYes: "Je continue"
 	},
-	quete4Modal2: {
+	quete4Modal3: {
 		title: "Sauver Gondolin",
 		text:
 			"Vous êtes passé par des tunnels sous la montagne, des ponts, des des chemins escarpés, de longs escaliers, des pentes sinueuses et avez   passé les septs portes qui mènes à Gondolin : la porte de bois, la porte de pierre, la porte de bronze, la porte de fer forgé, la porte de marble blanc, la porte d'argent, et enfin, la porte d'or.",
-		image: "quete4Modal2",
-		btnYes: "Je rentre"
+		image: "quete4Modal3",
+		btnYes: "Je livre mon message"
+	},
+	quete4Modal4: {
+		title: "Sauver Gondolin",
+		text:
+			"Vous avez accompli votre mission transmètre le message de danger imminent à Turgon roi de Gondolin mais il est trop tard, Melko à déjà découvert le passage et il a anvoyé son armée attaquer la ville, défendez la au péril de votre vie ! ",
+		image: "quete4Modal4",
+		btnYes: "Je defend la cité !"
 	},
 	quete5Modal1: {
 		title: "Récupérer les Silmaril",

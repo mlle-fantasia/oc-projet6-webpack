@@ -127,10 +127,24 @@ async function renderYourTurn(player) {
 
 			if (isGate) {
 				if (univers === "5") {
-					console.log("je passe ", univers);
 					let melkoArme = new Weapon(null, "melko");
 					let melko = new Player("Melko", 9, 2, [melkoArme]);
 					goPageFight(player, melko, true);
+				}
+				if (univers === "4") {
+					let responseModal = await Utils.showModal(player, "quete" + univers + "Modal2", null);
+					if (responseModal) {
+						let responseModal = await Utils.showModal(player, "quete" + univers + "Modal3", null);
+						if (responseModal) {
+							let nbArmee = Math.trunc(Math.random() * (5 - 2) + 2);
+							let armee = [];
+							for (let i = 0; i < nbArmee; i++) {
+								let arme = new Weapon("initial");
+								armee.push(new Player("orcs", 8, 2, [arme]));
+							}
+							goPageFight(player, armee, true);
+						}
+					}
 				}
 				if (!retour) {
 					let responseModal = await Utils.showModal(player, "quete" + univers + "Modal2", null);

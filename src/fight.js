@@ -7,6 +7,12 @@ import Modal from "./classes/Modal";
 const ANIMATE = ["shew", "rotate", "rotateX", "rotateY", "rotate3d", "scale"];
 let playerDefence = JSON.parse(localStorage.getItem("playerToFight"));
 let playerAttack = JSON.parse(localStorage.getItem("player"));
+let armee;
+if (Array.isArray(playerAttack)) {
+	armee = playerAttack;
+	playerAttack = playerAttack[0];
+}
+console.log("playerAttack", playerAttack);
 let combatants = [{ type: "defence", player: playerDefence }, { type: "attack", player: playerAttack }];
 let univers = localStorage.getItem("univers");
 let remainingPlayers = localStorage.getItem("remainingPlayers");
@@ -37,7 +43,7 @@ $(document).ready(function() {
 	renderptViePlayer(0, playerDefence, "defence");
 	renderptViePlayer(0, playerAttack, "attack");
 
-	if (univers === "6" || (univers === "5" && (playerAttack.heroNum === 9 || playerAttack.heroNum === 8))) {
+	if (univers === "6" || univers === "4" || (univers === "5" && (playerAttack.heroNum === 9 || playerAttack.heroNum === 8))) {
 		ennemieAttack();
 	}
 
@@ -83,7 +89,7 @@ $(document).ready(function() {
 						$("#btn-use-potion-player-" + otherPlayer.type).prop("disabled", false);
 					}
 				}
-				if ((univers === "6" || univers === "5") && otherPlayer.player.ptVie > 0) {
+				if ((univers === "6" || univers === "5" || univers === "4") && otherPlayer.player.ptVie > 0) {
 					ennemieAttack();
 				}
 			}, 1000);
@@ -213,19 +219,34 @@ async function endGame(playerToMaj, player) {
 			}
 		}
 	} else {
-		if (univers === 5 && player.heroNum === 9) {
+		if ((univers === "5" && player.heroNum === 9) || (univers === "4" && player.heroNum === 8)) {
 			let responseModal = await Utils.showModal(player, "loseFight", null, null, null, null, remainingPlayers);
 			if (responseModal) {
 				window.location.href = "index.html";
 			}
 		}
-		let responseModal = await Utils.showModal(player, "winFight", null, null, null, null, remainingPlayers);
-		if (responseModal) {
-			if (remainingPlayers > 0) {
-				let newGrid = deletePlayer(playerToMaj);
-				retourGame(newGrid);
+		if (univers === "4") {
+			armee.shift();
+			if (armee.length) {
+				localStorage.setItem("player", JSON.stringify(armee));
+				localStorage.setItem("playerToFight", JSON.stringify(playerDefence));
+				document.location.reload(true);
 			} else {
-				window.location.href = "index.html";
+				let responseModal = await Utils.showModal(player, "winFight", null, null, null, null, remainingPlayers);
+				if (responseModal) {
+					window.location.href = "index.html";
+				}
+			}
+			// todo fight again
+		} else {
+			let responseModal = await Utils.showModal(player, "winFight", null, null, null, null, remainingPlayers);
+			if (responseModal) {
+				if (remainingPlayers > 0) {
+					let newGrid = deletePlayer(playerToMaj);
+					retourGame(newGrid);
+				} else {
+					window.location.href = "index.html";
+				}
 			}
 		}
 	}
