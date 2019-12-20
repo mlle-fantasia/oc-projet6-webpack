@@ -20,10 +20,10 @@ let attackAgain = { attack: false, number: 0 };
 $(document).ready(function() {
 	calculFight(playerDefence);
 	calculFight(playerAttack);
+	$(".logo-fight").hide();
 	$(".btn-player-defence").prop("disabled", true);
 	$(".btn-player-attack").prop("disabled", true);
 	if (univers === "6" || univers === "4" || univers === "5") $(".btn-player-attack").hide();
-
 	$("#game").addClass("game-" + univers);
 	$(".fight-background").addClass("world" + univers + "-background");
 	let elementPlayerAttack = $(
@@ -42,14 +42,20 @@ $(document).ready(function() {
 	renderptViePlayer(0, playerDefence, "defence");
 	renderptViePlayer(0, playerAttack, "attack");
 	setTimeout(() => {
-		if (univers === "6" || univers === "4" || (univers === "5" && (playerAttack.heroNum === 9 || playerAttack.heroNum === 8))) {
-			ennemieAttack();
-		}
-		$(".btn-player-attack").prop("disabled", false);
-		if (!playerAttack.potion) {
-			$("#btn-use-potion-player-attack").prop("disabled", true);
-		}
-	}, 2100);
+		$(".logo-fight").show();
+		$(".logo-fight").addClass("scale-logo-fight");
+		setTimeout(() => {
+			$(".logo-fight").removeClass("scale-logo-fight");
+			$(".logo-fight").hide();
+			if (univers === "6" || univers === "4" || (univers === "5" && (playerAttack.heroNum === 9 || playerAttack.heroNum === 8))) {
+				ennemieAttack();
+			}
+			$(".btn-player-attack").prop("disabled", false);
+			if (!playerAttack.potion) {
+				$("#btn-use-potion-player-attack").prop("disabled", true);
+			}
+		}, 500);
+	}, 4000);
 	$(".btn-attack").click(element => {
 		let typePlayer = element.target.dataset.type;
 		let tabPlayer = combatants.filter(p => {

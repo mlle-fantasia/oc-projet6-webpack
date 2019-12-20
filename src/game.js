@@ -178,7 +178,7 @@ async function renderYourTurn(player) {
 					player.moveObstacle(isObsToMove, app.grid, univers);
 				}
 			}
-			let isPlayerToSteal = avantageHero3(player, x, y);
+			let isPlayerToSteal = avantageHeroSteal(player, x, y);
 			if (isPlayerToSteal) {
 				let responseModal = await Utils.showModal(player, "stealObject", isPlayerToSteal.accessories[1], x, y, isPlayerToSteal);
 				if (responseModal) {
@@ -247,7 +247,7 @@ function avantageHero4(player, x, y) {
 		return isObsToMove;
 	}
 }
-function avantageHero3(player) {
+function avantageHeroSteal(player) {
 	if (player.pointFort.value !== "steal") {
 		return false;
 	}
@@ -256,8 +256,9 @@ function avantageHero3(player) {
 			return p.playerNum != player.playerNum;
 		});
 		let playerToSteal = otherPlayer[Math.floor(otherPlayer.length * Math.random())];
+		if (!playerToSteal) return;
 		if (playerToSteal.playerNum === player.playerNum) {
-			avantageHero3(player);
+			avantageHeroSteal(player);
 		} else {
 			if (playerToSteal.accessories.length < 2) {
 				playerToSteal = null;

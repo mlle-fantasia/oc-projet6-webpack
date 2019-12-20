@@ -67,6 +67,10 @@
 .shew {
 	transform: skew(40deg, 40deg);
 }
+.scale-logo-fight {
+	transition: transform 0.5s linear;
+	transform: scale(2);
+}
 .btn-fight {
 	background-color: #e6c4a8;
 	border: double 4px #ffffff;
@@ -81,4 +85,11 @@
 .form-control:disabled {
 	background-color: #e6c4a8;
 	opacity: 0.5;
+}
+.logo-fight {
+	position: absolute;
+	top: 25%;
+	width: 20%;
+	left: 40%;
+	z-index: 5;
 }
