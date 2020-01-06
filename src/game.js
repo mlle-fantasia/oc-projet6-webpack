@@ -56,7 +56,6 @@ async function renderYourTurn(player) {
 		let playerToCopy = otherPlayer[Math.floor(otherPlayer.length * Math.random())];
 		if (playerToCopy) {
 			player.pointFort = playerToCopy.pointFort;
-			console.log("player", player);
 			//let responseModal = await Utils.showModal(player, "powerCopy", playerToCopy);
 		}
 	}
@@ -71,7 +70,24 @@ async function renderYourTurn(player) {
 	render(app.grid);
 	renderInfoAllPlayer(app.players);
 	$(".player-" + player.playerNum).addClass("zoom");
-
+	$(".icon-info-accessory").click(async event => {
+		console.log("coucou");
+		let x = parseInt(
+			$(event.target)
+				.parent()
+				.attr("data-x")
+		);
+		let y = parseInt(
+			$(event.target)
+				.parent()
+				.attr("data-y")
+		);
+		let isObject = app.grid[x][y].objects[0];
+		if (isObject) {
+			await Utils.showModal(player, "showObject", isObject, x, y);
+		}
+		event.stopPropagation();
+	});
 	$(".case").click(async () => {
 		// get x et y de la case cliquée
 		let x, y;
@@ -300,7 +316,9 @@ function renderObjectCell(cell, newCase) {
 		for (let i = 0; i < cell.objects.length; i++) {
 			const object = cell.objects[i];
 			let image = $("<div class='img-object-grid " + object.imageGrid + " player-" + object.playerNum + "'></div>");
+			let iconInfo = $("<div class='icon-info-accessory'></div>");
 			newCase.append(image);
+			if (object instanceof Accessory || object instanceof Weapon) newCase.append(iconInfo);
 		}
 	}
 }

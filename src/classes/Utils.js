@@ -11,6 +11,7 @@ export default class Utils {
 		if (functionToCall === "takeObject") {
 			functionToCall = object.constructor.name;
 		}
+		console.log("functionToCall", functionToCall);
 		let modal = new Modal(player, functionToCall, object, remainingPlayers, univers);
 		$("#game").prepend(modal.render());
 		let resonseModal = "pas encore de réponse";

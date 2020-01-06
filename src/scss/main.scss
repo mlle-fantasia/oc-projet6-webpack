@@ -18,6 +18,16 @@ $background-hero6: #434343;
 	src: url("../../public/tolkien.TTF");
 }
 ///////général//////
+.icon-info-accessory {
+	right: 2px;
+	position: absolute;
+	bottom: 3px;
+	width: 20px;
+	height: 18px;
+	background-image: url($path-image+"accessories/info.png");
+	background-size: contain;
+	z-index: 10;
+}
 .navbar-light {
 	border-bottom: solid 1px #9c9999;
 	&.navbar .navbar-nav .nav-item .nav-link:hover {

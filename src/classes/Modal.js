@@ -14,6 +14,9 @@ export default class Modal {
 		this.univers = univers;
 	}
 	render() {
+		let playerName = this.player.playerName + " ! ";
+		if (this.type === "loseFight" && (this.univers === "5" || this.univers === "4")) playerName = "";
+		if (this.type === "showObject") playerName = "";
 		let btnNo = "";
 		if (TYPE[this.type].btnNo) {
 			let data_response = "false";
@@ -22,7 +25,6 @@ export default class Modal {
 		}
 		let btnYes = "";
 		if (this.type === "winFight") {
-			console.log("this.type, this.retour", this.type, this.retour);
 			btnYes = this.retour ? "Retour grille" : "Retour accueil";
 		} else {
 			btnYes = TYPE[this.type].btnYes;
@@ -101,8 +103,7 @@ export default class Modal {
 					</div>
 					<div class="modal-content"><p>
 				` +
-			this.player.playerName +
-			` !  ` +
+			playerName +
 			this.text +
 			`
 					</p>
@@ -148,6 +149,11 @@ const TYPE = {
 		text: "Vous ne pouvez déplacer un obstacle, voulez vous le faire",
 		btnYes: "OUI",
 		btnNo: "Non"
+	},
+	showObject: {
+		title: "Object",
+		text: "",
+		btnYes: "OK"
 	},
 	Accessory: {
 		title: "Accessoire trouvé",
