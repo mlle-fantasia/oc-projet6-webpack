@@ -36,7 +36,6 @@ export default class App {
 	moveOneOrc(orc) {
 		let x = Math.floor(Math.random() * Math.floor(config.nbCasesX));
 		let y = Math.floor(Math.random() * Math.floor(config.nbCasesY));
-		console.log("grid[x][y]", x, y, this.grid[x][y].objects);
 		if (Utils.isFreeCell(x, y, this.grid)) {
 			this.grid[orc.placeX][orc.placeY].objects = [];
 			orc.placeX = x;
@@ -79,7 +78,7 @@ export default class App {
 		for (let p = 0; p < initPlayers.length; p++) {
 			const player = initPlayers[p];
 			let weapon = new Weapon("initial");
-			let newplayer = new Player(player.playerName, player.hero, p + 1, [weapon], true);
+			let newplayer = new Player(player.playerName, player.heroNum, p + 1, [weapon], true);
 			players.push(newplayer);
 		}
 		if (this.univers === "5") {
@@ -89,6 +88,7 @@ export default class App {
 				players.push(orc);
 			}
 		}
+		console.log("players ici", players);
 		return players;
 	}
 	generateWeapon() {
@@ -113,6 +113,8 @@ export default class App {
 			accessories.push(new Accessory("cotte"));
 			accessories.push(new Accessory("heaume"));
 			accessories.push(new Accessory("bouclier"));
+			accessories.push(new Accessory("potion_healfy"));
+			accessories.push(new Accessory("potion_life"));
 		}
 		return accessories;
 	}

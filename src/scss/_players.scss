@@ -3,7 +3,9 @@ $path-image: "../../public/images/";
 .zoom {
 	transform: scale(1.3);
 }
-
+.player-index {
+	width: 25% !important;
+}
 /////////////////////// infos players //////////////////////////
 /////////////// général //////////////
 .info-name {
@@ -43,6 +45,21 @@ $path-image: "../../public/images/";
 	}
 	.info-player2-img-armor {
 		padding: 5px;
+	}
+}
+/////////// page index ////////////
+.player-index {
+	.info-player2-img {
+		width: 100%;
+		border-radius: 0;
+	}
+	.info-player2-img-hero {
+		padding: 0;
+		margin-bottom: 5px;
+		object-fit: cover;
+	}
+	.background-cercle-player-hero {
+		height: auto;
 	}
 }
 /////////// current player ///////////

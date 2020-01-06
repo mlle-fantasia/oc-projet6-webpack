@@ -2,6 +2,7 @@ import "./scss/main.scss";
 import "bootstrap";
 import "babel-polyfill";
 import carouselHeroes from "../public/include/carousel-heroes.js";
+import Player from "./classes/Player";
 
 let world = 0;
 let nbPlayer = 0;
@@ -81,10 +82,12 @@ $(document).ready(function() {
 			window.location.href = "game.html";
 		}
 	});
+	$("#btn-retour").click(() => {
+		window.location.reload();
+	});
 });
 
 function appendCarouselHero(i, typeJeu) {
-	console.log("typeJeu", typeJeu);
 	if (typeJeu === "multijoueur") {
 		$(".container-choice-heroes").empty();
 		let carousel = carouselHeroes.render(i);
@@ -93,7 +96,6 @@ function appendCarouselHero(i, typeJeu) {
 		$(".container-choice-heroes").fadeIn();
 	}
 	if (typeJeu === "solo") {
-		console.log("typeJeu , i", typeJeu, i);
 		$(".container-choice-heroe").empty();
 		let carousel = carouselHeroes.render(i);
 		$(".container-choice-heroe").append(carousel);
@@ -117,10 +119,9 @@ function functiontruc(p, typeJeu) {
 					alert("vous devez renseigner un nom pour votre personnage");
 				} else {
 					let name = $(".inputplayerName" + h).val();
-					players.push({
-						hero: h,
-						playerName: name
-					});
+					let pl = new Player(name, h, players.length - 1, []);
+					players.push(pl);
+					renderchoosenPlayer();
 					$(".container-choice-heroes").slideUp();
 					$(".container-choice-heroe").slideUp();
 					if (nbPlayer > p) {
@@ -133,5 +134,44 @@ function functiontruc(p, typeJeu) {
 				}
 			});
 		}
+	}
+}
+function renderchoosenPlayer() {
+	console.log("players", players);
+	$(".show-players-choosen").empty();
+	//$(".show-players-choose").append(`<div class="info-name tolkien">Les joueurs</div>`);
+	//let widthPlayer = $(".show-players-choose").width() / 6;
+	for (let p = 0; p < players.length; p++) {
+		const player = players[p];
+
+		let onePlayer =
+			`<div class="player-index player" ><div class="info-name tolkien">Joueur ` +
+			(p + 1) +
+			` : ` +
+			player.playerName +
+			`</div>
+	<div class="background-cercle-player-hero">
+		<div class="container-info-players-vie">
+			<div id="triangle-1"></div>
+			<div id="triangle-2"></div>
+		</div>
+		<div class="info-players-vie">` +
+			player.ptVie +
+			`</div>
+		<img class="info-player2-img info-player2-img-hero " src="images/players/img/hero` +
+			player.heroNum +
+			`.jpg"
+			alt="image hero">
+	</div>
+	<div class="info-name">` +
+			player.hero +
+			`<br> ` +
+			player.pointFort.text +
+			`<br> (taux de chance : ` +
+			player.pointFort.chance +
+			`%)` +
+			`</div>
+</div>`;
+		$(".show-players-choosen").append(onePlayer);
 	}
 }
