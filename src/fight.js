@@ -60,7 +60,7 @@ $(document).ready(function() {
 				$("#btn-use-potion-player-attack").prop("disabled", true);
 			}
 		}, 500);
-	}, 4000);
+	}, 1000);
 	$(".btn-attack").click(element => {
 		let typePlayer = element.target.dataset.type;
 		let tabPlayer = combatants.filter(p => {
@@ -137,7 +137,7 @@ function ennemieAttack() {
 			if (playerDefence.potion) {
 				$("#btn-use-potion-player-defence").prop("disabled", false);
 			}
-		}, 1000);
+		}, 1500);
 	}, 1000);
 }
 function usePotion(player, type, otherPlayer) {
@@ -191,7 +191,7 @@ function renderptViePlayer(pointVieInitial, playerToMaj, type, player) {
 		if (plus) {
 			$(".player-" + type + "-vie").text(cpt++);
 			if (cpt <= n) {
-				setTimeout(countdown, 50);
+				setTimeout(countdown, 1000 / n);
 			}
 		} else {
 			$(".player-" + type + "-vie").text(cpt--);
