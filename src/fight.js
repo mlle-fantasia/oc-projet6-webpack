@@ -124,7 +124,9 @@ $(document).ready(function() {
 function ennemieAttack() {
 	$(".btn-player-attack").hide();
 	let pointVieInitiale = playerDefence.ptVie;
-	playerDefence.ptVie = playerDefence.ptVie - (playerAttack.force - playerDefence.resistance);
+	if (playerDefence.resistance < playerAttack.force) {
+		playerDefence.ptVie = playerDefence.ptVie - (playerAttack.force - playerDefence.resistance);
+	}
 	renderptViePlayer(pointVieInitiale, playerDefence, "defence", playerAttack);
 	let animate = ANIMATE[Math.floor(ANIMATE.length * Math.random())];
 	$(".img-attack-player").addClass("translate-attack");
@@ -229,7 +231,7 @@ async function endGame(playerToMaj, player) {
 			}
 		}
 	} else {
-		if ((univers === "5" && player.heroNum === 9) || (univers === "4" && player.heroNum === 8)) {
+		if (univers === "5" && player.heroNum === 9) {
 			let responseModal = await Utils.showModal(player, "loseFight", null, null, null, null, remainingPlayers);
 			if (responseModal) {
 				window.location.href = "index.html";
@@ -238,9 +240,16 @@ async function endGame(playerToMaj, player) {
 		if (univers === "4") {
 			armee.shift();
 			if (armee.length) {
-				localStorage.setItem("player", JSON.stringify(armee));
-				localStorage.setItem("playerToFight", JSON.stringify(playerDefence));
-				document.location.reload(true);
+				if (player.heroNum === 8) {
+					let responseModal = await Utils.showModal(player, "loseFight", null, null, null, null, remainingPlayers);
+					if (responseModal) {
+						window.location.href = "index.html";
+					}
+				} else {
+					localStorage.setItem("player", JSON.stringify(armee));
+					localStorage.setItem("playerToFight", JSON.stringify(playerDefence));
+					document.location.reload(true);
+				}
 			} else {
 				let responseModal = await Utils.showModal(player, "winFight", null, null, null, null, remainingPlayers);
 				if (responseModal) {

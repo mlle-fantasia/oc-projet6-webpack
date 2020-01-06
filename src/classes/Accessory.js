@@ -66,7 +66,7 @@ const ACCESSORY = [
 		value: "boot",
 		text: "bottes étanches",
 		avantage: 1,
-		avantageText: "ajoute un de déplacement",
+		avantageText: "ajoute 1 de déplacement",
 		temporality: "perpetual",
 		univers: "all",
 		type: "deplacement"
@@ -75,7 +75,7 @@ const ACCESSORY = [
 		value: "bouclier",
 		text: "le bouclier",
 		avantageText: "ajoute 2 de résistance",
-		avantage: 10,
+		avantage: 2,
 		univers: "4",
 		temporality: "perpetual",
 		type: "protection"
@@ -84,7 +84,7 @@ const ACCESSORY = [
 		value: "cotte",
 		text: "la cotte",
 		avantageText: "ajoute 3 de résistance",
-		avantage: 15,
+		avantage: 3,
 		univers: "4",
 		temporality: "perpetual",
 		type: "protection"
@@ -93,7 +93,7 @@ const ACCESSORY = [
 		value: "heaume",
 		text: "le heaume",
 		avantageText: "ajoute 4 de résistance",
-		avantage: 9,
+		avantage: 4,
 		univers: "4",
 		temporality: "perpetual",
 		type: "protection"

@@ -8,7 +8,6 @@ import Gate from "./Gate";
 export default class Player {
 	constructor(name, heroNum, playerNum, accessories, canMove = false) {
 		let forceOrc = Math.trunc(Math.random() * (20 - 8) + 8);
-		console.log("forceOrc", forceOrc);
 		const tabVariablePlayer = {
 			ptVie: [29, 30, 36, 35, 33, 30, 20, forceOrc, 50],
 			force: [10, 12, 14, 10, 12, 13, 8, 8, 50],
