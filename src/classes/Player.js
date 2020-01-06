@@ -10,7 +10,7 @@ export default class Player {
 		let forceOrc = Math.trunc(Math.random() * (20 - 8) + 8);
 		console.log("forceOrc", forceOrc);
 		const tabVariablePlayer = {
-			ptVie: [33, 30, 43, 52, 48, 40, 20, forceOrc, 50],
+			ptVie: [29, 30, 36, 35, 33, 30, 20, forceOrc, 50],
 			force: [10, 12, 14, 10, 12, 13, 8, 8, 50],
 			type: ["motorisé", "ailé", "énervé", "force-calme", "patriote", "joueur", "dépendant", "", ""],
 			pointFort: [

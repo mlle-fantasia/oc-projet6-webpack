@@ -35,9 +35,14 @@ $(document).ready(function() {
 	$(".attack-player").append($(elementPlayerAttack));
 	$(".defence-player").append($(elementPlayerDefence));
 	let infoplayerDefence = renderInfoPlayer(playerDefence);
+	//	let tabAccessoryHtml = renderAccessoriesCurentPlayer(playerDefence);
 	let infoplayerAttack = renderInfoPlayer(playerAttack);
 	$(".info-attack-player").append(infoplayerAttack);
 	$(".info-defence-player").append(infoplayerDefence);
+	/*for (let i = 0; i < tabAccessoryHtml.length; i++) {
+		const html = tabAccessoryHtml[i];
+		$(".info-defence-player").append(html);
+	} */
 
 	renderptViePlayer(0, playerDefence, "defence");
 	renderptViePlayer(0, playerAttack, "attack");
@@ -154,7 +159,6 @@ function usePotion(player, type, otherPlayer) {
 			player.potion = true;
 		}
 	}
-	console.log("player", player);
 	renderptViePlayer(pointVieInitiale, player, type, otherPlayer);
 	$(".info-" + type + "-player").empty();
 	let infoplayer = renderInfoPlayer(player);
@@ -287,8 +291,6 @@ function renderInfoPlayer(player) {
 			player.accessories[0].avantageText +
 			"</div></div>";
 	}
-	let accessory = "";
-	let infoAccessory = "";
 	if (player.accessories && player.accessories[1]) {
 		accessory = 'src="images/accessories/' + player.accessories[1].imageGrid + '.png" alt="image accessoire"';
 		let temp = player.accessories[1].temporality === "perpetual" ? "avantage permanent" : "avantage ponctuel";
@@ -305,8 +307,9 @@ function renderInfoPlayer(player) {
 	}
 	let heroSize = $(".info-attack-player").width();
 	let ArmorSize = $(".info-attack-player").width() / 2;
-	let AccessorySize = $(".info-attack-player").width() / 3;
-	return (
+	let tabAccessoryHtml = renderAccessoriesCurentPlayer(player);
+
+	let htmlInfoPlayer =
 		`
 		<div class="d-flex flex-column cercle-hero">
 	<div class="info-name tolkien">` +
@@ -343,20 +346,50 @@ function renderInfoPlayer(player) {
 	` +
 		infoWeapon +
 		`
-</div>
-<div class=" container-info-accessory">
-	<div class="cercle-accessory ">
-		<div class="background-cercle-anneau" style="height:` +
-		AccessorySize +
-		`px">
-			<img class="info-player2-img info-player2-img-accessory"` +
-		accessory +
-		` >
-		</div>
-	</div>` +
-		infoAccessory +
-		`
-	
-</div>`
-	);
+</div>`;
+	for (let i = 0; i < tabAccessoryHtml.length; i++) {
+		const html = tabAccessoryHtml[i];
+		htmlInfoPlayer += html;
+	}
+	return htmlInfoPlayer;
+}
+function renderAccessoriesCurentPlayer(player) {
+	let accessories = [];
+	for (let i = 1; i < player.accessories.length; i++) {
+		const accessory = player.accessories[i];
+		let AccessorySize = $(".info-defence-player").width() / 3;
+		let accessorySRC = "";
+		let infoAccessory = "";
+
+		accessorySRC = 'src="images/accessories/' + accessory.imageGrid + '.png" alt="image accessoire"';
+		let temp = accessory.temporality === "perpetual" ? "avantage permanent" : "avantage ponctuel";
+		infoAccessory =
+			`<div class="container-info-name-accessory"><div class="info-name info-accessory accessory-text">` +
+			accessory.text +
+			`</div>
+		<div class="info-name info-accessory accessory-avantage">` +
+			accessory.avantageText +
+			`</div>
+			<div class="info-name info-accessory accessory-temp">` +
+			temp +
+			`</div></div>`;
+
+		let oneAccessory =
+			`<div class=" container-info-accessory">
+		<div class="cercle-accessory ">
+			<div class="background-cercle-anneau" style="height:` +
+			AccessorySize +
+			`px">
+				<img class="info-player2-img info-player2-img-accessory"` +
+			accessorySRC +
+			` >
+			</div>
+		</div>` +
+			infoAccessory +
+			`
+		
+	</div>`;
+		accessories.push(oneAccessory);
+	}
+	return accessories;
 }
