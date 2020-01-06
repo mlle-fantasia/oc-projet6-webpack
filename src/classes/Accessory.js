@@ -11,8 +11,8 @@ const ACCESSORY = [
 	{
 		value: "potion_strength",
 		text: "Potion de force",
-		avantage: 3,
-		avantageText: "donne plus 3 de force au prochain coup",
+		avantage: 7,
+		avantageText: "redonne 7 points de vie",
 		temporality: "punctual",
 		univers: "all",
 		type: "potion"

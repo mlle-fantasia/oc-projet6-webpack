@@ -142,20 +142,21 @@ function ennemieAttack() {
 }
 function usePotion(player, type, otherPlayer) {
 	let pointVieInitiale = player.ptVie;
-	let indexPotion;
+	let indexPotion = 0;
+	let potionUsed = false;
 	for (let p = 0; p < player.accessories.length; p++) {
 		const accessory = player.accessories[p];
-		if (accessory.sousType === "potion") {
+		if (accessory.sousType === "potion" && !potionUsed) {
 			player.ptVie += accessory.avantage;
 			player.potion = false;
 			indexPotion = p;
+			potionUsed = true;
 		}
 	}
 	player.accessories.splice(indexPotion, 1);
 	for (let p = 0; p < player.accessories.length; p++) {
 		const accessory = player.accessories[p];
 		if (accessory.sousType === "potion") {
-			player.ptVie += accessory.avantage;
 			player.potion = true;
 		}
 	}
@@ -169,17 +170,13 @@ function calculFight(player) {
 	let force = 0;
 	let resistance = 0;
 	force = player.accessories[0].degat;
-	if (player.accessories.length > 1) {
-		if (univers === "5") {
-			for (let index = 1; index < player.accessories.length; index++) {
-				const accessory = player.accessories[index];
-				if (accessory.sousType === "protection") {
-					resistance += accessory.avantage;
-				}
-				if (accessory.sousType === "potion") {
-					player.potion = true;
-				}
-			}
+	for (let index = 1; index < player.accessories.length; index++) {
+		const accessory = player.accessories[index];
+		if (accessory.sousType === "protection") {
+			resistance += accessory.avantage;
+		}
+		if (accessory.sousType === "potion") {
+			player.potion = true;
 		}
 	}
 	player.force = force;
@@ -291,7 +288,7 @@ function renderInfoPlayer(player) {
 			player.accessories[0].avantageText +
 			"</div></div>";
 	}
-	if (player.accessories && player.accessories[1]) {
+	/* if (player.accessories && player.accessories[1]) {
 		accessory = 'src="images/accessories/' + player.accessories[1].imageGrid + '.png" alt="image accessoire"';
 		let temp = player.accessories[1].temporality === "perpetual" ? "avantage permanent" : "avantage ponctuel";
 		infoAccessory =
@@ -304,7 +301,7 @@ function renderInfoPlayer(player) {
 			<div class="info-name info-accessory accessory-temp">` +
 			temp +
 			`</div></div>`;
-	}
+	} */
 	let heroSize = $(".info-attack-player").width();
 	let ArmorSize = $(".info-attack-player").width() / 2;
 	let tabAccessoryHtml = renderAccessoriesCurentPlayer(player);
