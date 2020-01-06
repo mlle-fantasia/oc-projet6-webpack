@@ -59,7 +59,7 @@ $(document).ready(function() {
 			if (!playerAttack.potion) {
 				$("#btn-use-potion-player-attack").prop("disabled", true);
 			}
-		}, 500);
+		}, 700);
 	}, 1000);
 	$(".btn-attack").click(element => {
 		let typePlayer = element.target.dataset.type;
@@ -103,7 +103,7 @@ $(document).ready(function() {
 						$("#btn-use-potion-player-" + otherPlayer.type).prop("disabled", false);
 					}
 				}
-				if ((univers === "6" || univers === "5" || univers === "4") && otherPlayer.player.ptVie > 0) {
+				if ((univers === "6" || univers === "5" || univers === "4") && otherPlayer.player.ptVie > 0 && !attackAgain.attack) {
 					ennemieAttack();
 				}
 			}, 1000);
@@ -137,7 +137,7 @@ function ennemieAttack() {
 			if (playerDefence.potion) {
 				$("#btn-use-potion-player-defence").prop("disabled", false);
 			}
-		}, 1500);
+		}, 1000);
 	}, 1000);
 }
 function usePotion(player, type, otherPlayer) {
