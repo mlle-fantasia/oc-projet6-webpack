@@ -10,8 +10,6 @@ import Player from "./Player.js";
 export default class World {
 	constructor(univers) {
 		this.univers = univers;
-		/* this.nbWeapon = this.players.length;
-		this.nbObject = this.players.length; */
 		this.worldSizeY = config.nbCasesY;
 		this.worldSizeX = config.nbCasesX;
 		this.grid = [];
@@ -41,7 +39,6 @@ export default class World {
 									accessories.push(new Accessory(accessory.value));
 								}
 								if (accessory.type === "Weapon") {
-									console.log("accessory", accessory);
 									accessories.push(new Weapon(null, accessory.value));
 								}
 							}

@@ -12,7 +12,6 @@ if (Array.isArray(playerAttack)) {
 	armee = playerAttack;
 	playerAttack = playerAttack[0];
 }
-console.log("playerAttack", playerAttack);
 let combatants = [{ type: "defence", player: playerDefence }, { type: "attack", player: playerAttack }];
 let univers = localStorage.getItem("univers");
 let remainingPlayers = localStorage.getItem("remainingPlayers");
@@ -183,7 +182,7 @@ function calculFight(player) {
 	}
 	player.force = force;
 	player.resistance = resistance;
-	console.log("force, resistance", player.heroNum, force, resistance);
+	//console.log("force, resistance", player.heroNum, force, resistance);
 }
 function renderptViePlayer(pointVieInitial, playerToMaj, type, player) {
 	let plus = pointVieInitial < playerToMaj.ptVie ? true : false;
@@ -256,7 +255,6 @@ async function endGame(playerToMaj, player) {
 					window.location.href = "index.html";
 				}
 			}
-			// todo fight again
 		} else {
 			let responseModal = await Utils.showModal(player, "winFight", null, null, null, null, remainingPlayers);
 			if (responseModal) {

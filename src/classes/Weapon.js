@@ -14,7 +14,6 @@ export default class Weapon {
 	constructor(initial, value = null) {
 		let weapon;
 		if (value) {
-			console.log("value", value);
 			weapon = WEAPON.find(w => {
 				return w.value === value;
 			});
@@ -29,7 +28,6 @@ export default class Weapon {
 		this.initial = weapon.initial;
 		this.type = "Weapon";
 		this.value = weapon.value;
-		console.log("weapon", weapon);
 	}
 
 	defineWeapon(initial) {
@@ -39,7 +37,6 @@ export default class Weapon {
 			weaweapon = intialWeapons[Math.floor(intialWeapons.length * Math.random())];
 			return weaweapon;
 		} else {
-			console.log("all");
 			const Weapons = WEAPON.filter(w => w.univers === "all");
 			weaweapon = Weapons[Math.floor(Weapons.length * Math.random())];
 			return weaweapon;

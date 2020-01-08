@@ -137,7 +137,6 @@ function functiontruc(p, typeJeu) {
 	}
 }
 function renderchoosenPlayer() {
-	console.log("players", players);
 	$(".show-players-choosen").empty();
 	//$(".show-players-choose").append(`<div class="info-name tolkien">Les joueurs</div>`);
 	//let widthPlayer = $(".show-players-choose").width() / 6;

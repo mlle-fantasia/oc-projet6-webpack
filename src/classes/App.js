@@ -88,12 +88,10 @@ export default class App {
 				players.push(orc);
 			}
 		}
-		console.log("players ici", players);
 		return players;
 	}
 	generateWeapon() {
 		let weapons = [];
-		console.log("this.univers", this.univers);
 		if (this.univers === "4") {
 			weapons.push(new Weapon(null, "epee"));
 		} else {

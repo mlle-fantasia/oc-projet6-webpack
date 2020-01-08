@@ -71,7 +71,6 @@ async function renderYourTurn(player) {
 	renderInfoAllPlayer(app.players);
 	$(".player-" + player.playerNum).addClass("zoom");
 	$(".icon-info-accessory").click(async event => {
-		console.log("coucou");
 		let x = parseInt(
 			$(event.target)
 				.parent()
@@ -109,7 +108,6 @@ async function renderYourTurn(player) {
 
 		if (player.isMovableCell(x, y, app.grid)) {
 			player.move(x, y, app.grid);
-			console.log("player", player);
 
 			if (univers === "6" && retour) {
 				isEnd = app.destroyCell(app.grid, univers);
@@ -247,7 +245,6 @@ function goPageFight(player, isPlayerToFight, attackMe = false) {
 function testAttaque(x, y) {
 	let isPlayerToFight = Utils.isPlayerToFight(x, y, app.grid, 1);
 	if (isPlayerToFight) {
-		console.log("combat !!!!", isPlayerToFight);
 		return isPlayerToFight;
 	} else {
 		return false;
