@@ -9,8 +9,8 @@ export default class Player {
 	constructor(name, heroNum, playerNum, accessories, canMove = false) {
 		let forceOrc = Math.trunc(Math.random() * (20 - 8) + 8);
 		const tabVariablePlayer = {
-			ptVie: [29, 30, 36, 35, 33, 30, 20, forceOrc, 50],
-			force: [10, 12, 14, 10, 12, 13, 8, 8, 50],
+			ptVie: [16, 30, 36, 35, 33, 30, 20, forceOrc, 10],
+			force: [10, 12, 14, 10, 12, 13, 8, 8, 50], // pas utilisé
 			type: ["motorisé", "ailé", "énervé", "force-calme", "patriote", "joueur", "dépendant", "", ""],
 			pointFort: [
 				{ value: "fast", text: "peut se déplacer plus vite", chance: 100 },
@@ -153,10 +153,6 @@ export default class Player {
 					grid[x][y].objects.shift();
 				}
 			}
-			//console.log("grid[x][y].objects", grid[x][y].objects);
 		}
-	}
-	attack(isPlayerToFight) {
-		console.log("ataque...", isPlayerToFight);
 	}
 }

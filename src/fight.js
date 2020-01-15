@@ -213,57 +213,65 @@ function renderptViePlayer(pointVieInitial, playerToMaj, type, player) {
 	}
 }
 async function endGame(playerToMaj, player) {
-	if (univers === "6") {
-		let responseModal = await Utils.showModal(playerAttack, "quete" + univers + "Modal3", null);
-		if (responseModal) {
-			if (univers === "6") {
-				let responseModal = await Utils.showModal(playerAttack, "quete6Modal3success", null);
-				if (responseModal) {
-					let newGrid = deletePlayer();
-					retourGame(newGrid);
+	if (univers === "6" || univers === "5" || univers === "4") {
+		if (univers === "6") {
+			let responseModal = await Utils.showModal(playerAttack, "quete" + univers + "Modal3", null);
+			if (responseModal) {
+				if (univers === "6") {
+					let responseModal = await Utils.showModal(playerAttack, "quete6Modal3success", null);
+					if (responseModal) {
+						let newGrid = deletePlayer();
+						retourGame(newGrid);
+					}
+				}
+			} else {
+				let responseModal2 = await Utils.showModal(playerAttack, "quete" + univers + "Modal3fail", null, univers);
+				if (responseModal2) {
+					window.location.href = "index.html";
 				}
 			}
-		} else {
-			let responseModal2 = await Utils.showModal(playerAttack, "quete" + univers + "Modal3fail", null, univers);
-			if (responseModal2) {
-				window.location.href = "index.html";
-			}
 		}
-	} else {
-		if (univers === "5" && player.heroNum === 9) {
-			let responseModal = await Utils.showModal(player, "loseFight", null, null, null, null, remainingPlayers);
-			if (responseModal) {
-				window.location.href = "index.html";
+		if (univers === "5") {
+			if (player.heroNum === 9) {
+				let responseModal = await Utils.showModal(player, "quete5Modal3fail", null, null, null, null, remainingPlayers);
+				if (responseModal) {
+					window.location.href = "index.html";
+				}
+			} else {
+				let responseModal = await Utils.showModal(player, "quete5Modal3success", null, null, null, null, remainingPlayers);
+				if (responseModal) {
+					window.location.href = "index.html";
+				}
 			}
 		}
 		if (univers === "4") {
-			armee.shift();
-			if (armee.length) {
-				if (player.heroNum === 8) {
-					let responseModal = await Utils.showModal(player, "loseFight", null, null, null, null, remainingPlayers);
-					if (responseModal) {
-						window.location.href = "index.html";
-					}
-				} else {
-					localStorage.setItem("player", JSON.stringify(armee));
-					localStorage.setItem("playerToFight", JSON.stringify(playerDefence));
-					document.location.reload(true);
-				}
-			} else {
-				let responseModal = await Utils.showModal(player, "winFight", null, null, null, null, remainingPlayers);
+			if (player.heroNum === 8) {
+				let responseModal = await Utils.showModal(player, "quete4ModalFail", null, null, null, null, remainingPlayers);
 				if (responseModal) {
 					window.location.href = "index.html";
 				}
-			}
-		} else {
-			let responseModal = await Utils.showModal(player, "winFight", null, null, null, null, remainingPlayers);
-			if (responseModal) {
-				if (remainingPlayers > 0) {
-					let newGrid = deletePlayer(playerToMaj);
-					retourGame(newGrid);
+			} else {
+				armee.shift();
+				if (armee.length) {
+					localStorage.setItem("player", JSON.stringify(armee));
+					localStorage.setItem("playerToFight", JSON.stringify(playerDefence));
+					document.location.reload(true);
 				} else {
-					window.location.href = "index.html";
+					let responseModal = await Utils.showModal(player, "winFight", null, null, null, null, remainingPlayers);
+					if (responseModal) {
+						window.location.href = "index.html";
+					}
 				}
+			}
+		}
+	} else {
+		let responseModal = await Utils.showModal(player, "winFight", null, null, null, null, remainingPlayers);
+		if (responseModal) {
+			if (remainingPlayers > 0) {
+				let newGrid = deletePlayer(playerToMaj);
+				retourGame(newGrid);
+			} else {
+				window.location.href = "index.html";
 			}
 		}
 	}
@@ -295,20 +303,6 @@ function renderInfoPlayer(player) {
 			player.accessories[0].avantageText +
 			"</div></div>";
 	}
-	/* if (player.accessories && player.accessories[1]) {
-		accessory = 'src="images/accessories/' + player.accessories[1].imageGrid + '.png" alt="image accessoire"';
-		let temp = player.accessories[1].temporality === "perpetual" ? "avantage permanent" : "avantage ponctuel";
-		infoAccessory =
-			`<div class="container-info-name-accessory"><div class="info-name info-accessory accessory-text">` +
-			player.accessories[1].text +
-			`</div>
-		<div class="info-name info-accessory accessory-avantage">` +
-			player.accessories[1].avantageText +
-			`</div>
-			<div class="info-name info-accessory accessory-temp">` +
-			temp +
-			`</div></div>`;
-	} */
 	let heroSize = $(".info-attack-player").width();
 	let ArmorSize = $(".info-attack-player").width() / 2;
 	let tabAccessoryHtml = renderAccessoriesCurentPlayer(player);

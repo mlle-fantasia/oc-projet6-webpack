@@ -131,28 +131,6 @@ h2 {
 .checkbox {
 	align-items: center;
 }
-//pas utilisé
-.player1 {
-	background-image: url($path-image+"players/img/hero1.jpg");
-}
-.player2 {
-	background-image: url($path-image+"players/img/hero2.jpg");
-}
-.player3 {
-	background-image: url($path-image+"players/img/hero3.jpg");
-}
-.player4 {
-	background-image: url($path-image+"players/img/hero4.jpg");
-}
-.player5 {
-	background-image: url($path-image+"players/img/hero5.jpg");
-}
-.player6 {
-	background-image: url($path-image+"players/img/hero6.jpg");
-}
-.player7 {
-	background-image: url($path-image+"players/img/hero7.jpg");
-}
 .img-object-grid {
 	position: absolute;
 	background-size: contain;
@@ -228,8 +206,8 @@ h2 {
 	background-color: green;
 }
 //////// armes et accessoires /////////////
-.epee {
-	background-image: url($path-image+"accessories/epee.png");
+.boot {
+	background-image: url($path-image+"accessories/boot.png");
 }
 .cotte {
 	background-image: url($path-image+"accessories/cotte.png");

@@ -14,7 +14,7 @@ export default class Modal {
 		this.univers = univers;
 	}
 	render() {
-		let playerName = this.player.playerName + " ! ";
+		let playerName = this.univers === "5" || this.univers === "6" || this.univers === "4" ? "" : this.player.playerName + " ! ";
 		if (this.type === "loseFight" && (this.univers === "5" || this.univers === "4")) playerName = "";
 		if (this.type === "showObject") playerName = "";
 		let btnNo = "";
@@ -246,7 +246,7 @@ const TYPE = {
 	quete4Modal3: {
 		title: "Sauver Gondolin",
 		text:
-			"Vous êtes passé par des tunnels sous la montagne, des ponts, des des chemins escarpés, de longs escaliers, des pentes sinueuses et avez   passé les septs portes qui mènes à Gondolin : la porte de bois, la porte de pierre, la porte de bronze, la porte de fer forgé, la porte de marble blanc, la porte d'argent, et enfin, la porte d'or.",
+			"Vous êtes passé par des tunnels sous la montagne, des ponts, des des chemins escarpés, de longs escaliers, des pentes sinueuses et avez passé les septs portes qui mènes à Gondolin : la porte de bois, la porte de pierre, la porte de bronze, la porte de fer forgé, la porte de marble blanc, la porte d'argent, et enfin, la porte d'or. Enfin, Vous voyez la cité !",
 		image: "quete4Modal3",
 		btnYes: "Je livre mon message"
 	},
@@ -254,8 +254,14 @@ const TYPE = {
 		title: "Sauver Gondolin",
 		text:
 			"Vous avez accompli votre mission transmètre le message de danger imminent à Turgon roi de Gondolin mais il est trop tard, Melko à déjà découvert le passage et il a anvoyé son armée attaquer la ville, défendez la au péril de votre vie ! ",
-		image: "quete4Modal4",
+		image: "",
 		btnYes: "Je defend la cité !"
+	},
+	quete4ModalFail: {
+		title: "Sauver Gondolin",
+		text: "Vous n'avez pas réussi à sauver Gondolin de l'attaque surprise lancée par Melko, ",
+		image: "quete4ModalFail",
+		btnYes: "Terminé"
 	},
 	quete5Modal1: {
 		title: "Récupérer les Silmaril",
@@ -264,26 +270,17 @@ const TYPE = {
 		image: "quete5Modal1",
 		btnYes: "Je part"
 	},
-	quete5Modal2: {
-		title: "Récupérer les Silmaril",
-		text: "Vous voila équipé et prêt à passer à l'ataque, entrer dans la deumeure de Melko sous la montagne et ramenez les silmarils",
-		image: "quete5Modal2",
-		btnYes: "Je suis prêt",
-		btnNo: "Je rentre pas"
-	},
 	quete5Modal3fail: {
 		title: "Récupérer les Silmaril",
 		text:
 			"Vous avez échoué face à Melko. Mais votre exploi traversera les âges dans les chants elfiques. Très peu ont eu le courage d'affronter Melko en personne",
-		image: "quete5Modal2",
-		btnYes: "Je suis prêt",
-		btnNo: "Je rentre pas"
+		image: "quete5Modalfail",
+		btnYes: "Terminer"
 	},
 	quete5Modal3success: {
 		title: "Récupérer les Silmaril",
 		text: "Félicitation vous avec vaincu Melko et récupérer les silmarils, Luthien vous attend !",
-		image: "quete5Modal2",
-		btnYes: "Je suis prêt",
-		btnNo: "Je rentre pas"
+		image: "quete5Modalsuccess",
+		btnYes: "Terminer"
 	}
 };

@@ -206,7 +206,6 @@ async function renderYourTurn(player) {
 				} else {
 					let responseModal = await Utils.showModal(player, "fight", isPlayerToFight, x, y);
 					if (responseModal) {
-						//player.attack(isPlayerToFight);
 						goPageFight(player, isPlayerToFight);
 					}
 				}
