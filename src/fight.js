@@ -215,38 +215,60 @@ function renderptViePlayer(pointVieInitial, playerToMaj, type, player) {
 async function endGame(playerToMaj, player) {
 	if (univers === "6" || univers === "5" || univers === "4") {
 		if (univers === "6") {
-			let responseModal = await Utils.showModal(playerAttack, "quete" + univers + "Modal3", null);
-			if (responseModal) {
-				if (univers === "6") {
-					let responseModal = await Utils.showModal(playerAttack, "quete6Modal3success", null);
+			if (player.heroNum !== 7) {
+				let responseModal = await Utils.showModal(playerAttack, "quete6Modal3", null, null, univers);
+				if (responseModal) {
+					let responseModal = await Utils.showModal(playerAttack, "quete6Modal3success", null, null, univers);
 					if (responseModal) {
 						let newGrid = deletePlayer();
 						retourGame(newGrid);
 					}
+				} else {
+					let responseModal2 = await Utils.showModal(playerAttack, "quete6Modal3fail", null, null, univers);
+					if (responseModal2) {
+						window.location.href = "index.html";
+					}
 				}
 			} else {
-				let responseModal2 = await Utils.showModal(playerAttack, "quete" + univers + "Modal3fail", null, univers);
+				console.log("univers ok", univers);
+				let responseModal2 = await Utils.showModal(playerAttack, "quete6ModalFailGolum", null, null, univers);
 				if (responseModal2) {
 					window.location.href = "index.html";
 				}
 			}
 		}
 		if (univers === "5") {
-			if (player.heroNum === 9) {
-				let responseModal = await Utils.showModal(player, "quete5Modal3fail", null, null, null, null, remainingPlayers);
-				if (responseModal) {
-					window.location.href = "index.html";
+			if (player.heroNum !== 9 && player.heroNum !== 8) {
+				if (playerToMaj.heroNum === 9) {
+					let responseModal = await Utils.showModal(player, "quete5ModalSuccess", null, remainingPlayers, univers);
+					if (responseModal) {
+						window.location.href = "index.html";
+					}
+				} else {
+					let responseModal = await Utils.showModal(player, "quete5ModalWinOrcs", null, remainingPlayers, univers);
+					if (responseModal) {
+						let newGrid = deletePlayer(playerToMaj);
+						retourGame(newGrid);
+					}
 				}
 			} else {
-				let responseModal = await Utils.showModal(player, "quete5Modal3success", null, null, null, null, remainingPlayers);
-				if (responseModal) {
-					window.location.href = "index.html";
+				if (player.heroNum === 9) {
+					let responseModal = await Utils.showModal(player, "quete5ModalFail", null, remainingPlayers, univers);
+					if (responseModal) {
+						window.location.href = "index.html";
+					}
+				}
+				if (player.heroNum === 8) {
+					let responseModal = await Utils.showModal(player, "quete5ModalLoseOrcs", null, remainingPlayers, univers);
+					if (responseModal) {
+						window.location.href = "index.html";
+					}
 				}
 			}
 		}
 		if (univers === "4") {
 			if (player.heroNum === 8) {
-				let responseModal = await Utils.showModal(player, "quete4ModalFail", null, null, null, null, remainingPlayers);
+				let responseModal = await Utils.showModal(player, "quete4ModalFail", null, remainingPlayers, univers);
 				if (responseModal) {
 					window.location.href = "index.html";
 				}
@@ -257,7 +279,7 @@ async function endGame(playerToMaj, player) {
 					localStorage.setItem("playerToFight", JSON.stringify(playerDefence));
 					document.location.reload(true);
 				} else {
-					let responseModal = await Utils.showModal(player, "winFight", null, null, null, null, remainingPlayers);
+					let responseModal = await Utils.showModal(player, "winFight", null, remainingPlayers, univers);
 					if (responseModal) {
 						window.location.href = "index.html";
 					}
@@ -265,7 +287,7 @@ async function endGame(playerToMaj, player) {
 			}
 		}
 	} else {
-		let responseModal = await Utils.showModal(player, "winFight", null, null, null, null, remainingPlayers);
+		let responseModal = await Utils.showModal(player, "winFight", null, remainingPlayers, univers);
 		if (responseModal) {
 			if (remainingPlayers > 0) {
 				let newGrid = deletePlayer(playerToMaj);

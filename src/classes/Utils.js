@@ -7,10 +7,11 @@ import Weapon from "./Weapon.js";
 export default class Utils {
 	constructor() {}
 
-	static showModal(player, functionToCall, object, x, y, isPlayerToSteal, remainingPlayers, univers) {
+	static showModal(player, functionToCall, object, remainingPlayers, univers) {
 		if (functionToCall === "takeObject") {
 			functionToCall = object.constructor.name;
 		}
+		console.log("univers", univers);
 		let modal = new Modal(player, functionToCall, object, remainingPlayers, univers);
 		$("#game").prepend(modal.render());
 		let resonseModal = "pas encore de réponse";

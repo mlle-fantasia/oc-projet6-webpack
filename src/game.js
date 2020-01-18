@@ -37,7 +37,7 @@ $(document).ready(function() {
 	renderInfoAllPlayer(app.players);
 	//tour par tour
 	if ((univers === "4" || univers === "5" || univers === "6") && !retour) {
-		Utils.showModal(app.players[0], "quete" + univers + "Modal1", null);
+		Utils.showModal(app.players[0], "quete" + univers + "Modal1", null, null, univers);
 	}
 	nextPlayer();
 });
@@ -83,7 +83,7 @@ async function renderYourTurn(player) {
 		);
 		let isObject = app.grid[x][y].objects[0];
 		if (isObject) {
-			await Utils.showModal(player, "showObject", isObject, x, y);
+			await Utils.showModal(player, "showObject", isObject);
 		}
 		event.stopPropagation();
 	});
@@ -118,7 +118,7 @@ async function renderYourTurn(player) {
 			}
 			render(app.grid);
 			if (isEnd) {
-				let responseModal = await Utils.showModal(player, "quete" + univers + "ModalDead", null);
+				let responseModal = await Utils.showModal(player, "quete" + univers + "ModalDead");
 				if (responseModal) {
 					window.location.href = "index.html";
 				}
@@ -131,7 +131,7 @@ async function renderYourTurn(player) {
 					player.accessories.length < 2 ||
 					(player.accessories.length === 2 && !(isObject instanceof Accessory))
 				) {
-					let responseModal = await Utils.showModal(player, "takeObject", isObject, x, y);
+					let responseModal = await Utils.showModal(player, "takeObject", isObject);
 					if (responseModal) {
 						player.takeObject(x, y, app.grid, univers);
 					}
@@ -141,14 +141,17 @@ async function renderYourTurn(player) {
 
 			if (isGate) {
 				if (univers === "5") {
-					let melkoArme = new Weapon(null, "melko");
-					let melko = new Player("Melko", 9, 2, [melkoArme]);
-					goPageFight(player, melko, true);
+					let responseModal = await Utils.showModal(player, "quete4Modal4", null, null, univers);
+					if (responseModal) {
+						let melkoArme = new Weapon(null, "melko");
+						let melko = new Player("Melko", 9, 2, [melkoArme]);
+						goPageFight(player, melko, true);
+					}
 				}
 				if (univers === "4") {
-					let responseModal = await Utils.showModal(player, "quete" + univers + "Modal2", null);
+					let responseModal = await Utils.showModal(player, "quete4Modal2", null, null, univers);
 					if (responseModal) {
-						let responseModal = await Utils.showModal(player, "quete" + univers + "Modal3", null);
+						let responseModal = await Utils.showModal(player, "quete4Modal3", null, null, univers);
 						if (responseModal) {
 							let nbArmee = Math.trunc(Math.random() * (5 - 2) + 2);
 							let armee = [];
@@ -161,7 +164,7 @@ async function renderYourTurn(player) {
 					}
 				}
 				if (!retour) {
-					let responseModal = await Utils.showModal(player, "quete" + univers + "Modal2", null);
+					let responseModal = await Utils.showModal(player, "quete" + univers + "Modal2", null, null, univers);
 					if (responseModal) {
 						if (univers === "6") {
 							let golumArme = new Weapon(null, "cailloux");
@@ -178,7 +181,7 @@ async function renderYourTurn(player) {
 					}
 				} else {
 					if (univers === "6") {
-						let responseModal = await Utils.showModal(player, "quete" + univers + "ModalSuccess", null);
+						let responseModal = await Utils.showModal(player, "quete" + univers + "ModalSuccess", null, null, univers);
 						if (responseModal) {
 							window.location.href = "index.html";
 						}
@@ -187,14 +190,14 @@ async function renderYourTurn(player) {
 			}
 			let isObsToMove = avantageHero4(player, x, y);
 			if (isObsToMove) {
-				let responseModal = await Utils.showModal(player, "moveObstacle", isObsToMove, x, y);
+				let responseModal = await Utils.showModal(player, "moveObstacle", isObsToMove);
 				if (responseModal) {
 					player.moveObstacle(isObsToMove, app.grid, univers);
 				}
 			}
 			let isPlayerToSteal = avantageHeroSteal(player, x, y);
 			if (isPlayerToSteal) {
-				let responseModal = await Utils.showModal(player, "stealObject", isPlayerToSteal.accessories[1], x, y, isPlayerToSteal);
+				let responseModal = await Utils.showModal(player, "stealObject", isPlayerToSteal.accessories[1]);
 				if (responseModal) {
 					player.stealObject(isPlayerToSteal);
 				}
@@ -204,7 +207,7 @@ async function renderYourTurn(player) {
 				if (isPlayerToFight.heroNum === 8) {
 					goPageFight(player, isPlayerToFight, true);
 				} else {
-					let responseModal = await Utils.showModal(player, "fight", isPlayerToFight, x, y);
+					let responseModal = await Utils.showModal(player, "fight", isPlayerToFight);
 					if (responseModal) {
 						goPageFight(player, isPlayerToFight);
 					}

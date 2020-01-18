@@ -15,8 +15,9 @@ export default class Modal {
 	}
 	render() {
 		let playerName = this.univers === "5" || this.univers === "6" || this.univers === "4" ? "" : this.player.playerName + " ! ";
-		if (this.type === "loseFight" && (this.univers === "5" || this.univers === "4")) playerName = "";
+		//if (this.type === "loseFight" && (this.univers === "5" || this.univers === "4")) playerName = "";
 		if (this.type === "showObject") playerName = "";
+		console.log("playerName", this.univers, playerName);
 		let btnNo = "";
 		if (TYPE[this.type].btnNo) {
 			let data_response = "false";
@@ -223,6 +224,12 @@ const TYPE = {
 		text: "La montagne peut exploser, vous avez atteint des aigles, ils vont vous enmener en lieu sûr",
 		btnYes: "houra !"
 	},
+	quete6ModalFailGolum: {
+		title: "Détruire l'anneau unique",
+		text: "Golum à été plus fort que vous, animé par la volonté de récupérer son précieux. Vous êtes mort.",
+		image: "",
+		btnYes: "Terminer"
+	},
 	quete6ModalDead: {
 		title: "Détruire l'anneau unique",
 		text:
@@ -270,17 +277,29 @@ const TYPE = {
 		image: "quete5Modal1",
 		btnYes: "Je part"
 	},
-	quete5Modal3fail: {
+	quete5ModalFail: {
 		title: "Récupérer les Silmaril",
 		text:
 			"Vous avez échoué face à Melko. Mais votre exploi traversera les âges dans les chants elfiques. Très peu ont eu le courage d'affronter Melko en personne",
 		image: "quete5Modalfail",
 		btnYes: "Terminer"
 	},
-	quete5Modal3success: {
+	quete5ModalSuccess: {
 		title: "Récupérer les Silmaril",
 		text: "Félicitation vous avec vaincu Melko et récupérer les silmarils, Luthien vous attend !",
 		image: "quete5Modalsuccess",
+		btnYes: "Terminer"
+	},
+	quete5ModalWinOrcs: {
+		title: "Récupérer les Silmaril",
+		text: "Bravo, vous vous êtes bien défendu contre cette patrouille d'orcs ! Vous pouvez continuer votre quête ",
+		image: "quete5ModalWinOrcs",
+		btnYes: "Continuer"
+	},
+	quete5ModalLoseOrcs: {
+		title: "Récupérer les Silmaril",
+		text: "Vous vous êtes fait surprendre par une patrouille d'orcs, ils ont été plus forts que vous... ",
+		image: "quete5ModalWinOrcs",
 		btnYes: "Terminer"
 	}
 };
