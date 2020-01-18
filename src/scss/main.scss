@@ -257,8 +257,14 @@ h2 {
 .armor {
 	background-image: url($path-image+"accessories/armor.png");
 }
-.cotte_maille {
-	background-image: url($path-image+"accessories/cotte2.png");
+.cote_maille {
+	background-image: url($path-image+"accessories/cote_maille.png");
+}
+.cailloux {
+	background-image: url($path-image+"accessories/cailloux.png");
+}
+.marteau {
+	background-image: url($path-image+"accessories/marteau.png");
 }
 .container-accessories {
 	position: absolute;

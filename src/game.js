@@ -141,25 +141,25 @@ async function renderYourTurn(player) {
 
 			if (isGate) {
 				if (univers === "5") {
-					let responseModal = await Utils.showModal(player, "quete4Modal4", null, null, univers);
-					if (responseModal) {
-						let melkoArme = new Weapon(null, "melko");
-						let melko = new Player("Melko", 9, 2, [melkoArme]);
-						goPageFight(player, melko, true);
-					}
+					let melkoArme = new Weapon(null, "marteau");
+					let melko = new Player("Melko", 9, 2, [melkoArme]);
+					goPageFight(player, melko, true);
 				}
 				if (univers === "4") {
 					let responseModal = await Utils.showModal(player, "quete4Modal2", null, null, univers);
 					if (responseModal) {
 						let responseModal = await Utils.showModal(player, "quete4Modal3", null, null, univers);
 						if (responseModal) {
-							let nbArmee = Math.trunc(Math.random() * (5 - 2) + 2);
-							let armee = [];
-							for (let i = 0; i < nbArmee; i++) {
-								let arme = new Weapon("initial");
-								armee.push(new Player("orcs", 8, 2, [arme]));
+							let responseModal = await Utils.showModal(player, "quete4Modal4", null, null, univers);
+							if (responseModal) {
+								let nbArmee = Math.trunc(Math.random() * (5 - 2) + 2);
+								let armee = [];
+								for (let i = 0; i < nbArmee; i++) {
+									let arme = new Weapon("initial");
+									armee.push(new Player("orcs", 8, 2, [arme]));
+								}
+								goPageFight(player, armee, true);
 							}
-							goPageFight(player, armee, true);
 						}
 					}
 				}
@@ -171,13 +171,6 @@ async function renderYourTurn(player) {
 							let golum = new Player("Golum", 7, 2, [golumArme]);
 							goPageFight(player, golum, true);
 						}
-
-						/* localStorage.setItem("playerToFight", JSON.stringify(player));
-						let golumArme = new Weapon(null, "cailloux");
-						localStorage.setItem("player", JSON.stringify(new Player("Golum", 7, 2, [golumArme])));
-						localStorage.setItem("univers", univers);
-						localStorage.setItem("grid", JSON.stringify(app.grid));
-						window.location.href = "fight.html"; */
 					}
 				} else {
 					if (univers === "6") {
