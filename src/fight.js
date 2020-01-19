@@ -2,7 +2,86 @@ import "./scss/main.scss";
 import $ from "jquery";
 import "babel-polyfill";
 import Utils from "./classes/Utils";
-import Modal from "./classes/Modal";
+import imgHero1 from "../public/images/players/img/hero1.jpg";
+import imgHero2 from "../public/images/players/img/hero2.jpg";
+import imgHero3 from "../public/images/players/img/hero3.jpg";
+import imgHero4 from "../public/images/players/img/hero4.jpg";
+import imgHero5 from "../public/images/players/img/hero5.jpg";
+import imgHero6 from "../public/images/players/img/hero6.jpg";
+import imgHero7 from "../public/images/players/img/hero7.jpg";
+import imgHero8 from "../public/images/players/img/hero8.jpg";
+import imgHero9 from "../public/images/players/img/hero9.jpg";
+const imagesHeroes = {
+	1: imgHero1,
+	2: imgHero2,
+	3: imgHero3,
+	4: imgHero4,
+	5: imgHero5,
+	6: imgHero6,
+	7: imgHero7,
+	8: imgHero8,
+	9: imgHero9
+};
+import figureHero1 from "../public/images/players/grid/player1figure.png";
+import figureHero2 from "../public/images/players/grid/player2figure.png";
+import figureHero3 from "../public/images/players/grid/player3figure.png";
+import figureHero4 from "../public/images/players/grid/player4figure.png";
+import figureHero5 from "../public/images/players/grid/player5figure.png";
+import figureHero6 from "../public/images/players/grid/player6figure.png";
+import figureHero7 from "../public/images/players/grid/player7figure.png";
+import figureHero8 from "../public/images/players/grid/player8figure.png";
+import figureHero9 from "../public/images/players/grid/player9figure.png";
+const imagesHeroesFigure = {
+	1: figureHero1,
+	2: figureHero2,
+	3: figureHero3,
+	4: figureHero4,
+	5: figureHero5,
+	6: figureHero6,
+	7: figureHero7,
+	8: figureHero8,
+	9: figureHero9
+};
+import armor from "../public/images/accessories/armor.png";
+import boot from "../public/images/accessories/boot.png";
+import bouclier from "../public/images/accessories/bouclier.png";
+import cailloux from "../public/images/accessories/cailloux.png";
+import cote_maille from "../public/images/accessories/cote_maille.png";
+import cotte from "../public/images/accessories/cotte.png";
+import dague_etincelante from "../public/images/accessories/dague_etincelante.png";
+import hat from "../public/images/accessories/hat.png";
+import heaume from "../public/images/accessories/heaume.png";
+import hache from "../public/images/accessories/hache.png";
+import dard from "../public/images/accessories/dard.png";
+import epee from "../public/images/accessories/epee.png";
+import narsil from "../public/images/accessories/narsil.png";
+import nenya from "../public/images/accessories/nenya.png";
+import marteau from "../public/images/accessories/marteau.png";
+import mitril from "../public/images/accessories/mitril.png";
+import potion_healfy from "../public/images/accessories/potion_healfy.png";
+import potion_life from "../public/images/accessories/potion_life.png";
+import potion_strength from "../public/images/accessories/potion_strength.png";
+const imagesAccessories = {
+	armor: armor,
+	boot: boot,
+	bouclier: bouclier,
+	cailloux: cailloux,
+	cote_maille: cote_maille,
+	cotte: cotte,
+	dague_etincelante: dague_etincelante,
+	hat: hat,
+	heaume: heaume,
+	dard: dard,
+	epee: epee,
+	narsil: narsil,
+	nenya: nenya,
+	marteau: marteau,
+	mitril: mitril,
+	potion_healfy: potion_healfy,
+	potion_life: potion_life,
+	potion_strength: potion_strength,
+	hache: hache
+};
 
 const ANIMATE = ["shew", "rotate", "rotateX", "rotateY", "rotate3d", "scale"];
 let playerDefence = JSON.parse(localStorage.getItem("playerToFight"));
@@ -26,22 +105,17 @@ $(document).ready(function() {
 	$("#game").addClass("game-" + univers);
 	$(".fight-background").addClass("world" + univers + "-background");
 	let elementPlayerAttack = $(
-		" <img class='img-attack-player' src='images/players/grid/player" + playerAttack.heroNum + "figure.png' alt='image du joueur qui attaque'/>"
+		" <img class='img-attack-player' src='" + imagesHeroesFigure[playerAttack.heroNum] + "' alt='image du joueur qui attaque'/>"
 	);
 	let elementPlayerDefence = $(
-		"<img class='img-defence-player' src='images/players/grid/player" + playerDefence.heroNum + "figure.png' alt='image du joueur qui defend'/>"
+		"<img class='img-defence-player' src='" + imagesHeroesFigure[playerDefence.heroNum] + "' alt='image du joueur qui defend'/>"
 	);
 	$(".attack-player").append($(elementPlayerAttack));
 	$(".defence-player").append($(elementPlayerDefence));
 	let infoplayerDefence = renderInfoPlayer(playerDefence);
-	//	let tabAccessoryHtml = renderAccessoriesCurentPlayer(playerDefence);
 	let infoplayerAttack = renderInfoPlayer(playerAttack);
 	$(".info-attack-player").append(infoplayerAttack);
 	$(".info-defence-player").append(infoplayerDefence);
-	/*for (let i = 0; i < tabAccessoryHtml.length; i++) {
-		const html = tabAccessoryHtml[i];
-		$(".info-defence-player").append(html);
-	} */
 
 	renderptViePlayer(0, playerDefence, "defence");
 	renderptViePlayer(0, playerAttack, "attack");
@@ -182,7 +256,6 @@ function calculFight(player) {
 	}
 	player.force = force;
 	player.resistance = resistance;
-	//console.log("force, resistance", player.heroNum, force, resistance);
 }
 function renderptViePlayer(pointVieInitial, playerToMaj, type, player) {
 	let plus = pointVieInitial < playerToMaj.ptVie ? true : false;
@@ -317,56 +390,37 @@ function renderInfoPlayer(player) {
 	let weapon = "";
 	let infoWeapon = "";
 	if (player.accessories[0]) {
-		weapon = 'src="images/accessories/' + player.accessories[0].imageGrid + '.png" alt="image arme"';
-		infoWeapon =
-			'<div class="container-info-name-weapon"><div class="info-name info-weapon weapon-text">' +
-			player.accessories[0].text +
-			'</div><div class="info-name info-weapon weapon-avantage">' +
-			player.accessories[0].avantageText +
-			"</div></div>";
+		weapon = 'src="' + imagesAccessories[player.accessories[0].imageGrid] + '" alt="image arme"';
+		infoWeapon = `
+			<div class="container-info-name-weapon"><div class="info-name info-weapon weapon-text">
+			${player.accessories[0].text} 
+			</div>
+			<div class="info-name info-weapon weapon-avantage"> 
+			${player.accessories[0].avantageText} 
+			</div>
+			</div>`;
 	}
 	let heroSize = $(".info-attack-player").width();
 	let ArmorSize = $(".info-attack-player").width() / 2;
 	let tabAccessoryHtml = renderAccessoriesCurentPlayer(player);
 
-	let htmlInfoPlayer =
-		`
+	let htmlInfoPlayer = `
 		<div class="d-flex flex-column cercle-hero">
-	<div class="info-name tolkien">` +
-		player.playerName +
-		`</div>
-	<div class="background-cercle-player-hero" style="height:` +
-		heroSize +
-		`px">
-		
-		<img class="info-player2-img info-player2-img-hero " src="images/players/img/hero` +
-		player.heroNum +
-		`.jpg"
-			alt="image hero">
+	<div class="info-name tolkien">${player.playerName}</div>
+	<div class="background-cercle-player-hero" style="height:${heroSize}px">
+		<img class="info-player2-img info-player2-img-hero " src="${imagesHeroes[player.heroNum]}" alt="image hero">
 	</div>
-
-	<div class="info-name "> type : ` +
-		player.type +
-		`</div>
-	<div class="info-name ">` +
-		player.pointFort.text +
-		`</div>
+	<div class="info-name "> type : ${player.type} </div>
+	<div class="info-name ">${player.pointFort.text}</div>
 </div>
 <div class=" container-info-weapon">
-	<div class=" cercle-armor" style="height:` +
-		ArmorSize +
-		`px">
+	<div class=" cercle-armor" style="height:${ArmorSize}px">
 		<div class="background-cercle-anneau" >
-			<img class="info-player2-img info-player2-img-armor" ` +
-		weapon +
-		`>
-		
+			<img class="info-player2-img info-player2-img-armor" ${weapon}>
 		</div>
-	</div>
-	` +
-		infoWeapon +
-		`
+	</div>${infoWeapon} 
 </div>`;
+
 	for (let i = 0; i < tabAccessoryHtml.length; i++) {
 		const html = tabAccessoryHtml[i];
 		htmlInfoPlayer += html;
@@ -381,34 +435,23 @@ function renderAccessoriesCurentPlayer(player) {
 		let accessorySRC = "";
 		let infoAccessory = "";
 
-		accessorySRC = 'src="images/accessories/' + accessory.imageGrid + '.png" alt="image accessoire"';
+		accessorySRC = 'src="' + imagesAccessories[accessory.imageGrid] + '" alt="image accessoire"';
 		let temp = accessory.temporality === "perpetual" ? "avantage permanent" : "avantage ponctuel";
-		infoAccessory =
-			`<div class="container-info-name-accessory"><div class="info-name info-accessory accessory-text">` +
-			accessory.text +
-			`</div>
-		<div class="info-name info-accessory accessory-avantage">` +
-			accessory.avantageText +
-			`</div>
-			<div class="info-name info-accessory accessory-temp">` +
-			temp +
-			`</div></div>`;
+		infoAccessory = `<div class="container-info-name-accessory">
+				<div class="info-name info-accessory accessory-text">${accessory.text} 
+				</div>
+				<div class="info-name info-accessory accessory-avantage">${accessory.avantageText} 
+				</div>
+				<div class="info-name info-accessory accessory-temp">${temp} </div>
+			</div>`;
 
-		let oneAccessory =
-			`<div class=" container-info-accessory">
-		<div class="cercle-accessory ">
-			<div class="background-cercle-anneau" style="height:` +
-			AccessorySize +
-			`px">
-				<img class="info-player2-img info-player2-img-accessory"` +
-			accessorySRC +
-			` >
-			</div>
-		</div>` +
-			infoAccessory +
-			`
-		
-	</div>`;
+		let oneAccessory = `<div class=" container-info-accessory">
+				<div class="cercle-accessory ">
+					<div class="background-cercle-anneau" style="height:${AccessorySize}px">
+						<img class="info-player2-img info-player2-img-accessory" ${accessorySRC}>
+					</div>
+				</div>${infoAccessory} 
+			</div>`;
 		accessories.push(oneAccessory);
 	}
 	return accessories;
