@@ -8,44 +8,20 @@ import Gate from "./Gate";
 export default class Player {
 	constructor(name, heroNum, playerNum, accessories, canMove = false) {
 		let forceOrc = Math.trunc(Math.random() * (20 - 8) + 8);
-		const tabVariablePlayer = {
-			ptVie: [30, 30, 36, 35, 33, 30, 20, forceOrc, 50],
-			force: [10, 12, 14, 10, 12, 13, 8, 8, 50], // pas utilisé
-			type: ["motorisé", "ailé", "énervé", "force-calme", "patriote", "joueur", "dépendant", "", ""],
-			pointFort: [
-				{ value: "fast", text: "peut se déplacer plus vite", chance: 100 },
-				{ value: "attack", text: "peut attaquer deux fois", chance: 100 },
-				{ value: "steal", text: "peut voler un objet", chance: 100 },
-				{ value: "move", text: "peut déplacer les obstacles", chance: 100 },
-				{ value: "long", text: "peut attaquer de plus loin", chance: 100 },
-				{ value: "copy", text: "peut imiter le point fort d'un autre joueur", chance: 100 },
-				{ value: "teath", text: "a des dents asserées", chance: 100 },
-				{ value: "orc", text: "", chance: 100 },
-				{ value: "melko", text: "", chance: 100 }
-			],
-			hero: [
-				"L'elfe inventeur fou",
-				"L'elfe dresseur le dragon",
-				"Le mercenaire venu du sud",
-				"L'homme des cavernes aveugle",
-				"Le gardien de la citadelle",
-				"Le maître du destin",
-				"Le puant",
-				"elfe déchu",
-				"Ainur déchu"
-			]
-		};
+		const tabHeroes = Utils.tabHeroes();
+		tabHeroes[8].pointVie = forceOrc;
+
 		this.canMove = canMove;
 		this.playerName = name;
 		this.playerNum = playerNum;
 		this.heroNum = heroNum;
-		this.hero = tabVariablePlayer.hero[heroNum - 1];
+		this.hero = tabHeroes[heroNum].text;
 		this.image = "hero" + heroNum;
 		this.imageGrid = "hero" + heroNum + "-grid";
-		this.ptVieMax = tabVariablePlayer.ptVie[heroNum - 1];
-		this.ptVie = tabVariablePlayer.ptVie[heroNum - 1];
-		this.type = tabVariablePlayer.type[heroNum - 1];
-		this.pointFort = tabVariablePlayer.pointFort[heroNum - 1];
+		this.ptVieMax = tabHeroes[heroNum].pointVie;
+		this.ptVie = tabHeroes[heroNum].pointVie;
+		this.type = tabHeroes[heroNum].type;
+		this.pointFort = tabHeroes[heroNum].pointFort;
 		this.accessories = accessories;
 		this.placeX;
 		this.placeY;

@@ -2,10 +2,89 @@ import config from "../conf.json";
 import Player from "./Player";
 import Obstacle from "./Obstacle";
 import Modal from "./Modal.js";
+import "babel-polyfill";
 import Weapon from "./Weapon.js";
 
 export default class Utils {
 	constructor() {}
+
+	static tabHeroes() {
+		const tabHeroes = {
+			1: {
+				text: "L'elfe inventeur fou",
+				type: "motorisé",
+				pointVie: 30,
+				force: 10,
+				pointFort: { value: "fast", text: "peut avancer plus vite", chance: 100 },
+				image: "/images/players/img/hero1.jpg"
+			},
+			2: {
+				text: "L'elfe dresseur le dragon",
+				type: "ailé",
+				pointVie: 30,
+				force: 10,
+				pointFort: { value: "attack", text: "peut attaquer deux fois", chance: 100 },
+				image: "/images/players/img/hero2.jpg"
+			},
+			3: {
+				text: "Le mercenaire venu du sud",
+				type: "énervé",
+				pointVie: 30,
+				force: 10,
+				pointFort: { value: "steal", text: "peut voler un objet", chance: 100 },
+				image: "/images/players/img/hero3.jpg"
+			},
+			4: {
+				text: "L'homme des cavernes aveugle",
+				type: "force-calme",
+				pointVie: 30,
+				force: 10,
+				pointFort: { value: "move", text: "peut déplacer les obstacles", chance: 100 },
+				image: "/images/players/img/hero4.jpg"
+			},
+			5: {
+				text: "Le gardien de la citadelle",
+				type: "patriote",
+				pointVie: 30,
+				force: 10,
+				pointFort: { value: "long", text: "peut attaquer de plus loin", chance: 100 },
+				image: "/images/players/img/hero5.jpg"
+			},
+			6: {
+				text: "Le maître du destin",
+				type: "joueur",
+				pointVie: 30,
+				force: 10,
+				pointFort: { value: "copy", text: "peut imiter le point fort d'un autre joueur", chance: 100 },
+				image: "/images/players/img/hero6.jpg"
+			},
+			7: {
+				text: "Le puant",
+				type: "dépendant",
+				pointVie: 30,
+				force: 10,
+				pointFort: { value: "teath", text: "à les dents asserrées", chance: 100 },
+				image: ""
+			},
+			8: {
+				text: "Elfe dechu",
+				type: "",
+				pointVie: 15,
+				force: 10,
+				pointFort: { value: "orc", text: "", chance: 100 },
+				image: ""
+			},
+			9: {
+				text: "Ainur Dechu",
+				type: "",
+				pointVie: 50,
+				force: 10,
+				pointFort: { value: "melko", text: "A la puissance d'un dieu", chance: 100 },
+				image: ""
+			}
+		};
+		return tabHeroes;
+	}
 
 	static showModal(player, functionToCall, object, remainingPlayers, univers) {
 		if (functionToCall === "takeObject") {

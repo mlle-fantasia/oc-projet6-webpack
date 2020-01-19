@@ -7,6 +7,66 @@ import Modal from "./classes/Modal";
 import Utils from "./classes/Utils";
 import Weapon from "./classes/Weapon";
 import Accessory from "./classes/Accessory";
+import imgHero1 from "../public/images/players/img/hero1.jpg";
+import imgHero2 from "../public/images/players/img/hero2.jpg";
+import imgHero3 from "../public/images/players/img/hero3.jpg";
+import imgHero4 from "../public/images/players/img/hero4.jpg";
+import imgHero5 from "../public/images/players/img/hero5.jpg";
+import imgHero6 from "../public/images/players/img/hero6.jpg";
+import imgHero7 from "../public/images/players/img/hero6.jpg";
+import imgHero8 from "../public/images/players/img/hero6.jpg";
+import imgHero9 from "../public/images/players/img/hero6.jpg";
+const imagesHeroes = {
+	1: imgHero1,
+	2: imgHero2,
+	3: imgHero3,
+	4: imgHero4,
+	5: imgHero5,
+	6: imgHero6,
+	7: imgHero7,
+	8: imgHero8,
+	9: imgHero9
+};
+import armor from "../public/images/accessories/armor.png";
+import boot from "../public/images/accessories/boot.png";
+import bouclier from "../public/images/accessories/bouclier.png";
+import cailloux from "../public/images/accessories/cailloux.png";
+import cote_maille from "../public/images/accessories/cote_maille.png";
+import cotte from "../public/images/accessories/cotte.png";
+import dague from "../public/images/accessories/dague_etincelante.png";
+import hat from "../public/images/accessories/hat.png";
+import heaume from "../public/images/accessories/heaume.png";
+import hache from "../public/images/accessories/hache.png";
+import dard from "../public/images/accessories/dard.png";
+import epee from "../public/images/accessories/epee.png";
+import narsil from "../public/images/accessories/narsil.png";
+import nenya from "../public/images/accessories/nenya.png";
+import marteau from "../public/images/accessories/marteau.png";
+import mitril from "../public/images/accessories/mitril.png";
+import potion_healfy from "../public/images/accessories/potion_healfy.png";
+import potion_life from "../public/images/accessories/potion_life.png";
+import potion_strength from "../public/images/accessories/potion_strength.png";
+const imagesAccessories = {
+	armor: armor,
+	boot: boot,
+	bouclier: bouclier,
+	cailloux: cailloux,
+	cote_maille: cote_maille,
+	cotte: cotte,
+	dague: dague,
+	hat: hat,
+	heaume: heaume,
+	dard: dard,
+	epee: epee,
+	narsil: narsil,
+	nenya: nenya,
+	marteau: marteau,
+	mitril: mitril,
+	potion_healfy: potion_healfy,
+	potion_life: potion_life,
+	potion_strength: potion_strength,
+	hache: hache
+};
 
 var indexCurrentPlayer = -1;
 let players = JSON.parse(localStorage.getItem("players"));
@@ -318,55 +378,32 @@ function renderObjectCell(cell, newCase) {
 function renderInfoCurrentPlayer(player) {
 	let heroSize = $(".info-current-player").width();
 	let ArmorSize = $(".info-current-player").width() / 2;
-	return (
-		`<div class="d-flex flex-column cercle-hero">
-	<div class="info-name tolkien">` +
-		player.playerName +
-		`</div>
-	<div class="background-cercle-player-hero" style="height:` +
-		heroSize +
-		`px">
+	return `<div class="d-flex flex-column cercle-hero">
+	<div class="info-name tolkien">${player.playerName} </div>
+	<div class="background-cercle-player-hero" style="height:${heroSize}px">
 		<div class="container-info-player-vie">
 			<div id="triangle-1"></div>
 			<div id="triangle-2"></div>
 		</div>
-		<div class="info-player-vie">` +
-		player.ptVie +
-		`</div>
-		<img class="info-player2-img info-player2-img-hero " src="images/players/img/hero` +
-		player.heroNum +
-		`.jpg"
+		<div class="info-player-vie">${player.ptVie}</div>
+		<img class="info-player2-img info-player2-img-hero " src="${imagesHeroes[player.heroNum]}"
 			alt="image hero">
 	</div>
 
-	<div class="info-name "> type : ` +
-		player.type +
-		`</div>
-	<div class="info-name ">` +
-		player.pointFort.text +
-		`</div>
+	<div class="info-name "> type : ${player.type}</div>
+	<div class="info-name ">${player.pointFort.text}</div>
 </div>
 <div class=" container-info-weapon">
-	<div class=" cercle-armor" style="height:` +
-		ArmorSize +
-		`px">
+	<div class=" cercle-armor" style="height:${ArmorSize}px">
 		<div class="background-cercle-anneau" >
-			<img class="info-player2-img info-player2-img-armor" src="images/accessories/` +
-		player.accessories[0].imageGrid +
-		`.png"
-				alt="image arme">
+			<img class="info-player2-img info-player2-img-armor" src="${imagesAccessories[player.accessories[0].imageGrid]}" alt="image arme">
 		</div>
 	</div>
 	<div class="container-info-name-weapon">
-	<div class="info-name info-weapon weapon-text tolkien">` +
-		player.accessories[0].text +
-		`</div>
-	<div class="info-name info-weapon weapon-avantage">` +
-		player.accessories[0].avantageText +
-		`</div></div>
+	<div class="info-name info-weapon weapon-text tolkien">$(player.accessories[0].text)</div>
+	<div class="info-name info-weapon weapon-avantage">${player.accessories[0].avantageText} </div></div>
 </div>
-`
-	);
+`;
 }
 function renderAccessoriesCurentPlayer(player) {
 	let accessories = [];
@@ -376,33 +413,18 @@ function renderAccessoriesCurentPlayer(player) {
 		let accessorySRC = "";
 		let infoAccessory = "";
 
-		accessorySRC = 'src="images/accessories/' + accessory.imageGrid + '.png" alt="image accessoire"';
+		accessorySRC = 'src="images/accessories/' + imagesAccessories[accessory.imageGrid] + '" alt="image accessoire"';
 		let temp = accessory.temporality === "perpetual" ? "avantage permanent" : "avantage ponctuel";
-		infoAccessory =
-			`<div class="container-info-name-accessory"><div class="info-name info-accessory accessory-text tolkien">` +
-			accessory.text +
-			`</div>
-		<div class="info-name info-accessory accessory-avantage">` +
-			accessory.avantageText +
-			`</div>
-			<div class="info-name info-accessory accessory-temp">` +
-			temp +
-			`</div></div>`;
+		infoAccessory = `<div class="container-info-name-accessory"><div class="info-name info-accessory accessory-text tolkien">${accessory.text}</div>
+		<div class="info-name info-accessory accessory-avantage">${accessory.avantageText}</div>
+			<div class="info-name info-accessory accessory-temp">${temp}</div></div>`;
 
-		let oneAccessory =
-			`<div class=" container-info-accessory">
+		let oneAccessory = `<div class=" container-info-accessory">
 		<div class="cercle-accessory ">
-			<div class="background-cercle-anneau" style="height:` +
-			AccessorySize +
-			`px">
-				<img class="info-player2-img info-player2-img-accessory"` +
-			accessorySRC +
-			` >
+			<div class="background-cercle-anneau" style="height:${AccessorySize}px">
+				<img class="info-player2-img info-player2-img-accessory"${accessorySRC} >
 			</div>
-		</div>` +
-			infoAccessory +
-			`
-		
+		</div>${infoAccessory} 
 	</div>`;
 		accessories.push(oneAccessory);
 	}
@@ -418,37 +440,22 @@ function renderInfoAllPlayer(players) {
 		const player = players2[p];
 		let accessory = "";
 		if (player.accessories[1]) {
-			accessory = 'src="images/accessories/' + player.accessories[1].imageGrid + '.png" alt="image accessoire"';
+			accessory = 'src="' + imagesAccessories[player.accessories[1].imageGrid] + '" alt="image accessoire"';
 		}
-		let onePlayer =
-			`<div class="player" style="height:` +
-			widthPlayer +
-			`px">
+		let onePlayer = `<div class="player" style="height:${widthPlayer}px">
 	<div class="background-cercle-player-hero">
 		<div class="container-info-players-vie">
 			<div id="triangle-1"></div>
 			<div id="triangle-2"></div>
 		</div>
-		<div class="info-players-vie">` +
-			player.ptVie +
-			`</div>
-		<img class="info-player2-img info-player2-img-hero " src="images/players/img/hero` +
-			player.heroNum +
-			`.jpg"
-			alt="image hero">
+		<div class="info-players-vie">${player.ptVie}</div>
+		<img class="info-player2-img info-player2-img-hero " src="${imagesHeroes[player.heroNum]}" alt="image hero">
 			<div class="background-cercle-anneau all-player-weapon">
-			<img class="info-player2-img info-player2-img-armor" src="images/accessories/` +
-			player.accessories[0].imageGrid +
-			`.png"
-			alt="image arme"></div>
+			<img class="info-player2-img info-player2-img-armor" src="${imagesAccessories[player.accessories[0].imageGrid]}" alt="image arme"></div>
 			<div class="background-cercle-anneau all-player-accessory">
-			<img class="info-player2-img info-player2-img-armor" ` +
-			accessory +
-			`></div>
+			<img class="info-player2-img info-player2-img-armor" ${accessory}></div>
 	</div>
-	<div class="info-name tolkien ">` +
-			player.playerName +
-			`</div>
+	<div class="info-name tolkien ">${player.playerName}</div>
 </div>`;
 		$(".info-all-players").append(onePlayer);
 	}

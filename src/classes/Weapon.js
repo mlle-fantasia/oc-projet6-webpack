@@ -1,5 +1,5 @@
 const WEAPON = [
-	{ value: "dague-etincelante", text: "jolie dague étincelante", avantageText: "possède 9 de dégat", degat: 9, initial: true, univers: "all" },
+	{ value: "dague_etincelante", text: "jolie dague étincelante", avantageText: "possède 9 de dégat", degat: 9, initial: true, univers: "all" },
 	{ value: "nenya", text: "Nenya l'annaeu magique", avantageText: "possède 20 de dégat", degat: 20, initial: false, univers: "all" },
 	{ value: "dard", text: "Dard, la dague elfique", avantageText: "possède 10 de dégat", degat: 10, initial: true, univers: "all" },
 	{ value: "narsil", text: "Narsil, la flemme de l'ouest", avantageText: "possède 15 de dégat", degat: 15, initial: false, univers: "all" },
