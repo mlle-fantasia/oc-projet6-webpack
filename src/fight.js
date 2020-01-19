@@ -352,7 +352,7 @@ async function endGame(playerToMaj, player) {
 					localStorage.setItem("playerToFight", JSON.stringify(playerDefence));
 					document.location.reload(true);
 				} else {
-					let responseModal = await Utils.showModal(player, "winFight", null, remainingPlayers, univers);
+					let responseModal = await Utils.showModal(player, "quete4ModalSuccess", null, remainingPlayers, univers);
 					if (responseModal) {
 						window.location.href = "index.html";
 					}

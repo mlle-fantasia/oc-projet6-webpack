@@ -121,12 +121,13 @@ export default class Modal {
 			this.object = null;
 		}
 		let image = "";
+		console.log("type", this.type, TYPE[this.type].image);
 		if (TYPE[this.type].image) {
 			image = `
-<div class="quete-image-modal" >
-	<img class="" src="${imagesQuete[TYPE[this.type].image]}" alt="illustration de la quete">
-</div>
-`;
+				<div class="quete-image-modal" >
+					<img class="" src="${imagesQuete[TYPE[this.type].image]}" alt="illustration de la quete">
+				</div>
+				`;
 		}
 		let object = "";
 		if (this.object && (this.object instanceof Weapon || this.object instanceof Accessory)) {
@@ -259,17 +260,17 @@ const TYPE = {
 		title: "Détruire l'anneau unique",
 		text:
 			"Le coeur des homme est aisement coruptible et l'anneau à sa volonté propre, vous avez cédez à son pouvoir et échoué dans votre mission. L'anneau vous trahira en vous menant à la mort et toutes les contrées de la terre du milieu tomberont sous l'emprise de Sauron...",
-		image: "quete6Modal3fail",
+		image: "quete6ModalFail",
 		btnYes: "..."
 	},
 	quete6ModalSuccess: {
 		title: "Détruire l'anneau unique",
 		text:
 			"Vous avez pris la bonne décision, vous avez accompli la tâche qui vous a été confiée ! Jeter l'anneau dans le feu était le seul moyen de le détruire et de libérer la terre du milieu de l'emprise de Sauron. Mais le volcan commence à se reveiller, il vous faut sortir maintenant et éviter de mourir des rochers en fusion",
-		image: "quete6Modal3success",
+		image: "quete6ModalSuccess",
 		btnYes: "Je fuis !"
 	},
-	quete6ModalSuccess: {
+	quete6ModalSuccessAigle: {
 		title: "Détruire l'anneau unique",
 		text: "La montagne peut exploser, vous avez atteint des aigles, ils vont vous enmener en lieu sûr",
 		btnYes: "houra !"
@@ -316,8 +317,14 @@ const TYPE = {
 	},
 	quete4ModalFail: {
 		title: "Sauver Gondolin",
-		text: "Vous n'avez pas réussi à sauver Gondolin de l'attaque surprise lancée par Melko, ",
+		text: "Vous n'avez pas réussi à sauver Gondolin de l'attaque surprise lancée par Melko. ",
 		image: "quete4ModalFail",
+		btnYes: "Terminé"
+	},
+	quete4ModalSuccess: {
+		title: "Sauver Gondolin",
+		text: "Félicitations grâce à vos exploits Gondolin est sauve. le roi Turgon vous en remercie ! ",
+		image: "",
 		btnYes: "Terminé"
 	},
 	quete5Modal1: {
@@ -331,7 +338,7 @@ const TYPE = {
 		title: "Récupérer les Silmaril",
 		text:
 			"Vous avez échoué face à Melko. Mais votre exploi traversera les âges dans les chants elfiques. Très peu ont eu le courage d'affronter Melko en personne",
-		image: "quete5Modalfail",
+		image: "quete5ModalFail",
 		btnYes: "Terminer"
 	},
 	quete5ModalSuccess: {

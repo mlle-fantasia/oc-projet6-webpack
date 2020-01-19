@@ -33,7 +33,7 @@ import bouclier from "../public/images/accessories/bouclier.png";
 import cailloux from "../public/images/accessories/cailloux.png";
 import cote_maille from "../public/images/accessories/cote_maille.png";
 import cotte from "../public/images/accessories/cotte.png";
-import dague from "../public/images/accessories/dague_etincelante.png";
+import dague_etincelante from "../public/images/accessories/dague_etincelante.png";
 import hat from "../public/images/accessories/hat.png";
 import heaume from "../public/images/accessories/heaume.png";
 import hache from "../public/images/accessories/hache.png";
@@ -53,7 +53,7 @@ const imagesAccessories = {
 	cailloux: cailloux,
 	cote_maille: cote_maille,
 	cotte: cotte,
-	dague: dague,
+	dague_etincelante: dague_etincelante,
 	hat: hat,
 	heaume: heaume,
 	dard: dard,
@@ -234,7 +234,7 @@ async function renderYourTurn(player) {
 					}
 				} else {
 					if (univers === "6") {
-						let responseModal = await Utils.showModal(player, "quete" + univers + "ModalSuccess", null, null, univers);
+						let responseModal = await Utils.showModal(player, "quete6odalSuccessAigle", null, null, univers);
 						if (responseModal) {
 							window.location.href = "index.html";
 						}
@@ -400,7 +400,7 @@ function renderInfoCurrentPlayer(player) {
 		</div>
 	</div>
 	<div class="container-info-name-weapon">
-	<div class="info-name info-weapon weapon-text tolkien">$(player.accessories[0].text)</div>
+	<div class="info-name info-weapon weapon-text tolkien">${player.accessories[0].text}</div>
 	<div class="info-name info-weapon weapon-avantage">${player.accessories[0].avantageText} </div></div>
 </div>
 `;
@@ -413,7 +413,7 @@ function renderAccessoriesCurentPlayer(player) {
 		let accessorySRC = "";
 		let infoAccessory = "";
 
-		accessorySRC = 'src="images/accessories/' + imagesAccessories[accessory.imageGrid] + '" alt="image accessoire"';
+		accessorySRC = 'src="' + imagesAccessories[accessory.imageGrid] + '" alt="image accessoire"';
 		let temp = accessory.temporality === "perpetual" ? "avantage permanent" : "avantage ponctuel";
 		infoAccessory = `<div class="container-info-name-accessory"><div class="info-name info-accessory accessory-text tolkien">${accessory.text}</div>
 		<div class="info-name info-accessory accessory-avantage">${accessory.avantageText}</div>
