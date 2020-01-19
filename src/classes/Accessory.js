@@ -66,10 +66,10 @@ const ACCESSORY = [
 		value: "boot",
 		text: "bottes étanches",
 		avantage: 1,
-		avantageText: "ajoute 1 de déplacement",
+		avantageText: "ajoute 1 de résistance",
 		temporality: "perpetual",
 		univers: "all",
-		type: "deplacement"
+		type: "protection"
 	},
 	{
 		value: "bouclier",

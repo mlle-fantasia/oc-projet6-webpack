@@ -87,8 +87,9 @@ export default class Utils {
 	}
 
 	static showModal(player, functionToCall, object, remainingPlayers, univers) {
+		console.log("object", object);
 		if (functionToCall === "takeObject") {
-			functionToCall = object.constructor.name;
+			functionToCall = object.type === "weapon" ? "weapon" : "accessory";
 		}
 		console.log("univers", univers);
 		let modal = new Modal(player, functionToCall, object, remainingPlayers, univers);

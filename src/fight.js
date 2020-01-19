@@ -218,13 +218,13 @@ async function endGame(playerToMaj, player) {
 			if (player.heroNum !== 7) {
 				let responseModal = await Utils.showModal(playerAttack, "quete6Modal3", null, null, univers);
 				if (responseModal) {
-					let responseModal = await Utils.showModal(playerAttack, "quete6Modal3success", null, null, univers);
+					let responseModal = await Utils.showModal(playerAttack, "quete6ModalSuccess", null, null, univers);
 					if (responseModal) {
 						let newGrid = deletePlayer();
 						retourGame(newGrid);
 					}
 				} else {
-					let responseModal2 = await Utils.showModal(playerAttack, "quete6Modal3fail", null, null, univers);
+					let responseModal2 = await Utils.showModal(playerAttack, "quete6ModalFail", null, null, univers);
 					if (responseModal2) {
 						window.location.href = "index.html";
 					}
