@@ -342,7 +342,7 @@ function renderInfoCurrentPlayer(player) {
 		</div>
 	</div>
 	<div class="container-info-name-weapon">
-	<div class="info-name info-weapon weapon-text tolkien">${player.accessories[0].text}</div>
+	<div class="info-name info-weapon weapon-text ">${player.accessories[0].text}</div>
 	<div class="info-name info-weapon weapon-avantage">${player.accessories[0].avantageText} </div></div>
 </div>
 `;

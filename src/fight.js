@@ -173,6 +173,7 @@ function usePotion(player, type, otherPlayer) {
 			player.potion = true;
 		}
 	}
+	if (!player.potion) $("#btn-use-potion-player-" + type).prop("disabled", true);
 	renderptViePlayer(pointVieInitiale, player, type, otherPlayer);
 	$(".info-" + type + "-player").empty();
 	let infoplayer = renderInfoPlayer(player);
