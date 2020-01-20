@@ -3,7 +3,6 @@ import Player from "./Player";
 import Obstacle from "./Obstacle";
 import Modal from "./Modal.js";
 import "babel-polyfill";
-import Weapon from "./Weapon.js";
 
 export default class Utils {
 	constructor() {}
@@ -15,7 +14,7 @@ export default class Utils {
 				type: "motorisé",
 				pointVie: 30,
 				force: 10,
-				pointFort: { value: "fast", text: "peut avancer plus vite", chance: 100 },
+				pointFort: { value: "fast", text: "peut avancer plus vite", chance: 80 },
 				image: "/images/players/img/hero1.jpg"
 			},
 			2: {
@@ -23,7 +22,7 @@ export default class Utils {
 				type: "ailé",
 				pointVie: 30,
 				force: 10,
-				pointFort: { value: "attack", text: "peut attaquer deux fois", chance: 100 },
+				pointFort: { value: "attack", text: "peut attaquer deux fois", chance: 50 },
 				image: "/images/players/img/hero2.jpg"
 			},
 			3: {
@@ -31,7 +30,7 @@ export default class Utils {
 				type: "énervé",
 				pointVie: 30,
 				force: 10,
-				pointFort: { value: "steal", text: "peut voler un objet", chance: 100 },
+				pointFort: { value: "steal", text: "peut voler un objet", chance: 30 },
 				image: "/images/players/img/hero3.jpg"
 			},
 			4: {
@@ -39,7 +38,7 @@ export default class Utils {
 				type: "force-calme",
 				pointVie: 30,
 				force: 10,
-				pointFort: { value: "move", text: "peut déplacer les obstacles", chance: 100 },
+				pointFort: { value: "move", text: "peut déplacer les obstacles", chance: 80 },
 				image: "/images/players/img/hero4.jpg"
 			},
 			5: {
@@ -47,7 +46,7 @@ export default class Utils {
 				type: "patriote",
 				pointVie: 30,
 				force: 10,
-				pointFort: { value: "long", text: "peut attaquer de plus loin", chance: 100 },
+				pointFort: { value: "long", text: "peut attaquer de plus loin", chance: 40 },
 				image: "/images/players/img/hero5.jpg"
 			},
 			6: {
@@ -55,7 +54,7 @@ export default class Utils {
 				type: "joueur",
 				pointVie: 30,
 				force: 10,
-				pointFort: { value: "copy", text: "peut imiter le point fort d'un autre joueur", chance: 100 },
+				pointFort: { value: "copy", text: "peut imiter le point fort d'un autre joueur", chance: 60 },
 				image: "/images/players/img/hero6.jpg"
 			},
 			7: {
@@ -71,7 +70,7 @@ export default class Utils {
 				type: "",
 				pointVie: 15,
 				force: 10,
-				pointFort: { value: "orc", text: "", chance: 100 },
+				pointFort: { value: "orc", text: "est au service de Melko", chance: 100 },
 				image: ""
 			},
 			9: {
@@ -387,7 +386,6 @@ export default class Utils {
 
 	static calculChanceAvantage(ptfort) {
 		let chance = Math.floor(Math.random() * Math.floor(100));
-		//console.log("chance", chance);
 		if (chance <= ptfort.chance) {
 			return true;
 		} else {
@@ -395,7 +393,6 @@ export default class Utils {
 		}
 	}
 	static updateCell(x, y, cell, grid) {
-		// todo gérer les erreurs
 		grid[x][y] = cell;
 	}
 }

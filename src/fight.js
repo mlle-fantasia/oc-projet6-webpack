@@ -241,7 +241,6 @@ async function endGame(playerToMaj, player) {
 					}
 				}
 			} else {
-				console.log("univers ok", univers);
 				let responseModal2 = await Utils.showModal(playerAttack, "quete6ModalFailGolum", null, null, univers);
 				if (responseModal2) {
 					window.location.href = "index.html";

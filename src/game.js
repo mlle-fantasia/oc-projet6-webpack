@@ -57,7 +57,6 @@ async function renderYourTurn(player) {
 		let playerToCopy = otherPlayer[Math.floor(otherPlayer.length * Math.random())];
 		if (playerToCopy) {
 			player.pointFort = playerToCopy.pointFort;
-			//let responseModal = await Utils.showModal(player, "powerCopy", playerToCopy);
 		}
 	}
 	let infoHtml = renderInfoCurrentPlayer(player);

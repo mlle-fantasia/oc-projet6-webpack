@@ -27,7 +27,6 @@ export default class Player {
 		this.placeY;
 		this.movableCell;
 		this.type = "Player";
-		//this.playerInfo = this.showPlayerInfo();
 	}
 	showMove(grid) {
 		this.movableCell = Utils.showMove(grid, this.placeX, this.placeY, this.pointFort);
@@ -49,7 +48,6 @@ export default class Player {
 		}
 		let reste = grid[this.placeX][this.placeY].objects;
 		let oldPlayerCell = new Cell(x, y, reste);
-		//let oldPlayerCell = new Cell(this.placeX, this.placeY, []);
 		Utils.updateCell(this.placeX, this.placeY, oldPlayerCell, grid);
 		this.placeX = x;
 		this.placeY = y;
@@ -61,7 +59,6 @@ export default class Player {
 			newPlayerCell = new Cell(x, y, [this]);
 		}
 		Utils.updateCell(x, y, newPlayerCell, grid);
-		//console.log("newPlayerCell", newPlayerCell);
 		for (let c = 0; c < this.movableCell.length; c++) {
 			const coordinate = this.movableCell[c];
 			grid[coordinate.x][coordinate.y].movable = false;

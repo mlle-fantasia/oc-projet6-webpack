@@ -97,18 +97,13 @@ const TYPE = {
 	},
 	fight: {
 		title: "Combat !!",
-		text: "un joueur se trouve à coté de vous, voulez-vous l'attaquer ? ",
+		text: "un joueur se trouve à côté de vous, voulez-vous l'attaquer ? ",
 		btnYes: "OUI",
 		btnNo: "Non"
 	},
-	powerCopy: {
-		title: "Pouvoir Copié",
-		text: "Ce tour ci, avez copié les pouvoirs du joueur suivant : ",
-		btnYes: "OK ;)"
-	},
 	moveObstacle: {
 		title: "Déplacer un obstacle",
-		text: "Vous ne pouvez déplacer un obstacle, voulez vous le faire",
+		text: "Vous ne pouvez déplacer un obstacle, voulez-vous le faire",
 		btnYes: "OUI",
 		btnNo: "Non"
 	},
@@ -119,13 +114,13 @@ const TYPE = {
 	},
 	accessory: {
 		title: "Accessoire trouvé",
-		text: "Vous venez de trouver un accessoire, voulez-vous le rammaser ? ",
+		text: "Vous venez de trouver un accessoire, voulez-vous le ramasser ? ",
 		btnYes: "Je le prend !",
 		btnNo: "Je le laisse"
 	},
 	weapon: {
 		title: "arme trouvée",
-		text: "Vous venez de trouver une arme, voulez-vous la rammaser et remplacer votre arme actuelle ? ",
+		text: "Vous venez de trouver une arme, voulez-vous la ramasser et remplacer votre arme actuelle ? ",
 		btnYes: "Je la prend !",
 		btnNo: "Je la laisse"
 	},
@@ -137,18 +132,18 @@ const TYPE = {
 	},
 	winFight: {
 		title: "Vous avez gagné",
-		text: "Vous avez terrassé votre ennemie, félicitation",
+		text: "Vous avez terrassé votre ennemie, félicitations",
 		btnYes: ""
 	},
 	loseFight: {
 		title: "Vous avez perdu",
-		text: "Votre ennemie à été plus fort que vous ",
+		text: "Votre ennemie a été plus fort que vous ",
 		btnYes: "Terminer"
 	},
 	quete6Modal1: {
 		title: "Détruire l'anneau unique",
 		text:
-			"Après avoir traverser la terre du milieu, non sans embuches et mauvaises rencontres, vous avez enfin réussi à attendre le seul endroit de de la terre du milieu que l'on ne peut atendre : Le Mordor et la montagne du destin ! la dernière ligne droite est devant vous, atteignez la porte et jetez l'anneau !",
+			"Après avoir traversé la terre du milieu, non sans embûches et mauvaises rencontres, vous avez enfin réussi à attendre le seul endroit de la terre du milieu que l'on ne peut atteindre : Le Mordor et la montagne du destin ! la dernière ligne droite est devant vous, atteignez la porte et jetez l'anneau !",
 		image: "quete6Modal1",
 		btnYes: "Je vois la porte"
 	},
@@ -161,7 +156,7 @@ const TYPE = {
 	},
 	quete6Modal3: {
 		title: "Détruire l'anneau unique",
-		text: "Bien joué ! Golum est tombé dans la lave. il vous reste à jeter l'anneau dans le feu ! Allez-vous jeter votre précieux ? ",
+		text: "Bien joué ! Golum est tombé dans la lave. Il ne vous reste qu'à jeter l'anneau dans le feu ! Allez-vous jeter votre précieux ? ",
 		image: "quete6Modal3",
 		btnYes: "Je le jete",
 		btnNo: "Je le garde"
@@ -169,91 +164,92 @@ const TYPE = {
 	quete6ModalFail: {
 		title: "Détruire l'anneau unique",
 		text:
-			"Le coeur des homme est aisement coruptible et l'anneau à sa volonté propre, vous avez cédez à son pouvoir et échoué dans votre mission. L'anneau vous trahira en vous menant à la mort et toutes les contrées de la terre du milieu tomberont sous l'emprise de Sauron...",
+			"Le coeur des hommes est aisément corruptible et l'anneau à sa volonté propre, vous avez cédé à son pouvoir et échoué dans votre mission. L'anneau vous trahira en vous menant à la mort et toutes les contrées de la terre du milieu tomberont sous l'emprise de Sauron...",
 		image: "quete6ModalFail",
 		btnYes: "..."
 	},
 	quete6ModalSuccess: {
 		title: "Détruire l'anneau unique",
 		text:
-			"Vous avez pris la bonne décision, vous avez accompli la tâche qui vous a été confiée ! Jeter l'anneau dans le feu était le seul moyen de le détruire et de libérer la terre du milieu de l'emprise de Sauron. Mais le volcan commence à se reveiller, il vous faut sortir maintenant et éviter de mourir des rochers en fusion",
+			"Vous avez pris la bonne décision, vous avez accompli la tâche qui vous a été confiée ! Jeter l'anneau dans le feu était le seul moyen de le détruire et de libérer la terre du milieu de l'emprise de Sauron. Mais le volcan commence à se réveiller, il vous faut sortir maintenant et éviter de mourir des rochers en fusion",
 		image: "quete6ModalSuccess",
 		btnYes: "Je fuis !"
 	},
 	quete6ModalSuccessAigle: {
 		title: "Détruire l'anneau unique",
-		text: "La montagne peut exploser, vous avez atteint des aigles, ils vont vous enmener en lieu sûr",
+		text: "Vous avez atteint des aigles, ils vont vous emmener en lieu sûr, la montagne peut exploser",
 		btnYes: "houra !"
 	},
 	quete6ModalFailGolum: {
 		title: "Détruire l'anneau unique",
-		text: "Golum à été plus fort que vous, animé par la volonté de récupérer son précieux. Vous êtes mort.",
+		text: "Golum a été plus fort que vous, animé par la volonté de récupérer son précieux. Vous êtes mort.",
 		image: "",
 		btnYes: "Terminer"
 	},
 	quete6ModalDead: {
 		title: "Détruire l'anneau unique",
 		text:
-			"Vous êtes mort par la montagne du destin en furie ! Vous avez quand meme sauvé la terre du milieu, votre honneur est sauf, vous allez rejoindre vos ailleux et vous n'aurez pas honte.",
+			"Vous êtes mort par la montagne du destin en furie ! Vous avez quand même sauvé la terre du milieu, votre honneur est sauf, vous allez rejoindre vos aïeux et vous n'aurez pas honte.",
 		btnYes: ":'("
 	},
 	quete4Modal1: {
 		title: "Sauver Gondolin",
 		text:
-			"C'est lors de votre passage à Vinyamar, au bord de Belegaer, la grande mer qu'Ulmo le seigneur des eaux vous est apparut, il est sortit d'une tempête venu de l'ouest. il vous dit d'endosser le heaume, la cotte, l'épée et le bouclier laissés par Turgon dans la grande salle du trône, de quiter cet endroit et de trouver Gondolin afin de délivrer son message. ",
+			"C'est lors de votre passage à Vinyamar, au bord de Belegaer, la grande mer qu'Ulmo le seigneur des eaux vous est apparut, il est sorti d'une tempête venue de l'ouest. Il vous a dit d'endosser le heaume, la cotte, l'épée et le bouclier laissés par Turgon dans la grande salle du trône, de quitter cet endroit et de trouver Gondolin afin de délivrer son message. ",
 		image: "quete4Modal1",
 		btnYes: "Je part"
 	},
 	quete4Modal2: {
 		title: "Sauver Gondolin",
 		text:
-			"Bravo vous avez enfin trouvé le passage sous les montagnes qui mène à la cité cachée de gondolin ! c'est un tunnel creusé dans la pierre dure par les eaux qui s'écoulaient du flanc de la montagne. Passé le seuil tout est sombre noir. vous cheminé à l'aveuglette et avec précaussion lorsque vous êtes arreté par la garde de la cité. Vous connaissez maintenant le chemin secret, vous allez entrer dans la cité mais jamais plus vous n'en resortirez or par la porte de la mort.",
+			"Bravo vous avez enfin trouvé le passage sous les montagnes qui mènent à la cité cachée de Gondolin ! c'est un tunnel creusé dans la pierre dure par les eaux qui s'écoulaient du flanc de la montagne. Passé le seuil tout est sombre noir. Vous cheminez à l'aveuglette et avec précaution lorsque vous êtes arrêté par la garde de la cité. Vous connaissez maintenant le chemin secret, vous allez entrer dans la cité, mais jamais plus vous n'en resortirez, or par la porte de la mort.",
 		image: "quete4Modal2",
 		btnYes: "Je continue"
 	},
 	quete4Modal3: {
 		title: "Sauver Gondolin",
 		text:
-			"Vous êtes passé par des tunnels sous la montagne, des ponts, des des chemins escarpés, de longs escaliers, des pentes sinueuses et avez passé les septs portes qui mènes à Gondolin : la porte de bois, la porte de pierre, la porte de bronze, la porte de fer forgé, la porte de marble blanc, la porte d'argent, et enfin, la porte d'or. Enfin, Vous voyez la cité !",
+			"Accompagné par les gardes, vous traversez les sept portes qui mènent à Gondolin : la porte de bois, la porte de pierre, la porte de bronze, la porte de fer forgé, la porte de marbre blanc, la porte d'argent et enfin, la porte d'or. Enfin, Vous voyez la cité secrète !",
 		image: "quete4Modal3",
 		btnYes: "Je livre mon message"
 	},
 	quete4Modal4: {
 		title: "Sauver Gondolin",
 		text:
-			"Vous avez accompli votre mission transmètre le message de danger imminent à Turgon roi de Gondolin mais il est trop tard, Melko à déjà découvert le passage et il a anvoyé son armée attaquer la ville, défendez la au péril de votre vie ! ",
+			"Vous avez accompli votre mission : transmettre le message de danger imminent à Turgon roi de Gondolin, mais il est trop tard, Melko a déjà découvert le passage et il a envoyé son armée attaquer la ville, défendez-la au péril de votre vie !",
 		image: "",
 		btnYes: "Je defend la cité !"
 	},
 	quete4ModalFail: {
 		title: "Sauver Gondolin",
-		text: "Vous n'avez pas réussi à sauver Gondolin de l'attaque surprise lancée par Melko. ",
+		text:
+			"Melko a lancé toues ses forces sur la ville, son armée était plus nombreuse et plus forte que vous. Vous n'avez pas réussi à sauver Gondolin, la cité est tombée sous vos yeux mis-clos ",
 		image: "quete4ModalFail",
 		btnYes: "Terminé"
 	},
 	quete4ModalSuccess: {
 		title: "Sauver Gondolin",
-		text: "Félicitations grâce à vos exploits Gondolin est sauve. le roi Turgon vous en remercie ! ",
+		text: "Félicitations grâce à vos exploits Gondolin est sauve. Le roi Turgon vous en remercie ! ",
 		image: "",
 		btnYes: "Terminé"
 	},
 	quete5Modal1: {
 		title: "Récupérer les Silmaril",
 		text:
-			"Vous voila embarqué dans une perieuse aventure : récupérer les Silmaril de la couronne de l'ainu melko en personne, l'ennemie  le plus pluissant. ramassez le plus d'objet possible pour vous aider a vaincre melko mais en évitant de vous faire remarquer, par les orcs de garde.",
+			"Vous voila embarqué dans une périlleuse aventure : récupérer les Silmarils de la couronne de l'ainu Melko en personne, l'ennemie le plus puissant de la terre du milieu. Ramassez le plus d'objet possible pour vous aider a vaincre Melko, mais évitez de vous faire remarquer, par les orcs de garde.",
 		image: "quete5Modal1",
 		btnYes: "Je part"
 	},
 	quete5ModalFail: {
 		title: "Récupérer les Silmaril",
 		text:
-			"Vous avez échoué face à Melko. Mais votre exploi traversera les âges dans les chants elfiques. Très peu ont eu le courage d'affronter Melko en personne",
+			"Vous avez échoué face à Melko. Mais votre exploit traversera les âges dans les chants elfiques. Très peu ont eu le courage d'affronter Melko en personne",
 		image: "quete5ModalFail",
 		btnYes: "Terminer"
 	},
 	quete5ModalSuccess: {
 		title: "Récupérer les Silmaril",
-		text: "Félicitation vous avec vaincu Melko et récupérer les silmarils, Luthien vous attend !",
+		text: "Félicitations vous avez vaincu Melko et récupérer les silmarils, Luthien vous attend !",
 		image: "quete5ModalSuccess",
 		btnYes: "Terminer"
 	},
