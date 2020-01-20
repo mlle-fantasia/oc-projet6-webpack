@@ -2,68 +2,8 @@ import "./scss/main.scss";
 import $ from "jquery";
 import "babel-polyfill";
 import Utils from "./classes/Utils";
+import Accessory from "./classes/Accessory";
 import images from "../public/include/images.js";
-
-import figureHero1 from "../public/images/players/grid/player1figure.png";
-import figureHero2 from "../public/images/players/grid/player2figure.png";
-import figureHero3 from "../public/images/players/grid/player3figure.png";
-import figureHero4 from "../public/images/players/grid/player4figure.png";
-import figureHero5 from "../public/images/players/grid/player5figure.png";
-import figureHero6 from "../public/images/players/grid/player6figure.png";
-import figureHero7 from "../public/images/players/grid/player7figure.png";
-import figureHero8 from "../public/images/players/grid/player8figure.png";
-import figureHero9 from "../public/images/players/grid/player9figure.png";
-const imagesHeroesFigure = {
-	1: figureHero1,
-	2: figureHero2,
-	3: figureHero3,
-	4: figureHero4,
-	5: figureHero5,
-	6: figureHero6,
-	7: figureHero7,
-	8: figureHero8,
-	9: figureHero9
-};
-import armor from "../public/images/accessories/armor.png";
-import boot from "../public/images/accessories/boot.png";
-import bouclier from "../public/images/accessories/bouclier.png";
-import cailloux from "../public/images/accessories/cailloux.png";
-import cote_maille from "../public/images/accessories/cote_maille.png";
-import cotte from "../public/images/accessories/cotte.png";
-import dague_etincelante from "../public/images/accessories/dague_etincelante.png";
-import hat from "../public/images/accessories/hat.png";
-import heaume from "../public/images/accessories/heaume.png";
-import hache from "../public/images/accessories/hache.png";
-import dard from "../public/images/accessories/dard.png";
-import epee from "../public/images/accessories/epee.png";
-import narsil from "../public/images/accessories/narsil.png";
-import nenya from "../public/images/accessories/nenya.png";
-import marteau from "../public/images/accessories/marteau.png";
-import mitril from "../public/images/accessories/mitril.png";
-import potion_healfy from "../public/images/accessories/potion_healfy.png";
-import potion_life from "../public/images/accessories/potion_life.png";
-import potion_strength from "../public/images/accessories/potion_strength.png";
-const imagesAccessories = {
-	armor: armor,
-	boot: boot,
-	bouclier: bouclier,
-	cailloux: cailloux,
-	cote_maille: cote_maille,
-	cotte: cotte,
-	dague_etincelante: dague_etincelante,
-	hat: hat,
-	heaume: heaume,
-	dard: dard,
-	epee: epee,
-	narsil: narsil,
-	nenya: nenya,
-	marteau: marteau,
-	mitril: mitril,
-	potion_healfy: potion_healfy,
-	potion_life: potion_life,
-	potion_strength: potion_strength,
-	hache: hache
-};
 
 const ANIMATE = ["shew", "rotate", "rotateX", "rotateY", "rotate3d", "scale"];
 let playerDefence = JSON.parse(localStorage.getItem("playerToFight"));
@@ -210,15 +150,29 @@ function usePotion(player, type, otherPlayer) {
 			potionUsed = true;
 		}
 	}
-	player.accessories.splice(indexPotion, 1);
+	if (player.accessories[indexPotion].sousType === "potion") {
+		//supression de la potion dans l'instance du player sur la page fight
+		player.accessories.splice(indexPotion, 1);
+		//supression de la potion dans l'instance du player dans le localstorage
+		let playerToEdit = type === "attack" ? "player" : "playerToFight";
+		localStorage.setItem(playerToEdit, JSON.stringify(player));
+		//supression de la potion dans l'instance du player dans la grille du le localstorage
+		let grid = JSON.parse(localStorage.getItem("grid"));
+		if (grid[player.placeX][player.placeY].objects.length > 1) {
+			grid[player.placeX][player.placeY].objects[1].accessories.splice(indexPotion, 1);
+		} else {
+			grid[player.placeX][player.placeY].objects[0].accessories.splice(indexPotion, 1);
+		}
+		localStorage.setItem("grid", JSON.stringify(grid));
+	}
+
+	// on verifie s'il a une deuxième potion
 	for (let p = 0; p < player.accessories.length; p++) {
 		const accessory = player.accessories[p];
 		if (accessory.sousType === "potion") {
 			player.potion = true;
 		}
 	}
-	let playerToEdit = type === "attack" ? "player" : "playerToFight";
-	localStorage.setItem(playerToEdit, JSON.stringify(player));
 	renderptViePlayer(pointVieInitiale, player, type, otherPlayer);
 	$(".info-" + type + "-player").empty();
 	let infoplayer = renderInfoPlayer(player);

@@ -44,7 +44,7 @@ import bouclier from "../images/accessories/bouclier.png";
 import cailloux from "../images/accessories/cailloux.png";
 import cote_maille from "../images/accessories/cote_maille.png";
 import cotte from "../images/accessories/cotte.png";
-import dague from "../images/accessories/dague_etincelante.png";
+import dague_etincelante from "../images/accessories/dague_etincelante.png";
 import hat from "../images/accessories/hat.png";
 import heaume from "../images/accessories/heaume.png";
 import hache from "../images/accessories/hache.png";
@@ -64,7 +64,7 @@ const imagesAccessories = {
 	cailloux: cailloux,
 	cote_maille: cote_maille,
 	cotte: cotte,
-	dague: dague,
+	dague_etincelante: dague_etincelante,
 	hat: hat,
 	heaume: heaume,
 	dard: dard,
