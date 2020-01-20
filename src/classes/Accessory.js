@@ -4,7 +4,7 @@ const ACCESSORY = [
 		text: "Potion de vie",
 		avantage: 5,
 		avantageText: "redonne 5 points de vie",
-		temporality: "punctual",
+		temporality: "ponctuel",
 		univers: "all",
 		type: "potion"
 	},
@@ -13,7 +13,7 @@ const ACCESSORY = [
 		text: "Potion de force",
 		avantage: 7,
 		avantageText: "redonne 7 points de vie",
-		temporality: "punctual",
+		temporality: "ponctuel",
 		univers: "all",
 		type: "potion"
 	},
@@ -22,7 +22,7 @@ const ACCESSORY = [
 		text: "Potion de soin à la telas",
 		avantage: 4,
 		avantageText: "redonne 4 points de vie",
-		temporality: "punctual",
+		temporality: "ponctuel",
 		univers: "all",
 		type: "potion"
 	},
@@ -31,7 +31,7 @@ const ACCESSORY = [
 		text: "casque pointu du Gondor",
 		avantage: 1,
 		avantageText: "ajoute 1 de résistance",
-		temporality: "perpetual",
+		temporality: "permanent",
 		univers: "all",
 		type: "protection"
 	},
@@ -40,7 +40,7 @@ const ACCESSORY = [
 		text: "armure du Rohan",
 		avantage: 2,
 		avantageText: "ajoute 2 de résistance",
-		temporality: "perpetual",
+		temporality: "permanent",
 		univers: "all",
 		type: "protection"
 	},
@@ -49,7 +49,7 @@ const ACCESSORY = [
 		text: "chemise en mitril",
 		avantage: 3,
 		avantageText: "ajoute 3 de résistance",
-		temporality: "perpetual",
+		temporality: "permanent",
 		univers: "all",
 		type: "protection"
 	},
@@ -58,7 +58,7 @@ const ACCESSORY = [
 		text: "côte de maille un peu trop sérée à la poitrine",
 		avantage: 2,
 		avantageText: "ajoute 2 de résistance",
-		temporality: "perpetual",
+		temporality: "permanent",
 		univers: "all",
 		type: "protection"
 	},
@@ -67,7 +67,7 @@ const ACCESSORY = [
 		text: "bottes étanches",
 		avantage: 1,
 		avantageText: "ajoute 1 de résistance",
-		temporality: "perpetual",
+		temporality: "permanent",
 		univers: "all",
 		type: "protection"
 	},
@@ -77,7 +77,7 @@ const ACCESSORY = [
 		avantageText: "ajoute 2 de résistance",
 		avantage: 2,
 		univers: "4",
-		temporality: "perpetual",
+		temporality: "permanent",
 		type: "protection"
 	},
 	{
@@ -86,7 +86,7 @@ const ACCESSORY = [
 		avantageText: "ajoute 3 de résistance",
 		avantage: 3,
 		univers: "4",
-		temporality: "perpetual",
+		temporality: "permanent",
 		type: "protection"
 	},
 	{
@@ -95,7 +95,7 @@ const ACCESSORY = [
 		avantageText: "ajoute 4 de résistance",
 		avantage: 4,
 		univers: "4",
-		temporality: "perpetual",
+		temporality: "permanent",
 		type: "protection"
 	}
 ];

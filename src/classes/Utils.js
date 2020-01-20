@@ -87,11 +87,9 @@ export default class Utils {
 	}
 
 	static showModal(player, functionToCall, object, remainingPlayers, univers) {
-		console.log("object", object);
 		if (functionToCall === "takeObject") {
 			functionToCall = object.type === "weapon" ? "weapon" : "accessory";
 		}
-		console.log("univers", univers);
 		let modal = new Modal(player, functionToCall, object, remainingPlayers, univers);
 		$("#game").prepend(modal.render());
 		let resonseModal = "pas encore de réponse";

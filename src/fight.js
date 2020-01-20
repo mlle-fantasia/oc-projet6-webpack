@@ -2,26 +2,8 @@ import "./scss/main.scss";
 import $ from "jquery";
 import "babel-polyfill";
 import Utils from "./classes/Utils";
-import imgHero1 from "../public/images/players/img/hero1.jpg";
-import imgHero2 from "../public/images/players/img/hero2.jpg";
-import imgHero3 from "../public/images/players/img/hero3.jpg";
-import imgHero4 from "../public/images/players/img/hero4.jpg";
-import imgHero5 from "../public/images/players/img/hero5.jpg";
-import imgHero6 from "../public/images/players/img/hero6.jpg";
-import imgHero7 from "../public/images/players/img/hero7.jpg";
-import imgHero8 from "../public/images/players/img/hero8.jpg";
-import imgHero9 from "../public/images/players/img/hero9.jpg";
-const imagesHeroes = {
-	1: imgHero1,
-	2: imgHero2,
-	3: imgHero3,
-	4: imgHero4,
-	5: imgHero5,
-	6: imgHero6,
-	7: imgHero7,
-	8: imgHero8,
-	9: imgHero9
-};
+import images from "../public/include/images.js";
+
 import figureHero1 from "../public/images/players/grid/player1figure.png";
 import figureHero2 from "../public/images/players/grid/player2figure.png";
 import figureHero3 from "../public/images/players/grid/player3figure.png";
@@ -105,10 +87,10 @@ $(document).ready(function() {
 	$("#game").addClass("game-" + univers);
 	$(".fight-background").addClass("world" + univers + "-background");
 	let elementPlayerAttack = $(
-		" <img class='img-attack-player' src='" + imagesHeroesFigure[playerAttack.heroNum] + "' alt='image du joueur qui attaque'/>"
+		" <img class='img-attack-player' src='" + images.imagesHeroesFigure[playerAttack.heroNum] + "' alt='image du joueur qui attaque'/>"
 	);
 	let elementPlayerDefence = $(
-		"<img class='img-defence-player' src='" + imagesHeroesFigure[playerDefence.heroNum] + "' alt='image du joueur qui defend'/>"
+		"<img class='img-defence-player' src='" + images.imagesHeroesFigure[playerDefence.heroNum] + "' alt='image du joueur qui defend'/>"
 	);
 	$(".attack-player").append($(elementPlayerAttack));
 	$(".defence-player").append($(elementPlayerDefence));
@@ -235,6 +217,8 @@ function usePotion(player, type, otherPlayer) {
 			player.potion = true;
 		}
 	}
+	let playerToEdit = type === "attack" ? "player" : "playerToFight";
+	localStorage.setItem(playerToEdit, JSON.stringify(player));
 	renderptViePlayer(pointVieInitiale, player, type, otherPlayer);
 	$(".info-" + type + "-player").empty();
 	let infoplayer = renderInfoPlayer(player);
@@ -390,7 +374,7 @@ function renderInfoPlayer(player) {
 	let weapon = "";
 	let infoWeapon = "";
 	if (player.accessories[0]) {
-		weapon = 'src="' + imagesAccessories[player.accessories[0].imageGrid] + '" alt="image arme"';
+		weapon = 'src="' + images.imagesAccessories[player.accessories[0].imageGrid] + '" alt="image arme"';
 		infoWeapon = `
 			<div class="container-info-name-weapon"><div class="info-name info-weapon weapon-text">
 			${player.accessories[0].text} 
@@ -408,7 +392,7 @@ function renderInfoPlayer(player) {
 		<div class="d-flex flex-column cercle-hero">
 	<div class="info-name tolkien">${player.playerName}</div>
 	<div class="background-cercle-player-hero" style="height:${heroSize}px">
-		<img class="info-player2-img info-player2-img-hero " src="${imagesHeroes[player.heroNum]}" alt="image hero">
+		<img class="info-player2-img info-player2-img-hero " src="${images.imagesHeroes[player.heroNum]}" alt="image hero">
 	</div>
 	<div class="info-name "> type : ${player.type} </div>
 	<div class="info-name ">${player.pointFort.text}</div>
@@ -435,7 +419,7 @@ function renderAccessoriesCurentPlayer(player) {
 		let accessorySRC = "";
 		let infoAccessory = "";
 
-		accessorySRC = 'src="' + imagesAccessories[accessory.imageGrid] + '" alt="image accessoire"';
+		accessorySRC = 'src="' + images.imagesAccessories[accessory.imageGrid] + '" alt="image accessoire"';
 		let temp = accessory.temporality === "perpetual" ? "avantage permanent" : "avantage ponctuel";
 		infoAccessory = `<div class="container-info-name-accessory">
 				<div class="info-name info-accessory accessory-text">${accessory.text} 

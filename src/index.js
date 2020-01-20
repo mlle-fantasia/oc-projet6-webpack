@@ -2,22 +2,9 @@ import "./scss/main.scss";
 import "bootstrap";
 import "babel-polyfill";
 import carouselHeroes from "../public/include/carousel-heroes.js";
+import images from "../public/include/images.js";
 import Utils from "./classes/Utils";
 import Player from "./classes/Player";
-import imgHero1 from "../public/images/players/img/hero1.jpg";
-import imgHero2 from "../public/images/players/img/hero2.jpg";
-import imgHero3 from "../public/images/players/img/hero3.jpg";
-import imgHero4 from "../public/images/players/img/hero4.jpg";
-import imgHero5 from "../public/images/players/img/hero5.jpg";
-import imgHero6 from "../public/images/players/img/hero6.jpg";
-const imagesHeroes = {
-	1: imgHero1,
-	2: imgHero2,
-	3: imgHero3,
-	4: imgHero4,
-	5: imgHero5,
-	6: imgHero6
-};
 
 let world = 0;
 let nbPlayer = 0;
@@ -168,7 +155,7 @@ function renderchoosenPlayer() {
 			<div id="triangle-2"></div>
 		</div>
 		<div class="info-players-vie"> ${player.ptVie} </div>
-		<img class="info-player2-img info-player2-img-hero " src="${imagesHeroes[player.heroNum]}"
+		<img class="info-player2-img info-player2-img-hero " src="${images.imagesHeroes[player.heroNum]}"
 			alt="image hero">
 	</div>
 	<div class="info-name">

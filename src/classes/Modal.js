@@ -1,94 +1,7 @@
 import Accessory from "./Accessory";
 import Weapon from "./Weapon";
 import Player from "./Player";
-import imgHero1 from "../../public/images/players/img/hero1.jpg";
-import imgHero2 from "../../public/images/players/img/hero2.jpg";
-import imgHero3 from "../../public/images/players/img/hero3.jpg";
-import imgHero4 from "../../public/images/players/img/hero4.jpg";
-import imgHero5 from "../../public/images/players/img/hero5.jpg";
-import imgHero6 from "../../public/images/players/img/hero6.jpg";
-import imgHero7 from "../../public/images/players/img/hero6.jpg";
-import imgHero8 from "../../public/images/players/img/hero6.jpg";
-import imgHero9 from "../../public/images/players/img/hero6.jpg";
-const imagesHeroes = {
-	hero1: imgHero1,
-	hero2: imgHero2,
-	hero3: imgHero3,
-	hero4: imgHero4,
-	hero5: imgHero5,
-	hero6: imgHero6,
-	hero7: imgHero7,
-	hero8: imgHero8,
-	hero9: imgHero9
-};
-import armor from "../../public/images/accessories/armor.png";
-import boot from "../../public/images/accessories/boot.png";
-import bouclier from "../../public/images/accessories/bouclier.png";
-import cailloux from "../../public/images/accessories/cailloux.png";
-import cote_maille from "../../public/images/accessories/cote_maille.png";
-import cotte from "../../public/images/accessories/cotte.png";
-import dague from "../../public/images/accessories/dague_etincelante.png";
-import hat from "../../public/images/accessories/hat.png";
-import heaume from "../../public/images/accessories/heaume.png";
-import hache from "../../public/images/accessories/hache.png";
-import dard from "../../public/images/accessories/dard.png";
-import epee from "../../public/images/accessories/epee.png";
-import narsil from "../../public/images/accessories/narsil.png";
-import nenya from "../../public/images/accessories/nenya.png";
-import marteau from "../../public/images/accessories/marteau.png";
-import mitril from "../../public/images/accessories/mitril.png";
-import potion_healfy from "../../public/images/accessories/potion_healfy.png";
-import potion_life from "../../public/images/accessories/potion_life.png";
-import potion_strength from "../../public/images/accessories/potion_strength.png";
-const imagesAccessories = {
-	armor: armor,
-	boot: boot,
-	bouclier: bouclier,
-	cailloux: cailloux,
-	cote_maille: cote_maille,
-	cotte: cotte,
-	dague: dague,
-	hat: hat,
-	heaume: heaume,
-	dard: dard,
-	epee: epee,
-	narsil: narsil,
-	nenya: nenya,
-	marteau: marteau,
-	mitril: mitril,
-	potion_healfy: potion_healfy,
-	potion_life: potion_life,
-	potion_strength: potion_strength,
-	hache: hache
-};
-import quete4Modal1 from "../../public/images/modal/quete4Modal1.png";
-import quete4Modal2 from "../../public/images/modal/quete4Modal2.png";
-import quete4Modal3 from "../../public/images/modal/quete4Modal3.png";
-import quete4ModalFail from "../../public/images/modal/quete4ModalFail.png";
-import quete5Modal1 from "../../public/images/modal/quete5Modal1.png";
-import quete5ModalFail from "../../public/images/modal/quete5ModalFail.png";
-import quete5ModalSuccess from "../../public/images/modal/quete5ModalSuccess.png";
-import quete5ModalWinOrcs from "../../public/images/modal/quete5ModalWinOrcs.png";
-import quete6Modal1 from "../../public/images/modal/quete6Modal1.png";
-import quete6Modal2 from "../../public/images/modal/quete6Modal2.png";
-import quete6Modal3 from "../../public/images/modal/quete6Modal3.png";
-import quete6ModalFail from "../../public/images/modal/quete6ModalFail.png";
-import quete6ModalSuccess from "../../public/images/modal/quete6ModalSuccess.png";
-const imagesQuete = {
-	quete4Modal1: quete4Modal1,
-	quete4Modal2: quete4Modal2,
-	quete4Modal3: quete4Modal3,
-	quete4ModalFail: quete4ModalFail,
-	quete5Modal1: quete5Modal1,
-	quete5ModalFail: quete5ModalFail,
-	quete5ModalSuccess: quete5ModalSuccess,
-	quete5ModalWinOrcs: quete5ModalWinOrcs,
-	quete6Modal1: quete6Modal1,
-	quete6Modal2: quete6Modal2,
-	quete6Modal3: quete6Modal3,
-	quete6ModalFail: quete6ModalFail,
-	quete6ModalSuccess: quete6ModalSuccess
-};
+import images from "../../public/include/images.js";
 export default class Modal {
 	constructor(player, type, object, remainingPlayer = false, univers = null) {
 		this.type = type;
@@ -102,9 +15,7 @@ export default class Modal {
 	}
 	render() {
 		let playerName = this.univers === "5" || this.univers === "6" || this.univers === "4" ? "" : this.player.playerName + " ! ";
-		//if (this.type === "loseFight" && (this.univers === "5" || this.univers === "4")) playerName = "";
 		if (this.type === "showObject") playerName = "";
-		console.log("playerName", this.univers, playerName);
 		let btnNo = "";
 		if (TYPE[this.type].btnNo) {
 			let data_response = "false";
@@ -121,11 +32,10 @@ export default class Modal {
 			this.object = null;
 		}
 		let image = "";
-		console.log("type", this.type, TYPE[this.type].image);
 		if (TYPE[this.type].image) {
 			image = `
 				<div class="quete-image-modal" >
-					<img class="" src="${imagesQuete[TYPE[this.type].image]}" alt="illustration de la quete">
+					<img class="" src="${images.imagesQuete[TYPE[this.type].image]}" alt="illustration de la quete">
 				</div>
 				`;
 		}
@@ -137,23 +47,23 @@ export default class Modal {
 			}
 			object = `<div class="d-flex flex-row modal-container-info-object">
 					<div class="modal-background-anneau d-flex" >
-						<img class="" src="${imagesAccessories[this.object.imageGrid]}" alt="image objet trouvé">
+						<img class="" src="${images.imagesAccessories[this.object.imageGrid]}" alt="image objet trouvé">
 					</div>
 					<div class="d-flex flex-column modal-info-text">
-					<div><span class="bold"> Objet :</span>${this.object.text}</div>
-					<div class=""><span class="bold"> Avantage :</span>${this.object.avantageText}</div>${temporalite}
+					<div><span class="bold"> Objet : </span>${this.object.text}</div>
+					<div class=""><span class="bold"> Avantage : </span>${this.object.avantageText}</div>${temporalite}
 					</div>
 				</div>`;
 		}
 		if (this.object && this.object instanceof Player) {
 			object = `<div class="d-flex flex-row modal-container-info-object">
 					<div class="background-cercle-player-hero d-flex modal-background-cercle-player-hero" >
-						<img class="info-player2-img info-player2-img-hero " src="${imagesHeroes[this.object.image]}" alt="image du joueur copié">
+						<img class="info-player2-img info-player2-img-hero " src="${images.imagesHeroes[this.object.heroNum]}" alt="image du joueur copié">
 					</div>
 					<div class="d-flex flex-column modal-info-text">
 					<div class="">${this.object.hero}</div>
-					<div><span class="bold"> Son nom :</span>${this.object.playerName} </div>
-					<div class=""><span class="bold"> Son point fort :</span> ${this.object.pointFort.text} </div>
+					<div><span class="bold"> Son nom : </span>${this.object.playerName} </div>
+					<div class=""><span class="bold"> Son point fort : </span>${this.object.pointFort.text} </div>
 				
 					</div>
 				</div>`;
@@ -344,7 +254,7 @@ const TYPE = {
 	quete5ModalSuccess: {
 		title: "Récupérer les Silmaril",
 		text: "Félicitation vous avec vaincu Melko et récupérer les silmarils, Luthien vous attend !",
-		image: "quete5Modalsuccess",
+		image: "quete5ModalSuccess",
 		btnYes: "Terminer"
 	},
 	quete5ModalWinOrcs: {
