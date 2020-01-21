@@ -54,7 +54,7 @@ export default class Utils {
 				type: "joueur",
 				pointVie: 30,
 				force: 10,
-				pointFort: { value: "copy", text: "peut imiter le point fort d'un autre joueur", chance: 60 },
+				pointFort: { value: "copy", text: "peut imiter le point fort d'un autre joueur", chance: 80 },
 				image: "/images/players/img/hero6.jpg"
 			},
 			7: {
