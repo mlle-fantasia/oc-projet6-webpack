@@ -1,6 +1,7 @@
 // Imports
 const path = require("path");
 const htmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 require("babel-register");
 const webpack = require("webpack");
 // Webpack Configuration
@@ -29,12 +30,21 @@ const config = {
 			{
 				test: /\.s[ac]ss$/i,
 				use: [
-					// Creates `style` nodes from JS strings
+					{
+						loader: MiniCssExtractPlugin.loader,
+						options: {
+							hmr: process.env.NODE_ENV === "development"
+						}
+					},
+					"css-loader",
+					//"postcss-loader",
+					"sass-loader"
+					/* // Creates `style` nodes from JS strings
 					"style-loader",
 					// Translates CSS into CommonJS
 					"css-loader",
 					// Compiles Sass to CSS
-					"sass-loader"
+					"sass-loader" */
 				]
 			},
 			// images
@@ -57,6 +67,7 @@ const config = {
 	},
 	// Plugins
 	plugins: [
+		new MiniCssExtractPlugin(),
 		new htmlWebpackPlugin({
 			template: "./public/index.html",
 			chunks: ["main"],

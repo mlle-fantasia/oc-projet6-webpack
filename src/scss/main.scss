@@ -282,3 +282,12 @@ h2 {
 	background-position: center;
 	border-radius: 2px;
 }
+.jeu-solo,
+.jeu-multijoueur,
+#sectionChoicePlayers,
+#sectionChoicePlayer,
+#sectionChoiceWorld,
+#sectionChoiceQuete,
+#container-choice-heroes {
+	display: none;
+}
