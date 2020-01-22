@@ -12,7 +12,7 @@ export default class Utils {
 			1: {
 				text: "L'elfe inventeur fou",
 				type: "motorisé",
-				pointVie: 30,
+				pointVie: 29,
 				force: 10,
 				pointFort: { value: "fast", text: "peut avancer plus vite", chance: 80 },
 				image: "/images/players/img/hero1.jpg"
@@ -20,7 +20,7 @@ export default class Utils {
 			2: {
 				text: "L'elfe dresseur le dragon",
 				type: "ailé",
-				pointVie: 30,
+				pointVie: 28,
 				force: 10,
 				pointFort: { value: "attack", text: "peut attaquer deux fois", chance: 50 },
 				image: "/images/players/img/hero2.jpg"
@@ -28,7 +28,7 @@ export default class Utils {
 			3: {
 				text: "Le mercenaire venu du sud",
 				type: "énervé",
-				pointVie: 30,
+				pointVie: 33,
 				force: 10,
 				pointFort: { value: "steal", text: "peut voler un objet", chance: 30 },
 				image: "/images/players/img/hero3.jpg"
@@ -36,7 +36,7 @@ export default class Utils {
 			4: {
 				text: "L'homme des cavernes aveugle",
 				type: "force-calme",
-				pointVie: 30,
+				pointVie: 32,
 				force: 10,
 				pointFort: { value: "move", text: "peut déplacer les obstacles", chance: 80 },
 				image: "/images/players/img/hero4.jpg"
@@ -44,7 +44,7 @@ export default class Utils {
 			5: {
 				text: "Le gardien de la citadelle",
 				type: "patriote",
-				pointVie: 30,
+				pointVie: 32,
 				force: 10,
 				pointFort: { value: "long", text: "peut attaquer de plus loin", chance: 40 },
 				image: "/images/players/img/hero5.jpg"
@@ -60,7 +60,7 @@ export default class Utils {
 			7: {
 				text: "Le puant",
 				type: "dépendant",
-				pointVie: 30,
+				pointVie: 26,
 				force: 10,
 				pointFort: { value: "teath", text: "à les dents asserrées", chance: 100 },
 				image: ""

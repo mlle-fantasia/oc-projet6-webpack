@@ -174,7 +174,7 @@ async function renderYourTurn(player) {
 					}
 				} else {
 					if (univers === "6") {
-						let responseModal = await Utils.showModal(player, "quete6odalSuccessAigle", null, null, univers);
+						let responseModal = await Utils.showModal(player, "quete6ModalSuccessAigle", null, null, univers);
 						if (responseModal) {
 							window.location.href = "index.html";
 						}

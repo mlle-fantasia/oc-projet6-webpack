@@ -59,18 +59,16 @@
                configurer à la main. j'ai installé plusieurs loader selon mes besoins.</p>
             <h4>Scss</h4>
             <p>
-               Pour ce projet j'ai essayer d'utiliser scss. Mais je l'ai certainement pas utilisé dans tout son
-               potentiel. scss permet de séparer facilment tout le style en plusieurs fichiers ce qui le rend plus
-               facile à cerner. l'imbriquation de classe est intéressante dans certains cas et l'utilisation de
-               variables pour les couleur ou les chemins, par exemple, est très pratique.
+               Pour ce projet j'ai essayer d'utiliser Scss. Mais je ne l'ai certainement pas utilisé dans tout son
+               potentiel. Scss permet de séparer facilment tout le style en plusieurs fichiers ce qui le rend plus
+               facile à cerner. L'imbriquation de classes est intéressante dans certains cas et l'utilisation de
+               variables pour les couleurs ou les chemins, par exemple, est très pratique.
             </p>
             <h3>Architecture des pages</h3>
-            <p>Il y a trois pages différentes pour le jeu. la page d'accueil où les joueurs vont définir l'univers et
-               choisir leur heros, la page de grille de jeu où les joueurs vont pouvoir se déplacer et ramasser des
+            <p>Il y a trois pages différentes pour le jeu. La page d'accueil où les joueurs vont définir l'univers et
+               choisir leur hero, la page de grille de jeu où les joueurs vont pouvoir se déplacer et ramasser des
                objets et la page de combat où ils vont se combattre. Pour communiquer les informations utiles au bon
                fonctionnement du jeu entre les différentes pages, j'ai utilisé le localStorage. </p>
-
-
             <h3>Programation objet</h3>
             <p>
                J'ai mis en place une programmation orientée objet. Les différentes classes sont :
@@ -86,23 +84,25 @@
             </p>
             <img src="/images/jeu-de-plateau.png" alt="shémat explicatif des classes" class="img-fluid">
             <h5>Explication du shémat ci-dessus : </h5>
-            <p>Lorsque l'on est sur la page du jeu, le programme cré une nouvelle
+            <p>Lorsque l'on est sur la page du jeu, le programme crée une nouvelle
                application qui va s'ocupper de créer
-               les différents objets : Players, Weapon et Accessory puis une instance de World. Ensuite, c'est l'objet
+               les différents objets Players, Weapon et Accessory ainsi qu'une instance de World. Ensuite, c'est l'objet
                World qui va créer la grille et placer les différents objets qu'on lui a transmis. Il va tout d'abord
-               créer une grille vide, c'est à dire avec des objets Cell qui ont un attribut "objet" à tableau vide. Puis
+               créer une grille vide, c'est à dire avec des objets Cell qui ont un attribut "objets" à tableau vide.
+               Puis
                il va placer les différents objets et mettre à jour les cellules. L'image suivante représente la grille
-               générée par World : un tableau de tableau de celules qui sont soit vides (objet:[]) soit occupées (avec
+               générée par World : un tableau de tableau de celules qui sont soit vides (objets:[]) soit occupées (avec
                des objets dans le tableau "objets")</p>
             <img src="/images/grid-console.png" alt="grille générée par World" class="img-fluid">
             <p class="legende">Grille générée par World</p>
             <img src="/images/grid-console2.png" alt="cellule de la grille générée par World" class="img-fluid">
-            <p class="legende">Exemple de celule, une cellule vide puis une celule avec une arme</p>
+            <p class="legende">Exemple de celules : une cellule vide puis une celule avec une arme</p>
             <h3>Explications de code</h3>
             <h4>Placement des objets</h4>
             <p>
-               Pour placer les objets, la fonction définie tout d'abord une position aléatoire c'est à dire un x et un y
-               aléatoires. Puis elle vérifie qu'a cette position, la case est libre. Si la case est libre, on peut
+               Pour placer les objets, la fonction définie, tout d'abord, une position aléatoire c'est à dire un x et un
+               y
+               aléatoires. Puis elle vérifie, qu'à cette position, la case est libre. Si la case est libre, on peut
                placer l'objet en créant une nouvelle celule et en mettant à jour l'ancienne. Si elle n'est pas vide, on
                rappelle la fonction (fonction récursive) afin de définir une nouvelle position...
             </p>

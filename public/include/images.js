@@ -4,9 +4,9 @@ import imgHero3 from "../images/players/img/hero3.jpg";
 import imgHero4 from "../images/players/img/hero4.jpg";
 import imgHero5 from "../images/players/img/hero5.jpg";
 import imgHero6 from "../images/players/img/hero6.jpg";
-import imgHero7 from "../images/players/img/hero6.jpg";
-import imgHero8 from "../images/players/img/hero6.jpg";
-import imgHero9 from "../images/players/img/hero6.jpg";
+import imgHero7 from "../images/players/img/hero7.jpg";
+import imgHero8 from "../images/players/img/hero8.jpg";
+import imgHero9 from "../images/players/img/hero9.jpg";
 const imagesHeroes = {
 	1: imgHero1,
 	2: imgHero2,
