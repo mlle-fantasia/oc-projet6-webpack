@@ -16,7 +16,7 @@ const imagesHeroes = {
 	6: imgHero6,
 	7: imgHero7,
 	8: imgHero8,
-	9: imgHero9
+	9: imgHero9,
 };
 import figureHero1 from "../images/players/grid/player1figure.png";
 import figureHero2 from "../images/players/grid/player2figure.png";
@@ -36,7 +36,7 @@ const imagesHeroesFigure = {
 	6: figureHero6,
 	7: figureHero7,
 	8: figureHero8,
-	9: figureHero9
+	9: figureHero9,
 };
 import armor from "../images/accessories/armor.png";
 import boot from "../images/accessories/boot.png";
@@ -76,15 +76,15 @@ const imagesAccessories = {
 	potion_healfy: potion_healfy,
 	potion_life: potion_life,
 	potion_strength: potion_strength,
-	hache: hache
+	hache: hache,
 };
 import quete4Modal1 from "../images/modal/quete4Modal1.png";
 import quete4Modal2 from "../images/modal/quete4Modal2.png";
 import quete4Modal3 from "../images/modal/quete4Modal3.png";
 import quete4ModalFail from "../images/modal/quete4ModalFail.png";
 import quete5Modal1 from "../images/modal/quete5Modal1.png";
-import quete5ModalFail from "../images/modal/quete5ModalFail.png";
-import quete5ModalSuccess from "../images/modal/quete5ModalSuccess.png";
+import quete5ModalFail from "../images/modal/quete5Modalfail.png";
+import quete5ModalSuccess from "../images/modal/quete5Modalsuccess.png";
 import quete5ModalWinOrcs from "../images/modal/quete5ModalWinOrcs.png";
 import quete6Modal1 from "../images/modal/quete6Modal1.png";
 import quete6Modal2 from "../images/modal/quete6Modal2.png";
@@ -104,11 +104,11 @@ const imagesQuete = {
 	quete6Modal2: quete6Modal2,
 	quete6Modal3: quete6Modal3,
 	quete6ModalFail: quete6ModalFail,
-	quete6ModalSuccess: quete6ModalSuccess
+	quete6ModalSuccess: quete6ModalSuccess,
 };
 export default {
 	imagesQuete,
 	imagesAccessories,
 	imagesHeroes,
-	imagesHeroesFigure
+	imagesHeroesFigure,
 };
